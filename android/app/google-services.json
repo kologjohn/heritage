@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "979684319326",
+    "project_id": "heritageaskets",
+    "storage_bucket": "heritageaskets.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:979684319326:android:f6700543fc99505ba6d4cf",
+        "android_client_info": {
+          "package_name": "com.heritage.heritage"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0Ws-wCbL7r_Z4trfXwXm7mRc9ZQg7wdY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:979684319326:android:421cf79af4205217a6d4cf",
+        "android_client_info": {
+          "package_name": "heritage.kologsoft.jona"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0Ws-wCbL7r_Z4trfXwXm7mRc9ZQg7wdY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
