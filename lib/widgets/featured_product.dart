@@ -42,15 +42,18 @@ class _featured_productState extends State<featured_product> {
           children: [
             Padding(
               padding: const EdgeInsets.only(bottom: 5.0),
-              child: Container(
-                width: widget.contwidth,
-                height: widget.contheight,
-                child:ImageNetwork(
-                  fitAndroidIos: BoxFit.cover,
-                  fitWeb: BoxFitWeb.cover,
-                  onTap:(){
-                    print(widget.featuredName);
-                  }, image: widget.featuredImage, height: widget.imageHeight,width: widget.imageWidth,fullScreen: true,borderRadius: BorderRadius.circular(10),
+              child: AspectRatio(
+                aspectRatio: 2,
+                child: SizedBox(
+                  width: widget.contwidth,
+                  height: widget.contheight,
+                  child:ImageNetwork(
+                    fitAndroidIos: BoxFit.cover,
+                    fitWeb: BoxFitWeb.cover,
+                    onTap:(){
+                      print(widget.featuredName);
+                    }, image: widget.featuredImage, height: widget.imageHeight,width: widget.imageWidth,fullScreen: true,borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
               ),
             ),
@@ -65,7 +68,8 @@ class _featured_productState extends State<featured_product> {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-                      Container(child: Column(
+                      Container(
+                        child: Column(
                         children: [
                           Text(widget.featuredName, style: TextStyle(fontSize: widget.nameSize)),
                           Text('\$${widget.featuredPrice}', style: TextStyle(fontSize: widget.priceSize),),

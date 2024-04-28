@@ -106,7 +106,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                   ),
                 ),
                 Padding(
-                    padding: const EdgeInsets.only(left: 150.0, right: 150.0, top: 15),
+                    padding: const EdgeInsets.only(left: 130.0, right: 130.0, top: 15),
                     child: Container(
                       color: Colors.white,
                       //height: 10000,
@@ -416,7 +416,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                         height: 530,
                                         child:  Row(
                                           crossAxisAlignment: CrossAxisAlignment.center,
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
                                             Expanded(
                                               child: Row(
