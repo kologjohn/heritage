@@ -679,6 +679,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                   child: Padding(
                                     padding: const EdgeInsets.only(right: 8.0,),
                                     child: FittedBox(
+                                      fit: BoxFit.contain,
                                       child: Container(
                                         height: 300,
                                         color: Colors.lightGreen[50],
@@ -741,7 +742,6 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                           ],
                                         ),
                                       ),
-                                      fit: BoxFit.contain,
                                     ),
                                   )
                               )
