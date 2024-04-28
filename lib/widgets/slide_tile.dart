@@ -56,17 +56,14 @@ class SlideTile extends StatelessWidget {
                 children: [
                   Text(
                     slideName,
-                    style: const TextStyle(fontSize: 20),
+                    style: const TextStyle(fontSize: 14),
                   ),
                   const SizedBox(height: 2,),
-                  // Text(
-                  //   'With Almond Milk',
-                  //   style: TextStyle(color: Colors.grey[700]),
-                  // ),
                 ],
               ),
             ),
           ),
+          const SizedBox(height: 5,),
           //coffee price
           Expanded(
             child: Padding(

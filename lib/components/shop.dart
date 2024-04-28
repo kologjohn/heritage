@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:scroll_loop_auto_scroll/scroll_loop_auto_scroll.dart';
 
@@ -20,7 +21,7 @@ class _ShopPageState extends State<ShopPage> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(left: 300.0, right: 300, top: 20),
+          padding: const EdgeInsets.only(left: 130.0, right: 130, top: 20),
           child: Container(
               color: Colors.white,
               child: Column(
@@ -71,68 +72,55 @@ class _ShopPageState extends State<ShopPage> {
                                     child: ListView(
                                       scrollDirection: Axis.vertical,
                                       children:   [
-                                        MenuType(
+                                        const MenuType(
                                             isSelected: true,
                                             coffeeType: "MEAT"
                                         ),
                                         Divider(thickness: 1,color: Colors.grey[200],),
                                         SizedBox(height: 20),
-                                        MenuType(
+                                        const MenuType(
                                             isSelected: false,
                                             coffeeType: "VEGETABLES"
                                         ),
                                         Divider(thickness: 1,color: Colors.grey[200],),
                                         SizedBox(height: 20),
-                                        MenuType(
+                                        const MenuType(
                                             isSelected: false,
                                             coffeeType: "ELECTRONICSS"
                                         ),
                                         Divider(thickness: 1,color: Colors.grey[200],),
                                         SizedBox(height: 20),
-                                        MenuType(
+                                        const MenuType(
                                             isSelected: false,
                                             coffeeType: "FRUITS"
                                         ),
                                         Divider(thickness: 1,color: Colors.grey[200],),
                                         SizedBox(height: 20),
-                                        MenuType(
+                                        const MenuType(
                                             isSelected: false,
                                             coffeeType: "FAST FOODS"
                                         ),
                                         Divider(thickness: 1,color: Colors.grey[200],),
                                         SizedBox(height: 20),
-                                        MenuType(
+                                        const MenuType(
                                             isSelected: false,
                                             coffeeType: "BUTTER EGG"
                                         ),
                                         Divider(thickness: 1,color: Colors.grey[200],),
                                         SizedBox(height: 20),
-                                        MenuType(
+                                        const MenuType(
                                             isSelected: false,
                                             coffeeType: "OCEAN FOODS"
                                         ),
                                         Divider(thickness: 1,color: Colors.grey[200],),
                                         SizedBox(height: 20),
-                                        MenuType(
+                                        const MenuType(
                                             isSelected: false,
                                             coffeeType: "FRESH BERRIES"
                                         ),
                                       ],
                                     ),
                                   ),
-                                ),
-                                const Expanded(
-                                    child: Column(
-                                      children: [
-                                        Text("LATEST PRODUCTS", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25),),
-                                        //SizedBox(height: 18),
-                                        SizedBox(
-                                          //height: 640,
-                                          //color: Colors.red,
-                                          child: MyCarousel(enlargeCenter: false, viewPort: 0.6),
-                                        ),
-                                      ],
-                                    )
                                 ),
                                 const SizedBox(width: 8),
                               ],
@@ -170,7 +158,7 @@ class _ShopPageState extends State<ShopPage> {
                                   ),
                                 ),
                               ),
-                              Column(
+                              const Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   featuredGridview(shoenum: 3, widgth: 300, height: 200, imgHeight: 400, imgWidth: 250, name: 16, price: 16, favHeight: 30, favWidth: 100, favSize: 25, cartHeight: 30, cartWidth: 100, cartSize: 25)

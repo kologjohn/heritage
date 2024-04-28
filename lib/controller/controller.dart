@@ -26,11 +26,14 @@ class Ecom extends ChangeNotifier{
   );
   
   companyinfo()async{
+    print("jojo");
     final dbcompanyinfo=await db.collection("settings").get();
+    print(dbcompanyinfo);
     companyname=dbcompanyinfo.docs[0]['name'];
     companyemail=dbcompanyinfo.docs[0]['email'];
     companyphone=dbcompanyinfo.docs[0]['phone'];
     companyaddress=dbcompanyinfo.docs[0]['address'];
+    print(companyemail);
     notifyListeners();
 
   }

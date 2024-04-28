@@ -679,6 +679,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                   child: Padding(
                                     padding: const EdgeInsets.only(right: 8.0,),
                                     child: FittedBox(
+                                      fit: BoxFit.contain,
                                       child: Container(
                                         height: 300,
                                         color: Colors.lightGreen[50],
@@ -741,7 +742,6 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                           ],
                                         ),
                                       ),
-                                      fit: BoxFit.contain,
                                     ),
                                   )
                               )
@@ -1016,20 +1016,20 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Expanded(
+                            Expanded(
                                 child: SizedBox(
                                   height: 200,
                                   //color: Colors.red,
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text("RAIN INN MALL", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 30),),
+                                      Text(Companydata.companyname, style: TextStyle(fontWeight: FontWeight.w600, fontSize: 30),),
                                       SizedBox(height: 20),
-                                      Text("Address: Commercial Street, Bolgatanga"),
+                                      Text("Address: ${value.companyaddress}"),
                                       SizedBox(height: 15),
-                                      Text("Phone: +122 553 354 349"),
+                                      Text("Phone: ${value.companyphone}"),
                                       SizedBox(height: 15),
-                                      Text("Email: raininn@gmail.com"),
+                                      Text("Email: ${value.companyemail}"),
                                     ],
                                   ),
                                 )
