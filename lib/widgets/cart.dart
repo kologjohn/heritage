@@ -12,7 +12,7 @@ class _CartViewState extends State<CartView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.only(left: 300.0, right: 300, top: 20),
+        padding: const EdgeInsets.only(left: 130.0, right: 300, top: 20),
         child: Container(
           color: Colors.white,
           child: Column(
@@ -128,47 +128,6 @@ class _CartViewState extends State<CartView> {
                                           ),
                                         ],
                                       ),
-                                      // Row(
-                                      //   children: [
-                                      //     Container(
-                                      //       height: 30,
-                                      //       width: 30,
-                                      //       decoration: const BoxDecoration(
-                                      //         color: Colors.white,
-                                      //         border: Border(
-                                      //             top: BorderSide(color: Colors.black),
-                                      //             right: BorderSide(color: Colors.black),
-                                      //             left: BorderSide(color: Colors.black),
-                                      //             bottom: BorderSide(color: Colors.black))
-                                      //       ),
-                                      //       child: const Icon(Icons.remove),
-                                      //     ),
-                                      //     Container(
-                                      //       height: 30,
-                                      //       width: 30,
-                                      //       decoration: const BoxDecoration(
-                                      //         color: Colors.white,
-                                      //         border: Border(
-                                      //             top: BorderSide(color: Colors.black),
-                                      //             right: BorderSide(color: Colors.black),
-                                      //             bottom: BorderSide(color: Colors.black))
-                                      //       ),
-                                      //       child: Center(child: const Text("1")),
-                                      //     ),
-                                      //     Container(
-                                      //       height: 30,
-                                      //       width: 30,
-                                      //       decoration: const BoxDecoration(
-                                      //         color: Colors.white,
-                                      //         border: Border(
-                                      //             top: BorderSide(color: Colors.black),
-                                      //             right: BorderSide(color: Colors.black),
-                                      //             bottom: BorderSide(color: Colors.black))
-                                      //       ),
-                                      //       child: const Icon(Icons.add),
-                                      //     ),
-                                      //   ],
-                                      // )
                                     ],
                                   )
                                 ],

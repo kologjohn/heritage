@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jona/widgets/route.dart';
 
 class MenuType extends StatelessWidget {
   final String coffeeType;
@@ -8,7 +9,12 @@ class MenuType extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){},
+      onTap: (){
+        if (coffeeType=="SHOP")
+          {
+            Navigator.pushNamed(context, Routes.mainShop);
+          }
+      },
       child: Container(
         color: Colors.white30,
         child: Text(

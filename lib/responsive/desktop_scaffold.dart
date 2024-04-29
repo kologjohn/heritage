@@ -1,18 +1,12 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:jona/constanst.dart';
 import 'package:jona/controller/dbfields.dart';
 import 'package:provider/provider.dart';
-import 'package:scroll_loop_auto_scroll/scroll_loop_auto_scroll.dart';
 import '../controller/controller.dart';
 import '../widgets/carousel_slider.dart';
-import '../widgets/featured_product.dart';
 import '../widgets/featuredgridview.dart';
 import '../widgets/menu_type.dart';
-import '../widgets/route.dart';
 import '../widgets/social_media_icons.dart';
 class DesktopScaffold extends StatefulWidget {
   const DesktopScaffold({super.key});
@@ -149,39 +143,33 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                             height: 50,
                                             child: ListView(
                                               scrollDirection: Axis.horizontal,
-                                              children: [
+                                              children: const [
                                                 Row(
                                                   children: [
-                                                    const MenuType(
+                                                    MenuType(
                                                         isSelected: true,
                                                         coffeeType: "HOME"
                                                     ),
-                                                    const SizedBox(width: 40),
-                                                    InkWell(
-                                                      onTap: (){
-                                                        Navigator.pushNamed(context, Routes.shop);
-                                                      },
-                                                      child: const MenuType(
-                                                          isSelected: false,
-                                                          coffeeType: "SHOP"
-                                                      ),
+                                                    SizedBox(width: 40),
+                                                    MenuType(
+                                                        isSelected: false,
+                                                        coffeeType: "SHOP"
                                                     ),
-                                                    const SizedBox(width: 40),
-                                                    const MenuType(
+                                                    SizedBox(width: 40),
+                                                    MenuType(
                                                         isSelected: false,
                                                         coffeeType: "PAGES"
                                                     ),
-                                                    const SizedBox(width: 40),
-                                                    const MenuType(
+                                                    SizedBox(width: 40),
+                                                    MenuType(
                                                         isSelected: false,
                                                         coffeeType: "BLOG"
                                                     ),
-                                                    const SizedBox(width: 40),
-                                                    const MenuType(
+                                                    SizedBox(width: 40),
+                                                    MenuType(
                                                         isSelected: false,
                                                         coffeeType: "CONTACT"
                                                     ),
-
                                                   ],
                                                 ),
                                               ],
@@ -199,11 +187,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                           children: [
                                             const Icon(Icons.favorite),
-                                            InkWell(
-                                                onTap: (){
-                                                  Navigator.pushNamed(context, Routes.cart);
-                                                },
-                                                child: const Icon(Icons.shopping_cart)),
+                                            const Icon(Icons.shopping_cart),
                                             Text("Item: ${value.cartidnumber}")
                                           ],
                                         ),
@@ -608,6 +592,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 8.0),
                                     child: FittedBox(
+                                      fit: BoxFit.contain,
                                       child: Container(
                                         height: 300,
                                         color: Colors.lightBlue[50],
@@ -670,7 +655,6 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                           ],
                                         ),
                                       ),
-                                      fit: BoxFit.contain,
                                     ),
                                   )
                               ),
@@ -831,6 +815,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                             children: [
                               Expanded(
                                   child: FittedBox(
+                                    fit: BoxFit.contain,
                                     child: SizedBox(
                                       height: 600,
                                       //color: Colors.red,
@@ -881,12 +866,12 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                         ],
                                       ),
                                     ),
-                                    fit: BoxFit.contain,
                                   )
                               ),
                               const SizedBox(width: 8),
                               Expanded(
                                   child: FittedBox(
+                                    fit: BoxFit.contain,
                                     child: SizedBox(
                                       height: 600,
                                       //color: Colors.red,
@@ -937,12 +922,12 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                         ],
                                       ),
                                     ),
-                                    fit: BoxFit.contain,
                                   )
                               ),
                               const SizedBox(width: 8),
                               Expanded(
                                   child: FittedBox(
+                                    fit: BoxFit.contain,
                                     child: SizedBox(
                                       height: 600,
                                       //color: Colors.red,
@@ -993,7 +978,6 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                         ],
                                       ),
                                     ),
-                                    fit: BoxFit.contain,
                                   )
                               ),
                             ],
@@ -1023,12 +1007,12 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text(Companydata.companyname, style: TextStyle(fontWeight: FontWeight.w600, fontSize: 30),),
-                                      SizedBox(height: 20),
+                                      Text(Companydata.companyname, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 30),),
+                                      const SizedBox(height: 20),
                                       Text("Address: ${value.companyaddress}"),
-                                      SizedBox(height: 15),
+                                      const SizedBox(height: 15),
                                       Text("Phone: ${value.companyphone}"),
-                                      SizedBox(height: 15),
+                                      const SizedBox(height: 15),
                                       Text("Email: ${value.companyemail}"),
                                     ],
                                   ),

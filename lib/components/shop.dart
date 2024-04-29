@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:scroll_loop_auto_scroll/scroll_loop_auto_scroll.dart';
 
 import '../widgets/carousel_slider.dart';
@@ -34,33 +35,36 @@ class _ShopPageState extends State<ShopPage> {
                             height: 1200,
                             child: Column(
                               children: [
-                                Container(
-                                  height: 50,
-                                  color: Colors.orange,
-                                  child: const Padding(
-                                    padding: EdgeInsets.only(left: 18.0, right: 18),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Expanded(
-                                          child: Row(
+                                GestureDetector(
+                                  onTap: (){},
+                                  child: Container(
+                                    height: 50,
+                                    color: Colors.orange,
+                                    child: const Padding(
+                                      padding: EdgeInsets.only(left: 18.0, right: 18),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Expanded(
+                                            child: Row(
+                                              children: [
+                                                Icon(Icons.menu, color: Colors.white,),
+                                                Text(
+                                                  "ALL CATEGORIES",
+                                                  style: TextStyle(
+                                                      color: Colors.white
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                          Row(
                                             children: [
-                                              Icon(Icons.menu, color: Colors.white,),
-                                              Text(
-                                                "ALL CATEGORIES",
-                                                style: TextStyle(
-                                                    color: Colors.white
-                                                ),
-                                              )
+                                              Icon(Icons.arrow_drop_down, size: 30, color: Colors.white,),
                                             ],
                                           ),
-                                        ),
-                                        Row(
-                                          children: [
-                                            Icon(Icons.arrow_drop_down, size: 30, color: Colors.white,),
-                                          ],
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -77,7 +81,7 @@ class _ShopPageState extends State<ShopPage> {
                                             coffeeType: "MEAT"
                                         ),
                                         Divider(thickness: 1,color: Colors.grey[200],),
-                                        SizedBox(height: 20),
+                                        const SizedBox(height: 20),
                                         const MenuType(
                                             isSelected: false,
                                             coffeeType: "VEGETABLES"
@@ -161,7 +165,7 @@ class _ShopPageState extends State<ShopPage> {
                               const Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  featuredGridview(shoenum: 3, widgth: 300, height: 200, imgHeight: 400, imgWidth: 250, name: 16, price: 16, favHeight: 30, favWidth: 100, favSize: 25, cartHeight: 30, cartWidth: 100, cartSize: 25)
+                                  featuredGridview(shoenum: 4, widgth: 300, height: 200, imgHeight: 400, imgWidth: 250, name: 16, price: 16, favHeight: 30, favWidth: 100, favSize: 25, cartHeight: 30, cartWidth: 100, cartSize: 25)
                                 ],
                               )
                             ],
