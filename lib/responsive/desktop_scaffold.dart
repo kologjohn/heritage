@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:jona/constanst.dart';
 import 'package:jona/controller/dbfields.dart';
+import 'package:jona/widgets/route.dart';
 import 'package:provider/provider.dart';
 import '../controller/controller.dart';
 import '../widgets/carousel_slider.dart';
@@ -187,7 +188,12 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                           children: [
                                             const Icon(Icons.favorite),
-                                            const Icon(Icons.shopping_cart),
+                                            InkWell(
+                                              onTap: (){
+                                                Navigator.pushNamed(context, Routes.cart);
+                                              },
+                                                child: const Icon(Icons.shopping_cart)
+                                            ),
                                             Text("Item: ${value.cartidnumber}")
                                           ],
                                         ),
@@ -286,7 +292,8 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                                             Divider(thickness: 1,color: Colors.grey[200],),
                                                             const SizedBox(height: 10),
                                                           ],
-                                                        ),);
+                                                        ),
+                                                        );
 
                                                       },
                                                     );

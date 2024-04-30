@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:scroll_loop_auto_scroll/scroll_loop_auto_scroll.dart';
 
+import '../controller/dbfields.dart';
 import '../widgets/carousel_slider.dart';
 import '../widgets/featured_product.dart';
 import '../widgets/featuredgridview.dart';
@@ -73,56 +75,34 @@ class _ShopPageState extends State<ShopPage> {
                                   height: 500,
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 20.0, top: 20, right: 20),
-                                    child: ListView(
-                                      scrollDirection: Axis.vertical,
-                                      children:   [
-                                        const MenuType(
-                                            isSelected: true,
-                                            coffeeType: "MEAT"
-                                        ),
-                                        Divider(thickness: 1,color: Colors.grey[200],),
-                                        const SizedBox(height: 20),
-                                        const MenuType(
-                                            isSelected: false,
-                                            coffeeType: "VEGETABLES"
-                                        ),
-                                        Divider(thickness: 1,color: Colors.grey[200],),
-                                        SizedBox(height: 20),
-                                        const MenuType(
-                                            isSelected: false,
-                                            coffeeType: "ELECTRONICSS"
-                                        ),
-                                        Divider(thickness: 1,color: Colors.grey[200],),
-                                        SizedBox(height: 20),
-                                        const MenuType(
-                                            isSelected: false,
-                                            coffeeType: "FRUITS"
-                                        ),
-                                        Divider(thickness: 1,color: Colors.grey[200],),
-                                        SizedBox(height: 20),
-                                        const MenuType(
-                                            isSelected: false,
-                                            coffeeType: "FAST FOODS"
-                                        ),
-                                        Divider(thickness: 1,color: Colors.grey[200],),
-                                        SizedBox(height: 20),
-                                        const MenuType(
-                                            isSelected: false,
-                                            coffeeType: "BUTTER EGG"
-                                        ),
-                                        Divider(thickness: 1,color: Colors.grey[200],),
-                                        SizedBox(height: 20),
-                                        const MenuType(
-                                            isSelected: false,
-                                            coffeeType: "OCEAN FOODS"
-                                        ),
-                                        Divider(thickness: 1,color: Colors.grey[200],),
-                                        SizedBox(height: 20),
-                                        const MenuType(
-                                            isSelected: false,
-                                            coffeeType: "FRESH BERRIES"
-                                        ),
-                                      ],
+                                    child: StreamBuilder<QuerySnapshot>(
+                                      stream: Dbfields.db.collection("category").snapshots(),
+                                      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
+                                        if (!snapshot.hasData)
+                                          {
+                                            return Text("No data");
+                                          }
+
+                                        return ListView.builder(
+                                          scrollDirection: Axis.vertical,
+                                          itemCount: snapshot.data!.docs.length,
+                                          itemBuilder: (BuildContext context, int index) {
+                                            String cate=snapshot.data!.docs[index]['name'];
+                                            return Container(child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                MenuType(
+                                                    isSelected: false,
+                                                    coffeeType: cate
+                                                ),
+                                                Divider(thickness: 1,color: Colors.grey[200],),
+                                                const SizedBox(height: 10),
+                                              ],
+                                            ),
+                                            );
+                                        },
+                                        );
+                                      },
                                     ),
                                   ),
                                 ),

@@ -1,6 +1,3 @@
-import 'dart:js';
-
-import 'package:flutter/material.dart';
 import 'package:jona/components/mobile_shop.dart';
 import 'package:jona/components/shop.dart';
 import 'package:jona/components/tablet_shop.dart';
