@@ -37,23 +37,20 @@ class _featured_productState extends State<featured_product> {
       builder: (BuildContext context, value,child) {
        // value.companyinfo();
         return Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+          //crossAxisAlignment: CrossAxisAlignment.center,
+          //mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
               padding: const EdgeInsets.only(bottom: 5.0),
-              child: AspectRatio(
-                aspectRatio: 2,
-                child: SizedBox(
-                  width: widget.contwidth,
-                  height: widget.contheight,
-                  child:ImageNetwork(
-                    fitAndroidIos: BoxFit.cover,
-                    fitWeb: BoxFitWeb.cover,
-                    onTap:(){
-                      print(widget.featuredName);
-                    }, image: widget.featuredImage, height: widget.imageHeight,width: widget.imageWidth,fullScreen: true,borderRadius: BorderRadius.circular(10),
-                  ),
+              child: SizedBox(
+                width: widget.contwidth,
+                height: widget.contheight,
+                child:ImageNetwork(
+                  fitAndroidIos: BoxFit.cover,
+                  fitWeb: BoxFitWeb.cover,
+                  onTap:(){
+                    print(widget.featuredName);
+                  }, image: widget.featuredImage, height: widget.imageHeight,width: widget.imageWidth,fullScreen: true,borderRadius: BorderRadius.circular(10),
                 ),
               ),
             ),
@@ -102,7 +99,7 @@ class _featured_productState extends State<featured_product> {
                                       cartshow=false;
                                     });
                                     print(widget.featuredName);
-
+                              
                                     final addcart=await value.addtocart(widget.featuredName, widget.featuredPrice, "1", widget.featuredName);
                                     if(!value.cardstatus)
                                       {
@@ -118,11 +115,11 @@ class _featured_productState extends State<featured_product> {
                                         myprogess=false;
                                         cartshow=true;
                                       });
-
-
+                              
+                              
                                     }
                                     //String? email=Dbfields.auth.currentUser!.email;
-
+                              
                                   },
                                   child: Container(
                                     height: widget.cartHeight,

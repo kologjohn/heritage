@@ -187,7 +187,12 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                         child: Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                           children: [
-                                            const Icon(Icons.favorite),
+                                            InkWell(
+                                              onTap: (){
+                                                Navigator.pushNamed(context, Routes.singleProduct);
+                                              },
+                                                child: const Icon(Icons.favorite)
+                                            ),
                                             InkWell(
                                               onTap: (){
                                                 Navigator.pushNamed(context, Routes.cart);
@@ -500,12 +505,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                             ],
                           ),
                           const SizedBox(height: 30),
-                          Divider(
-                            thickness: 10,
-                            color: Colors.grey[200],
-                          ),
-                          const SizedBox(height: 30),
-                          const MyCarousel(enlargeCenter: false, viewPort: 0.2,),
+                          //const MyCarousel(enlargeCenter: false, viewPort: 0.2,),
                           // const SizedBox(
                           //   height: 320,
                           //   //color: Colors.red,

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:image_network/image_network.dart';
 
 import '../controller/dbfields.dart';
 import 'featured_product.dart';
@@ -21,12 +22,38 @@ class featuredGridview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> items=[];
+
     return StreamBuilder<QuerySnapshot>(
       stream: Dbfields.db.collection("items").snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if(!snapshot.hasData)
+        if(snapshot.hasData)
         {
-          return const Text("No Data");
+          items.clear();
+          for(int i=0;i<snapshot.data!.docs.length;i++){
+            print(i);
+            items.add(
+                Container(
+                  // height: 300,
+                  width: 200,
+                  color: Colors.lightBlue[50],
+                  child: featured_product(
+                    featuredImage: snapshot.data!.docs[i][ItemReg.itemurl],
+                    featuredName: snapshot.data!.docs[i][ItemReg.item],
+                    featuredPrice: snapshot.data!.docs[0][ItemReg.sellingprice],
+                    pgress: false,
+                    contwidth: widgth,
+                    contheight: height, imageHeight: imgHeight, imageWidth: imgWidth, nameSize: name, priceSize: price, favHeight: favHeight, favWidth: favWidth, favSize: favSize, cartHeight: cartHeight, cartWidth: cartWidth, cartSize: cartSize,
+                  ),
+                )
+            );
+
+          }
+          //return ;
+
+        }
+        else if(!snapshot.hasData){
+          return Text("Loading...");
         }
         else if(snapshot.connectionState==ConnectionState.waiting)
         {
@@ -37,25 +64,27 @@ class featuredGridview extends StatelessWidget {
           return const Text("Error Loading Data");
 
         }
-
         return Wrap(
-          children: [
-            GridView.builder(
-                shrinkWrap: true,
-                physics:const ScrollPhysics() ,
-                itemCount: snapshot.data!.docs.length,
-                itemBuilder: (context, index)=> featured_product(
-                  featuredImage: snapshot.data!.docs[index][ItemReg.itemurl],
-                  featuredName: snapshot.data!.docs[index][ItemReg.item],
-                  featuredPrice: snapshot.data!.docs[index][ItemReg.sellingprice],
-                  pgress: false,
-                  contwidth: widgth,
-                  contheight: height, imageHeight: imgHeight, imageWidth: imgWidth, nameSize: name, priceSize: price, favHeight: favHeight, favWidth: favWidth, favSize: favSize, cartHeight: cartHeight, cartWidth: cartWidth, cartSize: cartSize,
-                ),
-                gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: shoenum)
-            )
-          ],
-        );
+          runSpacing: 5,
+          spacing: 5,
+          children: items
+          );
+
+
+        // return GridView.builder(
+        //     shrinkWrap: true,
+        //     physics:const ScrollPhysics() ,
+        //     itemCount: snapshot.data!.docs.length,
+        //     itemBuilder: (context, index)=> featured_product(
+        //       featuredImage: snapshot.data!.docs[index][ItemReg.itemurl],
+        //       featuredName: snapshot.data!.docs[index][ItemReg.item],
+        //       featuredPrice: snapshot.data!.docs[index][ItemReg.sellingprice],
+        //       pgress: false,
+        //       contwidth: widgth,
+        //       contheight: height, imageHeight: imgHeight, imageWidth: imgWidth, nameSize: name, priceSize: price, favHeight: favHeight, favWidth: favWidth, favSize: favSize, cartHeight: cartHeight, cartWidth: cartWidth, cartSize: cartSize,
+        //     ),
+        //     gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: shoenum)
+        // );
 
       },
     );
