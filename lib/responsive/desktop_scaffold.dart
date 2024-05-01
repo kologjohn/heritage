@@ -5,10 +5,11 @@ import 'package:jona/controller/dbfields.dart';
 import 'package:jona/widgets/route.dart';
 import 'package:provider/provider.dart';
 import '../controller/controller.dart';
-import '../widgets/carousel_slider.dart';
 import '../widgets/featuredgridview.dart';
 import '../widgets/menu_type.dart';
 import '../widgets/social_media_icons.dart';
+
+
 class DesktopScaffold extends StatefulWidget {
   const DesktopScaffold({super.key});
 
@@ -535,8 +536,8 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                               Text("FEATURED BASKETS", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
                               Divider(
                                 color: Colors.orange,
-                                indent: 600,
-                                endIndent: 600,
+                                indent: 800,
+                                endIndent: 800,
                                 thickness: 5,
                               ),
                               SizedBox(height: 30),
@@ -738,69 +739,69 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                               )
                             ],
                           ),
-                          const SizedBox(height: 30),
-                          Divider(
-                            thickness: 10,
-                            color: Colors.grey[200],
-                          ),
-                          const SizedBox(height: 80),
-                          Row(
-                            children: [
-                              Expanded(
-                                  child: Container(
-                                    height: 470,
-                                    color: Colors.white,
-                                    child: const Column(
-                                      //crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text("LATEST PRODUCTS", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25),),
-                                        SizedBox(
-                                          //height: 640,
-                                          //color: Colors.red,
-                                            child: MyCarousel(enlargeCenter: false, viewPort: 0.5)
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                              ),
-                              const SizedBox(width: 8),
-                              Expanded(
-                                  child: Container(
-                                    height: 470,
-                                    color: Colors.white,
-                                    child: const Column(
-                                      //crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text("TOP RATED PRODUCTS", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25),),
-                                        SizedBox(
-                                          //height: 640,
-                                          //color: Colors.red,
-                                            child: MyCarousel(enlargeCenter: false, viewPort: 0.5)
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                              ),
-                              const SizedBox(width: 8),
-                              Expanded(
-                                  child: Container(
-                                    height: 470,
-                                    color: Colors.white,
-                                    child: const Column(
-                                      //crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text("REVIEW PRODUCTS", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25),),
-                                        SizedBox(
-                                          //height: 640,
-                                          //color: Colors.red,
-                                            child: MyCarousel(enlargeCenter: false, viewPort: 0.5)
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                              )
-                            ],
-                          ),
+                          // const SizedBox(height: 30),
+                          // Divider(
+                          //   thickness: 10,
+                          //   color: Colors.grey[200],
+                          // ),
+                          // const SizedBox(height: 80),
+                          // Row(
+                          //   children: [
+                          //     Expanded(
+                          //         child: Container(
+                          //           height: 470,
+                          //           color: Colors.white,
+                          //           child: const Column(
+                          //             //crossAxisAlignment: CrossAxisAlignment.start,
+                          //             children: [
+                          //               Text("LATEST PRODUCTS", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25),),
+                          //               SizedBox(
+                          //                 //height: 640,
+                          //                 //color: Colors.red,
+                          //                   child: MyCarousel(enlargeCenter: false, viewPort: 0.5)
+                          //               ),
+                          //             ],
+                          //           ),
+                          //         )
+                          //     ),
+                          //     const SizedBox(width: 8),
+                          //     Expanded(
+                          //         child: Container(
+                          //           height: 470,
+                          //           color: Colors.white,
+                          //           child: const Column(
+                          //             //crossAxisAlignment: CrossAxisAlignment.start,
+                          //             children: [
+                          //               Text("TOP RATED PRODUCTS", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25),),
+                          //               SizedBox(
+                          //                 //height: 640,
+                          //                 //color: Colors.red,
+                          //                   child: MyCarousel(enlargeCenter: false, viewPort: 0.5)
+                          //               ),
+                          //             ],
+                          //           ),
+                          //         )
+                          //     ),
+                          //     const SizedBox(width: 8),
+                          //     Expanded(
+                          //         child: Container(
+                          //           height: 470,
+                          //           color: Colors.white,
+                          //           child: const Column(
+                          //             //crossAxisAlignment: CrossAxisAlignment.start,
+                          //             children: [
+                          //               Text("REVIEW PRODUCTS", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25),),
+                          //               SizedBox(
+                          //                 //height: 640,
+                          //                 //color: Colors.red,
+                          //                   child: MyCarousel(enlargeCenter: false, viewPort: 0.5)
+                          //               ),
+                          //             ],
+                          //           ),
+                          //         )
+                          //     )
+                          //   ],
+                          // ),
                           const SizedBox(height: 30),
                           Divider(
                             thickness: 10,
@@ -811,8 +812,8 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                               Text("FROM THE BLOG", style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),),
                               Divider(
                                 color: Colors.orange,
-                                indent: 600,
-                                endIndent: 600,
+                                indent: 800,
+                                endIndent: 800,
                                 thickness: 5,
                               ),
                             ],

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -45,12 +46,19 @@ class _featured_productState extends State<featured_product> {
               child: SizedBox(
                 width: widget.contwidth,
                 height: widget.contheight,
-                child:ImageNetwork(
-                  fitAndroidIos: BoxFit.cover,
-                  fitWeb: BoxFitWeb.cover,
-                  onTap:(){
-                    print(widget.featuredName);
-                  }, image: widget.featuredImage, height: widget.imageHeight,width: widget.imageWidth,fullScreen: true,borderRadius: BorderRadius.circular(10),
+                child:CachedNetworkImage(
+                  imageUrl: "widget.featuredImage",
+                  imageBuilder: (context, imageProvider) => Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: imageProvider,
+                          fit: BoxFit.cover,
+                          // colorFilter: ColorFilter.mode(Colors.white, BlendMode.colorDodge)
+                      ),
+                    ),
+                  ),
+                  placeholder: (context, url) => Transform.scale(scale:0.4,child: const CircularProgressIndicator()),
+                  errorWidget: (context, url, error) => const Icon(Icons.error,color: Colors.red,size: 40,),
                 ),
               ),
             ),

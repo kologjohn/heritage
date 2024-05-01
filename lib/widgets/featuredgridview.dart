@@ -31,16 +31,18 @@ class featuredGridview extends StatelessWidget {
         {
           items.clear();
           for(int i=0;i<snapshot.data!.docs.length;i++){
-            print(i);
+            //print(i);
+            String url= snapshot.data!.docs[i][ItemReg.itemurl];
+            //print(url);
             items.add(
                 Container(
                   // height: 300,
                   width: 200,
                   color: Colors.lightBlue[50],
                   child: featured_product(
-                    featuredImage: snapshot.data!.docs[i][ItemReg.itemurl],
+                    featuredImage:url,
                     featuredName: snapshot.data!.docs[i][ItemReg.item],
-                    featuredPrice: snapshot.data!.docs[0][ItemReg.sellingprice],
+                    featuredPrice: snapshot.data!.docs[i][ItemReg.sellingprice],
                     pgress: false,
                     contwidth: widgth,
                     contheight: height, imageHeight: imgHeight, imageWidth: imgWidth, nameSize: name, priceSize: price, favHeight: favHeight, favWidth: favWidth, favSize: favSize, cartHeight: cartHeight, cartWidth: cartWidth, cartSize: cartSize,
