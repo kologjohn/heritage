@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:image_network/image_network.dart';
 import 'package:provider/provider.dart';
 import '../controller/controller.dart';
 
@@ -47,7 +46,7 @@ class _featured_productState extends State<featured_product> {
                 width: widget.contwidth,
                 height: widget.contheight,
                 child:CachedNetworkImage(
-                  imageUrl: "widget.featuredImage",
+                  imageUrl: widget.featuredImage,
                   imageBuilder: (context, imageProvider) => Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(

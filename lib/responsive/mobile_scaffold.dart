@@ -444,7 +444,6 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                     ],
                   ),
                   const SizedBox(height: 20),
-                  const MyCarousel(enlargeCenter: false, viewPort: 0.6),
                   // const SizedBox(
                   //   height: 320,
                   //   //color: Colors.red,
@@ -464,14 +463,13 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                   //     ),
                   //   ),
                   // ),
-                  const SizedBox(height: 20),
                   Column(
                     children: [
                       const Text("FEATURED PRODUCTS", style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),),
                       const Divider(
                         color: Colors.orange,
-                        indent: 100,
-                        endIndent: 100,
+                        indent: 140,
+                        endIndent: 140,
                         thickness: 5,
                       ),
                       const SizedBox(height: 30),
@@ -593,7 +591,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                                   children: [
                                     Column(
                                       children: [
-                                        Image.asset("assets/images/chair.png", height: 180, width: 180,)
+                                        Image.asset(Imagesurls.d2, height: 180, width: 180,)
                                       ],
                                     ),
                                   ],
@@ -648,80 +646,13 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                     ],
                   ),
                   const SizedBox(height: 18),
-                  Row(
-                    children: [
-                      Expanded(
-                          child: Container(
-                            color: Colors.white,
-                            height: 500,
-                            child: const Column(
-                              children: [
-                                Text("LATEST PRODUCTS", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25),),
-                                SizedBox(height: 18),
-                                SizedBox(
-                                  //height: 640,
-                                  //color: Colors.red,
-                                  child: MyCarousel(enlargeCenter: false, viewPort: 0.6),
-                                ),
-                              ],
-                            ),
-                          )
-                      ),
-                      const SizedBox(width: 8),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                          child: Container(
-                            color: Colors.white,
-                            height: 500,
-                            child: const Column(
-                              children: [
-                                Text("TOP RATED PRODUCTS", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25),),
-                                SizedBox(height: 18),
-                                SizedBox(
-                                  //height: 640,
-                                  //color: Colors.red,
-                                  child: MyCarousel(enlargeCenter: false, viewPort: 0.6),
-                                ),
-                              ],
-                            ),
-                          )
-                      ),
-                      const SizedBox(width: 8),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                          child: Container(
-                            color: Colors.white,
-                            height: 500,
-                            child: const Column(
-                              children: [
-                                Text("TOP RATED PRODUCTS", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25),),
-                                SizedBox(height: 18),
-                                SizedBox(
-                                  //height: 640,
-                                  //color: Colors.red,
-                                  child: MyCarousel(enlargeCenter: false, viewPort: 0.6),
-                                ),
-                              ],
-                            ),
-                          )
-                      ),
-                      const SizedBox(width: 8),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
                   const Column(
                     children: [
                       Text("FROM THE BLOG", style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),),
                       Divider(
                         color: Colors.orange,
-                        indent: 120,
-                        endIndent: 120,
+                        indent: 140,
+                        endIndent: 140,
                         thickness: 5,
                       ),
                     ],
@@ -735,7 +666,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                             //color: Colors.red,
                             child: Column(
                               children: [
-                                Container(color: Colors.lightBlue[50],child: Image.asset("assets/images/chair.png", height: 400,width: 400,),),
+                                Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.d2, height: 400,width: 400,),),
                                 const SizedBox(height: 10),
                                 const Row(
                                   children: [
@@ -782,7 +713,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                             //color: Colors.red,
                             child: Column(
                               children: [
-                                Container(color: Colors.lightBlue[50],child: Image.asset("assets/images/chair.png", height: 400,width: 400,),),
+                                Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.d2, height: 400,width: 400,),),
                                 const SizedBox(height: 10),
                                 const Row(
                                   children: [
@@ -829,7 +760,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                             //color: Colors.red,
                             child: Column(
                               children: [
-                                Container(color: Colors.lightBlue[50],child: Image.asset("assets/images/chair.png", height: 400,width: 400,),),
+                                Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.d2, height: 400,width: 400,),),
                                 const SizedBox(height: 10),
                                 const Row(
                                   children: [

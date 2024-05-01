@@ -612,7 +612,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                               children: [
                                                 Column(
                                                   children: [
-                                                    Image.asset("assets/images/chair.png", height: 300, width: 300,)
+                                                    Image.asset(Imagesurls.d2, height: 300, width: 300,)
                                                   ],
                                                 ),
                                               ],
@@ -683,7 +683,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                               children: [
                                                 Column(
                                                   children: [
-                                                    Image.asset("assets/images/chair.png", height: 300, width: 300,)
+                                                    Image.asset(Imagesurls.d2, height: 300, width: 300,)
                                                   ],
                                                 ),
                                               ],
@@ -819,176 +819,179 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                             ],
                           ),
                           const SizedBox(height: 50),
-                          Row(
-                            children: [
-                              Expanded(
-                                  child: FittedBox(
-                                    fit: BoxFit.contain,
-                                    child: SizedBox(
-                                      height: 600,
-                                      //color: Colors.red,
-                                      child: Column(
-                                        children: [
-                                          Container(color: Colors.lightBlue[50],child: Image.asset("assets/images/chair.png", height: 400,width: 400,),),
-                                          const SizedBox(height: 18),
-                                          const Padding(
-                                            padding: EdgeInsets.only(left: 8.0, right: 8.0),
-                                            child: Row(
-                                              children: [
-                                                Icon(Icons.calendar_today, size: 18,),
-                                                SizedBox(width: 4),
-                                                Text("February 18, 2024"),
-                                                SizedBox(width: 20),
-                                                Row(
-                                                  children: [
-                                                    Icon(Icons.comment, size: 18,),
-                                                    SizedBox(width: 4),
-                                                    Text("10")
-                                                  ],
-                                                ),
-                                              ],
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                    child: FittedBox(
+                                      fit: BoxFit.contain,
+                                      child: SizedBox(
+                                        height: 600,
+                                        //color: Colors.red,
+                                        child: Column(
+                                          children: [
+                                            Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.d2, height: 400,width: 400,),),
+                                            const SizedBox(height: 18),
+                                            const Padding(
+                                              padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                                              child: Row(
+                                                children: [
+                                                  Icon(Icons.calendar_today, size: 18,),
+                                                  SizedBox(width: 4),
+                                                  Text("February 18, 2024"),
+                                                  SizedBox(width: 20),
+                                                  Row(
+                                                    children: [
+                                                      Icon(Icons.comment, size: 18,),
+                                                      SizedBox(width: 4),
+                                                      Text("10")
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                          const SizedBox(height: 15),
-                                          const Padding(
-                                            padding: EdgeInsets.only(left: 8.0, right: 8.0),
-                                            child: Row(
-                                              children: [
-                                                Text("COMFORTABLE STUFFING CHAIRS", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
-                                              ],
+                                            const SizedBox(height: 15),
+                                            const Padding(
+                                              padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                                              child: Row(
+                                                children: [
+                                                  Text("COMFORTABLE STUFFING CHAIRS", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                          const SizedBox(height: 15),
-                                          const Padding(
-                                            padding: EdgeInsets.only(left: 8.0, right: 8.0),
-                                            child: Row(
-                                              children: [
-                                                Text("Stuffing is the soft material inside pillows, "
-                                                    "\n mattresses, or sofa cushions. Without stuffing, "
-                                                    "\n your comfy chair wouldn't be very comfy.",
-                                                  style: TextStyle(color: Colors.black54),
-                                                ),
-                                              ],
+                                            const SizedBox(height: 15),
+                                            const Padding(
+                                              padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                                              child: Row(
+                                                children: [
+                                                  Text("Stuffing is the soft material inside pillows, "
+                                                      "\n mattresses, or sofa cushions. Without stuffing, "
+                                                      "\n your comfy chair wouldn't be very comfy.",
+                                                    style: TextStyle(color: Colors.black54),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  )
-                              ),
-                              const SizedBox(width: 8),
-                              Expanded(
-                                  child: FittedBox(
-                                    fit: BoxFit.contain,
-                                    child: SizedBox(
-                                      height: 600,
-                                      //color: Colors.red,
-                                      child: Column(
-                                        children: [
-                                          Container(color: Colors.lightBlue[50],child: Image.asset("assets/images/chair.png", height: 400,width: 400,),),
-                                          const SizedBox(height: 18),
-                                          const Padding(
-                                            padding: EdgeInsets.only(left: 8.0, right: 8.0),
-                                            child: Row(
-                                              children: [
-                                                Icon(Icons.calendar_today, size: 18,),
-                                                SizedBox(width: 4),
-                                                Text("February 18, 2024"),
-                                                SizedBox(width: 20),
-                                                Row(
-                                                  children: [
-                                                    Icon(Icons.comment, size: 18,),
-                                                    SizedBox(width: 4),
-                                                    Text("10")
-                                                  ],
-                                                ),
-                                              ],
+                                    )
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                    child: FittedBox(
+                                      fit: BoxFit.contain,
+                                      child: SizedBox(
+                                        height: 600,
+                                        //color: Colors.red,
+                                        child: Column(
+                                          children: [
+                                            Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.d2, height: 400,width: 400,),),
+                                            const SizedBox(height: 18),
+                                            const Padding(
+                                              padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                                              child: Row(
+                                                children: [
+                                                  Icon(Icons.calendar_today, size: 18,),
+                                                  SizedBox(width: 4),
+                                                  Text("February 18, 2024"),
+                                                  SizedBox(width: 20),
+                                                  Row(
+                                                    children: [
+                                                      Icon(Icons.comment, size: 18,),
+                                                      SizedBox(width: 4),
+                                                      Text("10")
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                          const SizedBox(height: 15),
-                                          const Padding(
-                                            padding: EdgeInsets.only(left: 8.0, right: 8.0),
-                                            child: Row(
-                                              children: [
-                                                Text("COMFORTABLE STUFFING CHAIRS", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
-                                              ],
+                                            const SizedBox(height: 15),
+                                            const Padding(
+                                              padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                                              child: Row(
+                                                children: [
+                                                  Text("COMFORTABLE STUFFING CHAIRS", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                          const SizedBox(height: 15),
-                                          const Padding(
-                                            padding: EdgeInsets.only(left: 8.0, right: 8.0),
-                                            child: Row(
-                                              children: [
-                                                Text("Stuffing is the soft material inside pillows, "
-                                                    "\n mattresses, or sofa cushions. Without stuffing, "
-                                                    "\n your comfy chair wouldn't be very comfy.",
-                                                  style: TextStyle(color: Colors.black54),
-                                                ),
-                                              ],
+                                            const SizedBox(height: 15),
+                                            const Padding(
+                                              padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                                              child: Row(
+                                                children: [
+                                                  Text("Stuffing is the soft material inside pillows, "
+                                                      "\n mattresses, or sofa cushions. Without stuffing, "
+                                                      "\n your comfy chair wouldn't be very comfy.",
+                                                    style: TextStyle(color: Colors.black54),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  )
-                              ),
-                              const SizedBox(width: 8),
-                              Expanded(
-                                  child: FittedBox(
-                                    fit: BoxFit.contain,
-                                    child: SizedBox(
-                                      height: 600,
-                                      //color: Colors.red,
-                                      child: Column(
-                                        children: [
-                                          Container(color: Colors.lightBlue[50],child: Image.asset("assets/images/chair.png", height: 400,width: 400,),),
-                                          const SizedBox(height: 18),
-                                          const Padding(
-                                            padding: EdgeInsets.only(left: 8.0, right: 8.0),
-                                            child: Row(
-                                              children: [
-                                                Icon(Icons.calendar_today, size: 18,),
-                                                SizedBox(width: 4),
-                                                Text("February 18, 2024"),
-                                                SizedBox(width: 20),
-                                                Row(
-                                                  children: [
-                                                    Icon(Icons.comment, size: 18,),
-                                                    SizedBox(width: 4),
-                                                    Text("10")
-                                                  ],
-                                                ),
-                                              ],
+                                    )
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                    child: FittedBox(
+                                      fit: BoxFit.contain,
+                                      child: SizedBox(
+                                        height: 600,
+                                        //color: Colors.red,
+                                        child: Column(
+                                          children: [
+                                            Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.d2, height: 400,width: 400,),),
+                                            const SizedBox(height: 18),
+                                            const Padding(
+                                              padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                                              child: Row(
+                                                children: [
+                                                  Icon(Icons.calendar_today, size: 18,),
+                                                  SizedBox(width: 4),
+                                                  Text("February 18, 2024"),
+                                                  SizedBox(width: 20),
+                                                  Row(
+                                                    children: [
+                                                      Icon(Icons.comment, size: 18,),
+                                                      SizedBox(width: 4),
+                                                      Text("10")
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                          const SizedBox(height: 15),
-                                          const Padding(
-                                            padding: EdgeInsets.only(left: 8.0, right: 8.0),
-                                            child: Row(
-                                              children: [
-                                                Text("COMFORTABLE STUFFING CHAIRS", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
-                                              ],
+                                            const SizedBox(height: 15),
+                                            const Padding(
+                                              padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                                              child: Row(
+                                                children: [
+                                                  Text("COMFORTABLE STUFFING CHAIRS", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                          const SizedBox(height: 15),
-                                          const Padding(
-                                            padding: EdgeInsets.only(left: 8.0, right: 8.0),
-                                            child: Row(
-                                              children: [
-                                                Text("Stuffing is the soft material inside pillows, "
-                                                    "\n mattresses, or sofa cushions. Without stuffing, "
-                                                    "\n your comfy chair wouldn't be very comfy.",
-                                                  style: TextStyle(color: Colors.black54),
-                                                ),
-                                              ],
+                                            const SizedBox(height: 15),
+                                            const Padding(
+                                              padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                                              child: Row(
+                                                children: [
+                                                  Text("Stuffing is the soft material inside pillows, "
+                                                      "\n mattresses, or sofa cushions. Without stuffing, "
+                                                      "\n your comfy chair wouldn't be very comfy.",
+                                                    style: TextStyle(color: Colors.black54),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  )
-                              ),
-                            ],
+                                    )
+                                ),
+                              ],
+                            ),
                           ),
                           Divider(
                             thickness: 20,

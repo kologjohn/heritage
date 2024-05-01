@@ -358,8 +358,6 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                         ],
                       ),
                       const SizedBox(height: 20),
-                      const MyCarousel(enlargeCenter: false, viewPort: 0.3),
-                      const SizedBox(height: 20),
                       const Column(
                         children: [
                           Text("FEATURED PRODUCTS", style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),),
@@ -429,7 +427,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                           children: [
                                             Column(
                                               children: [
-                                                Image.asset("assets/images/chair.png", height: 300, width: 300,)
+                                                Image.asset(Imagesurls.d2, height: 300, width: 300,)
                                               ],
                                             ),
                                           ],
@@ -500,7 +498,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                           children: [
                                             Column(
                                               children: [
-                                                Image.asset("assets/images/chair.png", height: 300, width: 300,)
+                                                Image.asset(Imagesurls.d2, height: 300, width: 300,)
                                               ],
                                             ),
                                           ],
@@ -557,45 +555,45 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                         ],
                       ),
                       const SizedBox(height: 20),
-                      Row(
-                        children: [
-                          Expanded(
-                              child: Container(
-                                color: Colors.white,
-                                height: 470,
-                                child: const Column(
-                                  children: [
-                                    Text("TOP RATED PRODUCTS", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25),),
-                                    SizedBox(height: 18),
-                                    MyCarousel(enlargeCenter: false, viewPort: 0.5),
-                                  ],
-                                ),
-                              )
-                          ),
-                          const SizedBox(width: 8),
-                          Expanded(
-                              child: Container(
-                                color: Colors.white,
-                                height: 470,
-                                child: const Column(
-                                  children: [
-                                    Text("TOP RATED PRODUCTS", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25),),
-                                    SizedBox(height: 18),
-                                    MyCarousel(enlargeCenter: false, viewPort: 0.5)
-                                  ],
-                                ),
-                              )
-                          ),
-                          const SizedBox(width: 8),
-                        ],
-                      ),
+                      // Row(
+                      //   children: [
+                      //     Expanded(
+                      //         child: Container(
+                      //           color: Colors.white,
+                      //           height: 470,
+                      //           child: const Column(
+                      //             children: [
+                      //               Text("TOP RATED PRODUCTS", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25),),
+                      //               SizedBox(height: 18),
+                      //               MyCarousel(enlargeCenter: false, viewPort: 0.5),
+                      //             ],
+                      //           ),
+                      //         )
+                      //     ),
+                      //     const SizedBox(width: 8),
+                      //     Expanded(
+                      //         child: Container(
+                      //           color: Colors.white,
+                      //           height: 470,
+                      //           child: const Column(
+                      //             children: [
+                      //               Text("TOP RATED PRODUCTS", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25),),
+                      //               SizedBox(height: 18),
+                      //               MyCarousel(enlargeCenter: false, viewPort: 0.5)
+                      //             ],
+                      //           ),
+                      //         )
+                      //     ),
+                      //     const SizedBox(width: 8),
+                      //   ],
+                      // ),
                       const Column(
                         children: [
                           Text("FROM THE BLOG", style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),),
                           Divider(
                             color: Colors.orange,
-                            indent: 300,
-                            endIndent: 300,
+                            indent: 400,
+                            endIndent: 400,
                             thickness: 5,
                           ),
 
@@ -612,7 +610,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                   //color: Colors.red,
                                   child: Column(
                                     children: [
-                                      Container(color: Colors.lightBlue[50],child: Image.asset("assets/images/chair.png", height: 400,width: 400,),),
+                                      Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.d2, height: 400,width: 400,),),
                                       const SizedBox(height: 18),
                                       const Padding(
                                         padding: EdgeInsets.only(left: 8.0, right: 8.0),
@@ -649,7 +647,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                             Text("Stuffing is the soft material inside pillows, "
                                                 "\n mattresses, or sofa cushions. Without stuffing, "
                                                 "\n your comfy chair wouldn't be very comfy.",
-                                              style: TextStyle(color: Colors.black54),
+                                              style: TextStyle(color: Colors.black54, fontSize: 20),
                                             ),
                                           ],
                                         ),
@@ -668,7 +666,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                   //color: Colors.red,
                                   child: Column(
                                     children: [
-                                      Container(color: Colors.lightBlue[50],child: Image.asset("assets/images/chair.png", height: 400,width: 400,),),
+                                      Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.d2, height: 400,width: 400,),),
                                       const SizedBox(height: 18),
                                       const Padding(
                                         padding: EdgeInsets.only(left: 8.0, right: 8.0),
@@ -705,7 +703,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                             Text("Stuffing is the soft material inside pillows, "
                                                 "\n mattresses, or sofa cushions. Without stuffing, "
                                                 "\n your comfy chair wouldn't be very comfy.",
-                                              style: TextStyle(color: Colors.black54),
+                                              style: TextStyle(color: Colors.black54, fontSize: 20),
                                             ),
                                           ],
                                         ),
@@ -724,7 +722,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                   //color: Colors.red,
                                   child: Column(
                                     children: [
-                                      Container(color: Colors.lightBlue[50],child: Image.asset("assets/images/chair.png", height: 400,width: 400,),),
+                                      Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.d2, height: 400,width: 400,),),
                                       const SizedBox(height: 18),
                                       const Padding(
                                         padding: EdgeInsets.only(left: 8.0, right: 8.0),
@@ -761,7 +759,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                             Text("Stuffing is the soft material inside pillows, "
                                                 "\n mattresses, or sofa cushions. Without stuffing, "
                                                 "\n your comfy chair wouldn't be very comfy.",
-                                              style: TextStyle(color: Colors.black54),
+                                              style: TextStyle(color: Colors.black54, fontSize: 20),
                                             ),
                                           ],
                                         ),
@@ -779,157 +777,160 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                 Container(
                   height: 400,
                   color: Colors.lightGreen[50],
-                  child:  Column(
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                           Expanded(
-                              child: SizedBox(
-                                height: 200,
-                                //color: Colors.red,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Expanded(child: Text(Companydata.companyname, style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25),)),
-                                    const SizedBox(height: 20),
-                                    Expanded(child: Text(value.companyaddress)),
-                                    const SizedBox(height: 15),
-                                    Expanded(child: Text(value.companyphone)),
-                                    const SizedBox(height: 15),
-                                    Expanded(child: Text("Email: ${value.companyaddress}")),
-                                  ],
-                                ),
-                              )
-                          ),
-                          const SizedBox(width: 8),
-                          const Expanded(
-                              child: SizedBox(
-                                height: 250,
-                                //color: Colors.red,
-                                child: Padding(
-                                  padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                  child:  Padding(
+                    padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                    child: Column(
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                             Expanded(
+                                child: SizedBox(
+                                  height: 200,
+                                  //color: Colors.red,
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text("USEFUL LINKS", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25)),
-                                      SizedBox(height: 20),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text("About Us"),
-                                          Text("Who We Are"),
-                                        ],
-                                      ),
-                                      SizedBox(height: 15),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text("Secure Products"),
-                                          Text("Project"),
-                                        ],
-                                      ),
-                                      SizedBox(height: 15),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text("About Our Shop"),
-                                          Text("Our Services"),
-                                        ],
-                                      ),
-                                      SizedBox(height: 15),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text("Privacy And Policy"),
-                                          Text("SiteMap"),
-                                        ],
-                                      ),
-                                      SizedBox(height: 15),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text("Delivery Information"),
-                                          Text("Contact"),
-                                        ],
-                                      ),
+                                      Expanded(child: Text(Companydata.companyname, style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25),)),
+                                      const SizedBox(height: 20),
+                                      Expanded(child: Text(value.companyaddress)),
+                                      const SizedBox(height: 15),
+                                      Expanded(child: Text(value.companyphone)),
+                                      const SizedBox(height: 15),
+                                      Expanded(child: Text("Email: ${value.companyaddress}")),
                                     ],
                                   ),
-                                ),
-                              )
-                          ),
-                          const SizedBox(width: 8),
-                          Expanded(
-                              child: SizedBox(
-                                height: 250,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    const Text("JOIN OUR NEWSLETTER NOW", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25)),
-                                    const SizedBox(height: 20),
-                                    const Text("Get E-mail updates about our latest shop and special offers."),
-                                    const SizedBox(height: 15),
-                                    Row(
+                                )
+                            ),
+                            const SizedBox(width: 8),
+                            const Expanded(
+                                child: SizedBox(
+                                  height: 250,
+                                  //color: Colors.red,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
-                                        const Expanded(
-                                            flex: 2,
-                                            child: TextField(
-                                              decoration: InputDecoration(
-                                                  hintText: 'Enter your mail',
-                                                  fillColor: Colors.white,
-                                                  filled: true
-                                              ),
-                                            )
+                                        Text("USEFUL LINKS", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25)),
+                                        SizedBox(height: 20),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text("About Us"),
+                                            Text("Who We Are"),
+                                          ],
                                         ),
-                                        Expanded(
-                                            child: Container(
-                                              height: 50,
-                                              color: Colors.orange,
-                                              child: const Column(
-                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                children: [
-                                                  Text("SUBSCRIBE"),
-                                                ],
-                                              ),
-                                            )
-                                        )
+                                        SizedBox(height: 15),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text("Secure Products"),
+                                            Text("Project"),
+                                          ],
+                                        ),
+                                        SizedBox(height: 15),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text("About Our Shop"),
+                                            Text("Our Services"),
+                                          ],
+                                        ),
+                                        SizedBox(height: 15),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text("Privacy And Policy"),
+                                            Text("SiteMap"),
+                                          ],
+                                        ),
+                                        SizedBox(height: 15),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text("Delivery Information"),
+                                            Text("Contact"),
+                                          ],
+                                        ),
                                       ],
                                     ),
-                                    const SizedBox(height: 15),
-                                    const SocialMediaIcons(),
-                                  ],
-                                ),
-                                //color: Colors.red,
-                              )
-                          ),
-                        ],
-                      ),
-                      const Divider(),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Row(
-                            children: [
-                              Text('Copyright ©2024 All rights reserved', style: TextStyle(fontSize: 15),),
-                              SizedBox(width: 10),
-                              Text('|'),
-                              SizedBox(width: 10),
-                              Text('Powered By KologSoft', style: TextStyle(fontSize: 15)),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Image.asset("assets/images/visa1.png", height: 50,),
-                              const SizedBox(width: 10),
-                              Image.asset("assets/images/PayPal.png", height: 50,),
-                              const SizedBox(width: 10),
-                              Image.asset("assets/images/MasterCard1.png", height: 50,),
-                              //Image.asset("assets/images/payout.png", height: 100,)
-                            ],
-                          )
-                        ],
-                      )
-                    ],
+                                  ),
+                                )
+                            ),
+                            const SizedBox(width: 8),
+                            Expanded(
+                                child: SizedBox(
+                                  height: 250,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      const Text("JOIN OUR NEWSLETTER NOW", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25)),
+                                      const SizedBox(height: 20),
+                                      const Text("Get E-mail updates about our latest shop and special offers."),
+                                      const SizedBox(height: 15),
+                                      Row(
+                                        children: [
+                                          const Expanded(
+                                              flex: 2,
+                                              child: TextField(
+                                                decoration: InputDecoration(
+                                                    hintText: 'Enter your mail',
+                                                    fillColor: Colors.white,
+                                                    filled: true
+                                                ),
+                                              )
+                                          ),
+                                          Expanded(
+                                              child: Container(
+                                                height: 50,
+                                                color: Colors.orange,
+                                                child: const Column(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    Text("SUBSCRIBE"),
+                                                  ],
+                                                ),
+                                              )
+                                          )
+                                        ],
+                                      ),
+                                      const SizedBox(height: 15),
+                                      const SocialMediaIcons(),
+                                    ],
+                                  ),
+                                  //color: Colors.red,
+                                )
+                            ),
+                          ],
+                        ),
+                        const Divider(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Row(
+                              children: [
+                                Text('Copyright ©2024 All rights reserved', style: TextStyle(fontSize: 15),),
+                                SizedBox(width: 10),
+                                Text('|'),
+                                SizedBox(width: 10),
+                                Text('Powered By KologSoft', style: TextStyle(fontSize: 15)),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Image.asset("assets/images/visa1.png", height: 50,),
+                                const SizedBox(width: 10),
+                                Image.asset("assets/images/PayPal.png", height: 50,),
+                                const SizedBox(width: 10),
+                                Image.asset("assets/images/MasterCard1.png", height: 50,),
+                                //Image.asset("assets/images/payout.png", height: 100,)
+                              ],
+                            )
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],
