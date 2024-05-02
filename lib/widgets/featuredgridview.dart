@@ -4,8 +4,8 @@ import 'package:image_network/image_network.dart';
 
 import '../controller/dbfields.dart';
 import 'featured_product.dart';
-class featuredGridview extends StatelessWidget {
-  final int shoenum;
+class featuredGridview extends StatefulWidget {
+  final String shoenum;
   final double widgth;
   final double height;
   final double imgHeight;
@@ -21,11 +21,26 @@ class featuredGridview extends StatelessWidget {
   const featuredGridview({super.key, required this.shoenum, required this.widgth, required this.height, required this.imgHeight, required this.imgWidth, required this.name, required this.price, required this.favHeight, required this.favWidth, required this.favSize, required this.cartHeight, required this.cartWidth, required this.cartSize,});
 
   @override
+  State<featuredGridview> createState() => _featuredGridviewState();
+}
+
+class _featuredGridviewState extends State<featuredGridview> {
+  var itemData;
+  @override
   Widget build(BuildContext context) {
     List<Widget> items=[];
-
+    if(widget.shoenum.isNotEmpty)
+      {
+        print(widget.shoenum);
+        setState(() {
+          itemData=Dbfields.db.collection("items").orderBy(ItemReg.category).startAt([widget.shoenum]).snapshots();
+        });
+      }
+    else{
+      itemData=Dbfields.db.collection("items").snapshots();
+    }
     return StreamBuilder<QuerySnapshot>(
-      stream: Dbfields.db.collection("items").snapshots(),
+      stream: itemData,
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if(snapshot.hasData)
         {
@@ -38,14 +53,13 @@ class featuredGridview extends StatelessWidget {
                 Container(
                   // height: 300,
                   width: 200,
-                  color: Colors.lightBlue[50],
                   child: featured_product(
                     featuredImage:url,
                     featuredName: snapshot.data!.docs[i][ItemReg.item],
                     featuredPrice: snapshot.data!.docs[i][ItemReg.sellingprice],
                     pgress: false,
-                    contwidth: widgth,
-                    contheight: height, imageHeight: imgHeight, imageWidth: imgWidth, nameSize: name, priceSize: price, favHeight: favHeight, favWidth: favWidth, favSize: favSize, cartHeight: cartHeight, cartWidth: cartWidth, cartSize: cartSize,
+                    contwidth: widget.widgth,
+                    contheight: widget.height, imageHeight: widget.imgHeight, imageWidth: widget.imgWidth, nameSize: widget.name, priceSize: widget.price, favHeight: widget.favHeight, favWidth: widget.favWidth, favSize: widget.favSize, cartHeight: widget.cartHeight, cartWidth: widget.cartWidth, cartSize: widget.cartSize,
                   ),
                 )
             );

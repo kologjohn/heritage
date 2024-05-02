@@ -18,6 +18,7 @@ class TabletShop extends StatefulWidget {
 }
 
 class _TabletShopState extends State<TabletShop> {
+  String shoenum="";
   bool show=false;
   bool editShow=true;
   @override
@@ -160,6 +161,7 @@ class _TabletShopState extends State<TabletShop> {
                                                   itemCount: snapshot.data!.docs.length,
                                                   scrollDirection: Axis.vertical,
                                                   itemBuilder: (BuildContext context, int index) {
+                                                    String categoryName = snapshot.data!.docs[index]['name'];
                                                     return  InkWell(
                                                       onTap: (){},
                                                       child: Column(
@@ -167,9 +169,16 @@ class _TabletShopState extends State<TabletShop> {
                                                         children: [
                                                           Padding(
                                                             padding: const EdgeInsets.all(4.0),
-                                                            child: MenuType(
-                                                                isSelected: false,
-                                                                coffeeType: snapshot.data!.docs[index]['name']
+                                                            child: InkWell(
+                                                              onTap: (){
+                                                                setState(() {
+                                                                  shoenum=categoryName;
+                                                                });
+                                                              },
+                                                              child: MenuType(
+                                                                  isSelected: false,
+                                                                  coffeeType: categoryName
+                                                              ),
                                                             ),
                                                           ),
                                                           Divider(thickness: 1,color: Colors.grey[200],),
@@ -300,10 +309,10 @@ class _TabletShopState extends State<TabletShop> {
                           SizedBox(height: 30),
                         ],
                       ),
-                      const Column(
+                      Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          featuredGridview(shoenum: 3, widgth: 250, height: 150, imgHeight: 300, imgWidth: 200, name: 14, price: 14, favHeight: 30, favWidth: 80, favSize: 20, cartHeight: 30, cartWidth: 80, cartSize: 20)
+                          featuredGridview(shoenum: shoenum, widgth: 250, height: 150, imgHeight: 300, imgWidth: 200, name: 14, price: 14, favHeight: 30, favWidth: 80, favSize: 20, cartHeight: 30, cartWidth: 80, cartSize: 20)
                         ],
                       ),
                       const SizedBox(height: 20),

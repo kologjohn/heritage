@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../constanst.dart';
+
 class CartView extends StatefulWidget {
   const CartView({super.key});
 
@@ -42,7 +44,7 @@ class _CartViewState extends State<CartView> {
                                                 children: [
                                                   Column(
                                                     children: [
-                                                      Image.asset("assets/images/chair.png",height: 150,)
+                                                      Image.asset(Imagesurls.d2,height: 150,)
                                                     ],
                                                   ),
                                                   const Column(

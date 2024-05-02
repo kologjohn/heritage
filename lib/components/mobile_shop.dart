@@ -16,6 +16,7 @@ class MobileShop extends StatefulWidget {
 }
 
 class _MobileShopState extends State<MobileShop> {
+  String shoenum="";
   bool show=false;
   bool editShow=true;
   @override
@@ -250,6 +251,7 @@ class _MobileShopState extends State<MobileShop> {
                                                   scrollDirection: Axis.vertical,
                                                   itemCount: snapshot.data!.docs.length,
                                                   itemBuilder: (BuildContext context, int index) {
+                                                    String cate = snapshot.data!.docs[index]['name'];
                                                     return  InkWell(
                                                       onTap: (){},
                                                       child: Column(
@@ -257,9 +259,16 @@ class _MobileShopState extends State<MobileShop> {
                                                         children: [
                                                           Padding(
                                                             padding: const EdgeInsets.all(4.0),
-                                                            child: MenuType(
-                                                                isSelected: false,
-                                                                coffeeType: snapshot.data!.docs[index]['name']
+                                                            child: InkWell(
+                                                              onTap: (){
+                                                                setState(() {
+                                                                  shoenum=cate;
+                                                                });
+                                                              },
+                                                              child: MenuType(
+                                                                  isSelected: false,
+                                                                  coffeeType: cate
+                                                              ),
                                                             ),
                                                           ),
                                                           Divider(thickness: 1,color: Colors.grey[200],),
@@ -401,9 +410,9 @@ class _MobileShopState extends State<MobileShop> {
                     ],
                   ),
                   const SizedBox(height: 40),
-                  const Column(
+                  Column(
                     children: [
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
@@ -421,13 +430,13 @@ class _MobileShopState extends State<MobileShop> {
                           )
                         ],
                       ),
-                      Divider(
+                      const Divider(
                         color: Colors.orange,
                         indent: 150,
                         endIndent: 150,
                         thickness: 2,
                       ),
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text("30", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
@@ -435,8 +444,8 @@ class _MobileShopState extends State<MobileShop> {
                           Text("Items Found", style: TextStyle(fontSize: 18)),
                         ],
                       ),
-                      SizedBox(height: 15),
-                      featuredGridview(shoenum: 1, widgth: 250, height: 250, imgHeight: 200, imgWidth: 250, name: 12, price: 12, favHeight: 25, favWidth: 60, favSize: 25, cartHeight: 25, cartWidth: 60, cartSize: 25),
+                      const SizedBox(height: 15),
+                      featuredGridview(shoenum: shoenum, widgth: 250, height: 250, imgHeight: 200, imgWidth: 250, name: 12, price: 12, favHeight: 25, favWidth: 60, favSize: 25, cartHeight: 25, cartWidth: 60, cartSize: 25),
                     ],
                   ),
                   const SizedBox(height: 20),

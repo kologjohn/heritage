@@ -25,6 +25,7 @@ class MobileScaffold extends StatefulWidget {
 }
 
 class _MobileScaffoldState extends State<MobileScaffold> {
+  String shoenum="";
   bool show=false;
   bool editShow=true;
   @override
@@ -259,6 +260,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                                                 scrollDirection: Axis.vertical,
                                                 itemCount: snapshot.data!.docs.length,
                                                 itemBuilder: (BuildContext context, int index) {
+                                                  String cate = snapshot.data!.docs[index]['name'];
                                                   return  InkWell(
                                                     onTap: (){},
                                                     child: Column(
@@ -266,9 +268,16 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                                                       children: [
                                                         Padding(
                                                           padding: const EdgeInsets.all(4.0),
-                                                          child: MenuType(
-                                                              isSelected: false,
-                                                              coffeeType: snapshot.data!.docs[index]['name']
+                                                          child: InkWell(
+                                                            onTap: (){
+                                                              setState(() {
+                                                                shoenum=cate;
+                                                              });
+                                                            },
+                                                            child: MenuType(
+                                                                isSelected: false,
+                                                                coffeeType: cate
+                                                            ),
                                                           ),
                                                         ),
                                                         Divider(thickness: 1,color: Colors.grey[200],),
@@ -504,7 +513,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                           ],
                         ),
                       ),
-                      const featuredGridview(shoenum: 1, widgth: 250, height: 250, imgHeight: 200, imgWidth: 250, name: 12, price: 12, favHeight: 25, favWidth: 60, favSize: 25, cartHeight: 25, cartWidth: 60, cartSize: 25),
+                      featuredGridview(shoenum: shoenum, widgth: 250, height: 250, imgHeight: 200, imgWidth: 250, name: 12, price: 12, favHeight: 25, favWidth: 60, favSize: 25, cartHeight: 25, cartWidth: 60, cartSize: 25),
                     ],
                   ),
                   const SizedBox(height: 20),

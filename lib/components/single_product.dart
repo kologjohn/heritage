@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../constanst.dart';
+
 
 class SingleProduct extends StatefulWidget {
   const SingleProduct({super.key});
@@ -77,7 +79,7 @@ class _SingleProductState extends State<SingleProduct> {
                           color: Colors.lightBlue[50],
                           height: 500,
                           width: 500,
-                          child: Image.asset("assets/images/chair.png"),
+                          child: Image.asset(Imagesurls.hats),
                         ),
                         Container(
                           color: Colors.white,
@@ -90,13 +92,12 @@ class _SingleProductState extends State<SingleProduct> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 const Text(
-                                    "BABY MOSES BASKET",
+                                    "WOVEN HATS",
                                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
                                 ),
                                 const SizedBox(height: 10),
-                                const Text(
-                                    "Basket weaving (also basketry or basket making) is the process of weaving or sewing pliable materials into three-dimensional artifacts, such as baskets, mats, mesh bags or even furniture. Craftspeople and artists specialized in making baskets may be known as basket makers and basket weavers.",
-                                  style: TextStyle(fontWeight: FontWeight.w300),
+                                Text(Companydata.description,
+                                  style: const TextStyle(fontWeight: FontWeight.w300),
                                 ),
                                 const SizedBox(height: 10),
                                 Container(

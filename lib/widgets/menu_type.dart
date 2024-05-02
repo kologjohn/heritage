@@ -8,22 +8,14 @@ class MenuType extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: (){
-        if (coffeeType=="SHOP")
-          {
-            Navigator.pushNamed(context, Routes.mainShop);
-          }
-      },
-      child: Container(
-        color: Colors.white30,
-        child: Text(
-          coffeeType,
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.normal,
-            color: isSelected ? Colors.orange: Colors.black,
-          ),
+    return Container(
+      color: Colors.white30,
+      child: Text(
+        coffeeType,
+        style: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.normal,
+          color: isSelected ? Colors.orange: Colors.black,
         ),
       ),
     );

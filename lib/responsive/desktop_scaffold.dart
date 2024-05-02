@@ -5,6 +5,7 @@ import 'package:jona/controller/dbfields.dart';
 import 'package:jona/widgets/route.dart';
 import 'package:provider/provider.dart';
 import '../controller/controller.dart';
+import '../forms/uploaditems.dart';
 import '../widgets/featuredgridview.dart';
 import '../widgets/menu_type.dart';
 import '../widgets/social_media_icons.dart';
@@ -18,12 +19,8 @@ class DesktopScaffold extends StatefulWidget {
 }
 
 class _DesktopScaffoldState extends State<DesktopScaffold> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    Ecom().companyinfo();
-  }
+  String shoenum="";
+
   bool show=false;
   bool editShow=true;
   @override
@@ -89,12 +86,17 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                             color: Colors.grey,
                           ),
                           const SizedBox(width: 10),
-                          const Row(
-                            children: [
-                              Icon(Icons.person),
-                              SizedBox(width: 8),
-                              Text("Login")
-                            ],
+                          InkWell(
+                            onTap: (){
+                              itemupload(context);
+                            },
+                            child: const Row(
+                              children: [
+                                Icon(Icons.person),
+                                SizedBox(width: 8),
+                                Text("Login")
+                              ],
+                            ),
                           )
                         ],
                       ),
@@ -145,17 +147,27 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                             height: 50,
                                             child: ListView(
                                               scrollDirection: Axis.horizontal,
-                                              children: const [
+                                              children: [
                                                 Row(
                                                   children: [
-                                                    MenuType(
-                                                        isSelected: true,
-                                                        coffeeType: "HOME"
+                                                    InkWell(
+                                                      onTap: (){
+                                                        Navigator.pushNamed(context, Routes.dashboard);
+                                                      },
+                                                      child: const MenuType(
+                                                          isSelected: true,
+                                                          coffeeType: "HOME"
+                                                      ),
                                                     ),
                                                     SizedBox(width: 40),
-                                                    MenuType(
-                                                        isSelected: false,
-                                                        coffeeType: "SHOP"
+                                                    InkWell(
+                                                      onTap: (){
+                                                        Navigator.pushNamed(context, Routes.mainShop);
+                                                      },
+                                                      child: const MenuType(
+                                                          isSelected: false,
+                                                          coffeeType: "SHOP"
+                                                      ),
                                                     ),
                                                     SizedBox(width: 40),
                                                     MenuType(
@@ -291,9 +303,17 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                                         return Container(child: Column(
                                                           crossAxisAlignment: CrossAxisAlignment.start,
                                                           children: [
-                                                            MenuType(
-                                                                isSelected: false,
-                                                                coffeeType: cate
+                                                            InkWell(
+                                                              onTap: (){
+                                                                setState(() {
+                                                                  shoenum=cate;
+                                                                });
+
+                                                        },
+                                                              child: MenuType(
+                                                                  isSelected: false,
+                                                                  coffeeType: cate
+                                                              ),
                                                             ),
                                                             Divider(thickness: 1,color: Colors.grey[200],),
                                                             const SizedBox(height: 10),
@@ -582,10 +602,10 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                               // ),
                             ],
                           ),
-                          const Column(
+                          Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              featuredGridview(shoenum: 4, widgth: 250, height: 150, imgHeight: 300, imgWidth: 200, name: 14, price: 14, favHeight: 30, favWidth: 80, favSize: 20, cartHeight: 30, cartWidth: 80, cartSize: 20)
+                              featuredGridview(shoenum: shoenum, widgth: 250, height: 150, imgHeight: 300, imgWidth: 200, name: 14, price: 14, favHeight: 30, favWidth: 80, favSize: 20, cartHeight: 30, cartWidth: 80, cartSize: 20)
                             ],
                           ),
                           const SizedBox(height: 20),
