@@ -7,7 +7,8 @@ class LoginField extends StatelessWidget {
   final String hintText;
   final  TextEditingController controller;
   final TextInputType textInputType;
-  const LoginField({super.key, required this.hintText,required this.controller, required this.textInputType});
+  final bool obscure;
+  const LoginField({super.key, required this.hintText,required this.controller, required this.textInputType, required this.obscure});
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +19,7 @@ class LoginField extends StatelessWidget {
       child: TextFormField(
         keyboardType: textInputType,
         controller: controller,
+        obscureText: obscure,
         decoration: InputDecoration(
           //contentPadding: EdgeInsets.all(27),
           enabledBorder: OutlineInputBorder(

@@ -24,19 +24,30 @@ class Ecom extends ChangeNotifier{
       // Add other scopes as needed.
     ],
   );
+
+
   
   companyinfo()async{
-    print("jojo");
-    final dbcompanyinfo=await db.collection("settings").get();
-    print(dbcompanyinfo);
-    companyname=dbcompanyinfo.docs[0]['name'];
-    companyemail=dbcompanyinfo.docs[0]['email'];
-    companyphone=dbcompanyinfo.docs[0]['phone'];
-    companyaddress=dbcompanyinfo.docs[0]['address'];
-    print(companyemail);
-    notifyListeners();
+try{
+  final dbcompanyinfo=await db.collection("settings").get();
+  companyname=dbcompanyinfo.docs[0]['name'];
+  companyemail=dbcompanyinfo.docs[0]['email'];
+  companyphone=dbcompanyinfo.docs[0]['phone'];
+  companyaddress=dbcompanyinfo.docs[0]['address'];
+}on FirebaseException catch(e){
+  print(e.message);
+}
 
+    notifyListeners();
   }
+  itemslist()async{
+    await db.collection('useitemrs').get().then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+      //  print(doc["item"]);
+      });
+    });
+
+}
 
 
   signupwithemail(String firstname,String lastname,String username,String contact,String sex,String email,String password)async{
@@ -69,22 +80,36 @@ class Ecom extends ChangeNotifier{
 
   }
 
+   String capitalizeEachWord(String input) {
+     // Split the input string into words
+     List<String> words = input.split(' ');
+
+     // Capitalize the first letter of each word
+     List<String> capitalizedWords = words.map((word) {
+       // Handle cases where the word is empty
+       if (word.isEmpty) {
+         return word;
+       }
+       // Capitalize the first letter and concatenate the rest of the word
+       return word[0].toUpperCase() + word.substring(1);
+     }).toList();
+
+     // Join the capitalized words back into a single string
+     return capitalizedWords.join(' ');
+   }
+
   loginwithemail(String email,String password) async{
     try{
         final mylogin= await Dbfields.auth.signInWithEmailAndPassword(email: email, password: password);
         if(!Dbfields.auth.currentUser!.emailVerified)
           {
             Dbfields.auth.currentUser!.sendEmailVerification();
-          }
-        else
-          {
-            print("Already Verified");
+            error="Please verify your email to continue to add to cart";
           }
        // print(Dbfields.auth.currentUser!.emailVerified);
        // addtocart(email, "0553354349", "TV","code", "200", "20");
         String? myemail=Dbfields.auth.currentUser!.email;
-        cartid("id", "date", false, "method", myemail!);
-        error="";
+        //cartid("id", "date", false, "method", myemail!);
     }on FirebaseException catch(e){
       error=e.message!;
      // print(error);
@@ -181,9 +206,9 @@ class Ecom extends ChangeNotifier{
       });
       // Once signed in, return the UserCredential
       final my_login = await Dbfields.auth.signInWithPopup(googleProvider);
-      print(my_login);
+      //print(my_login);
     }on FirebaseException catch(e){
-      print(e);
+     // print(e);
       //errorMsgs=e.message!;
     }
     // Or use signInWithRedirect
@@ -247,7 +272,7 @@ class Ecom extends ChangeNotifier{
           );
 
           final UserCredential userCredential =await auth.signInWithCredential(credential);
-print(userCredential);
+//print(userCredential);
           user = userCredential.user;
           }
 

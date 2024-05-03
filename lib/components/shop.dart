@@ -62,7 +62,7 @@ class _ShopPageState extends State<ShopPage> {
                           coffeeType: "BLOG"
                       ),
                       SizedBox(width: 40),
-                      MenuType(
+                      const MenuType(
                           isSelected: false,
                           coffeeType: "CONTACT"
                       ),
@@ -79,11 +79,12 @@ class _ShopPageState extends State<ShopPage> {
                             TextField(
                               controller: searchController,
                               onChanged: (e){
+                                print(searchController.text);
                                 setState(() {
-                                  shoenum=searchController.text.trim();
+                                  shoenum=searchController.text.trim().toUpperCase();
                                 });
                               },
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 hintText: 'What do you need?',
                                 hintStyle: TextStyle(color: Colors.grey, fontSize: 16),
 

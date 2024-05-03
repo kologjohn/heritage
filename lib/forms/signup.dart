@@ -9,9 +9,7 @@ import '../components/global.dart';
 import '../components/gradient_button.dart';
 import '../components/login_field.dart';
 
-
 Future signup(BuildContext context) {
-
   XenCardGutter gutter = XenCardGutter(
     child: InkWell(
       onTap: () => Navigator.pop(context),
@@ -25,17 +23,17 @@ Future signup(BuildContext context) {
     ),
   );
 
- final formvalidate=GlobalKey<FormState>();
- bool formval(){
-   return formvalidate.currentState!.validate();
- }
-  TextEditingController email=TextEditingController();
-  TextEditingController password=TextEditingController();
-  TextEditingController firstname=TextEditingController();
-  TextEditingController lastname=TextEditingController();
-  TextEditingController username=TextEditingController();
-  TextEditingController contact=TextEditingController();
+  final formvalidate = GlobalKey<FormState>();
+  bool formval() {
+    return formvalidate.currentState!.validate();
+  }
 
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+  TextEditingController firstname = TextEditingController();
+  TextEditingController lastname = TextEditingController();
+  TextEditingController username = TextEditingController();
+  TextEditingController contact = TextEditingController();
 
   return showDialog(
     context: context,
@@ -60,7 +58,8 @@ Future signup(BuildContext context) {
                     const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('Sign Up.',
+                        Text(
+                          'Sign Up.',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
@@ -68,20 +67,65 @@ Future signup(BuildContext context) {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 20,),
-                    LoginField(hintText: 'First Name',controller: firstname,textInputType: TextInputType.name,),
-                    const SizedBox(height: 15,),
-                    LoginField(hintText: 'Last Name',controller: lastname,textInputType: TextInputType.name,),
-                    const SizedBox(height: 15,),
-                    LoginField(hintText: 'User Name',controller: username,textInputType: TextInputType.name,),
-                    const SizedBox(height: 15,),
-                    LoginField(hintText: 'Email',controller: email,textInputType: TextInputType.emailAddress,),
-                    const SizedBox(height: 15,),
-                    LoginField(hintText: 'Phone',controller: contact,textInputType: TextInputType.phone,),
-                    const SizedBox(height: 15,),
-                    LoginField(hintText: 'Password',controller: password,textInputType: TextInputType.visiblePassword,),
-                    const SizedBox(height: 20,),
-                     Container(
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    LoginField(
+                      hintText: 'First Name',
+                      controller: firstname,
+                      textInputType: TextInputType.name,
+                      obscure: false,
+
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    LoginField(
+                      hintText: 'Last Name',
+                      controller: lastname,
+                      textInputType: TextInputType.name,
+                      obscure: false,
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    LoginField(
+                      hintText: 'User Name',
+                      controller: username,
+                      textInputType: TextInputType.name,
+                      obscure: false,
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    LoginField(
+                      hintText: 'Email',
+                      controller: email,
+                      textInputType: TextInputType.emailAddress,
+                      obscure: false,
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    LoginField(
+                      hintText: 'Phone',
+                      controller: contact,
+                      textInputType: TextInputType.phone,
+                      obscure: false,
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    LoginField(
+                      hintText: 'Password',
+                      controller: password,
+                      textInputType: TextInputType.visiblePassword,
+                      obscure: true,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Container(
                       decoration: BoxDecoration(
                           color: Global.borderColor,
                           // gradient: const LinearGradient(
@@ -93,22 +137,27 @@ Future signup(BuildContext context) {
                           //   begin: Alignment.bottomLeft,
                           //   end: Alignment.topRight,
                           // ),
-                          borderRadius: BorderRadius.circular(7)
-                      ),
+                          borderRadius: BorderRadius.circular(7)),
                       child: ElevatedButton(
                         onPressed: () {
                           formval();
-                          String email_txt=email.text.trim();
-                          String password_txt=password.text.trim();
-                          String firstnname_txt=firstname.text.trim();
-                          String lastname_txt=lastname.text.trim();
-                          String username_txt=username.text.trim();
-                          String contact_txt=contact.text.trim();
-                          String sex="Male";
-                          Ecom().signupwithemail(firstnname_txt, lastname_txt, username_txt, contact_txt, sex, email_txt, password_txt);
+                          String email_txt = email.text.trim();
+                          String password_txt = password.text.trim();
+                          String firstnname_txt = firstname.text.trim();
+                          String lastname_txt = lastname.text.trim();
+                          String username_txt = username.text.trim();
+                          String contact_txt = contact.text.trim();
+                          String sex = "Male";
+                          Ecom().signupwithemail(
+                              firstnname_txt,
+                              lastname_txt,
+                              username_txt,
+                              contact_txt,
+                              sex,
+                              email_txt,
+                              password_txt);
                           print(Ecom().accountcreated);
                           print(Ecom().error);
-
                         },
                         style: ElevatedButton.styleFrom(
                           fixedSize: const Size(395, 55),
@@ -126,20 +175,20 @@ Future signup(BuildContext context) {
                       ),
                     ),
                     //const SizedBox(height: 20,),
-                    const SizedBox(height: 15,),
+                    const SizedBox(
+                      height: 15,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text(
                           'Already have an account?',
                           style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold
-                          ),
+                              fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                         InkWell(
                           child: GestureDetector(
-                            onTap: (){},
+                            onTap: () {},
                             child: const Text(
                               ' Sign In',
                               style: TextStyle(

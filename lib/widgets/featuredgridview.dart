@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_network/image_network.dart';
+import 'package:jona/controller/controller.dart';
 
 import '../controller/dbfields.dart';
 import 'featured_product.dart';
@@ -31,9 +32,10 @@ class _featuredGridviewState extends State<featuredGridview> {
     List<Widget> items=[];
     if(widget.shoenum.isNotEmpty)
       {
-        print(widget.shoenum);
+        String value=Ecom().capitalizeEachWord(widget.shoenum);
+        print(value);
         setState(() {
-          itemData=Dbfields.db.collection("items").orderBy(ItemReg.category).startAt([widget.shoenum]).snapshots();
+          itemData=Dbfields.db.collection("items").orderBy(ItemReg.category).startAt([value]).snapshots();
         });
       }
     else{
@@ -85,22 +87,6 @@ class _featuredGridviewState extends State<featuredGridview> {
           spacing: 5,
           children: items
           );
-
-
-        // return GridView.builder(
-        //     shrinkWrap: true,
-        //     physics:const ScrollPhysics() ,
-        //     itemCount: snapshot.data!.docs.length,
-        //     itemBuilder: (context, index)=> featured_product(
-        //       featuredImage: snapshot.data!.docs[index][ItemReg.itemurl],
-        //       featuredName: snapshot.data!.docs[index][ItemReg.item],
-        //       featuredPrice: snapshot.data!.docs[index][ItemReg.sellingprice],
-        //       pgress: false,
-        //       contwidth: widgth,
-        //       contheight: height, imageHeight: imgHeight, imageWidth: imgWidth, nameSize: name, priceSize: price, favHeight: favHeight, favWidth: favWidth, favSize: favSize, cartHeight: cartHeight, cartWidth: cartWidth, cartSize: cartSize,
-        //     ),
-        //     gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: shoenum)
-        // );
 
       },
     );
