@@ -74,7 +74,7 @@ Future signup(BuildContext context) {
                       hintText: 'First Name',
                       controller: firstname,
                       textInputType: TextInputType.name,
-                      obscure: false,
+                      obscure: false, labelText: '',
 
                     ),
                     const SizedBox(
@@ -84,7 +84,7 @@ Future signup(BuildContext context) {
                       hintText: 'Last Name',
                       controller: lastname,
                       textInputType: TextInputType.name,
-                      obscure: false,
+                      obscure: false, labelText: '',
                     ),
                     const SizedBox(
                       height: 15,
@@ -93,7 +93,7 @@ Future signup(BuildContext context) {
                       hintText: 'User Name',
                       controller: username,
                       textInputType: TextInputType.name,
-                      obscure: false,
+                      obscure: false, labelText: '',
                     ),
                     const SizedBox(
                       height: 15,
@@ -102,7 +102,7 @@ Future signup(BuildContext context) {
                       hintText: 'Email',
                       controller: email,
                       textInputType: TextInputType.emailAddress,
-                      obscure: false,
+                      obscure: false, labelText: '',
                     ),
                     const SizedBox(
                       height: 15,
@@ -111,7 +111,7 @@ Future signup(BuildContext context) {
                       hintText: 'Phone',
                       controller: contact,
                       textInputType: TextInputType.phone,
-                      obscure: false,
+                      obscure: false, labelText: '',
                     ),
                     const SizedBox(
                       height: 15,
@@ -121,6 +121,7 @@ Future signup(BuildContext context) {
                       controller: password,
                       textInputType: TextInputType.visiblePassword,
                       obscure: true,
+                      labelText: '',
                     ),
                     const SizedBox(
                       height: 20,

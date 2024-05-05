@@ -1,11 +1,16 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:jona/constanst.dart';
 import 'package:jona/controller/controller.dart';
+import 'package:jona/widgets/drawer.dart';
 import 'package:jona/widgets/featuredgridview.dart';
+import 'package:jona/widgets/side_menu.dart';
 import 'package:provider/provider.dart';
+import '../controller/dbfields.dart';
 import '../widgets/menu_type.dart';
 import '../widgets/route.dart';
 import '../widgets/social_media_icons.dart';
@@ -23,7 +28,31 @@ class _TabletShopState extends State<TabletShop> {
   bool editShow=true;
   @override
   Widget build(BuildContext context) {
+    final querysnapshot;
+    final data = ModalRoute.of(context)?.settings.arguments;
+    if(data!=null){
+      querysnapshot=Dbfields.db.collection("items").orderBy(ItemReg.category).startAt(['value']).snapshots();
+
+    }
+    else
+      {
+        querysnapshot=Dbfields.db.collection("items").orderBy(ItemReg.category).startAt(['value']).snapshots();
+
+      }
+    //Map<String, dynamic> mapData = jsonDecode(data.toString());
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.lightGreen[50],
+        centerTitle: true,
+        title: Text(
+          data.toString(),
+           // Companydata.companyname,
+          style: const TextStyle(
+            fontWeight: FontWeight.w500
+          ),
+        )
+      ),
+      drawer: const SideDrawer(dWidth: 400),
       body: Consumer<Ecom>(
         builder: (BuildContext context, Ecom value, Widget? child) {
           if(value.companyaddress.isEmpty)
@@ -37,35 +66,6 @@ class _TabletShopState extends State<TabletShop> {
                   padding: const EdgeInsets.only(left: 100.0, right: 100),
                   child: Column(
                     children: [
-                      Column(
-                        children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                  child: SizedBox(
-                                    height: 50,
-                                    //color: Colors.red,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Flexible(
-                                          child: Text(Companydata.companyname,
-                                            style: const TextStyle(
-                                                fontSize: 30,
-                                                fontWeight: FontWeight.w600
-                                            ),
-                                          ),
-                                        ),
-                                        const Icon(Icons.menu, size: 40,)
-                                      ],
-                                    ),
-                                  )
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 20,),
                       Column(
                         children: [
                           Row(
@@ -206,63 +206,66 @@ class _TabletShopState extends State<TabletShop> {
                           Row(
                             children: [
                               Expanded(
-                                  child: Container(
-                                    color: Colors.white,
-                                    height: 60,
-                                    child:  Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            const Text("All Categories"),
-                                            const Icon(Icons.arrow_drop_down),
-                                            const SizedBox(width: 30),
-                                            const SizedBox(
-                                              height: 50,
-                                              width: 300,
-                                              child: Column(
-                                                children: [
-                                                  TextField(
-                                                    decoration: InputDecoration(
-                                                      hintText: 'What do you need?',
-                                                      hintStyle: TextStyle(color: Colors.grey, fontSize: 12),
-                                                    ),
-                                                  )
-                                                ],
+                                  child: FittedBox(
+                                    fit: BoxFit.contain,
+                                    child: Container(
+                                      color: Colors.white,
+                                      height: 60,
+                                      child:  Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              const Text("All Categories"),
+                                              const Icon(Icons.arrow_drop_down),
+                                              const SizedBox(width: 30),
+                                              const SizedBox(
+                                                height: 50,
+                                                width: 300,
+                                                child: Column(
+                                                  children: [
+                                                    TextField(
+                                                      decoration: InputDecoration(
+                                                        hintText: 'What do you need?',
+                                                        hintStyle: TextStyle(color: Colors.grey, fontSize: 12),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
                                               ),
-                                            ),
-                                            Container(
-                                              height: 50,
-                                              width: 80,
-                                              color: Colors.orange,
-                                              child: const Column(
+                                              Container(
+                                                height: 50,
+                                                width: 80,
+                                                color: Colors.orange,
+                                                child: const Column(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    Text("Search", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              CircleAvatar(
+                                                backgroundColor: Colors.lightGreen[50],
+                                                child: const Icon(
+                                                  Icons.call, color: Colors.orange,
+                                                ),
+                                              ),
+                                              const SizedBox(width: 12),
+                                              Column(
                                                 mainAxisAlignment: MainAxisAlignment.center,
                                                 children: [
-                                                  Text("Search", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),),
+                                                  Text(value.companyphone, style: TextStyle(fontWeight: FontWeight.bold),),
+                                                  Text("support 24/7 time", style: TextStyle(color: Colors.black54),),
                                                 ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            CircleAvatar(
-                                              backgroundColor: Colors.lightGreen[50],
-                                              child: const Icon(
-                                                Icons.call, color: Colors.orange,
-                                              ),
-                                            ),
-                                            const SizedBox(width: 12),
-                                            Column(
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              children: [
-                                                Text(value.companyphone, style: TextStyle(fontWeight: FontWeight.bold),),
-                                                Text("support 24/7 time", style: TextStyle(color: Colors.black54),),
-                                              ],
-                                            )
-                                          ],
-                                        )
-                                      ],
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   )
                               ),
@@ -312,7 +315,7 @@ class _TabletShopState extends State<TabletShop> {
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          featuredGridview(shoenum: shoenum, widgth: 250, height: 150, imgHeight: 300, imgWidth: 200, name: 14, price: 14, favHeight: 30, favWidth: 80, favSize: 20, cartHeight: 30, cartWidth: 80, cartSize: 20)
+                          featuredGridview(shoenum: shoenum, widgth: 250, height: 150, name: 14, price: 14, favHeight: 30, favWidth: 80, favSize: 20, cartHeight: 30, cartWidth: 80, cartSize: 20, querySnapshot: null,)
                         ],
                       ),
                       const SizedBox(height: 20),
@@ -323,7 +326,7 @@ class _TabletShopState extends State<TabletShop> {
                   height: 400,
                   color: Colors.lightGreen[50],
                   child:  Padding(
-                    padding: const EdgeInsets.only(left: 100.0, right: 100, top: 50),
+                    padding: const EdgeInsets.only(left: 10.0, right: 10, top: 50),
                     child: Column(
                       children: [
                         Row(
@@ -336,7 +339,7 @@ class _TabletShopState extends State<TabletShop> {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Expanded(child: Text(Companydata.companyname, style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25),)),
+                                      Expanded(child: Text(Companydata.companyname, style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),)),
                                       const SizedBox(height: 20),
                                       Expanded(child: Text(value.companyaddress)),
                                       const SizedBox(height: 15),
@@ -357,7 +360,7 @@ class _TabletShopState extends State<TabletShop> {
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
-                                        Text("USEFUL LINKS", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25)),
+                                        Text("USEFUL LINKS", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18)),
                                         SizedBox(height: 20),
                                         Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -410,7 +413,7 @@ class _TabletShopState extends State<TabletShop> {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
-                                      const Text("JOIN OUR NEWSLETTER NOW", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25)),
+                                      const Text("JOIN OUR NEWSLETTER NOW", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18)),
                                       const SizedBox(height: 20),
                                       const Text("Get E-mail updates about our latest shop and special offers."),
                                       const SizedBox(height: 15),

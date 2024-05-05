@@ -1,20 +1,13 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:jona/constanst.dart';
 import 'package:jona/controller/dbfields.dart';
-import 'package:jona/widgets/carousel_slider.dart';
+import 'package:jona/widgets/side_menu.dart';
 import 'package:jona/widgets/social_media_icons.dart';
-import 'package:scroll_loop_auto_scroll/scroll_loop_auto_scroll.dart';
 import 'package:typewritertext/typewritertext.dart';
-import '../forms/login.dart';
-import '../forms/signup.dart';
-import '../widgets/featured_product.dart';
 import '../widgets/featuredgridview.dart';
 import '../widgets/menu_type.dart';
-import '../widgets/slide_tile.dart';
 
 
 class MobileScaffold extends StatefulWidget {
@@ -33,133 +26,26 @@ class _MobileScaffoldState extends State<MobileScaffold> {
     return Scaffold(
       appBar: AppBar(
         //backgroundColor: Colors.orange,
-        actions:  [
-          Padding(
-            padding: const EdgeInsets.only(right: 10.0),
-            child: Text(Companydata.companyname,
-              style: const TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.w600
-              ),
-            ),
+        // actions:  [
+        //   Padding(
+        //     padding: const EdgeInsets.only(right: 10.0),
+        //     child: Text(Companydata.companyname,
+        //       style: const TextStyle(
+        //           fontSize: 25,
+        //           fontWeight: FontWeight.w600
+        //       ),
+        //     ),
+        //   ),
+        // ],
+        centerTitle: true,
+        title: Text(Companydata.companyname,
+          style: const TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.w600
           ),
-        ],
-        //title: const Text("APPBAR"),
-      ),
-      drawer: Drawer(
-        child: Column(
-          children: [
-             DrawerHeader(
-                child: Text(
-                  Companydata.companyname,
-                  style: const TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.w600
-                  ),
-                ),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Icon(Icons.favorite),
-                  SizedBox(width: 10),
-                  Icon(Icons.shopping_bag),
-                  SizedBox(width: 20),
-                  Text("Item:"),
-                  SizedBox(width: 10),
-                  Text("500.00"),
-                ],
-              ),
-            ),
-            //const SizedBox(height: 15),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Image.asset("assets/images/ghana.png", height: 20, width: 20,),
-                      const SizedBox(width: 8),
-                      const Text("Ghana"),
-                      const Icon(Icons.keyboard_arrow_down)
-                    ],
-                  ),
-                  InkWell(
-                    onTap: (){
-                      signin(context);
-                    },
-                    child: const Row(
-                      children: [
-                        Icon(Icons.person),
-                        SizedBox(width: 8),
-                        Text("Login")
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-            const SizedBox(height: 30),
-            const ExpansionTile(
-              leading: Icon(Icons.menu, color: Colors.white54,),
-                title: Text("MENU", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
-              collapsedIconColor: Colors.white54,
-              childrenPadding: EdgeInsets.only(left: 30),
-              collapsedBackgroundColor: Colors.black54,
-              backgroundColor: Colors.grey,
-              children: [
-                ListTile(
-                  title: MenuType(isSelected: true, coffeeType: 'HOME'),
-                ),
-                ListTile(
-                  title: MenuType(isSelected: false, coffeeType: 'SHOP'),
-                ),
-                ListTile(
-                  title: MenuType(isSelected: false, coffeeType: 'BLOG'),
-                ),
-                ListTile(
-                  title: MenuType(isSelected: false, coffeeType: 'CONTACT'),
-                ),
-              ],
-            ),
-            const SizedBox(height: 30),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SocialMediaIcons(),
-                ],
-              ),
-            ),
-           // const SizedBox(height: 15),
-             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  const Icon(Icons.email, size: 18,),
-                  const SizedBox(width: 8,),
-                  Text(Companydata.companyname),
-                ],
-              ),
-            ),
-            //const SizedBox(height: 15),
-             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  const Icon(Icons.location_pin, size: 18,),
-                  const SizedBox(width: 8),
-                  Text(Companydata.address),
-                ],
-              ),
-            )
-          ],
         ),
       ),
+      drawer: const SideDrawer(dWidth: 350),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -349,7 +235,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                            Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(Companydata.phone, style: TextStyle(fontWeight: FontWeight.bold),),
+                              Text(Companydata.phone, style: const TextStyle(fontWeight: FontWeight.bold),),
                               const Text("support 24/7 time", style: TextStyle(color: Colors.black54),),
                             ],
                           )
@@ -513,7 +399,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                           ],
                         ),
                       ),
-                      featuredGridview(shoenum: shoenum, widgth: 250, height: 250, imgHeight: 200, imgWidth: 250, name: 12, price: 12, favHeight: 25, favWidth: 60, favSize: 25, cartHeight: 25, cartWidth: 60, cartSize: 25),
+                      featuredGridview(shoenum: shoenum, widgth: 250, height: 250,name: 12, price: 12, favHeight: 25, favWidth: 60, favSize: 25, cartHeight: 25, cartWidth: 60, cartSize: 25, querySnapshot: null,),
                     ],
                   ),
                   const SizedBox(height: 20),

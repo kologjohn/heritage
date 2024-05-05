@@ -7,9 +7,11 @@ import 'package:jona/constanst.dart';
 import 'package:jona/controller/controller.dart';
 import 'package:jona/widgets/featuredgridview.dart';
 import 'package:provider/provider.dart';
+import '../forms/login.dart';
 import '../widgets/carousel_slider.dart';
 import '../widgets/menu_type.dart';
 import '../widgets/route.dart';
+import '../widgets/side_menu.dart';
 import '../widgets/slide_tile.dart';
 import '../widgets/social_media_icons.dart';
 
@@ -24,9 +26,23 @@ class _TabletScaffoldState extends State<TabletScaffold> {
   String shoenum="";
   bool show=false;
   bool editShow=true;
+  late double dWidth;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.lightGreen[50],
+        title: Flexible(
+          child: Text(Companydata.companyname,
+            style: const TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.w600
+            ),
+          ),
+        ),
+        centerTitle: true,
+      ),
+      drawer: const SideDrawer(dWidth: 400),
       body: Consumer<Ecom>(
         builder: (BuildContext context, Ecom value, Widget? child) {
           if(value.companyaddress.isEmpty)
@@ -40,49 +56,49 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                   padding: const EdgeInsets.only(left: 50.0, right: 50.0),
                   child: Column(
                     children: [
-                      Column(
-                        children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                  child: SizedBox(
-                                    height: 50,
-                                    //color: Colors.red,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Flexible(
-                                          child: Text(Companydata.companyname,
-                                            style: const TextStyle(
-                                                fontSize: 30,
-                                                fontWeight: FontWeight.w600
-                                            ),
-                                          ),
-                                        ),
-                                        Icon(Icons.menu, size: 40,)
-                                      ],
-                                    ),
-                                  )
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
+                      // Column(
+                      //   children: [
+                      //     Row(
+                      //       children: [
+                      //         Expanded(
+                      //             child: SizedBox(
+                      //               height: 50,
+                      //               //color: Colors.red,
+                      //               child: Row(
+                      //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //                 children: [
+                      //                   Flexible(
+                      //                     child: Text(Companydata.companyname,
+                      //                       style: const TextStyle(
+                      //                           fontSize: 30,
+                      //                           fontWeight: FontWeight.w600
+                      //                       ),
+                      //                     ),
+                      //                   ),
+                      //                   //Icon(Icons.menu, size: 40,)
+                      //                 ],
+                      //               ),
+                      //             )
+                      //         )
+                      //       ],
+                      //     ),
+                      //   ],
+                      // ),
                       const SizedBox(height: 20,),
                       Column(
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.favorite),
-                              SizedBox(width: 20),
+                              const Icon(Icons.favorite),
+                              const SizedBox(width: 20),
                               InkWell(
                                   onTap: (){
                                     Navigator.pushNamed(context, Routes.cart);
                                   },
                                   child: const Icon(Icons.shopping_cart)),
-                              SizedBox(width: 20),
-                              Text("Item")
+                              const SizedBox(width: 20),
+                              const Text("Item")
                             ],
                           )
                         ],
@@ -157,7 +173,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                               builder: (context, snapshot) {
                                                 if(!snapshot.hasData)
                                                 {
-                                                  return Text("No data yet");
+                                                  return const Text("No data yet");
 
                                                 }
                                                 return ListView.builder(
@@ -207,17 +223,22 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                             children: [
                               Expanded(
                                   child: FittedBox(
+                                    fit: BoxFit.contain,
                                     child: Container(
                                       color: Colors.white,
                                       height: 60,
                                       child:  Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
+                                          const Row(
+                                            children: [
+                                              Text("All Categories"),
+                                              Icon(Icons.arrow_drop_down),
+                                            ],
+                                          ),
+                                          const SizedBox(width: 50,),
                                           Row(
                                             children: [
-                                              const Text("All Categories"),
-                                              const Icon(Icons.arrow_drop_down),
-                                              const SizedBox(width: 30),
                                               const SizedBox(
                                                 height: 50,
                                                 width: 300,
@@ -245,6 +266,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                               ),
                                             ],
                                           ),
+                                          const SizedBox(width: 50,),
                                           Row(
                                             children: [
                                               CircleAvatar(
@@ -257,8 +279,8 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                                Column(
                                                 mainAxisAlignment: MainAxisAlignment.center,
                                                 children: [
-                                                  Text(value.companyphone, style: TextStyle(fontWeight: FontWeight.bold),),
-                                                  Text("support 24/7 time", style: TextStyle(color: Colors.black54),),
+                                                  Text(value.companyphone, style: const TextStyle(fontWeight: FontWeight.bold),),
+                                                  const Text("support 24/7 time", style: TextStyle(color: Colors.black54, fontSize: 12),),
                                                 ],
                                               )
                                             ],
@@ -266,7 +288,6 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                         ],
                                       ),
                                     ),
-                                    fit: BoxFit.contain,
                                   )
                               ),
                             ],
@@ -411,7 +432,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          featuredGridview(shoenum: shoenum, widgth: 250, height: 150, imgHeight: 300, imgWidth: 200, name: 14, price: 14, favHeight: 30, favWidth: 80, favSize: 20, cartHeight: 30, cartWidth: 80, cartSize: 20)
+                          featuredGridview(shoenum: shoenum, widgth: 250, height: 150, name: 14, price: 14, favHeight: 30, favWidth: 80, favSize: 20, cartHeight: 30, cartWidth: 80, cartSize: 20, querySnapshot: null,)
                         ],
                       ),
                       const SizedBox(height: 50),
@@ -796,7 +817,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Expanded(child: Text(Companydata.companyname, style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25),)),
+                                      Expanded(child: Text(Companydata.companyname, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 25),)),
                                       const SizedBox(height: 20),
                                       Expanded(child: Text(value.companyaddress)),
                                       const SizedBox(height: 15),
@@ -946,3 +967,4 @@ class _TabletScaffoldState extends State<TabletScaffold> {
     );
   }
 }
+
