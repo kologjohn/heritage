@@ -1,10 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
-import 'package:jona/forms/signup.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:jona/widgets/route.dart';
 import 'package:provider/provider.dart';
-import 'package:xen_popup_card/xen_popup_card.dart';
-
 import '../components/forgot_password.dart';
 import '../components/global.dart';
 import '../components/login_field.dart';
@@ -12,49 +10,43 @@ import '../components/social_button.dart';
 import '../constanst.dart';
 import '../controller/controller.dart';
 
+class SignInPage extends StatefulWidget {
+  const SignInPage({super.key});
 
-Future signin(BuildContext context) {
+  @override
+  State<SignInPage> createState() => _SignInPageState();
+}
 
-  XenCardGutter gutter = XenCardGutter(
-    child: InkWell(
-      onTap: () => Navigator.pop(context),
-      child: Container(
-        color: Colors.black45,
-        child: const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Text("close", textAlign: TextAlign.center),
-        ),
-      ),
-    ),
-  );
+class _SignInPageState extends State<SignInPage> {
+  final formskey=GlobalKey<FormState>();
+  bool validator(){
+    return formskey.currentState!.validate();
 
+  }
   TextEditingController email=TextEditingController();
   TextEditingController password=TextEditingController();
-
-  return showDialog(
-    context: context,
-    builder: (builder) => SizedBox(
-      height: 100,
-      width: 80,
-      child: ProgressHUD(
-        child: Consumer<Ecom>(
-
-          builder: (BuildContext context, Ecom value, Widget? child) {
-            return Builder(
-              builder: (context) {
-                return XenPopupCard(
-                  //cardBgColor: Colors.black,
-                  gutter: gutter,
-                  body: Padding(
-                    padding: const EdgeInsets.only(top: 16),
-                    child: Center(
-                      child: ConstrainedBox(
-                        constraints: const BoxConstraints(
-                          maxWidth: 500,
-                        ),
+  
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<Ecom>(
+        builder: (BuildContext context, Ecom value, Widget? child){
+          return Scaffold(
+            body: Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(
+                    maxWidth: 550,
+                    maxHeight: 600
+                ),
+                child: Card(
+                  elevation: 2,
+                  child: Container(
+                    color: Colors.white,
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Form(
+                        key: formskey,
                         child: ListView(
                           children: [
-                            // Existing form fields
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -76,19 +68,12 @@ Future signin(BuildContext context) {
                             Container(
                               decoration: BoxDecoration(
                                   color: Global.borderColor,
-                                  // gradient:   const LinearGradient(
-                                  //   colors: [
-                                  //     Global.gradient1,
-                                  //     Global.gradient2,
-                                  //     Global.gradient3,
-                                  //   ],
-                                  //   begin: Alignment.bottomLeft,
-                                  //   end: Alignment.topRight,
-                                  // ),
                                   borderRadius: BorderRadius.circular(7)
                               ),
                               child: ElevatedButton(
                                 onPressed: () async{
+                                  validator() ;
+
                                   String email_txt=email.text.trim();
                                   String password_txt=password.text.trim();
                                   final progress=ProgressHUD.of(context);
@@ -115,7 +100,6 @@ Future signin(BuildContext context) {
                                 ),
                               ),
                             ),
-
                             const SizedBox(height: 15,),
                             const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -132,26 +116,27 @@ Future signin(BuildContext context) {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                SocialButton(
-                                    iconPath: 'assets/svg/g_logo.svg',
-                                    label: '', horizontalPadding: 20,
-                                    onPressed: ()async{
-                                      final hh=await value.signInWithGoogles(context: context);
 
-                                      if(hh!=null){
-                                        SnackBar snackbar=SnackBar(content: Text("Hello,${hh.displayName}, Login Success"));
-                                        ScaffoldMessenger.of(context).showSnackBar(snackbar);
-                                        Navigator.of(context).pop();
+                                Container(
+                                  decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                  ),
+                                  width: 200,
+                                  child: SocialButton(
+                                      iconPath: 'assets/svg/google-svgrepo-com.svg',
+                                      label: 'Google Login', horizontalPadding: 20,
+                                      onPressed: ()async{
+                                        final hh=await value.signInWithGoogles(context: context);
+                                        if(hh!=null){
+                                          SnackBar snackbar=SnackBar(content: Text("Hello,${hh.displayName}, Login Success"));
+                                          ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                                          Navigator.of(context).pop();
+                                        }
+                                        // print(hh);
                                       }
-                                      // print(hh);
-                                    }
+                                  ),
                                 ),
-                                const SizedBox(width: 10),
-                                SocialButton(
-                                    iconPath: 'assets/svg/f_logo.svg',
-                                    label: '',horizontalPadding: 20,
-                                    onPressed: (){}
-                                )
+
                               ],
                             ),
                             const SizedBox(height: 15),
@@ -170,17 +155,15 @@ Future signin(BuildContext context) {
                                     ),
                                   ),
                                   InkWell(
-                                    child: GestureDetector(
-                                      onTap: (){
-                                        signup(context);
-                                      },
-                                      child: const Text(
-                                        ' Sign Up',
-                                        style: TextStyle(
-                                          color: Global.gradient3,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 14,
-                                        ),
+                                    onTap: (){
+                                      Navigator.pushNamed(context, Routes.signup);
+                                    },
+                                    child: const Text(
+                                      ' Sign Up',
+                                      style: TextStyle(
+                                        color: Global.gradient3,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14,
                                       ),
                                     ),
                                   ),
@@ -192,12 +175,11 @@ Future signin(BuildContext context) {
                       ),
                     ),
                   ),
-                );
-              }
-            );
-          },
-        ),
-      ),
-    ),
-  );
+                ),
+              ),
+            ),
+          );
+        }
+    );
+  }
 }

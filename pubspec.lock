@@ -254,6 +254,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.2"
+  flutter_social_button:
+    dependency: "direct main"
+    description:
+      name: flutter_social_button
+      sha256: e10dbd78e8370b8c260148eb8d2904a77001073daeb263b5cdcf6c4dd652eed3
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.4+1"
   flutter_svg:
     dependency: "direct main"
     description:
@@ -272,6 +280,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  font_awesome_flutter:
+    dependency: transitive
+    description:
+      name: font_awesome_flutter
+      sha256: "275ff26905134bcb59417cf60ad979136f1f8257f2f449914b2c3e05bbb4cd6f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "10.7.0"
   google_fonts:
     dependency: "direct main"
     description:
@@ -581,6 +597,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.1"
+  smooth_star_rating_null_safety:
+    dependency: "direct main"
+    description:
+      name: smooth_star_rating_null_safety
+      sha256: "8b3e56609da43577e5e72732d1dcad62fcabbd8131b228542f9ce2e9dc245dc1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.4+2"
   source_span:
     dependency: transitive
     description:

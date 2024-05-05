@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:jona/constanst.dart';
@@ -6,6 +7,7 @@ import 'package:jona/widgets/route.dart';
 import 'package:provider/provider.dart';
 import '../controller/controller.dart';
 import '../widgets/featuredgridview.dart';
+import '../widgets/main_menu.dart';
 import '../widgets/menu_type.dart';
 import '../widgets/social_media_icons.dart';
 
@@ -146,45 +148,8 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                             height: 50,
                                             child: ListView(
                                               scrollDirection: Axis.horizontal,
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    InkWell(
-                                                      onTap: (){
-                                                        Navigator.pushNamed(context, Routes.dashboard);
-                                                      },
-                                                      child: const MenuType(
-                                                          isSelected: true,
-                                                          coffeeType: "HOME"
-                                                      ),
-                                                    ),
-                                                    SizedBox(width: 40),
-                                                    InkWell(
-                                                      onTap: (){
-                                                        Navigator.pushNamed(context, Routes.mainShop);
-                                                      },
-                                                      child: const MenuType(
-                                                          isSelected: false,
-                                                          coffeeType: "SHOP"
-                                                      ),
-                                                    ),
-                                                    SizedBox(width: 40),
-                                                    MenuType(
-                                                        isSelected: false,
-                                                        coffeeType: "PAGES"
-                                                    ),
-                                                    SizedBox(width: 40),
-                                                    MenuType(
-                                                        isSelected: false,
-                                                        coffeeType: "BLOG"
-                                                    ),
-                                                    SizedBox(width: 40),
-                                                    MenuType(
-                                                        isSelected: false,
-                                                        coffeeType: "CONTACT"
-                                                    ),
-                                                  ],
-                                                ),
+                                              children: const [
+                                                MainMenu(),
                                               ],
                                             ),
                                           ),
@@ -309,9 +274,14 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                                                 });
 
                                                         },
-                                                              child: MenuType(
-                                                                  isSelected: false,
-                                                                  coffeeType: cate
+                                                              child: InkWell(
+                                                                onTap: (){
+                                                                  Navigator.pushNamed(context, Routes.mainShop, arguments: {"cate":cate,"from":"desktop"});
+                                                                },
+                                                                child: MenuType(
+                                                                    isSelected: false,
+                                                                    coffeeType: cate
+                                                                ),
                                                               ),
                                                             ),
                                                             Divider(thickness: 1,color: Colors.grey[200],),
@@ -508,7 +478,27 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                                       crossAxisAlignment: CrossAxisAlignment.start,
                                                       mainAxisAlignment: MainAxisAlignment.center,
                                                       children: [
-                                                        Image.asset(Imagesurls.d2,height: 400,)
+                                                        Container(
+                                                          color: Colors.lightBlue[50],
+                                                          height: 530,
+                                                          child: CarouselSlider(
+                                                            items: [
+                                                              Image.asset(Imagesurls.d2, height: 400,),
+                                                              Image.asset(Imagesurls.hats, height: 400,),
+                                                              // Add more images here if needed
+                                                            ],
+                                                            options: CarouselOptions(
+                                                              aspectRatio: 16/9,
+                                                              enlargeCenterPage: true,
+                                                              autoPlay: true,
+                                                              autoPlayInterval: const Duration(seconds: 3),
+                                                              autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                                                              enableInfiniteScroll: true,
+                                                              autoPlayCurve: Curves.fastOutSlowIn,
+                                                              scrollDirection: Axis.horizontal,
+                                                            ),
+                                                          ),
+                                                        ),
                                                       ],
                                                     ),
                                                   ),
@@ -604,7 +594,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              featuredGridview(shoenum: shoenum, widgth: 250, height: 150, imgHeight: 300, imgWidth: 200, name: 14, price: 14, favHeight: 30, favWidth: 80, favSize: 20, cartHeight: 30, cartWidth: 80, cartSize: 20)
+                              featuredGridview(shoenum: shoenum, widgth: 250, height: 150, name: 14, price: 14, favHeight: 30, favWidth: 80, favSize: 20, cartHeight: 30, cartWidth: 80, cartSize: 20, querySnapshot: null,)
                             ],
                           ),
                           const SizedBox(height: 20),

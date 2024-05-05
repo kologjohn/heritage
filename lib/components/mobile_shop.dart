@@ -133,7 +133,7 @@ class _MobileShopState extends State<MobileShop> {
                 children: [
                   const Icon(Icons.email, size: 18,),
                   const SizedBox(width: 8,),
-                  Text(Companydata.companyname, style: TextStyle(fontSize: 12),),
+                  Text(Companydata.companyname, style: const TextStyle(fontSize: 12),),
                 ],
               ),
             ),
@@ -144,7 +144,7 @@ class _MobileShopState extends State<MobileShop> {
                 children: [
                   const Icon(Icons.location_pin, size: 18,),
                   const SizedBox(width: 8),
-                  Text(Companydata.address, style: TextStyle(fontSize: 12),),
+                  Text(Companydata.address, style: const TextStyle(fontSize: 12),),
                 ],
               ),
             )
@@ -340,7 +340,7 @@ class _MobileShopState extends State<MobileShop> {
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(Companydata.phone, style: TextStyle(fontWeight: FontWeight.bold),),
+                              Text(Companydata.phone, style: const TextStyle(fontWeight: FontWeight.bold),),
                               const Text("support 24/7 time", style: TextStyle(color: Colors.black54),),
                             ],
                           )
@@ -445,7 +445,7 @@ class _MobileShopState extends State<MobileShop> {
                         ],
                       ),
                       const SizedBox(height: 15),
-                      featuredGridview(shoenum: shoenum, widgth: 250, height: 250, imgHeight: 200, imgWidth: 250, name: 12, price: 12, favHeight: 25, favWidth: 60, favSize: 25, cartHeight: 25, cartWidth: 60, cartSize: 25),
+                      featuredGridview(shoenum: shoenum, widgth: 250, height: 250, name: 12, price: 12, favHeight: 25, favWidth: 60, favSize: 25, cartHeight: 25, cartWidth: 60, cartSize: 25, querySnapshot: null,),
                     ],
                   ),
                   const SizedBox(height: 20),
@@ -475,6 +475,7 @@ class _MobileShopState extends State<MobileShop> {
                         )
                       ],
                     ),
+                    const SizedBox(height: 20),
                     const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -521,6 +522,7 @@ class _MobileShopState extends State<MobileShop> {
                         ),
                       ],
                     ),
+                    const SizedBox(height: 20),
                     const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -529,6 +531,7 @@ class _MobileShopState extends State<MobileShop> {
                         Text("Get E-mail updates about our latest shop and special offers."),
                       ],
                     ),
+                    const SizedBox(height: 8),
                     Row(
                       children: [
                         const Expanded(

@@ -5,10 +5,11 @@ import 'global.dart';
 
 class LoginField extends StatelessWidget {
   final String hintText;
+  final String labelText;
   final  TextEditingController controller;
   final TextInputType textInputType;
   final bool obscure;
-  const LoginField({super.key, required this.hintText,required this.controller, required this.textInputType, required this.obscure});
+  const LoginField({super.key, required this.hintText,required this.controller, required this.textInputType, required this.obscure, required this.labelText});
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +18,11 @@ class LoginField extends StatelessWidget {
         maxWidth: 400,
       ),
       child: TextFormField(
+        validator: (value){
+          if(value!.isEmpty){
+            return "Field is required";
+          }
+        },
         keyboardType: textInputType,
         controller: controller,
         obscureText: obscure,
@@ -25,18 +31,20 @@ class LoginField extends StatelessWidget {
           enabledBorder: OutlineInputBorder(
               borderSide: const BorderSide(
                 color: Global.borderColor,
-                width: 3,
+                width: 1,
               ),
-              borderRadius: BorderRadius.circular(10)
+              borderRadius: BorderRadius.circular(6)
           ),
           focusedBorder: OutlineInputBorder(
               borderSide: const BorderSide(
                 color: Colors.orange,
-                width: 3,
+                width: 1,
               ),
-              borderRadius: BorderRadius.circular(10)
+              borderRadius: BorderRadius.circular(6)
           ),
           hintText: hintText,
+          labelText: labelText,
+          //labelText: 'label'
         ),
       ),
     );

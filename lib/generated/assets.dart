@@ -4,13 +4,21 @@ class Assets {
 
   static const String assetsChair = 'assets/chair.png';
   static const String imagesChair = 'assets/images/chair.png';
+  static const String imagesDSC6131 = 'assets/images/DSC_6131.jpg';
+  static const String imagesDSC6144 = 'assets/images/DSC_6144.jpg';
+  static const String imagesDSC6146 = 'assets/images/DSC_6146.jpg';
+  static const String imagesDSC6148 = 'assets/images/DSC_6148.jpg';
+  static const String imagesEu = 'assets/images/eu.png';
   static const String imagesGhana = 'assets/images/ghana.png';
+  static const String imagesHandwovenFanRemovebgPreview = 'assets/images/Handwoven_Fan-removebg-preview.png';
+  static const String imagesHats = 'assets/images/hats.png';
   static const String imagesHeadphone = 'assets/images/headphone.png';
   static const String imagesImage0 = 'assets/images/image_0.png';
   static const String imagesMasterCard = 'assets/images/MasterCard.png';
   static const String imagesMasterCard1 = 'assets/images/MasterCard1.png';
   static const String imagesPayPal = 'assets/images/PayPal.png';
   static const String imagesPayout = 'assets/images/payout.png';
+  static const String imagesUshape = 'assets/images/ushape.jpg';
   static const String imagesVisa = 'assets/images/visa.jpg';
   static const String imagesVisa1 = 'assets/images/visa1.png';
   static const String svgFLogo = 'assets/svg/f_logo.svg';

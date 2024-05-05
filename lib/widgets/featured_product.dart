@@ -12,8 +12,6 @@ class featured_product extends StatefulWidget {
   final bool pgress;
   final double contwidth;
   final double contheight;
-  final double imageHeight;
-  final double imageWidth;
   final double nameSize;
   final double priceSize;
   final double favHeight;
@@ -22,7 +20,7 @@ class featured_product extends StatefulWidget {
   final double cartHeight;
   final double cartWidth;
   final double cartSize;
-  const featured_product({super.key, required this.featuredImage, required this.featuredName, required this.featuredPrice,required this.pgress, required this.contwidth, required this.contheight, required this.imageHeight, required this.imageWidth, required this.nameSize, required this.priceSize, required this.favHeight, required this.favWidth, required this.favSize, required this.cartHeight, required this.cartWidth, required this.cartSize});
+  const featured_product({super.key, required this.featuredImage, required this.featuredName, required this.featuredPrice,required this.pgress, required this.contwidth, required this.contheight, required this.nameSize, required this.priceSize, required this.favHeight, required this.favWidth, required this.favSize, required this.cartHeight, required this.cartWidth, required this.cartSize});
 
   @override
   State<featured_product> createState() => _featured_productState();
