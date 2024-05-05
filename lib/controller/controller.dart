@@ -2,17 +2,25 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:jona/widgets/route.dart';
 
 import '../widgets/menu_type.dart';
 import 'dbfields.dart';
 class Ecom extends ChangeNotifier{
    final db=FirebaseFirestore.instance;
    final auth=FirebaseAuth.instance;
+   static final querysnapshot=FirebaseFirestore.instance.collection("items").orderBy(ItemReg.category).limit(10).snapshots();
+
    String companyname="";
    String companyemail="";
    String companyphone="";
    String companyaddress="";
-   
+
+   String user_email="";
+   String user_firstname="";
+   String user_lastname="";
+   String user_middlename="";
+
   bool accountcreated=false;
   String error="";
   bool cardstatus=false;
@@ -25,6 +33,20 @@ class Ecom extends ChangeNotifier{
     ],
   );
 
+   String capitalizeSentence(String sentence) {
+     List<String> words = sentence.split(' ');
+     String result = '';
+
+     for (String word in words) {
+       if (word.isNotEmpty) {
+         String capitalizedWord =
+             word[0].toUpperCase() + word.substring(1).toLowerCase();
+         result += capitalizedWord + ' ';
+       }
+     }
+
+     return result.trim();
+   }
 
   
   companyinfo()async{
@@ -50,31 +72,49 @@ try{
 }
 
 
-  signupwithemail(String firstname,String lastname,String username,String contact,String sex,String email,String password)async{
+  signupwithemail(String firstname,String lastname,String username,String contact,String sex,String email,String password,BuildContext context)async{
     try{
-      await Dbfields.auth.createUserWithEmailAndPassword(email: email, password: password);
+      final eixistuser=await Dbfields.db.collection(Dbfields.users).doc(email).get();
       final countexiist=await Dbfields.db.collection(Dbfields.users).get();
       int userid=countexiist.docs.length+1;
-      final data={
-        Dbfields.firstname:firstname,
-        Dbfields.lastname:lastname,
-        Dbfields.username:username,
-        Dbfields.contact:contact,
-        Dbfields.sex:sex,
-        Dbfields.email:email,
-        Dbfields.password:password,
-        Dbfields.userid:userid
-      };
-      await Dbfields.db.collection(Dbfields.users).doc(email).set(data);
-      if(Dbfields.auth.currentUser!=null && !Dbfields.auth.currentUser!.emailVerified)
+      if(eixistuser.exists)
         {
-          Dbfields.auth.currentUser!.sendEmailVerification();
+          //await Dbfields.auth.createUserWithEmailAndPassword(email: email, password: password);
+          if(auth.currentUser!=null)
+            {
+              Navigator.pushNamed(context, Routes.dashboard);
+            }
         }
-      accountcreated=true;
-      error="";
+      else
+        {
+          final data={
+            Dbfields.firstname:firstname,
+            Dbfields.lastname:lastname,
+            Dbfields.username:username,
+            Dbfields.contact:contact,
+            Dbfields.sex:sex,
+            Dbfields.email:email,
+            Dbfields.password:password,
+            Dbfields.userid:userid
+          };
+          await Dbfields.db.collection(Dbfields.users).doc(email).set(data);
+          if(auth.currentUser==null){
+            await Dbfields.auth.createUserWithEmailAndPassword(email: email, password: password);
+            Navigator.pushNamed(context, Routes.dashboard);
+          }
+          if(auth.currentUser!=null && !auth.currentUser!.emailVerified)
+          {
+            auth.currentUser!.updateDisplayName("$lastname $firstname");
+            await auth.currentUser!.sendEmailVerification();
+            Navigator.pushNamed(context, Routes.dashboard);
+          }
+          accountcreated=true;
+          error="";
+        }
+
     }on FirebaseException catch (e){
       accountcreated=false;
-      error=e.message!;
+      error=e.code!;
     }
     notifyListeners();
 
@@ -106,8 +146,6 @@ try{
             Dbfields.auth.currentUser!.sendEmailVerification();
             error="Please verify your email to continue to add to cart";
           }
-       // print(Dbfields.auth.currentUser!.emailVerified);
-       // addtocart(email, "0553354349", "TV","code", "200", "20");
         String? myemail=Dbfields.auth.currentUser!.email;
         //cartid("id", "date", false, "method", myemail!);
     }on FirebaseException catch(e){
@@ -119,21 +157,21 @@ try{
     notifyListeners();
   }
 
-  Future<bool> addtocart(String itemname,String price,String quantity,String code)async{
+  Future<List>addtocart(String itemname,String price,String quantity,String code)async{
   //  double total=double.parse(price)*double.parse(quantity);
     bool success=false;
     if(Dbfields.auth.currentUser==null) {
       success=false;
       cardstatus=false;
-      print("Please u are not login");
+      //print("Please u are not login");
       error="Please you must login before you can add to cart";
-
+      notifyListeners();
     }
     else if(!Dbfields.auth.currentUser!.emailVerified){
       success=false;
       cardstatus=false;
       error="Your email is not verified. Check your inbox and verify your email";
-      print("You are not verified");
+     // print("You are not verified");
     }
     else
       {
@@ -156,9 +194,7 @@ try{
         print("Added Successfully$cartidnumber");
       }
     notifyListeners();
-
-    return success;
-
+    return [success,error];
   }
 
   Future<String> cartid(String id,String date,bool status,String method,String email)async{
@@ -206,54 +242,38 @@ try{
       });
       // Once signed in, return the UserCredential
       final my_login = await Dbfields.auth.signInWithPopup(googleProvider);
+      if(my_login!=null)
+        {
+          String? displayname = auth.currentUser!.displayName;
+          String? loginmail = auth.currentUser!.email;
+          List? namelist = displayname!.split(" ");
+          String fname = namelist[0];
+          String lname = namelist[1];
+          user_email=loginmail!;
+          user_firstname=fname;
+          user_lastname=lname;
+        }
       //print(my_login);
     }on FirebaseException catch(e){
      // print(e);
       //errorMsgs=e.message!;
     }
-    // Or use signInWithRedirect
-    // return await FirebaseAuth.instance.signInWithRedirect(googleProvider);
+   notifyListeners();
   }
-  googlesignup(BuildContext context) async{
-    final GoogleSignInAccount? googleSignInAccount=await GoogleSignIn().signIn();
-    final GoogleSignInAuthentication googleSignInAuthentication=await googleSignInAccount!.authentication;
-    final credentials=GoogleAuthProvider.credential(accessToken: googleSignInAuthentication.accessToken, idToken: googleSignInAuthentication.idToken);
-    try{
-      await  Dbfields.auth.signInWithCredential(credentials);
-      loginstatus=true;
-      String? name=Dbfields.auth.currentUser!.displayName;
-      String? email=Dbfields.auth.currentUser!.email;
-      // final existdata=await Dbfields.db.collection("users").doc(email).get();
-      // if(existdata.exists)
-      // {
-      //   String phone=existdata.data()!['phone'];
-      //   await setsession(name!, email!, phone);
-      //   if(await SessionManager().containsKey("pin"))
-      //   {
-      //     Navigator.pushNamed(context, Routes.pinscreen);
-      //
-      //   }
-      //   else
-      //   {
-      //     Navigator.pushNamed(context, Routes.pinsetup);
-      //
-      //   }
-      // }
-      // else
-      // {
-      //   googlebtn=true;
-      //   await SessionManager().set("googlebtn", true);
-      //   Navigator.pushNamed(context, Routes.signup);
-      // }
+  signout()async{
+     try{
+         await auth.signOut();
+     }on FirebaseException catch(e){
+       error=e.message!;
+       print(e.message);
+     }
 
+     notifyListeners();
 
-      // setsession(name!, email!);
-      notifyListeners();
-    }on FirebaseException catch(e){
-      print( e.message!);
+  }
 
-    }
-    notifyListeners();
+  logindetail(){
+
   }
 
   Future<User?> signInWithGoogles({required BuildContext context}) async {
@@ -272,8 +292,40 @@ try{
           );
 
           final UserCredential userCredential =await auth.signInWithCredential(credential);
-//print(userCredential);
           user = userCredential.user;
+          if(user!=null){
+            String? displayname = auth.currentUser!.displayName;
+            String? loginmail = auth.currentUser!.email;
+            List? namelist = displayname!.split(" ");
+            String fname = namelist[0];
+            String lname = namelist[1];
+            user_email=loginmail!;
+            user_firstname=fname;
+            user_lastname=lname;
+          }
+          final existdata=await Dbfields.db.collection("users").doc(auth.currentUser!.email).get();
+          if(existdata.exists)
+          {
+            print("Exist");
+            Navigator.pushNamed(context, Routes.dashboard);
+            // String phone=existdata.data()!['phone'];
+            // await setsession(name!, email!, phone);
+            // if(await SessionManager().containsKey("pin"))
+            // {
+            //   Navigator.pushNamed(context, Routes.pinscreen);
+            //
+            // }
+            // else
+            // {
+            //   Navigator.pushNamed(context, Routes.pinsetup);
+            //
+            // }
+          }
+          else
+          {
+            print("No Exist");
+            Navigator.pushNamed(context, Routes.signup);
+          }
           }
 
       } on FirebaseAuthException catch (e) {
@@ -290,7 +342,7 @@ try{
         // handle the error here
       }
 
-
+notifyListeners();
     return user;
   }
 

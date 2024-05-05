@@ -13,7 +13,7 @@ class MenuType extends StatelessWidget {
       child: Text(
         coffeeType,
         style: TextStyle(
-          fontSize: 18,
+          fontSize: 16,
           fontWeight: FontWeight.normal,
           color: isSelected ? Colors.orange: Colors.black,
         ),

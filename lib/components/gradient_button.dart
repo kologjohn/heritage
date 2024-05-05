@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'global.dart';
-import '../forms/signup.dart';
 
 class GradientButton extends StatelessWidget {
   const GradientButton({super.key});

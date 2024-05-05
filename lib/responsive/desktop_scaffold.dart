@@ -11,7 +11,6 @@ import '../widgets/main_menu.dart';
 import '../widgets/menu_type.dart';
 import '../widgets/social_media_icons.dart';
 
-
 class DesktopScaffold extends StatefulWidget {
   const DesktopScaffold({super.key});
 
@@ -20,8 +19,9 @@ class DesktopScaffold extends StatefulWidget {
 }
 
 class _DesktopScaffoldState extends State<DesktopScaffold> {
-  String shoenum="";
+  var querysnapshot=Dbfields.db.collection("items").orderBy(ItemReg.category).limit(10).snapshots();
 
+  String shoenum="";
   bool show=false;
   bool editShow=true;
   @override
@@ -451,7 +451,9 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                                           ),
                                                           const SizedBox(height: 20),
                                                           ElevatedButton(
-                                                            onPressed: (){},
+                                                            onPressed: (){
+                                                              Navigator.pushNamed(context, Routes.mainShop);
+                                                            },
                                                             style: ButtonStyle(
                                                               backgroundColor: MaterialStateProperty.resolveWith((states) {
                                                                 if (states.contains(MaterialState.pressed)) {
@@ -515,26 +517,6 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                             ],
                           ),
                           const SizedBox(height: 30),
-                          //const MyCarousel(enlargeCenter: false, viewPort: 0.2,),
-                          // const SizedBox(
-                          //   height: 320,
-                          //   //color: Colors.red,
-                          //   child: ScrollLoopAutoScroll(
-                          //     scrollDirection: Axis.horizontal,
-                          //     delay: Duration(seconds: 4),
-                          //     duration: Duration(seconds: 50),
-                          //     gap: 25,
-                          //     reverseScroll: false,
-                          //     duplicateChild : 25,
-                          //     enableScrollInput : false,
-                          //     delayAfterScrollInput : Duration(seconds: 4),
-                          //     child:  SlideTile(
-                          //         slideImagePath: "assets/images/chair.png",
-                          //         slideName: "Stuffing Chair",
-                          //         slidePrice: "500.00"
-                          //     ),
-                          //   ),
-                          // ),
                           Divider(
                             thickness: 10,
                             color: Colors.grey[200],
@@ -550,51 +532,12 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                 thickness: 5,
                               ),
                               SizedBox(height: 30),
-                              // SizedBox(
-                              //   height: 50,
-                              //   child: StreamBuilder<QuerySnapshot>(
-                              //       stream: value.db.collection("category").limit(4).snapshots(),
-                              //       builder: (context, snapshot) {
-                              //         List<Widget> widget=[
-                              //           const MenuType(
-                              //             isSelected: true,
-                              //             coffeeType: "ALL"
-                              //         ),];
-                              //         if(!snapshot.hasData)
-                              //           {
-                              //             return Text("No category");
-                              //           }
-                              //         else
-                              //           {
-                              //
-                              //             for(int i=0;i<snapshot.data!.docs.length;i++){
-                              //               widget.add(
-                              //                   Padding(
-                              //                     padding: const EdgeInsets.symmetric(horizontal: 10),
-                              //                     child: MenuType(
-                              //                         coffeeType: snapshot.data!.docs[i]['name'], isSelected: false,
-                              //                     ),
-                              //                   )
-                              //               );
-                              //
-                              //             }
-                              //
-                              //           }
-                              //         return  Row(
-                              //           mainAxisAlignment: MainAxisAlignment.center,
-                              //           //scrollDirection: Axis.horizontal,
-                              //
-                              //           children: widget
-                              //         );
-                              //       }
-                              //   ),
-                              // ),
                             ],
                           ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              featuredGridview(shoenum: shoenum, widgth: 250, height: 150, name: 14, price: 14, favHeight: 30, favWidth: 80, favSize: 20, cartHeight: 30, cartWidth: 80, cartSize: 20, querySnapshot: null,)
+                              featuredGridview(shoenum: shoenum, widgth: 250, height: 150, name: 14, price: 14, favHeight: 30, favWidth: 80, favSize: 20, cartHeight: 30, cartWidth: 80, cartSize: 20, querySnapshot: Ecom.querysnapshot,)
                             ],
                           ),
                           const SizedBox(height: 20),
@@ -723,7 +666,10 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                                       ),
                                                       //const SizedBox(height: 20),
                                                       ElevatedButton(
-                                                        onPressed: (){},
+                                                        onPressed: (){
+                                                          print("Loading...");
+                                                          Navigator.pushNamed(context, Routes.mainShop);
+                                                        },
                                                         style: ButtonStyle(
                                                           backgroundColor: MaterialStateProperty.resolveWith((states) {
                                                             if (states.contains(MaterialState.pressed)) {
@@ -748,69 +694,6 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                               )
                             ],
                           ),
-                          // const SizedBox(height: 30),
-                          // Divider(
-                          //   thickness: 10,
-                          //   color: Colors.grey[200],
-                          // ),
-                          // const SizedBox(height: 80),
-                          // Row(
-                          //   children: [
-                          //     Expanded(
-                          //         child: Container(
-                          //           height: 470,
-                          //           color: Colors.white,
-                          //           child: const Column(
-                          //             //crossAxisAlignment: CrossAxisAlignment.start,
-                          //             children: [
-                          //               Text("LATEST PRODUCTS", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25),),
-                          //               SizedBox(
-                          //                 //height: 640,
-                          //                 //color: Colors.red,
-                          //                   child: MyCarousel(enlargeCenter: false, viewPort: 0.5)
-                          //               ),
-                          //             ],
-                          //           ),
-                          //         )
-                          //     ),
-                          //     const SizedBox(width: 8),
-                          //     Expanded(
-                          //         child: Container(
-                          //           height: 470,
-                          //           color: Colors.white,
-                          //           child: const Column(
-                          //             //crossAxisAlignment: CrossAxisAlignment.start,
-                          //             children: [
-                          //               Text("TOP RATED PRODUCTS", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25),),
-                          //               SizedBox(
-                          //                 //height: 640,
-                          //                 //color: Colors.red,
-                          //                   child: MyCarousel(enlargeCenter: false, viewPort: 0.5)
-                          //               ),
-                          //             ],
-                          //           ),
-                          //         )
-                          //     ),
-                          //     const SizedBox(width: 8),
-                          //     Expanded(
-                          //         child: Container(
-                          //           height: 470,
-                          //           color: Colors.white,
-                          //           child: const Column(
-                          //             //crossAxisAlignment: CrossAxisAlignment.start,
-                          //             children: [
-                          //               Text("REVIEW PRODUCTS", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25),),
-                          //               SizedBox(
-                          //                 //height: 640,
-                          //                 //color: Colors.red,
-                          //                   child: MyCarousel(enlargeCenter: false, viewPort: 0.5)
-                          //               ),
-                          //             ],
-                          //           ),
-                          //         )
-                          //     )
-                          //   ],
-                          // ),
                           const SizedBox(height: 30),
                           Divider(
                             thickness: 10,

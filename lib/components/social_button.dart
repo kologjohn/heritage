@@ -15,12 +15,11 @@ class SocialButton extends StatelessWidget {
       onPressed: onPressed,
       icon: SvgPicture.asset(
         iconPath,
-        width: 25,
-        color: Global.bgColor,
+        width: 30,
       ),
       label: Text(label,
         style: const TextStyle(
-          color: Global.whiteColor,
+          color: Global.backgroundColor,
           fontSize: 17,
         ),
       ),
@@ -29,7 +28,6 @@ class SocialButton extends StatelessWidget {
         shape:  RoundedRectangleBorder(
           side: const BorderSide(
             color: Global.borderColor,
-            width: 3,
           ),
           borderRadius: BorderRadius.circular(10),
         ),

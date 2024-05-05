@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jona/widgets/route.dart';
 import 'package:provider/provider.dart';
@@ -31,6 +32,20 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Consumer<Ecom>(
         builder: (BuildContext context, Ecom value, Widget? child){
+          bool emailedit=true;
+          bool fnameedit=true;
+          bool lnameedit=true;
+          bool passwordedit=true;
+          if(value.auth.currentUser!=null){
+            email.text=value.auth.currentUser!.email!;
+            firstname.text=value.user_firstname!;
+            lastname.text=value.user_lastname!;
+            username.text=value.auth.currentUser!.displayName!;
+            emailedit=false;
+            fnameedit=false;
+            lnameedit=false;
+            passwordedit=false;
+          }
           return Scaffold(
             body: Center(
               child: ConstrainedBox(
@@ -65,7 +80,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               controller: firstname,
                               textInputType: TextInputType.name,
                               obscure: false,
-                              labelText: 'First Name',
+                              labelText: 'First Name', enabled: fnameedit,
 
                             ),
                             const SizedBox(
@@ -76,7 +91,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               controller: lastname,
                               textInputType: TextInputType.name,
                               obscure: false,
-                              labelText: 'Last Name',
+                              labelText: 'Last Name', enabled: lnameedit,
                             ),
                             const SizedBox(
                               height: 15,
@@ -86,7 +101,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               controller: username,
                               textInputType: TextInputType.name,
                               obscure: false,
-                              labelText: 'UserName',
+                              labelText: 'UserName', enabled: true,
                             ),
                             const SizedBox(
                               height: 15,
@@ -96,7 +111,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               controller: email,
                               textInputType: TextInputType.emailAddress,
                               obscure: false,
-                              labelText: 'Email',
+                              labelText: 'Email', enabled: emailedit,
                             ),
                             const SizedBox(
                               height: 15,
@@ -106,17 +121,20 @@ class _RegisterPageState extends State<RegisterPage> {
                               controller: contact,
                               textInputType: TextInputType.phone,
                               obscure: false,
-                              labelText: 'Phone',
+                              labelText: 'Phone', enabled: true,
                             ),
                             const SizedBox(
                               height: 15,
                             ),
-                            LoginField(
-                              hintText: 'Password',
-                              controller: password,
-                              textInputType: TextInputType.visiblePassword,
-                              obscure: true,
-                              labelText: 'Password',
+                            Visibility(
+                              visible: passwordedit,
+                              child: LoginField(
+                                hintText: 'Password',
+                                controller: password,
+                                textInputType: TextInputType.visiblePassword,
+                                obscure: true,
+                                labelText: 'Password', enabled: true,
+                              ),
                             ),
                             const SizedBox(
                               height: 20,
@@ -142,7 +160,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                       contact_txt,
                                       sex,
                                       email_txt,
-                                      password_txt);
+                                      password_txt,context);
                                   print(Ecom().accountcreated);
                                   print(Ecom().error);
                                 },

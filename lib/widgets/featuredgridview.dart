@@ -44,10 +44,8 @@ class _featuredGridviewState extends State<featuredGridview> {
     return StreamBuilder<QuerySnapshot>(
       stream: widget.querySnapshot,
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-
         if(snapshot.hasData)
         {
-
           items.clear();
           for(int i=0;i<snapshot.data!.docs.length;i++){
             //print(i);
@@ -56,10 +54,10 @@ class _featuredGridviewState extends State<featuredGridview> {
             items.add(
                 InkWell(
                   onTap: (){
-                    Navigator.pushNamed(context, Routes.singleProduct);
+                    print(widget.name);
+                    Navigator.pushNamed(context, Routes.singleProduct,arguments: {"name":snapshot.data!.docs[i][ItemReg.code]});
                   },
                   child: Container(
-
                     // height: 300,
                     width: 200,
                     child: featured_product(

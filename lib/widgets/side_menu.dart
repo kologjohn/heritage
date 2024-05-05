@@ -48,29 +48,34 @@ class SideDrawer extends StatelessWidget {
             //const SizedBox(height: 15),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+              child: Column(
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Image.asset("assets/images/ghana.png", height: 20, width: 20,),
-                      const SizedBox(width: 8),
-                      const Text("Ghana"),
-                      const Icon(Icons.keyboard_arrow_down)
+                      Row(
+                        children: [
+                          Image.asset("assets/images/ghana.png", height: 20, width: 20,),
+                          const SizedBox(width: 8),
+                          const Text("Ghana"),
+                          const Icon(Icons.keyboard_arrow_down)
+                        ],
+                      ),
+
+                      InkWell(
+                        onTap: (){
+                          Navigator.pushNamed(context, Routes.login);
+                        },
+                        child: const Row(
+                          children: [
+                            Icon(Icons.person),
+                            SizedBox(width: 8),
+                            Text("Login")
+                          ],
+                        ),
+                      )
                     ],
                   ),
-                  InkWell(
-                    onTap: (){
-                      Navigator.pushNamed(context, Routes.login);
-                    },
-                    child: const Row(
-                      children: [
-                        Icon(Icons.person),
-                        SizedBox(width: 8),
-                        Text("Login")
-                      ],
-                    ),
-                  )
                 ],
               ),
             ),

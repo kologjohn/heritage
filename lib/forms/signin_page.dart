@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:jona/widgets/route.dart';
@@ -59,9 +61,9 @@ class _SignInPageState extends State<SignInPage> {
                               ],
                             ),
                             const SizedBox(height: 50,),
-                            LoginField(hintText: 'Email',controller: email,textInputType: TextInputType.name,obscure: false, labelText: 'Email',),
+                            LoginField(hintText: 'Email',controller: email,textInputType: TextInputType.name,obscure: false, labelText: 'Email', enabled: true,),
                             const SizedBox(height: 15,),
-                            LoginField(hintText: 'Password',controller:password ,textInputType: TextInputType.visiblePassword,obscure: false, labelText: 'Password',),
+                            LoginField(hintText: 'Password',controller:password ,textInputType: TextInputType.visiblePassword,obscure: false, labelText: 'Password', enabled: true,),
                             const SizedBox(height: 15,),
                             const ForgotPasText(),
                             const SizedBox(height: 20,),
@@ -82,7 +84,6 @@ class _SignInPageState extends State<SignInPage> {
                                   print(value.error);
                                   progress!.dismiss();
                                   Navigator.pop(context);
-
 
                                 },
                                 style: ElevatedButton.styleFrom(
@@ -113,31 +114,33 @@ class _SignInPageState extends State<SignInPage> {
                               ],
                             ),
                             const SizedBox(height: 15),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
+                            FittedBox(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
 
-                                Container(
-                                  decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                  ),
-                                  width: 200,
-                                  child: SocialButton(
-                                      iconPath: 'assets/svg/google-svgrepo-com.svg',
-                                      label: 'Google Login', horizontalPadding: 20,
-                                      onPressed: ()async{
-                                        final hh=await value.signInWithGoogles(context: context);
-                                        if(hh!=null){
-                                          SnackBar snackbar=SnackBar(content: Text("Hello,${hh.displayName}, Login Success"));
-                                          ScaffoldMessenger.of(context).showSnackBar(snackbar);
-                                          Navigator.of(context).pop();
+                                  Container(
+                                    decoration: const BoxDecoration(
+                                      color: Colors.white,
+                                    ),
+                                    width: 360,
+                                    child: SocialButton(
+                                        iconPath: 'assets/svg/glogo.svg',
+                                        label: 'Google Login', horizontalPadding: 20,
+                                        onPressed: ()async{
+                                          final hh=await value.signInWithGoogles(context: context);
+                                          if(hh!=null){
+                                            SnackBar snackbar=SnackBar(content: Text("Hello,${hh.displayName}, Login Success"));
+                                            ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                                          }
+                                          // print(hh);
                                         }
-                                        // print(hh);
-                                      }
+                                    ),
                                   ),
-                                ),
 
-                              ],
+                                ],
+                              )
+
                             ),
                             const SizedBox(height: 15),
                             ConstrainedBox(

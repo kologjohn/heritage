@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:typewritertext/typewritertext.dart';
 import '../constanst.dart';
 import '../controller/dbfields.dart';
-import '../forms/login.dart';
 import '../widgets/featuredgridview.dart';
 import '../widgets/menu_type.dart';
 import '../widgets/social_media_icons.dart';
@@ -80,7 +79,7 @@ class _MobileShopState extends State<MobileShop> {
                   ),
                   InkWell(
                     onTap: (){
-                      signin(context);
+                      //signin(context);
                     },
                     child: const Row(
                       children: [

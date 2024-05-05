@@ -113,7 +113,7 @@ class _featured_productState extends State<featured_product> {
                                         myprogess=false;
                                         cartshow=true;
                                       }
-                                    if(addcart){
+                                    if(addcart[0]){
                                       SnackBar snackbar=SnackBar(content: Text("${widget.featuredName} added successfully",style:const TextStyle(color: Colors.white,fontSize: 14,fontWeight: FontWeight.bold),),backgroundColor: Colors.green,);
                                       ScaffoldMessenger.of(context).showSnackBar(snackbar);
                                       setState(() {

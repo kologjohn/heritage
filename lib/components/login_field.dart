@@ -9,7 +9,8 @@ class LoginField extends StatelessWidget {
   final  TextEditingController controller;
   final TextInputType textInputType;
   final bool obscure;
-  const LoginField({super.key, required this.hintText,required this.controller, required this.textInputType, required this.obscure, required this.labelText});
+  final bool enabled;
+  const LoginField({super.key, required this.hintText,required this.controller, required this.textInputType, required this.obscure, required this.labelText, required this.enabled});
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +27,7 @@ class LoginField extends StatelessWidget {
         keyboardType: textInputType,
         controller: controller,
         obscureText: obscure,
+        enabled: enabled,
         decoration: InputDecoration(
           //contentPadding: EdgeInsets.all(27),
           enabledBorder: OutlineInputBorder(

@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:jona/controller/controller.dart';
 import '../controller/dbfields.dart';
 import '../widgets/featuredgridview.dart';
 import '../widgets/menu_type.dart';
@@ -61,9 +62,9 @@ class _ShopPageState extends State<ShopPage> {
                         onTap: (){
                           Navigator.pushNamed(context, Routes.dashboard);
                         },
-                        child: MenuType(
+                        child: const MenuType(
                             isSelected: true,
-                            coffeeType: dfg,
+                            coffeeType: "Home",
                         ),
                       ),
                       SizedBox(width: 40),
@@ -99,9 +100,12 @@ class _ShopPageState extends State<ShopPage> {
                             TextField(
                               controller: searchController,
                               onChanged: (e){
-                                shoenum=searchController.text.trim().toUpperCase();
-                                //uerysnapshot=Dbfields.db.collection("items").orderBy(ItemReg.category).startAt([shoenum]).snapshots();
-                                print("sddfgghhhhghg");
+                                setState(() {
+
+                                  shoenum=Ecom().capitalizeSentence(searchController.text.trim().toUpperCase());
+                                  querysnapshot=Dbfields.db.collection("items").orderBy(ItemReg.item).startAt([shoenum]).snapshots();
+                                 // print(shoenum);
+                                });
 
                               },
                               decoration: const InputDecoration(
@@ -228,7 +232,8 @@ class _ShopPageState extends State<ShopPage> {
                                                 InkWell(
                                                   onTap: (){
                                                     setState(() {
-                                                      shoenum=cate;
+                                                      shoenum=Ecom().capitalizeSentence(cate);
+                                                      querysnapshot=Dbfields.db.collection("items").where(ItemReg.category,isEqualTo: cate).snapshots();
                                                       if(active[index])
                                                         {
                                                           active.add(false);

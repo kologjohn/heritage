@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../forms/login.dart';
-import '../forms/signup.dart';
-
 class SocialMediaIcons extends StatelessWidget {
   const SocialMediaIcons({
     super.key,
@@ -29,7 +26,7 @@ class SocialMediaIcons extends StatelessWidget {
           child: SvgPicture.asset("assets/svg/icons8-pinterest.svg", width: 20, height: 20,),
           onTap: (){
             Navigator.of(context).pop();
-            signin(context);
+            //signin(context);
           },
         ),
       ],
