@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:jona/components/global.dart';
 import 'package:jona/constanst.dart';
 import 'package:jona/controller/dbfields.dart';
 import 'package:jona/widgets/route.dart';
@@ -210,7 +211,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                           },
                                           child: Container(
                                             height: 50,
-                                            color: Colors.orange,
+                                            color: Colors.brown,
                                             child: const Padding(
                                               padding: EdgeInsets.only(left: 18.0, right: 18),
                                               child: Row(
@@ -349,7 +350,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                                                 child: Container(
                                                                   height: 50,
                                                                   width: 100,
-                                                                  color: Colors.orange,
+                                                                  color: Colors.brown,
                                                                   child: const Column(
                                                                     mainAxisAlignment: MainAxisAlignment.center,
                                                                     children: [
@@ -369,7 +370,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                                               CircleAvatar(
                                                                 backgroundColor: Colors.lightGreen[50],
                                                                 child: const Icon(
-                                                                  Icons.call, color: Colors.orange,
+                                                                  Icons.call, color: Colors.brown,
                                                                 ),
                                                               ),
                                                               const SizedBox(width: 12),
@@ -418,7 +419,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                                           const Text(
                                                             "HAND WOVEN",
                                                             style: TextStyle(
-                                                                color: Colors.orange,
+                                                                color: Colors.brown,
                                                                 fontWeight: FontWeight.w600,
                                                                 fontSize: 25
                                                             ),
@@ -459,7 +460,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                                                 if (states.contains(MaterialState.pressed)) {
                                                                   return Colors.orange.withOpacity(0.5); // Color when pressed
                                                                 }
-                                                                return Colors.orange; // Default color
+                                                                return Colors.brown; // Default color
                                                               }),
                                                             ),
                                                             child: const Text("SHOP NOW", style: TextStyle(color: Colors.white),),
@@ -485,8 +486,9 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                                           height: 530,
                                                           child: CarouselSlider(
                                                             items: [
-                                                              Image.asset(Imagesurls.d2, height: 400,),
-                                                              Image.asset(Imagesurls.hats, height: 400,),
+                                                              Image.asset(Imagesurls.heritage4, height: 400,),
+                                                              Image.asset(Imagesurls.heritage1, height: 400,),
+                                                              Image.asset(Imagesurls.heritage2, height: 400,),
                                                               // Add more images here if needed
                                                             ],
                                                             options: CarouselOptions(
@@ -526,7 +528,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                             children: [
                               Text("FEATURED BASKETS", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
                               Divider(
-                                color: Colors.orange,
+                                color: Colors.brown,
                                 indent: 800,
                                 endIndent: 800,
                                 thickness: 5,
@@ -580,7 +582,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                                       const Text(
                                                         "SUMMER FRUIT",
                                                         style: TextStyle(
-                                                            color: Colors.orange,
+                                                            color: Colors.brown,
                                                             fontWeight: FontWeight.w600,
                                                             fontSize: 20
                                                         ),
@@ -601,7 +603,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                                             if (states.contains(MaterialState.pressed)) {
                                                               return Colors.orange.withOpacity(0.5); // Color when pressed
                                                             }
-                                                            return Colors.orange; // Default color
+                                                            return Colors.brown; // Default color
                                                           }),
                                                         ),
                                                         child: const Text("SHOP NOW", style: TextStyle(color: Colors.white),),
@@ -635,7 +637,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                               children: [
                                                 Column(
                                                   children: [
-                                                    Image.asset(Imagesurls.d2, height: 300, width: 300,)
+                                                    Image.asset(Imagesurls.heritage3, height: 300, width: 300,)
                                                   ],
                                                 ),
                                               ],
@@ -651,7 +653,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                                       const Text(
                                                         "SUMMER FRUIT",
                                                         style: TextStyle(
-                                                            color: Colors.orange,
+                                                            color: Colors.brown,
                                                             fontWeight: FontWeight.w600,
                                                             fontSize: 20
                                                         ),
@@ -675,7 +677,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                                             if (states.contains(MaterialState.pressed)) {
                                                               return Colors.orange.withOpacity(0.5); // Color when pressed
                                                             }
-                                                            return Colors.orange; // Default color
+                                                            return Colors.brown;
                                                           }),
                                                         ),
                                                         child: const Text("SHOP NOW", style: TextStyle(color: Colors.white),),
@@ -703,7 +705,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                             children: [
                               Text("FROM THE BLOG", style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),),
                               Divider(
-                                color: Colors.orange,
+                                color: Colors.brown,
                                 indent: 800,
                                 endIndent: 800,
                                 thickness: 5,
@@ -723,7 +725,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                         //color: Colors.red,
                                         child: Column(
                                           children: [
-                                            Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.d2, height: 400,width: 400,),),
+                                            Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.heritage4, height: 400,width: 400,),),
                                             const SizedBox(height: 18),
                                             const Padding(
                                               padding: EdgeInsets.only(left: 8.0, right: 8.0),
@@ -779,7 +781,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                         //color: Colors.red,
                                         child: Column(
                                           children: [
-                                            Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.d2, height: 400,width: 400,),),
+                                            Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.heritage2, height: 400,width: 400,),),
                                             const SizedBox(height: 18),
                                             const Padding(
                                               padding: EdgeInsets.only(left: 8.0, right: 8.0),
@@ -835,7 +837,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                         //color: Colors.red,
                                         child: Column(
                                           children: [
-                                            Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.d2, height: 400,width: 400,),),
+                                            Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.heritage1, height: 400,width: 400,),),
                                             const SizedBox(height: 18),
                                             const Padding(
                                               padding: EdgeInsets.only(left: 8.0, right: 8.0),
@@ -1003,11 +1005,11 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                           Expanded(
                                               child: Container(
                                                 height: 50,
-                                                color: Colors.orange,
+                                                color: Colors.brown,
                                                 child: const Column(
                                                   mainAxisAlignment: MainAxisAlignment.center,
                                                   children: [
-                                                    Text("SUBSCRIBE"),
+                                                    Text("SUBSCRIBE", style: TextStyle(color: Global.mainColor),),
                                                   ],
                                                 ),
                                               )

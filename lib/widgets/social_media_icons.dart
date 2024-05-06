@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:jona/widgets/route.dart';
 
 class SocialMediaIcons extends StatelessWidget {
   const SocialMediaIcons({
@@ -18,6 +19,7 @@ class SocialMediaIcons extends StatelessWidget {
         GestureDetector(
           child: SvgPicture.asset("assets/svg/icons8-linkedin.svg", width: 20, height: 20,),
           onTap: (){
+            Navigator.pushNamed(context, Routes.checkout);
             //signup(context);
           },
         ),

@@ -2,6 +2,7 @@ import 'package:jona/components/mobile_shop.dart';
 import 'package:jona/components/shop.dart';
 import 'package:jona/components/single_product.dart';
 import 'package:jona/components/tablet_shop.dart';
+import 'package:jona/forms/check_out.dart';
 import 'package:jona/forms/register_page.dart';
 import 'package:jona/forms/signin_page.dart';
 import 'package:jona/responsive/desktop_scaffold.dart';
@@ -17,6 +18,7 @@ class Routes{
   static String singleProduct="singleProduct";
   static String login="login";
   static String signup="signup";
+  static String checkout="checkout";
 }
 
 final pages={
@@ -24,6 +26,7 @@ final pages={
   Routes.singleProduct:(context)=>const SingleProduct(),
   Routes.login:(context)=>const SignInPage(),
   Routes.signup:(context)=>const RegisterPage(),
+  Routes.checkout:(context)=>CheckoutForm(),
   Routes.mainShop:(context)=>const ResponsiveLayout(isMobile: MobileShop(), isTablet: TabletShop(), isDesktop: ShopPage(),),
   Routes.dashboard:(context)=>const ResponsiveLayout(isMobile: MobileScaffold(), isTablet: TabletScaffold(), isDesktop: DesktopScaffold(),
   ),

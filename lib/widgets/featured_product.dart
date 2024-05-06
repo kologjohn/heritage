@@ -129,7 +129,7 @@ class _featured_productState extends State<featured_product> {
                                   child: Container(
                                     height: widget.cartHeight,
                                     width: widget.cartWidth,
-                                    color: Colors.orange[200],
+                                    color: Colors.brown[200],
                                     child: Icon(
                                       Icons.shopping_cart,size: widget.cartSize, color: Colors.white,
                                     ),
@@ -139,7 +139,7 @@ class _featured_productState extends State<featured_product> {
                           ],
                         ),
                       ),
-                      Visibility(visible:myprogess,child: const SizedBox(height:20,width:20,child: CircularProgressIndicator(color: Colors.orange,strokeWidth: 4,))),
+                      Visibility(visible:myprogess,child: const SizedBox(height:20,width:20,child: CircularProgressIndicator(color: Colors.brown,strokeWidth: 4,))),
 
                     ],
                   ),
