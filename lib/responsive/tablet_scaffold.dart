@@ -394,38 +394,6 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                             thickness: 5,
                           ),
                           SizedBox(height: 30),
-                          SizedBox(height: 50,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              //scrollDirection: Axis.horizontal,
-                              children: [
-                                MenuType(
-                                    isSelected: true,
-                                    coffeeType: "ALL"
-                                ),
-                                SizedBox(width: 20),
-                                MenuType(
-                                    isSelected: false,
-                                    coffeeType: "ELECTRONICS"
-                                ),
-                                SizedBox(width: 20),
-                                MenuType(
-                                    isSelected: false,
-                                    coffeeType: "WINE"
-                                ),
-                                SizedBox(width: 20),
-                                MenuType(
-                                    isSelected: false,
-                                    coffeeType: "VEGETABLES"
-                                ),
-                                SizedBox(width: 20),
-                                MenuType(
-                                    isSelected: false,
-                                    coffeeType: "FRUITS"
-                                ),
-                              ],
-                            ),
-                          ),
                         ],
                       ),
                       Column(
@@ -818,9 +786,9 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                     children: [
                                       Expanded(child: Text(Companydata.companyname, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 25),)),
                                       const SizedBox(height: 20),
-                                      Expanded(child: Text(value.companyaddress)),
+                                      Expanded(child: Text("Address: ${value.companyaddress}"),),
                                       const SizedBox(height: 15),
-                                      Expanded(child: Text(value.companyphone)),
+                                      Expanded(child: Text("Phone: ${value.companyphone}"),),
                                       const SizedBox(height: 15),
                                       Expanded(child: Text("Email: ${value.companyaddress}")),
                                     ],

@@ -32,6 +32,9 @@ class _MobileScaffoldState extends State<MobileScaffold> {
     return ProgressHUD(
       child: Consumer<Ecom>(
         builder: (BuildContext context, Ecom value, Widget? child) {
+          if(value.companyphone.isEmpty){
+            value.companyinfo();
+          }
           if(value.auth.currentUser!=null)
             {
               showoptionmenu=true;
@@ -45,19 +48,19 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                   child: PopupMenuButton<String>(
                    // iconColor: Colors.white,
                     onSelected: (text) async{
-                      print("selected");
+                      //print("selected");
 
                     },
                     itemBuilder: (BuildContext context) => [
                       PopupMenuItem<String>(
                         value: 'email',
-                        child: Row(children: [const Icon(Icons.email,color: Colors.green,),Text("${value.user_email}")],),
+                        child: Row(children: [const Icon(Icons.email,color: Colors.green,),Text(value.user_email)],),
                       ),
                       PopupMenuItem<String>(
                         value: 'name',
                         child: Row(children: [
-                          Icon(Icons.person,color: Colors.green,),
-                          Text("${value.user_lastname}")
+                          const Icon(Icons.person,color: Colors.green,),
+                          Text(value.user_lastname)
                         ],
                         ),
                       ),
@@ -66,10 +69,11 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                           final progress=ProgressHUD.of(context);
                           progress!.show();
                           await value.signout();
+                          Navigator.pushNamed(context, Routes.dashboard);
                           progress.dismiss();
                         },
                         value: 'Logout',
-                        child: Row(children: [Icon(Icons.logout,color: Colors.green,),Text(' Logout')],),
+                        child: const Row(children: [Icon(Icons.logout,color: Colors.green,),Text(' Logout')],),
                       ),
                     ],
                   ),
@@ -286,7 +290,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(Companydata.phone, style: const TextStyle(fontWeight: FontWeight.bold),),
+                                    Text(value.companyphone, style: const TextStyle(fontWeight: FontWeight.bold),),
                                     const Text("support 24/7 time", style: TextStyle(color: Colors.black54),),
                                   ],
                                 )
@@ -328,40 +332,6 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                                                       repeat: true,
                                                       duration: Duration(milliseconds: 50),
                                                     )
-                                                    //  const Text(
-                                                    //    "FRUIT FRESH",
-                                                    //    style: TextStyle(
-                                                    //        color: Colors.orange,
-                                                    //        fontWeight: FontWeight.w600,
-                                                    //        fontSize: 20
-                                                    //    ),
-                                                    //  ),
-                                                    //  //const SizedBox(height: 8),
-                                                    //  const Text(
-                                                    //    "VEGETABLE",
-                                                    //    style: TextStyle(
-                                                    //        color: Colors.black,
-                                                    //        fontWeight: FontWeight.w600,
-                                                    //        fontSize: 20
-                                                    //    ),
-                                                    //  ),
-                                                    //  //const SizedBox(height: 15),
-                                                    //  const Text(
-                                                    //    "100% ORGANIC",
-                                                    //    style: TextStyle(
-                                                    //        color: Colors.black,
-                                                    //        fontWeight: FontWeight.w600,
-                                                    //        fontSize: 20
-                                                    //    ),
-                                                    //  ),
-                                                    // // const SizedBox(height: 8),
-                                                    //  const Text(
-                                                    //    "Free pickup delivery available",
-                                                    //    style: TextStyle(
-                                                    //      color: Colors.black,
-                                                    //      fontSize: 20,
-                                                    //    ),
-                                                    //  ),
                                                   ],
                                                 ),
                                               ),
@@ -393,25 +363,6 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                           ],
                         ),
                         const SizedBox(height: 20),
-                        // const SizedBox(
-                        //   height: 320,
-                        //   //color: Colors.red,
-                        //   child: ScrollLoopAutoScroll(
-                        //     scrollDirection: Axis.horizontal,
-                        //     delay: Duration(seconds: 4),
-                        //     duration: Duration(seconds: 50),
-                        //     gap: 0,
-                        //     reverseScroll: false,
-                        //     duplicateChild : 25,
-                        //     enableScrollInput : false,
-                        //     delayAfterScrollInput : Duration(seconds: 4),
-                        //     child:  SlideTile(
-                        //         slideImagePath: "assets/images/chair.png",
-                        //         slideName: "Stuffing Chair",
-                        //         slidePrice: "500.00"
-                        //     ),
-                        //   ),
-                        // ),
                         Column(
                           children: [
                             const Text("FEATURED PRODUCTS", style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),),
@@ -421,38 +372,6 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                               endIndent: 140,
                               thickness: 5,
                             ),
-                            //const SizedBox(height: 30),
-                            // SizedBox(height: 50,
-                            //   child: ListView(
-                            //     scrollDirection: Axis.horizontal,
-                            //     children: const [
-                            //       MenuType(
-                            //           isSelected: true,
-                            //           coffeeType: "ALL"
-                            //       ),
-                            //       SizedBox(width: 8),
-                            //       MenuType(
-                            //           isSelected: false,
-                            //           coffeeType: "ELECTRONICS"
-                            //       ),
-                            //       SizedBox(width: 8),
-                            //       MenuType(
-                            //           isSelected: false,
-                            //           coffeeType: "WINE"
-                            //       ),
-                            //       SizedBox(width: 8),
-                            //       MenuType(
-                            //           isSelected: false,
-                            //           coffeeType: "VEGETABLES"
-                            //       ),
-                            //       SizedBox(width: 8),
-                            //       MenuType(
-                            //           isSelected: false,
-                            //           coffeeType: "FRUITS"
-                            //       ),
-                            //     ],
-                            //   ),
-                            // ),
                             featuredGridview(shoenum: shoenum, widgth: 250, height: 250,name: 12, price: 12, favHeight: 25, favWidth: 60, favSize: 25, cartHeight: 25, cartWidth: 60, cartSize: 25, querySnapshot: Ecom.querysnapshot,),
                           ],
                         ),
@@ -770,11 +689,11 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                                 children: [
                                   Text(Companydata.companyname, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20),),
                                   const SizedBox(height: 8),
-                                  const Text("Address: Commercial Street, Bolgatanga"),
+                                  Text("Address: ${value.companyaddress}"),
                                   const SizedBox(height: 6),
-                                  const Text("Phone: +122 553 354 349"),
+                                  Text("Phone: ${value.companyphone}"),
                                   const SizedBox(height: 6),
-                                  Text("Email: ${Companydata.email}"),
+                                  Text("Email: ${value.companyaddress}")
                                 ],
                               )
                             ],
