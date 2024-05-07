@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:jona/components/global.dart';
 import 'package:jona/constanst.dart';
 import 'package:jona/controller/controller.dart';
 import 'package:jona/widgets/drawer.dart';
@@ -105,7 +106,7 @@ class _TabletShopState extends State<TabletShop> {
                                       });
                                     },
                                     child: Container(
-                                      color: Colors.orange,
+                                      color: Global.mainColor,
                                       height: 50,
                                       child: const Padding(
                                         padding: EdgeInsets.only(left: 18.0, right: 18),
@@ -236,7 +237,7 @@ class _TabletShopState extends State<TabletShop> {
                                               Container(
                                                 height: 50,
                                                 width: 80,
-                                                color: Colors.orange,
+                                                color: Global.mainColor,
                                                 child: const Column(
                                                   mainAxisAlignment: MainAxisAlignment.center,
                                                   children: [
@@ -251,7 +252,7 @@ class _TabletShopState extends State<TabletShop> {
                                               CircleAvatar(
                                                 backgroundColor: Colors.lightGreen[50],
                                                 child: const Icon(
-                                                  Icons.call, color: Colors.orange,
+                                                  Icons.call, color: Global.mainColor,
                                                 ),
                                               ),
                                               const SizedBox(width: 12),
@@ -432,11 +433,11 @@ class _TabletShopState extends State<TabletShop> {
                                           Expanded(
                                               child: Container(
                                                 height: 50,
-                                                color: Colors.orange,
+                                                color: Global.mainColor,
                                                 child: const Column(
                                                   mainAxisAlignment: MainAxisAlignment.center,
                                                   children: [
-                                                    Text("SUBSCRIBE"),
+                                                    Text("SUBSCRIBE", style: TextStyle(color: Colors.white),),
                                                   ],
                                                 ),
                                               )

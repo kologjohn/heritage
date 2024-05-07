@@ -211,7 +211,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                           },
                                           child: Container(
                                             height: 50,
-                                            color: Colors.brown,
+                                            color: Global.mainColor,
                                             child: const Padding(
                                               padding: EdgeInsets.only(left: 18.0, right: 18),
                                               child: Row(
@@ -350,7 +350,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                                                 child: Container(
                                                                   height: 50,
                                                                   width: 100,
-                                                                  color: Colors.brown,
+                                                                  color: Global.mainColor,
                                                                   child: const Column(
                                                                     mainAxisAlignment: MainAxisAlignment.center,
                                                                     children: [
@@ -370,7 +370,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                                               CircleAvatar(
                                                                 backgroundColor: Colors.lightGreen[50],
                                                                 child: const Icon(
-                                                                  Icons.call, color: Colors.brown,
+                                                                  Icons.call, color: Global.mainColor,
                                                                 ),
                                                               ),
                                                               const SizedBox(width: 12),
@@ -419,7 +419,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                                           const Text(
                                                             "HAND WOVEN",
                                                             style: TextStyle(
-                                                                color: Colors.brown,
+                                                                color: Global.mainColor,
                                                                 fontWeight: FontWeight.w600,
                                                                 fontSize: 25
                                                             ),
@@ -458,14 +458,13 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                                             style: ButtonStyle(
                                                               backgroundColor: MaterialStateProperty.resolveWith((states) {
                                                                 if (states.contains(MaterialState.pressed)) {
-                                                                  return Colors.orange.withOpacity(0.5); // Color when pressed
+                                                                  return Global.mainColor.withOpacity(0.5);
                                                                 }
-                                                                return Colors.brown; // Default color
+                                                                return Global.mainColor;
                                                               }),
                                                             ),
                                                             child: const Text("SHOP NOW", style: TextStyle(color: Colors.white),),
                                                           )
-
                                                         ],
                                                       ),
                                                     ),
@@ -486,10 +485,10 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                                           height: 530,
                                                           child: CarouselSlider(
                                                             items: [
+                                                              Image.asset(Imagesurls.heritage5, height: 400,),
                                                               Image.asset(Imagesurls.heritage4, height: 400,),
                                                               Image.asset(Imagesurls.heritage1, height: 400,),
                                                               Image.asset(Imagesurls.heritage2, height: 400,),
-                                                              // Add more images here if needed
                                                             ],
                                                             options: CarouselOptions(
                                                               aspectRatio: 16/9,
@@ -528,7 +527,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                             children: [
                               Text("FEATURED BASKETS", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
                               Divider(
-                                color: Colors.brown,
+                                color: Global.mainColor,
                                 indent: 800,
                                 endIndent: 800,
                                 thickness: 5,
@@ -582,7 +581,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                                       const Text(
                                                         "SUMMER FRUIT",
                                                         style: TextStyle(
-                                                            color: Colors.brown,
+                                                            color: Global.mainColor,
                                                             fontWeight: FontWeight.w600,
                                                             fontSize: 20
                                                         ),
@@ -601,9 +600,9 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                                         style: ButtonStyle(
                                                           backgroundColor: MaterialStateProperty.resolveWith((states) {
                                                             if (states.contains(MaterialState.pressed)) {
-                                                              return Colors.orange.withOpacity(0.5); // Color when pressed
+                                                              return Global.mainColor.withOpacity(0.5);
                                                             }
-                                                            return Colors.brown; // Default color
+                                                            return Global.mainColor;
                                                           }),
                                                         ),
                                                         child: const Text("SHOP NOW", style: TextStyle(color: Colors.white),),
@@ -653,7 +652,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                                       const Text(
                                                         "SUMMER FRUIT",
                                                         style: TextStyle(
-                                                            color: Colors.brown,
+                                                            color: Global.mainColor,
                                                             fontWeight: FontWeight.w600,
                                                             fontSize: 20
                                                         ),
@@ -675,9 +674,9 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                                         style: ButtonStyle(
                                                           backgroundColor: MaterialStateProperty.resolveWith((states) {
                                                             if (states.contains(MaterialState.pressed)) {
-                                                              return Colors.orange.withOpacity(0.5); // Color when pressed
+                                                              return Global.mainColor.withOpacity(0.5);
                                                             }
-                                                            return Colors.brown;
+                                                            return Global.mainColor;
                                                           }),
                                                         ),
                                                         child: const Text("SHOP NOW", style: TextStyle(color: Colors.white),),
@@ -705,7 +704,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                             children: [
                               Text("FROM THE BLOG", style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),),
                               Divider(
-                                color: Colors.brown,
+                                color: Global.mainColor,
                                 indent: 800,
                                 endIndent: 800,
                                 thickness: 5,
@@ -750,7 +749,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                               padding: EdgeInsets.only(left: 8.0, right: 8.0),
                                               child: Row(
                                                 children: [
-                                                  Text("COMFORTABLE STUFFING CHAIRS", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
+                                                  Text("COMFORTABLE STUFFING CHAIRS", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),),
                                                 ],
                                               ),
                                             ),
@@ -762,7 +761,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                                   Text("Stuffing is the soft material inside pillows, "
                                                       "\n mattresses, or sofa cushions. Without stuffing, "
                                                       "\n your comfy chair wouldn't be very comfy.",
-                                                    style: TextStyle(color: Colors.black54),
+                                                    style: TextStyle(color: Colors.black54, fontSize: 12),
                                                   ),
                                                 ],
                                               ),
@@ -806,7 +805,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                               padding: EdgeInsets.only(left: 8.0, right: 8.0),
                                               child: Row(
                                                 children: [
-                                                  Text("COMFORTABLE STUFFING CHAIRS", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
+                                                  Text("COMFORTABLE STUFFING CHAIRS", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),),
                                                 ],
                                               ),
                                             ),
@@ -818,7 +817,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                                   Text("Stuffing is the soft material inside pillows, "
                                                       "\n mattresses, or sofa cushions. Without stuffing, "
                                                       "\n your comfy chair wouldn't be very comfy.",
-                                                    style: TextStyle(color: Colors.black54),
+                                                    style: TextStyle(color: Colors.black54, fontSize: 12),
                                                   ),
                                                 ],
                                               ),
@@ -862,7 +861,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                               padding: EdgeInsets.only(left: 8.0, right: 8.0),
                                               child: Row(
                                                 children: [
-                                                  Text("COMFORTABLE STUFFING CHAIRS", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
+                                                  Text("COMFORTABLE STUFFING CHAIRS", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),),
                                                 ],
                                               ),
                                             ),
@@ -874,7 +873,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                                   Text("Stuffing is the soft material inside pillows, "
                                                       "\n mattresses, or sofa cushions. Without stuffing, "
                                                       "\n your comfy chair wouldn't be very comfy.",
-                                                    style: TextStyle(color: Colors.black54),
+                                                    style: TextStyle(color: Colors.black54, fontSize: 12),
                                                   ),
                                                 ],
                                               ),
@@ -912,7 +911,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text(Companydata.companyname, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 30),),
+                                      Text(Companydata.companyname, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20),),
                                       const SizedBox(height: 20),
                                       Text("Address: ${value.companyaddress}"),
                                       const SizedBox(height: 15),
@@ -933,7 +932,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
-                                        Text("USEFUL LINKS", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 30)),
+                                        Text("USEFUL LINKS", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20)),
                                         SizedBox(height: 20),
                                         Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -986,7 +985,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
-                                      const Text("JOIN OUR NEWSLETTER NOW", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 30)),
+                                      const Text("JOIN OUR NEWSLETTER NOW", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20)),
                                       const SizedBox(height: 20),
                                       const Text("Get E-mail updates about our latest shop and special offers."),
                                       const SizedBox(height: 15),
@@ -1005,11 +1004,11 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                           Expanded(
                                               child: Container(
                                                 height: 50,
-                                                color: Colors.brown,
+                                                color: Global.mainColor,
                                                 child: const Column(
                                                   mainAxisAlignment: MainAxisAlignment.center,
                                                   children: [
-                                                    Text("SUBSCRIBE", style: TextStyle(color: Global.mainColor),),
+                                                    Text("SUBSCRIBE", style: TextStyle(color: Colors.white),),
                                                   ],
                                                 ),
                                               )
@@ -1057,10 +1056,8 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
               ],
             ),
           );
-
         },
       ),
     );
-
   }
 }

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:jona/components/global.dart';
 import 'package:typewritertext/typewritertext.dart';
 import '../constanst.dart';
 import '../controller/dbfields.dart';
@@ -196,7 +197,7 @@ class _MobileShopState extends State<MobileShop> {
                                   });
                                 },
                                 child: Container(
-                                  color: Colors.orange,
+                                  color: Global.mainColor,
                                   height: 50,
                                   child: const Padding(
                                     padding: EdgeInsets.only(left: 20.0, right: 20),
@@ -310,11 +311,11 @@ class _MobileShopState extends State<MobileShop> {
                           Expanded(
                               child: Container(
                                 height: 50,
-                                color: Colors.orange,
+                                color: Global.mainColor,
                                 child: const Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text("SEARCH"),
+                                    Text("SEARCH", style: TextStyle(color: Colors.white),),
                                   ],
                                 ),
                               )
@@ -357,7 +358,7 @@ class _MobileShopState extends State<MobileShop> {
                             child: Stack(
                               fit: StackFit.expand,
                               children: [
-                                Image.asset(Imagesurls.d2, fit: BoxFit.cover,),
+                                Image.asset(Imagesurls.heritage2, fit: BoxFit.cover,),
                                 Center(
                                   child: Container(
                                     height: 300,
@@ -390,9 +391,9 @@ class _MobileShopState extends State<MobileShop> {
                                           style: ButtonStyle(
                                             backgroundColor: MaterialStateProperty.resolveWith((states) {
                                               if (states.contains(MaterialState.pressed)) {
-                                                return Colors.orange.withOpacity(0.5);
+                                                return Global.mainColor.withOpacity(0.5);
                                               }
-                                              return Colors.orange; // Default color
+                                              return Global.mainColor; // Default color
                                             }),
                                           ),
                                           child: const Text("SHOP NOW", style: TextStyle(color: Colors.white),),
@@ -430,7 +431,7 @@ class _MobileShopState extends State<MobileShop> {
                         ],
                       ),
                       const Divider(
-                        color: Colors.orange,
+                        color: Global.mainColor,
                         indent: 150,
                         endIndent: 150,
                         thickness: 2,
@@ -546,11 +547,11 @@ class _MobileShopState extends State<MobileShop> {
                         Expanded(
                             child: Container(
                               height: 50,
-                              color: Colors.orange,
+                              color: Global.mainColor,
                               child: const Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text("SUBSCRIBE"),
+                                  Text("SUBSCRIBE", style: TextStyle(color: Colors.white),),
                                 ],
                               ),
                             )

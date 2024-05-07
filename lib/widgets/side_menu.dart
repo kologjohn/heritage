@@ -98,7 +98,7 @@ class SideDrawer extends StatelessWidget {
                 ListTile(
                   title: InkWell(
                     onTap: (){
-                      Navigator.pushNamed(context, Routes.mainShop, arguments: "id");
+                      Navigator.pushNamed(context, Routes.mainShop,);//arguments: "id"
                     },
                       child: const MenuType(isSelected: false, coffeeType: 'SHOP')),
                 ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jona/components/global.dart';
 import 'package:jona/widgets/route.dart';
 
 class MenuType extends StatelessWidget {
@@ -15,7 +16,7 @@ class MenuType extends StatelessWidget {
         style: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.normal,
-          color: isSelected ? Colors.orange: Colors.black,
+          color: isSelected ? Global.mainColor: Colors.black,
         ),
       ),
     );

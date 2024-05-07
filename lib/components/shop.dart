@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:jona/components/global.dart';
 import 'package:jona/controller/controller.dart';
 import '../controller/dbfields.dart';
 import '../widgets/featuredgridview.dart';
@@ -120,7 +121,7 @@ class _ShopPageState extends State<ShopPage> {
                       Container(
                         height: 50,
                         width: 200,
-                        color: Colors.orange,
+                        color: Global.mainColor,
                         child: const Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -178,7 +179,7 @@ class _ShopPageState extends State<ShopPage> {
                                   onTap: (){},
                                   child: Container(
                                     height: 50,
-                                    color: Colors.orange,
+                                    color: Global.mainColor,
                                     child: const Padding(
                                       padding: EdgeInsets.only(left: 18.0, right: 18),
                                       child: Row(

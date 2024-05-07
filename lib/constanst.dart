@@ -12,8 +12,9 @@ class Imagesurls{
   static String d1="assets/images/ushape.jpg";
   static String d2="assets/images/eu.png";
   static String hats="assets/images/hats.png";
-  static String heritage1="assets/images/heritage11.png";
-  static String heritage2="assets/images/heritage22.png";
+  static String heritage1="assets/images/heritage6.png";
+  static String heritage2="assets/images/heritage7.png";
   static String heritage3="assets/images/heritage3.jpg";
-  static String heritage4="assets/images/heritage44.png";
+  static String heritage4="assets/images/heritage8.png";
+  static String heritage5="assets/images/heritage5.png";
 }

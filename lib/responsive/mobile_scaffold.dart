@@ -11,6 +11,7 @@ import 'package:jona/widgets/side_menu.dart';
 import 'package:jona/widgets/social_media_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:typewritertext/typewritertext.dart';
+import '../components/global.dart';
 import '../widgets/featuredgridview.dart';
 import '../widgets/menu_type.dart';
 
@@ -147,7 +148,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                                         });
                                       },
                                       child: Container(
-                                        color: Colors.orange,
+                                        color: Global.mainColor,
                                         height: 50,
                                         child: const Padding(
                                           padding: EdgeInsets.only(left: 20.0, right: 20),
@@ -261,11 +262,11 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                                 Expanded(
                                     child: Container(
                                       height: 50,
-                                      color: Colors.orange,
+                                      color: Global.mainColor,
                                       child: const Column(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
-                                          Text("SEARCH"),
+                                          Text("SEARCH", style: TextStyle(color: Colors.white),),
                                         ],
                                       ),
                                     )
@@ -308,7 +309,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                                   child: Stack(
                                     fit: StackFit.expand,
                                     children: [
-                                      Image.asset(Imagesurls.d2, fit: BoxFit.cover,),
+                                      Image.asset(Imagesurls.heritage2, fit: BoxFit.cover,),
                                       Center(
                                         child: Container(
                                           height: 300,
@@ -337,16 +338,13 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                                               ),
                                               const SizedBox(height: 20),
                                               ElevatedButton(
-                                                onPressed: (){
-                                                  Navigator.pushNamed(context, Routes.mainShop);
-
-                                                },
+                                                onPressed: (){},
                                                 style: ButtonStyle(
                                                   backgroundColor: MaterialStateProperty.resolveWith((states) {
                                                     if (states.contains(MaterialState.pressed)) {
-                                                      return Colors.orange.withOpacity(0.5); // Color when pressed
+                                                      return Global.mainColor.withOpacity(0.5);
                                                     }
-                                                    return Colors.orange; // Default color
+                                                    return Global.mainColor; // Default color
                                                   }),
                                                 ),
                                                 child: const Text("SHOP NOW", style: TextStyle(color: Colors.white),),
@@ -367,7 +365,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                           children: [
                             const Text("FEATURED PRODUCTS", style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),),
                             const Divider(
-                              color: Colors.orange,
+                              color: Global.mainColor,
                               indent: 140,
                               endIndent: 140,
                               thickness: 5,
@@ -390,7 +388,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                                         children: [
                                           Column(
                                             children: [
-                                              Image.asset(Imagesurls.d2, height: 180, width: 180,)
+                                              Image.asset(Imagesurls.heritage1, height: 180, width: 180,)
                                             ],
                                           ),
                                         ],
@@ -406,7 +404,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                                                 const Text(
                                                   "STUFFING CHAIR",
                                                   style: TextStyle(
-                                                      color: Colors.orange,
+                                                      color: Global.mainColor,
                                                       fontWeight: FontWeight.w600,
                                                       fontSize: 15
                                                   ),
@@ -423,14 +421,13 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                                                 ElevatedButton(
                                                   onPressed: (){
                                                     Navigator.pushNamed(context, Routes.mainShop);
-                                                    print("Printing...");
                                                   },
                                                   style: ButtonStyle(
                                                     backgroundColor: MaterialStateProperty.resolveWith((states) {
                                                       if (states.contains(MaterialState.pressed)) {
-                                                        return Colors.orange.withOpacity(0.5); // Color when pressed
+                                                        return Global.mainColor.withOpacity(0.5); // Color when pressed
                                                       }
-                                                      return Colors.orange; // Default color
+                                                      return Global.mainColor; // Default color
                                                     }),
                                                   ),
                                                   child: const Text("SHOP NOW", style: TextStyle(color: Colors.white, fontSize: 10),),
@@ -462,7 +459,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                                         children: [
                                           Column(
                                             children: [
-                                              Image.asset(Imagesurls.d2, height: 180, width: 180,)
+                                              Image.asset(Imagesurls.heritage5, height: 180, width: 180,)
                                             ],
                                           ),
                                         ],
@@ -478,7 +475,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                                                 const Text(
                                                   "STUFFING CHAIR",
                                                   style: TextStyle(
-                                                      color: Colors.orange,
+                                                      color: Global.mainColor,
                                                       fontWeight: FontWeight.w600,
                                                       fontSize: 15
                                                   ),
@@ -499,9 +496,9 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                                                   style: ButtonStyle(
                                                     backgroundColor: MaterialStateProperty.resolveWith((states) {
                                                       if (states.contains(MaterialState.pressed)) {
-                                                        return Colors.orange.withOpacity(0.5); // Color when pressed
+                                                        return Global.mainColor.withOpacity(0.5); // Color when pressed
                                                       }
-                                                      return Colors.orange; // Default color
+                                                      return Global.mainColor; // Default color
                                                     }),
                                                   ),
                                                   child: const Text("SHOP NOW", style: TextStyle(color: Colors.white, fontSize: 10),),
@@ -523,7 +520,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                           children: [
                             Text("FROM THE BLOG", style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),),
                             Divider(
-                              color: Colors.orange,
+                              color: Global.mainColor,
                               indent: 140,
                               endIndent: 140,
                               thickness: 5,
@@ -539,7 +536,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                                   //color: Colors.red,
                                   child: Column(
                                     children: [
-                                      Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.d2, height: 400,width: 400,),),
+                                      Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.heritage3, height: 400,width: 400,),),
                                       const SizedBox(height: 10),
                                       const Row(
                                         children: [
@@ -586,7 +583,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                                   //color: Colors.red,
                                   child: Column(
                                     children: [
-                                      Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.d2, height: 400,width: 400,),),
+                                      Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.heritage4, height: 400,width: 400,),),
                                       const SizedBox(height: 10),
                                       const Row(
                                         children: [
@@ -633,7 +630,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                                   //color: Colors.red,
                                   child: Column(
                                     children: [
-                                      Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.d2, height: 400,width: 400,),),
+                                      Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.heritage1, height: 400,width: 400,),),
                                       const SizedBox(height: 10),
                                       const Row(
                                         children: [
@@ -767,11 +764,11 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                               Expanded(
                                   child: Container(
                                     height: 50,
-                                    color: Colors.orange,
+                                    color: Global.mainColor,
                                     child: const Column(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        Text("SUBSCRIBE"),
+                                        Text("SUBSCRIBE", style: TextStyle(color: Colors.white),),
                                       ],
                                     ),
                                   )

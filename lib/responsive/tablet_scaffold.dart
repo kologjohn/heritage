@@ -7,11 +7,10 @@ import 'package:jona/constanst.dart';
 import 'package:jona/controller/controller.dart';
 import 'package:jona/widgets/featuredgridview.dart';
 import 'package:provider/provider.dart';
-import '../widgets/carousel_slider.dart';
+import '../components/global.dart';
 import '../widgets/menu_type.dart';
 import '../widgets/route.dart';
 import '../widgets/side_menu.dart';
-import '../widgets/slide_tile.dart';
 import '../widgets/social_media_icons.dart';
 
 class TabletScaffold extends StatefulWidget {
@@ -55,34 +54,6 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                   padding: const EdgeInsets.only(left: 50.0, right: 50.0),
                   child: Column(
                     children: [
-                      // Column(
-                      //   children: [
-                      //     Row(
-                      //       children: [
-                      //         Expanded(
-                      //             child: SizedBox(
-                      //               height: 50,
-                      //               //color: Colors.red,
-                      //               child: Row(
-                      //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //                 children: [
-                      //                   Flexible(
-                      //                     child: Text(Companydata.companyname,
-                      //                       style: const TextStyle(
-                      //                           fontSize: 30,
-                      //                           fontWeight: FontWeight.w600
-                      //                       ),
-                      //                     ),
-                      //                   ),
-                      //                   //Icon(Icons.menu, size: 40,)
-                      //                 ],
-                      //               ),
-                      //             )
-                      //         )
-                      //       ],
-                      //     ),
-                      //   ],
-                      // ),
                       const SizedBox(height: 20,),
                       Column(
                         children: [
@@ -123,7 +94,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                       });
                                     },
                                     child: Container(
-                                      color: Colors.orange,
+                                      color: Global.mainColor,
                                       height: 50,
                                       child: const Padding(
                                         padding: EdgeInsets.only(left: 18.0, right: 18),
@@ -255,7 +226,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                               Container(
                                                 height: 50,
                                                 width: 80,
-                                                color: Colors.orange,
+                                                color: Global.mainColor,
                                                 child: const Column(
                                                   mainAxisAlignment: MainAxisAlignment.center,
                                                   children: [
@@ -271,7 +242,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                               CircleAvatar(
                                                 backgroundColor: Colors.lightGreen[50],
                                                 child: const Icon(
-                                                  Icons.call, color: Colors.orange,
+                                                  Icons.call, color: Global.mainColor,
                                                 ),
                                               ),
                                               const SizedBox(width: 12),
@@ -317,7 +288,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                                 const Text(
                                                   "FRUIT FRESH",
                                                   style: TextStyle(
-                                                      color: Colors.orange,
+                                                      color: Global.mainColor,
                                                       fontWeight: FontWeight.w600,
                                                       fontSize: 20
                                                   ),
@@ -354,9 +325,9 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                                   style: ButtonStyle(
                                                     backgroundColor: MaterialStateProperty.resolveWith((states) {
                                                       if (states.contains(MaterialState.pressed)) {
-                                                        return Colors.orange.withOpacity(0.5); // Color when pressed
+                                                        return Global.mainColor.withOpacity(0.5); // Color when pressed
                                                       }
-                                                      return Colors.orange; // Default color
+                                                      return Global.mainColor; // Default color
                                                     }),
                                                   ),
                                                   child: const Text("SHOP NOW", style: TextStyle(color: Colors.white),),
@@ -369,10 +340,22 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                       ),
                                       Row(
                                         children: [
-                                          Column(
-                                            children: [
-                                              Image.asset(Imagesurls.d2, height: 350, width: 350,)
+                                          CarouselSlider(
+                                            items: [
+                                              Image.asset(Imagesurls.heritage5, height: 400,),
+                                              Image.asset(Imagesurls.heritage4, height: 400,),
+                                              Image.asset(Imagesurls.heritage1, height: 400,),
+                                              Image.asset(Imagesurls.heritage2, height: 400,),
                                             ],
+                                            options: CarouselOptions(
+                                              aspectRatio: 1.0,
+                                              enlargeCenterPage: true,
+                                              autoPlay: true,
+                                              autoPlayInterval: const Duration(seconds: 3),
+                                              autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                                              enableInfiniteScroll: true,
+                                              scrollDirection: Axis.horizontal,
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -388,7 +371,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                         children: [
                           Text("FEATURED PRODUCTS", style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),),
                           Divider(
-                            color: Colors.orange,
+                            color: Global.mainColor,
                             indent: 300,
                             endIndent: 300,
                             thickness: 5,
@@ -421,7 +404,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                           children: [
                                             Column(
                                               children: [
-                                                Image.asset(Imagesurls.d2, height: 300, width: 300,)
+                                                Image.asset(Imagesurls.heritage2, height: 300, width: 300,)
                                               ],
                                             ),
                                           ],
@@ -437,7 +420,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                                   const Text(
                                                     "SUMMER FRUIT",
                                                     style: TextStyle(
-                                                        color: Colors.orange,
+                                                        color: Global.mainColor,
                                                         fontWeight: FontWeight.w600,
                                                         fontSize: 20
                                                     ),
@@ -456,14 +439,13 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                                     style: ButtonStyle(
                                                       backgroundColor: MaterialStateProperty.resolveWith((states) {
                                                         if (states.contains(MaterialState.pressed)) {
-                                                          return Colors.orange.withOpacity(0.5); // Color when pressed
+                                                          return Global.mainColor.withOpacity(0.5); // Color when pressed
                                                         }
-                                                        return Colors.orange; // Default color
+                                                        return Global.mainColor; // Default color
                                                       }),
                                                     ),
                                                     child: const Text("SHOP NOW", style: TextStyle(color: Colors.white),),
                                                   )
-
                                                 ],
                                               ),
                                             ),
@@ -492,7 +474,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                           children: [
                                             Column(
                                               children: [
-                                                Image.asset(Imagesurls.d2, height: 300, width: 300,)
+                                                Image.asset(Imagesurls.heritage1, height: 300, width: 300,)
                                               ],
                                             ),
                                           ],
@@ -508,7 +490,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                                   const Text(
                                                     "SUMMER FRUIT",
                                                     style: TextStyle(
-                                                        color: Colors.orange,
+                                                        color: Global.mainColor,
                                                         fontWeight: FontWeight.w600,
                                                         fontSize: 20
                                                     ),
@@ -527,9 +509,9 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                                     style: ButtonStyle(
                                                       backgroundColor: MaterialStateProperty.resolveWith((states) {
                                                         if (states.contains(MaterialState.pressed)) {
-                                                          return Colors.orange.withOpacity(0.5); // Color when pressed
+                                                          return Global.mainColor.withOpacity(0.5); // Color when pressed
                                                         }
-                                                        return Colors.orange; // Default color
+                                                        return Global.mainColor; // Default color
                                                       }),
                                                     ),
                                                     child: const Text("SHOP NOW", style: TextStyle(color: Colors.white),),
@@ -585,7 +567,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                         children: [
                           Text("FROM THE BLOG", style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),),
                           Divider(
-                            color: Colors.orange,
+                            color: Global.mainColor,
                             indent: 400,
                             endIndent: 400,
                             thickness: 5,
@@ -603,7 +585,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                   //color: Colors.red,
                                   child: Column(
                                     children: [
-                                      Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.d2, height: 400,width: 400,),),
+                                      Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.heritage4, height: 400,width: 400,),),
                                       const SizedBox(height: 18),
                                       const Padding(
                                         padding: EdgeInsets.only(left: 8.0, right: 8.0),
@@ -659,7 +641,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                   //color: Colors.red,
                                   child: Column(
                                     children: [
-                                      Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.d2, height: 400,width: 400,),),
+                                      Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.heritage5, height: 400,width: 400,),),
                                       const SizedBox(height: 18),
                                       const Padding(
                                         padding: EdgeInsets.only(left: 8.0, right: 8.0),
@@ -715,7 +697,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                   //color: Colors.red,
                                   child: Column(
                                     children: [
-                                      Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.d2, height: 400,width: 400,),),
+                                      Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.heritage3, height: 400,width: 400,),),
                                       const SizedBox(height: 18),
                                       const Padding(
                                         padding: EdgeInsets.only(left: 8.0, right: 8.0),
@@ -877,7 +859,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                           Expanded(
                                               child: Container(
                                                 height: 50,
-                                                color: Colors.orange,
+                                                color: Global.mainColor,
                                                 child: const Column(
                                                   mainAxisAlignment: MainAxisAlignment.center,
                                                   children: [
