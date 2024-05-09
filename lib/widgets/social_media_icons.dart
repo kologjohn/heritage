@@ -12,7 +12,12 @@ class SocialMediaIcons extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        SvgPicture.asset("assets/svg/icons8-facebook.svg", width: 20, height: 20,),
+        InkWell(
+          onTap: (){
+            Navigator.pushNamed(context, Routes.table);
+          },
+            child: SvgPicture.asset("assets/svg/icons8-facebook.svg", width: 20, height: 20,)
+        ),
         const SizedBox(width: 18,),
         SvgPicture.asset("assets/svg/icons8-twitter.svg", width: 20, height: 20,),
         const SizedBox(width: 18,),

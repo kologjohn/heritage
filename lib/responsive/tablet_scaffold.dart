@@ -200,12 +200,12 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                       child:  Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
-                                          const Row(
-                                            children: [
-                                              Text("All Categories"),
-                                              Icon(Icons.arrow_drop_down),
-                                            ],
-                                          ),
+                                          // const Row(
+                                          //   children: [
+                                          //     Text("All Categories"),
+                                          //     Icon(Icons.arrow_drop_down),
+                                          //   ],
+                                          // ),
                                           const SizedBox(width: 50,),
                                           Row(
                                             children: [

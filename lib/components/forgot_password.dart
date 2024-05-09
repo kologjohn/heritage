@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jona/widgets/route.dart';
 import 'global.dart';
 
 class ForgotPasText extends StatelessWidget {
@@ -14,7 +15,9 @@ class ForgotPasText extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           GestureDetector(
-            onTap: (){},
+            onTap: (){
+              Navigator.pushNamed(context, Routes.resetPassword);
+            },
             child: const Text(
               'Forgot Password?',
               style: TextStyle(

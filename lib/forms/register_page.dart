@@ -142,7 +142,8 @@ class _RegisterPageState extends State<RegisterPage> {
                             Container(
                               decoration: BoxDecoration(
                                   color: Global.borderColor,
-                                  borderRadius: BorderRadius.circular(6)),
+                                  borderRadius: BorderRadius.circular(6)
+                              ),
                               child: ElevatedButton(
                                 onPressed: () {
                                   validator();

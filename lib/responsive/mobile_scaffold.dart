@@ -14,6 +14,7 @@ import 'package:typewritertext/typewritertext.dart';
 import '../components/global.dart';
 import '../widgets/featuredgridview.dart';
 import '../widgets/menu_type.dart';
+import '../widgets/options_menu.dart';
 
 
 class MobileScaffold extends StatefulWidget {
@@ -44,41 +45,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
             appBar: AppBar(
 
               actions: [
-                Visibility(
-                  visible: showoptionmenu,
-                  child: PopupMenuButton<String>(
-                   // iconColor: Colors.white,
-                    onSelected: (text) async{
-                      //print("selected");
-
-                    },
-                    itemBuilder: (BuildContext context) => [
-                      PopupMenuItem<String>(
-                        value: 'email',
-                        child: Row(children: [const Icon(Icons.email,color: Colors.green,),Text(value.user_email)],),
-                      ),
-                      PopupMenuItem<String>(
-                        value: 'name',
-                        child: Row(children: [
-                          const Icon(Icons.person,color: Colors.green,),
-                          Text(value.user_lastname)
-                        ],
-                        ),
-                      ),
-                       PopupMenuItem<String>(
-                        onTap: ()async{
-                          final progress=ProgressHUD.of(context);
-                          progress!.show();
-                          await value.signout();
-                          Navigator.pushNamed(context, Routes.dashboard);
-                          progress.dismiss();
-                        },
-                        value: 'Logout',
-                        child: const Row(children: [Icon(Icons.logout,color: Colors.green,),Text(' Logout')],),
-                      ),
-                    ],
-                  ),
-                ),
+                options_menu(showoptionmenu: showoptionmenu, ecom: value,),
 
               ],
               //backgroundColor: Colors.orange,
@@ -818,4 +785,5 @@ class _MobileScaffoldState extends State<MobileScaffold> {
     );
   }
 }
+
 

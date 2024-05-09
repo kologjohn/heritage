@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
+import 'package:jona/components/global.dart';
 import 'package:jona/controller/controller.dart';
 import 'package:jona/controller/dbfields.dart';
 import 'package:provider/provider.dart';
@@ -162,7 +163,7 @@ class _SingleProductState extends State<SingleProduct> {
                                                               style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
                                                             ),
                                                             const SizedBox(height: 8),
-                                                            Text(snapshot.data!.docs[0][ItemReg.category], style: const TextStyle(color: Colors.orange),),
+                                                            Text(snapshot.data!.docs[0][ItemReg.category], style: const TextStyle(color: Global.mainColor),),
                                                             const SizedBox(height: 10),
                                                             Text(snapshot.data!.docs[0][ItemReg.description],
                                                               style: const TextStyle(fontWeight: FontWeight.w300,fontSize: 20),
@@ -180,11 +181,11 @@ class _SingleProductState extends State<SingleProduct> {
                                                                     Row(
                                                                       children: [
                                                                         Text("${snapshot.data!.docs[0][ItemReg.sellingprice]}",
-                                                                          style: const TextStyle(
+                                                                          style: TextStyle(
                                                                             //decoration: TextDecoration.lineThrough,
                                                                               fontSize: 25,
                                                                               fontWeight: FontWeight.bold,
-                                                                              color: Colors.deepOrange
+                                                                              color: Colors.brown[900]
                                                                           ),
                                                                         ),
                                                                         const SizedBox(width: 20),
@@ -227,8 +228,8 @@ class _SingleProductState extends State<SingleProduct> {
                                                                       filledIconData: Icons.star,
                                                                       halfFilledIconData: Icons.star_half,
                                                                       defaultIconData: Icons.star_border,
-                                                                      color: Colors.amber,
-                                                                      borderColor: Colors.amber,
+                                                                      color: Global.mainColor,
+                                                                      borderColor: Global.mainColor,
                                                                       spacing:2.0,
                                                                     ),
                                                                     const SizedBox(height: 20),
@@ -345,7 +346,7 @@ class _SingleProductState extends State<SingleProduct> {
                                                                   height: 40,
                                                                   width: 500,
                                                                   decoration: const BoxDecoration(
-                                                                      color: Colors.orange,
+                                                                      color: Global.mainColor,
                                                                       borderRadius: BorderRadius.all(Radius.circular(5))
                                                                   ),
                                                                   child: const Center(child: Text("ADD TO CART", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),))
