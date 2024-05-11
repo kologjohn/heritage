@@ -7,6 +7,7 @@ import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:jona/components/global.dart';
 import 'package:jona/controller/controller.dart';
 import 'package:jona/controller/dbfields.dart';
+import 'package:jona/widgets/route.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
 
@@ -30,6 +31,10 @@ class _SingleProductState extends State<SingleProduct> {
       final Map<String, dynamic> args =routeparam as Map<String, dynamic>;
       itemamme=args['name'];
     }
+    else
+      {
+        Navigator.pushNamed(context, Routes.dashboard);
+      }
 
       return ProgressHUD(
         child: Consumer<Ecom>(
@@ -212,6 +217,15 @@ class _SingleProductState extends State<SingleProduct> {
                                                                         )
                                                                       ],
                                                                     ),
+
+                                                                    const Row(
+                                                                      children: [
+                                                                        Icon(Icons.star),
+                                                                        Icon(Icons.star_rate),
+                                                                        Icon(Icons.star_rate),
+
+                                                                      ],
+                                                                    ),
                                                                     const SizedBox(height: 10),
                                                                     SmoothStarRating(
                                                                       allowHalfRating: true,
@@ -324,9 +338,11 @@ class _SingleProductState extends State<SingleProduct> {
                                                                 String code=snapshot.data!.docs[0][ItemReg.code];
                                                                 String name=snapshot.data!.docs[0][ItemReg.item];
                                                                 String price=snapshot.data!.docs[0][ItemReg.sellingprice];
+                                                                String des=snapshot.data!.docs[0][ItemReg.description];
+                                                                String imageurl=snapshot.data!.docs[0][ItemReg.itemurl];
                                                                 String quantity="1";
 
-                                                                final savetocard=await Ecom().addtocart(name, price, quantity, code);
+                                                                final savetocard=await Ecom().addtocart(name, price, quantity, code,imageurl,des);
                                                                 print(savetocard);
                                                                 if(savetocard[0]){
                                                                   SnackBar snackbar=const SnackBar(content: Text("Added to cart successfully",style: TextStyle(color: Colors.white),),backgroundColor: Colors.green,);

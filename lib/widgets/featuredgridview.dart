@@ -54,7 +54,7 @@ class _featuredGridviewState extends State<featuredGridview> {
             items.add(
                 InkWell(
                   onTap: (){
-                    print(widget.name);
+                   // print(widget.name);
                     Navigator.pushNamed(context, Routes.singleProduct,arguments: {"name":snapshot.data!.docs[i][ItemReg.code]});
                   },
                   child: Container(

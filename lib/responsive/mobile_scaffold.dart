@@ -34,6 +34,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
     return ProgressHUD(
       child: Consumer<Ecom>(
         builder: (BuildContext context, Ecom value, Widget? child) {
+          value.paystacks("0552111770","200","432244892579076662");
           if(value.companyphone.isEmpty){
             value.companyinfo();
           }

@@ -32,6 +32,22 @@ class Dbfields{
   static String cartidnumber="cartidnumber";
 }
 
+class CheckoutFields{
+  static String firstname="firstname";
+  static String lastname="lastname";
+  static String phone="phone";
+  static String city="city";
+  static String region="region";
+  static String address="address";
+  static String country="country";
+  static String email="email";
+  static String postalcode="postalcode";
+  static String total="total";
+  static String status="status";
+  static String ghtotal="ghtotal";
+  static String cartid="cartid";
+}
+
 class ItemReg{
   static String item="item";
   static String itemurl="itemurl";

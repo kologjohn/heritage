@@ -1,21 +1,32 @@
+import 'dart:convert';
+import 'dart:core';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:intl/intl.dart';
 import 'package:jona/widgets/route.dart';
-
+import 'package:http/http.dart'as http;
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../widgets/menu_type.dart';
 import 'dbfields.dart';
 class Ecom extends ChangeNotifier{
    final db=FirebaseFirestore.instance;
    final auth=FirebaseAuth.instance;
    static final querysnapshot=FirebaseFirestore.instance.collection("items").orderBy(ItemReg.category).limit(10).snapshots();
+   final numformat = NumberFormat("#,##0.00", "en_US");
 
+   //cart id with provider
+   double currecyval=0;
+   String mycardid="";
    String companyname="";
    String companyemail="";
    String companyphone="";
    String companyaddress="";
-
+   double mycarttotal=0;
+   String cardvalue="0.00";
    String user_email="";
    String user_firstname="";
    String user_lastname="";
@@ -32,6 +43,85 @@ class Ecom extends ChangeNotifier{
       // Add other scopes as needed.
     ],
   );
+
+  checkout(String email_txt,String fname_txt,String,lnamme_txt,String addres_txt,String phone_txt, String country_txt,String region_txt, String city_txt,String postcode_txt)async{
+  try{
+    final SharedPreferences  sprefs=await SharedPreferences.getInstance();
+    final cart_id=sprefs.getString("cartid");
+    await carttotal();
+    await cartidmethod();
+    await currecy();
+    double ghs=currecyval*double.parse(cardvalue);
+    final checkoutdata={
+      CheckoutFields.firstname:fname_txt,
+      CheckoutFields.lastname:lnamme_txt,
+      CheckoutFields.address:addres_txt,
+      CheckoutFields.phone:phone_txt,
+      CheckoutFields.country:country_txt,
+      CheckoutFields.region:region_txt,
+      CheckoutFields.city:city_txt,
+      CheckoutFields.postalcode:postcode_txt,
+      CheckoutFields.cartid:sprefs.getString("cartid"),
+      CheckoutFields.email:auth.currentUser!.email,
+      CheckoutFields.total:cardvalue,
+      CheckoutFields.ghtotal:"$ghs",
+      CheckoutFields.status:false,
+    };
+    await db.collection("checkout").doc(cart_id).set(checkoutdata);
+    paystacks(phone_txt, cardvalue, cart_id!);
+    error="";
+
+  }on FirebaseException catch(e){
+    print(e);
+    error=e.message!;
+  }
+
+  }
+  carttotal()async{
+    await cartidmethod();
+    try{
+      final shards = await db.collection('cart').where(Dbfields.cartidnumber,isEqualTo:mycardid ).get();
+      mycarttotal=0;
+      shards.docs.forEach(
+            (doc) {
+          mycarttotal += double.parse(doc.data()['price']);
+          cardvalue=numformat.format(mycarttotal);
+
+        },
+      );
+      print(mycarttotal);
+    }catch(e){
+      print(e);
+
+    }
+    notifyListeners();
+  }
+deleteitem(String key)async{
+  try{
+    await db.collection("cart").doc(key).delete();
+    print("deleted");
+  }catch(e){
+    print(e);
+  }
+}
+  cartidmethod()async{
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final idgen=DateTime.timestamp().millisecondsSinceEpoch.toString();
+    if(!prefs.containsKey("cartid"))
+      {
+        prefs.setString("cartid", idgen);
+        mycardid=prefs.getString("cartid")!;
+      }
+    else
+      {
+        print("Exist already");
+        print(prefs.getString("cartid"));
+        mycardid=prefs.getString("cartid")!;
+
+      }
+    notifyListeners();
+
+  }
 
    String capitalizeSentence(String sentence) {
      List<String> words = sentence.split(' ');
@@ -120,23 +210,7 @@ try{
 
   }
 
-   String capitalizeEachWord(String input) {
-     // Split the input string into words
-     List<String> words = input.split(' ');
 
-     // Capitalize the first letter of each word
-     List<String> capitalizedWords = words.map((word) {
-       // Handle cases where the word is empty
-       if (word.isEmpty) {
-         return word;
-       }
-       // Capitalize the first letter and concatenate the rest of the word
-       return word[0].toUpperCase() + word.substring(1);
-     }).toList();
-
-     // Join the capitalized words back into a single string
-     return capitalizedWords.join(' ');
-   }
 
   loginwithemail(String email,String password) async{
     try{
@@ -157,7 +231,14 @@ try{
     notifyListeners();
   }
 
-  Future<List>addtocart(String itemname,String price,String quantity,String code)async{
+
+  cartids()async{
+    final SharedPreferences sharedPreferences=await SharedPreferences.getInstance();
+    mycardid= sharedPreferences.getString("cartid").toString();
+    print(mycardid);
+    notifyListeners();
+   }
+  Future<List>addtocart(String itemname,String price,String quantity,String code,String imageurl,String description)async{
   //  double total=double.parse(price)*double.parse(quantity);
     bool success=false;
     if(Dbfields.auth.currentUser==null) {
@@ -178,7 +259,9 @@ try{
         String? email=Dbfields.auth.currentUser!.email;
         String? contact=Dbfields.auth.currentUser!.phoneNumber;
         final date=DateTime.now();
-        String mycartid=await cartid("id", "$date", false, "MOMO", email!);
+        final SharedPreferences sharedPreferences=await SharedPreferences.getInstance();
+        String? mycartids=sharedPreferences.getString("cartid");
+        mycardid=mycartids!;
         final data={
           Dbfields.email:email,
           Dbfields.contact:contact,
@@ -186,10 +269,12 @@ try{
           Dbfields.price:price,
           Dbfields.quantity:quantity,
           Dbfields.code:code,
-          Dbfields.cartidnumber:mycartid,
+          Dbfields.cartidnumber:mycartids,
+          ItemReg.itemurl:imageurl,
+          ItemReg.description:description
         };
         await Dbfields.db.collection(Dbfields.cart).add(data);
-        cartidnumber=mycartid;
+        cartidnumber=mycartids!;
         success=true;
         print("Added Successfully$cartidnumber");
       }
@@ -272,9 +357,7 @@ try{
 
   }
 
-  logindetail(){
 
-  }
 
   Future<User?> signInWithGoogles({required BuildContext context}) async {
     FirebaseAuth auth = FirebaseAuth.instance;
@@ -364,6 +447,104 @@ notifyListeners();
       // Handle the error (e.g., by showing an error message or prompting an interactive sign-in)
     }
   }
+
+   openpaystack(String url)async{
+     try{
+       final Uri url0 = Uri.parse(url);
+       launchUrl(url0,
+           mode: LaunchMode.inAppWebView,
+           webViewConfiguration: const WebViewConfiguration(
+             enableDomStorage: true,
+             enableJavaScript: true,
+           ));
+
+     }on FirebaseException catch (e){
+       print(e.message);
+       // print("Erro $e");
+     }
+   }
+
+   paystacks(String phone,String amount,String tid) async {
+     String? email = auth.currentUser!.email;
+     final user = FirebaseAuth.instance.currentUser;
+     if (user != null) {
+       String? token = await user.getIdToken();
+       var headers = {
+         'Content-Type': 'application/json',
+         'Authorization': 'Bearer $token',
+       };
+       var request = http.Request('POST', Uri.parse('http://localhost:5000/heritageaskets/us-central1/paystack'));
+       request.body = json.encode({
+         "data": {
+           "phone": phone,
+           "email": email,
+           "tid": tid,
+           "reference": tid,
+           "amount": amount,
+           "message": "Data",
+           "senderid": "GAFAT"
+         }
+       });
+       request.headers.addAll(headers);
+       http.StreamedResponse response = await request.send();
+       if (response.statusCode == 200) {
+         String resdata = await response.stream.bytesToString();
+         final Map parsed = json.decode(resdata);
+         final Map finaldata = parsed['result'];
+
+         String url = finaldata['data']['authorization_url'];
+         String reference = finaldata['data']['reference'];
+         String accessCode = finaldata['data']['access_code'];
+         print(finaldata);
+
+         if (finaldata['status']) {
+           // await Dbinsert().db.collection("sendmoney").doc(tid).update(
+           //     {Dbfield.reference: reference, "accesscode": accessCode,"payurl":url});
+          openpaystack(url);
+           print(reference);
+         }
+         else {
+           print("URL NOT GENERATED");
+         }
+       } else {
+         print("Error:${response.reasonPhrase}");
+       }
+
+     }
+   }
+
+   currecy() async {
+     String? email = auth.currentUser!.email;
+     final user = FirebaseAuth.instance.currentUser;
+     if (user != null) {
+       String? token = await user.getIdToken();
+       var headers = {
+         'Content-Type': 'application/json',
+         'Authorization': 'Bearer $token',
+       };
+       var request = http.Request('POST', Uri.parse('http://localhost:5000/heritageaskets/us-central1/currency'));
+       request.body = json.encode({
+         "data": {
+           "email": email,
+         }
+       });
+       request.headers.addAll(headers);
+       http.StreamedResponse response = await request.send();
+       if (response.statusCode == 200) {
+         String resdata = await response.stream.bytesToString();
+         final Map parsed = json.decode(resdata);
+         final  finaldata = parsed['result'];
+         currecyval=finaldata;
+         print(finaldata);
+       } else {
+         print("Error:${response.reasonPhrase}");
+       }
+
+     }
+     notifyListeners();
+   }
+
+
 
 
 }
