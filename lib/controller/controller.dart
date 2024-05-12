@@ -70,6 +70,12 @@ class Ecom extends ChangeNotifier{
     notifyListeners();
 return status;
   }
+ resetcart(BuildContext context)async{
+   final SharedPreferences  sprefs=await SharedPreferences.getInstance();
+   final cart_id=sprefs.remove("cartid");
+
+   //Navigator.pushNamed(context, Routes.dashboard);
+ }
 
   checkout(String email_txt,String fname_txt,String lnamme_txt,String addres_txt,String phone_txt, String country_txt,String region_txt, String city_txt,String postcode_txt)async{
   try{
@@ -125,7 +131,6 @@ return status;
             (doc) {
           mycarttotal += double.parse(doc.data()['price']);
           cardvalue=numformat.format(mycarttotal);
-
         },
       );
       print(mycarttotal);
@@ -138,6 +143,7 @@ return status;
 deleteitem(String key)async{
   try{
     await db.collection("cart").doc(key).delete();
+    carttotal();
     print("deleted");
   }catch(e){
     print(e);

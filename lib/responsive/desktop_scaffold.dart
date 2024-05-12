@@ -191,7 +191,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                               },
                                               child: const Icon(Icons.shopping_cart)
                                           ),
-                                          Text("Total: USD ${value.cardvalue}",style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),)
+                                          Text("Total: USD ${value.mycarttotal}",style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),)
                                         ],
                                       ),
                                     )

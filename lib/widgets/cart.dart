@@ -20,19 +20,22 @@ class CartView extends StatefulWidget {
 
 class _CartViewState extends State<CartView> {
   List<Widget> items=[];
-  String totalamt="";
   @override
   Widget build(BuildContext context) {
     return ProgressHUD(
       child: Consumer<Ecom>(
         builder: (BuildContext context, value, Widget? child) {
+          String email="";
+          if(value.auth.currentUser!=null)
+            {
+              email=value.auth.currentUser!.email!;
+            }
           if(value.mycardid.isEmpty)
             {
               value.cartidmethod();
               value.carttotal();
             }
           String cardnumber=value.mycardid;
-          print(cardnumber);
           return Scaffold(
               appBar: AppBar(
                 centerTitle: true,
@@ -49,10 +52,9 @@ class _CartViewState extends State<CartView> {
                             color: Colors.white,
                             //height: 1500,
                             child: StreamBuilder<QuerySnapshot>(
-                                stream: value.db.collection("cart").where(Dbfields.email, isEqualTo: value.auth.currentUser!.email).where(Dbfields.cartidnumber, isEqualTo: cardnumber).snapshots(),
+                                stream: value.db.collection("cart").where(Dbfields.email, isEqualTo: email).where(Dbfields.cartidnumber, isEqualTo: cardnumber).snapshots(),
                                 builder: (context, snapshot) {
                                   items.clear();
-                                  totalamt=value.cardvalue;
                                   if(snapshot.hasData){
                                     for(int i=0;i<snapshot.data!.docs.length;i++){
                                       String itemname=snapshot.data!.docs[i][Dbfields.itemname];
@@ -61,9 +63,7 @@ class _CartViewState extends State<CartView> {
                                       String price=snapshot.data!.docs[i][Dbfields.price];
                                       String key=snapshot.data!.docs[i].id;
                                        // totalamt+=double.parse(price);
-
-                                      items.add(
-                                          FittedBox(
+                                      items.add(FittedBox(
                                             child: Container(
                                             child: Column(
                                               children: [
@@ -147,21 +147,19 @@ class _CartViewState extends State<CartView> {
                                                                          InkWell(
                                                                           onTap: ()async{
                                                                             final progres=ProgressHUD.of(context);
-                                                                            progres!.showWithText("Deleting...");
+                                                                            progres!.show();
                                                                             Future.delayed(const Duration(seconds: 10),(){
                                                                               progres.dismiss();
                                                                               //print("Stoped");
-      
                                                                             });
-                                                                            await value.deleteitem(key);
                                                                             await value.carttotal();
-                                                                            setState(() {
-                                                                              totalamt;
-                                                                            });
+                                                                            await value.deleteitem(key);
+                                                                            //print(value.mycarttotal);
                                                                             progres.dismiss();
-                                                                            if(totalamt==0)
+                                                                            if(value.mycarttotal==0)
                                                                               {
                                                                                 Navigator.pushNamed(context, Routes.dashboard);
+                                                                                value.resetcart(context);
                                                                               }
                                                                           },
                                                                           child: const Row(
@@ -217,8 +215,14 @@ class _CartViewState extends State<CartView> {
                                               ],
                                             ),
                                                                                   ),
-                                          )
-                                      );
+                                          ));
+                                    }
+                                    if(snapshot.data!.docs.isEmpty){
+                                      value.resetcart(context);
+                                      return Container(
+                                        color: Global.mainColor,
+                                          child: const Center(child: Text("Your cart is empty",style: TextStyle(fontSize: 20,color: Colors.white),)));
+                                    //  Navigator.pushNamed(context, Routes.dashboard);
                                     }
                                    // print(snapshot.data!.docs.length);
                                   }
@@ -279,7 +283,7 @@ class _CartViewState extends State<CartView> {
                                                                   ),
                                                                 ),
                                                                 Text(
-                                                                  "USD ${value.cardvalue}",
+                                                                  "USD ${value.mycarttotal}",
                                                                   style: const TextStyle(
                                                                       fontSize: 15,
                                                                       fontWeight: FontWeight.w600
@@ -307,7 +311,7 @@ class _CartViewState extends State<CartView> {
                                                                   mainAxisAlignment: MainAxisAlignment.center,
                                                                   children: [
                                                                     Text(
-                                                                      "Checkout (USD ${value.cardvalue})",
+                                                                      "Checkout (USD ${value.mycarttotal})",
                                                                       style: const TextStyle(
                                                                           color: Colors.white,
                                                                           fontSize: 15
