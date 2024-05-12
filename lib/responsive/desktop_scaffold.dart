@@ -29,6 +29,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
   @override
   Widget build(BuildContext context) {
     return   Consumer<Ecom>(builder: (context,  value,  child) {
+      
       if(value.mycarttotal==0)
         {
          // value.carttotal();
@@ -184,6 +185,8 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                           InkWell(
                                               onTap: ()async{
                                                 await value.cartidmethod();
+                                                final st=await value.alreadypaid(context);
+                                                print(st);
                                                 Navigator.pushNamed(context, Routes.cart);
                                               },
                                               child: const Icon(Icons.shopping_cart)

@@ -46,6 +46,8 @@ class CheckoutFields{
   static String status="status";
   static String ghtotal="ghtotal";
   static String cartid="cartid";
+  static String accesscode="accesscode";
+  static String payurl="payurl";
 }
 
 class ItemReg{

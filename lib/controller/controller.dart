@@ -43,15 +43,52 @@ class Ecom extends ChangeNotifier{
       // Add other scopes as needed.
     ],
   );
+  alreadypaid(BuildContext context)async{
+    final SharedPreferences  sprefs=await SharedPreferences.getInstance();
+    final cart_id=sprefs.getString("cartid");
+    final alreaypaid=await db.collection("checkout").doc(cart_id).get();
+    bool status=false;
+    if(alreaypaid.exists){
+      bool status=alreaypaid[CheckoutFields.status];
+      if(status)
+        {
+         // print("paid");
+          status=true;
+          sprefs.remove("cartid");
+          SnackBar snackBar=const SnackBar(content: Text("Thank you have paid already",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),backgroundColor: Colors.green,);
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
-  checkout(String email_txt,String fname_txt,String,lnamme_txt,String addres_txt,String phone_txt, String country_txt,String region_txt, String city_txt,String postcode_txt)async{
+        }
+      else
+        {
+          SnackBar snackBar=const SnackBar(content: Text("Not paid"));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          status=false;
+        }
+
+    }
+    notifyListeners();
+return status;
+  }
+
+  checkout(String email_txt,String fname_txt,String lnamme_txt,String addres_txt,String phone_txt, String country_txt,String region_txt, String city_txt,String postcode_txt)async{
   try{
+     String payurl="";
+     String accesscode="";
+     bool status=false;
     final SharedPreferences  sprefs=await SharedPreferences.getInstance();
     final cart_id=sprefs.getString("cartid");
     await carttotal();
     await cartidmethod();
     await currecy();
     double ghs=currecyval*double.parse(cardvalue);
+    final alreaypaid=await db.collection("checkout").doc(cart_id).get();
+    if(alreaypaid.exists)
+      {
+        openpaystack(alreaypaid['payurl']);
+        payurl=alreaypaid[CheckoutFields.payurl];
+        accesscode=alreaypaid[CheckoutFields.accesscode];
+      }
     final checkoutdata={
       CheckoutFields.firstname:fname_txt,
       CheckoutFields.lastname:lnamme_txt,
@@ -65,7 +102,9 @@ class Ecom extends ChangeNotifier{
       CheckoutFields.email:auth.currentUser!.email,
       CheckoutFields.total:cardvalue,
       CheckoutFields.ghtotal:"$ghs",
-      CheckoutFields.status:false,
+      CheckoutFields.payurl:payurl,
+      CheckoutFields.accesscode:accesscode,
+      CheckoutFields.status:status,
     };
     await db.collection("checkout").doc(cart_id).set(checkoutdata);
     paystacks(phone_txt, cardvalue, cart_id!);
@@ -452,7 +491,8 @@ notifyListeners();
      try{
        final Uri url0 = Uri.parse(url);
        launchUrl(url0,
-           mode: LaunchMode.inAppWebView,
+           webOnlyWindowName: "_self",
+           mode: LaunchMode.platformDefault,
            webViewConfiguration: const WebViewConfiguration(
              enableDomStorage: true,
              enableJavaScript: true,
@@ -465,52 +505,72 @@ notifyListeners();
    }
 
    paystacks(String phone,String amount,String tid) async {
-     String? email = auth.currentUser!.email;
-     final user = FirebaseAuth.instance.currentUser;
-     if (user != null) {
-       String? token = await user.getIdToken();
-       var headers = {
-         'Content-Type': 'application/json',
-         'Authorization': 'Bearer $token',
-       };
-       var request = http.Request('POST', Uri.parse('http://localhost:5000/heritageaskets/us-central1/paystack'));
-       request.body = json.encode({
-         "data": {
-           "phone": phone,
-           "email": email,
-           "tid": tid,
-           "reference": tid,
-           "amount": amount,
-           "message": "Data",
-           "senderid": "GAFAT"
-         }
-       });
-       request.headers.addAll(headers);
-       http.StreamedResponse response = await request.send();
-       if (response.statusCode == 200) {
-         String resdata = await response.stream.bytesToString();
-         final Map parsed = json.decode(resdata);
-         final Map finaldata = parsed['result'];
+    try{
+      final alreaypaid=await db.collection("checkout").doc(tid).get();
+      print(alreaypaid['payurl']);
+      if(alreaypaid.exists)
+      {
+        String checkpayurl=alreaypaid['payurl'];
+        print(checkpayurl);
+        if(checkpayurl.isNotEmpty){
+      print("paid");
+        }
+        else
+        {
+          print("0paid");
 
-         String url = finaldata['data']['authorization_url'];
-         String reference = finaldata['data']['reference'];
-         String accessCode = finaldata['data']['access_code'];
-         print(finaldata);
+          String? email = auth.currentUser!.email;
+          final user = FirebaseAuth.instance.currentUser;
+          if (user != null) {
+            String? token = await user.getIdToken();
+            var headers = {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer $token',
+            };
+            var request = http.Request('POST', Uri.parse('https://us-central1-heritageaskets.cloudfunctions.net/paystack'));
+            request.body = json.encode({
+              "data": {
+                "phone": phone,
+                "email": email,
+                "tid": tid,
+                "reference": tid,
+                "amount": amount,
+                "message": "Data",
+                "senderid": "Heritage"
+              }
+            });
+            request.headers.addAll(headers);
+            http.StreamedResponse response = await request.send();
+            if (response.statusCode == 200) {
+              String resdata = await response.stream.bytesToString();
+              final Map parsed = json.decode(resdata);
+              final Map finaldata = parsed['result'];
 
-         if (finaldata['status']) {
-           // await Dbinsert().db.collection("sendmoney").doc(tid).update(
-           //     {Dbfield.reference: reference, "accesscode": accessCode,"payurl":url});
-          openpaystack(url);
-           print(reference);
-         }
-         else {
-           print("URL NOT GENERATED");
-         }
-       } else {
-         print("Error:${response.reasonPhrase}");
-       }
+              String url = finaldata['data']['authorization_url'];
+              String reference = finaldata['data']['reference'];
+              String accessCode = finaldata['data']['access_code'];
+              print(finaldata);
+              if (finaldata['status']) {
+                await db.collection("checkout").doc(tid).update({CheckoutFields.accesscode: accessCode,CheckoutFields.payurl:url});
+                openpaystack(url);
+              }
+              else {
+                print("URL NOT GENERATED");
+              }
+            } else {
+              print("Error:${response.reasonPhrase}");
+            }
 
-     }
+          }
+
+        }
+      }
+    }
+    catch(e){
+     print(e);
+    }
+
+
    }
 
    currecy() async {
@@ -522,7 +582,7 @@ notifyListeners();
          'Content-Type': 'application/json',
          'Authorization': 'Bearer $token',
        };
-       var request = http.Request('POST', Uri.parse('http://localhost:5000/heritageaskets/us-central1/currency'));
+       var request = http.Request('POST', Uri.parse('https://us-central1-heritageaskets.cloudfunctions.net/currency'));
        request.body = json.encode({
          "data": {
            "email": email,

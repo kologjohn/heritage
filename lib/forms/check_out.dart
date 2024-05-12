@@ -33,7 +33,13 @@ class _CheckoutFormState extends State<CheckoutForm> {
     'Nigeria': ['Abuja', 'Lagos', 'Kano', 'Ibadan'],
     // Add more countries and their regions here
   };
-
+@override
+  void initState() {
+    // TODO: implement initState
+  print("hello");
+  Ecom().alreadypaid(context);
+    super.initState();
+  }
   bool validator() {
     return formskey.currentState!.validate();
   }
@@ -335,7 +341,7 @@ class _CheckoutFormState extends State<CheckoutForm> {
                                                               Future.delayed(Duration(seconds: 10),(){
                                                                 pgress.dismiss();
                                                               });
-                                                              await ecom.checkout(email_txt, fname_txt, String, lname_txt, addres_txt, phone_txt, country_txt, region_txt, city_txt, postcode_txt);
+                                                              await ecom.checkout(email_txt, fname_txt,lname_txt, addres_txt, phone_txt, country_txt, region_txt, city_txt, postcode_txt);
                                                               double paystackvalue=convertedamt*100;
                                                              // int fff=ecom.cardvalue;
                                                              // print(fff);
