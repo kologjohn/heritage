@@ -295,7 +295,7 @@ class _CartViewState extends State<CartView> {
                                                             InkWell(
                                                               onTap: ()async{
                                                                 Navigator.pushNamed(context, Routes.checkout);
-
+                                                                value.lockcart();
                                                                 // final pgress=ProgressHUD.of(context);
                                                                 // pgress!.show();
                                                                 // Future.delayed(Duration(seconds: 10),(){

@@ -17,12 +17,17 @@
   <link rel="manifest" href="manifest.json">
   <script>
     // The value below is injected by flutter build, do not touch.
-    const serviceWorkerVersion = "723000979";
+    const serviceWorkerVersion = "2061521130";
   </script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
 </head>
 <body>
+<script>
+  if (bot) {
+    window.flutterWebRenderer = "html";
+  }
+</script>
   <script>
     window.addEventListener('load', function(ev) {
 

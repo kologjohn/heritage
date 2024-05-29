@@ -73,3 +73,42 @@ exports.paystackcall = functions.https.onRequest((req, res) => {
   //var records= admin.firestore().collection("sendmoney").doc(clientid).get();
    res.status(200).send('Success'+reference);
 });
+
+
+exports.chat = functions.https.onCall(async (data, context) => {
+  // Ensure the request has the necessary authentication if required
+  // if (!context.auth) {
+  //   throw new functions.https.HttpsError('unauthenticated', 'Request had no authentication.');
+  // }
+
+  const text=data.text;
+  const requestData = JSON.stringify({
+    "contents": [
+      {
+        "parts": [
+          {
+            "text": data.text 
+          }
+        ]
+      }
+    ]
+  });
+
+  const config = {
+    method: 'post',
+    maxBodyLength: Infinity,
+    url: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyAsjYTLt34TtJN80f4cWmB_1H0eLpB5P90',
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+    data: requestData
+  };
+
+  try {
+    const response = await axios.request(config);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw new functions.https.HttpsError('internal', 'Unable to generate content', error);
+  }
+});

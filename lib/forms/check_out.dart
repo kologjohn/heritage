@@ -343,10 +343,6 @@ class _CheckoutFormState extends State<CheckoutForm> {
                                                               });
                                                               await ecom.checkout(email_txt, fname_txt,lname_txt, addres_txt, phone_txt, country_txt, region_txt, city_txt, postcode_txt);
                                                               double paystackvalue=convertedamt*100;
-                                                             // int fff=ecom.cardvalue;
-                                                             // print(fff);
-                                                              //ecom.paystacks(phone_txt, "20000", ecom.mycardid);
-                                                              //ecom.paystacks(phone_txt, "$convertedamt",  ecom.mycardid);
 
                                                               ecom.paystacks(phone_txt, "$paystackvalue",ecom.mycardid);
 

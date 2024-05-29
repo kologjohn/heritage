@@ -31,20 +31,11 @@ class _featured_productState extends State<featured_product> {
   bool myprogess=false;
   bool cartshow=true;
   final numformat = NumberFormat("#,##0.00", "en_US");
-  String finalprice="0";
   @override
   Widget build(BuildContext context) {
     return Consumer<Ecom>(
       builder: (BuildContext context, value,child) {
-        if(value.currecyval==0){
-          value.currecy();
-        }
-        try{
-          double conv_price=double.parse(widget.featuredPrice) * value.currecyval;
-           finalprice=numformat.format(conv_price);
-        }catch(e){
-           finalprice="Error";
-        }
+
 
        // value.companyinfo();
         return Column(
@@ -88,7 +79,7 @@ class _featured_productState extends State<featured_product> {
                         children: [
                           Text(widget.featuredName, style: TextStyle(fontSize: widget.nameSize)),
                           Text('\$${widget.featuredPrice}', style: TextStyle(fontSize: widget.priceSize),),
-                          Text('GHS $finalprice', style: TextStyle(fontSize: widget.priceSize),),
+                        //  Text('GHS $finalprice', style: TextStyle(fontSize: widget.priceSize),),
                         ],
                       ),),
 
@@ -119,8 +110,8 @@ class _featured_productState extends State<featured_product> {
                                       cartshow=false;
                                     });
                                     //print(widget.featuredName);
-                              
-                                    final addcart=await value.addtocart(widget.featuredName, widget.featuredPrice, "1", widget.featuredName,widget.featuredImage,"");
+                                    //print(value.alreadycheckedout());
+                                    final addcart=await value.addtocart(widget.featuredName, widget.featuredPrice, "1", widget.featuredName,widget.featuredImage,"",context);
                                     if(value.error.isNotEmpty)
                                       {
                                         SnackBar snackbar=SnackBar(content: Text(value.error,style:const TextStyle(color: Colors.white,fontSize: 14,fontWeight: FontWeight.bold),),backgroundColor: Colors.deepOrangeAccent,);
@@ -138,7 +129,7 @@ class _featured_productState extends State<featured_product> {
 
                                     }
                                     //String? email=Dbfields.auth.currentUser!.email;
-                              
+
                                   },
                                   child: Container(
                                     height: widget.cartHeight,
@@ -150,6 +141,7 @@ class _featured_productState extends State<featured_product> {
                                   )
                               ),
                             ),
+
                           ],
                         ),
                       ),

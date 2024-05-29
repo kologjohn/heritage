@@ -29,7 +29,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
   @override
   Widget build(BuildContext context) {
     return   Consumer<Ecom>(builder: (context,  value,  child) {
-      
+
       if(value.mycarttotal==0)
         {
          // value.carttotal();

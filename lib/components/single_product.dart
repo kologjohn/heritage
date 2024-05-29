@@ -341,20 +341,17 @@ class _SingleProductState extends State<SingleProduct> {
                                                                 String des=snapshot.data!.docs[0][ItemReg.description];
                                                                 String imageurl=snapshot.data!.docs[0][ItemReg.itemurl];
                                                                 String quantity="1";
-
-                                                                final savetocard=await Ecom().addtocart(name, price, quantity, code,imageurl,des);
-                                                                print(savetocard);
+                                                                final savetocard=await Ecom().addtocart(name, price, quantity, code,imageurl,des,context);
+                                                                //print(savetocard);
                                                                 if(savetocard[0]){
                                                                   SnackBar snackbar=const SnackBar(content: Text("Added to cart successfully",style: TextStyle(color: Colors.white),),backgroundColor: Colors.green,);
                                                                   ScaffoldMessenger.of(context).showSnackBar(snackbar);
                                                                 }
                                                                 else
-                                                                  {
-
+                                                                {
                                                                     SnackBar snackbar= SnackBar(content: Text(savetocard[1],style: const TextStyle(color: Colors.white),),backgroundColor: Colors.red,);
                                                                     ScaffoldMessenger.of(context).showSnackBar(snackbar);
-
-                                                                  }
+                                                                }
 
                                                                 progress.dismiss();
                                                               },
