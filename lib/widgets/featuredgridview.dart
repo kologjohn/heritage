@@ -54,7 +54,7 @@ class _featuredGridviewState extends State<featuredGridview> {
             items.add(
                 InkWell(
                   onTap: (){
-                    print(widget.name);
+                   // print(widget.name);
                     Navigator.pushNamed(context, Routes.singleProduct,arguments: {"name":snapshot.data!.docs[i][ItemReg.code]});
                   },
                   child: Container(
@@ -77,7 +77,7 @@ class _featuredGridviewState extends State<featuredGridview> {
 
         }
         else if(!snapshot.hasData){
-          return Text("Loading...");
+          return const Text("Loading...");
         }
         else if(snapshot.connectionState==ConnectionState.waiting)
         {
@@ -86,7 +86,6 @@ class _featuredGridviewState extends State<featuredGridview> {
         else if(snapshot.hasError)
         {
           return const Text("Error Loading Data");
-
         }
         return Wrap(
           runSpacing: 5,

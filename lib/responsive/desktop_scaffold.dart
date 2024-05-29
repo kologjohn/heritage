@@ -28,7 +28,16 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
   bool showoptions=false;
   @override
   Widget build(BuildContext context) {
-    return   Consumer<Ecom>(builder: (BuildContext context, Ecom value, Widget? child) {
+    return   Consumer<Ecom>(builder: (context,  value,  child) {
+
+      if(value.mycarttotal==0)
+        {
+         // value.carttotal();
+        }
+      // print(value.mycardid);
+      // if(value.companyemail.isEmpty){
+      //   value.companyinfo();
+      // }
       return Scaffold(
         appBar: AppBar(
           backgroundColor:  Colors.lightGreen[50],
@@ -66,7 +75,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                     const SizedBox(width: 10),
                     Row(
                       children: [
-                        Image.asset(Imagesurls.hats, height: 20, width: 20,),
+                        Image.asset(Imagesurls.hats, height: 30, width: 30,),
                         const SizedBox(width: 8),
                         //SvgPicture.asset("assets/svg/gh.svg", width: 40, height: 20,),
                         const Text("Ghana", style: TextStyle(fontSize: 15)),
@@ -103,580 +112,362 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
           ],
         ),
         backgroundColor: Colors.grey[200],
-        body: Consumer<Ecom>(
-          builder: (BuildContext context, Ecom value, Widget? child) {
-            if(value.companyemail.isEmpty){
-              value.companyinfo();
-
-            }
-            return  SingleChildScrollView(
-              reverse: false,
-              child: Column(
-                children: [
-                  Padding(
-                      padding: const EdgeInsets.only(left: 130.0, right: 130.0, top: 15),
-                      child: Container(
-                        color: Colors.white,
-                        //height: 10000,
-                        child: Column(
+        body:  SingleChildScrollView(
+          reverse: false,
+          child: Column(
+            children: [
+              Padding(
+                  padding: const EdgeInsets.only(left: 130.0, right: 130.0, top: 15),
+                  child: Container(
+                    color: Colors.white,
+                    //height: 10000,
+                    child: Column(
+                      children: [
+                        Column(
                           children: [
-                            Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    // const Expanded(
-                                    //     flex: 2,
-                                    //     child: SizedBox(
-                                    //       //color: Colors.lightBlue[50],
-                                    //       height: 50,
-                                    //       child: Expanded(
-                                    //         child: Column(
-                                    //           children: [
-                                    //             Expanded(
-                                    //               child: Row(
-                                    //                 //mainAxisAlignment: MainAxisAlignment.center,
-                                    //                 crossAxisAlignment: CrossAxisAlignment.center,
-                                    //                 children: [
-                                    //                   Expanded(child: Text("RAIN INN MALL", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),))
-                                    //                 ],
-                                    //               ),
-                                    //             )
-                                    //           ],
-                                    //         ),
-                                    //       ),
-                                    //     )),
-                                    const SizedBox(width: 10),
-                                    Expanded(
-                                      flex: 4,
-                                      child: SizedBox(
-                                        //color: Colors.lightBlue[50],
-                                        height: 50,
-                                        child:  Column(
-                                          children: [
-                                            SizedBox(
-                                              height: 50,
-                                              child: ListView(
-                                                scrollDirection: Axis.horizontal,
-                                                children: const [
-                                                  MainMenu(),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                        child: SizedBox(
-                                          height: 50,
-                                          //color: Colors.red,
-                                          child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              InkWell(
-                                                  onTap: (){
-                                                    Navigator.pushNamed(context, Routes.singleProduct);
-                                                  },
-                                                  child: const Icon(Icons.favorite)
-                                              ),
-                                              InkWell(
-                                                  onTap: (){
-                                                    Navigator.pushNamed(context, Routes.cart);
-                                                  },
-                                                  child: const Icon(Icons.shopping_cart)
-                                              ),
-                                              Text("Item: ${value.cartidnumber}")
-                                            ],
-                                          ),
-                                        )
-                                    )
-                                  ],
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 16),
                             Row(
                               children: [
-                                Expanded(
-                                  flex: 2,
-                                  child: SizedBox(
-                                    //color: Colors.white,
-                                      height: 600,
-                                      child: Column(
-                                        children: [
-                                          GestureDetector(
-                                            onTap: ()async{
-                                              setState(() {
-                                                if (editShow==true)
-                                                {
-                                                  editShow=false;
-                                                }
-                                                else {
-                                                  editShow=true;
-                                                }
-                                                //editShow=false;
-                                              });
-                                            },
-                                            child: Container(
-                                              height: 50,
-                                              color: Global.mainColor,
-                                              child: const Padding(
-                                                padding: EdgeInsets.only(left: 18.0, right: 18),
-                                                child: Row(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                  children: [
-                                                    Expanded(
-                                                      child: Row(
-                                                        children: [
-                                                          Icon(Icons.menu, color: Colors.white,),
-                                                          Text(
-                                                            "ALL CATEGORIES",
-                                                            style: TextStyle(
-                                                                color: Colors.white
-                                                            ),
-                                                          )
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        Icon(Icons.arrow_drop_down, size: 30, color: Colors.white,),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Visibility(
-                                            visible: editShow,
-                                            child: Container(
-                                              color: Colors.white,
-                                              height: 550,
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(left: 20.0, top: 20, right: 20),
-                                                child: StreamBuilder<QuerySnapshot>(
-                                                    stream: Dbfields.db.collection("category").snapshots(),
-                                                    builder: (context, snapshot) {
-                                                      if(!snapshot.hasData){
-                                                        return const Text("Loading...");
-                                                      }
-                                                      else if(snapshot.connectionState!=ConnectionState.active){
-                                                        return const Text("Connection Error",style: TextStyle(color: Colors.red),);
-                                                      }
-                                                      else if(snapshot.data!.docs.isEmpty)
-                                                      {
-                                                        return const Text("Empty Baskets Category");
-                                                      }
-                                                      return ListView.builder(
-                                                        scrollDirection: Axis.vertical,
-                                                        itemCount: snapshot.data!.docs.length,
-                                                        itemBuilder: (BuildContext context, int index) {
-                                                          String cate=snapshot.data!.docs[index]['name'];
-                                                          return Container(child: Column(
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                                            children: [
-                                                              InkWell(
-                                                                onTap: (){
-                                                                  setState(() {
-                                                                    shoenum=cate;
-                                                                  });
-
-                                                                },
-                                                                child: InkWell(
-                                                                  onTap: (){
-                                                                    Navigator.pushNamed(context, Routes.mainShop, arguments: {"cate":cate,"from":"desktop"});
-                                                                  },
-                                                                  child: MenuType(
-                                                                      isSelected: false,
-                                                                      coffeeType: cate
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              Divider(thickness: 1,color: Colors.grey[200],),
-                                                              const SizedBox(height: 10),
-                                                            ],
-                                                          ),
-                                                          );
-
-                                                        },
-                                                      );
-                                                    }
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      )
-                                  ),
-                                ),
+                                // const Expanded(
+                                //     flex: 2,
+                                //     child: SizedBox(
+                                //       //color: Colors.lightBlue[50],
+                                //       height: 50,
+                                //       child: Expanded(
+                                //         child: Column(
+                                //           children: [
+                                //             Expanded(
+                                //               child: Row(
+                                //                 //mainAxisAlignment: MainAxisAlignment.center,
+                                //                 crossAxisAlignment: CrossAxisAlignment.center,
+                                //                 children: [
+                                //                   Expanded(child: Text("RAIN INN MALL", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),))
+                                //                 ],
+                                //               ),
+                                //             )
+                                //           ],
+                                //         ),
+                                //       ),
+                                //     )),
                                 const SizedBox(width: 10),
                                 Expanded(
-                                  flex: 5,
-                                  child: Column(
-                                    children: [
-                                      Column(
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                  child: Container(
-                                                    color: Colors.white,
-                                                    height: 50,
-                                                    child:  Padding(
-                                                      padding: const EdgeInsets.only(left: 20.0, right: 20),
-                                                      child: Row(
-                                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                        children: [
-                                                          Expanded(
-                                                            flex: 2,
-                                                            child: Row(
-                                                              children: [
-                                                                // const Text("All Categories", style: TextStyle(fontWeight: FontWeight.bold),),
-                                                                // const SizedBox(width: 20),
-                                                                // const Icon(Icons.arrow_drop_down),
-                                                                // const SizedBox(width: 30),
-                                                                const Expanded(
-                                                                  flex:3,
-                                                                  child: SizedBox(
-                                                                    height: 50,
-                                                                    width: 300,
-                                                                    child: Column(
-                                                                      children: [
-                                                                        TextField(
-                                                                          decoration: InputDecoration(
-                                                                            hintText: 'What do you need?',
-                                                                            hintStyle: TextStyle(color: Colors.grey, fontSize: 12),
-                                                                          ),
-                                                                        )
-                                                                      ],
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                  flex:1,
-                                                                  child: Container(
-                                                                    height: 50,
-                                                                    width: 100,
-                                                                    color: Global.mainColor,
-                                                                    child: const Column(
-                                                                      mainAxisAlignment: MainAxisAlignment.center,
-                                                                      children: [
-                                                                        Text("Search", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),),
-                                                                      ],
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                          Expanded(
-                                                            child: Row(
-                                                              mainAxisAlignment: MainAxisAlignment.end,
-
-                                                              children: [
-                                                                CircleAvatar(
-                                                                  backgroundColor: Colors.lightGreen[50],
-                                                                  child: const Icon(
-                                                                    Icons.call, color: Global.mainColor,
-                                                                  ),
-                                                                ),
-                                                                const SizedBox(width: 12),
-                                                                Flexible(
-                                                                  child: Column(
-                                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                                    children: [
-                                                                      Expanded(child: Text(value.companyphone, style: const TextStyle(fontWeight: FontWeight.bold),)),
-                                                                      const Text("support 24/7 time", style: TextStyle(color: Colors.black54),),
-                                                                    ],
-                                                                  ),
-                                                                )
-                                                              ],
-                                                            ),
-                                                          )
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  )
-                                              ),
+                                  flex: 4,
+                                  child: SizedBox(
+                                    //color: Colors.lightBlue[50],
+                                    height: 50,
+                                    child:  Column(
+                                      children: [
+                                        SizedBox(
+                                          height: 50,
+                                          child: ListView(
+                                            scrollDirection: Axis.horizontal,
+                                            children: const [
+                                              MainMenu(),
                                             ],
-                                          )
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                    child: SizedBox(
+                                      height: 50,
+                                      //color: Colors.red,
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          InkWell(
+                                              onTap: (){
+                                                Navigator.pushNamed(context, Routes.singleProduct);
+                                              },
+                                              child: const Icon(Icons.favorite)
+                                          ),
+                                          InkWell(
+                                              onTap: ()async{
+                                                await value.cartidmethod();
+                                                final st=await value.alreadypaid(context);
+                                                print(st);
+                                                Navigator.pushNamed(context, Routes.cart);
+                                              },
+                                              child: const Icon(Icons.shopping_cart)
+                                          ),
+                                          Text("Total: USD ${value.mycarttotal}",style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),)
                                         ],
                                       ),
-                                      const SizedBox(height: 20,),
-                                      Padding(
-                                        padding: const EdgeInsets.only(right: 8.0),
+                                    )
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 16),
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: SizedBox(
+                                //color: Colors.white,
+                                  height: 600,
+                                  child: Column(
+                                    children: [
+                                      GestureDetector(
+                                        onTap: ()async{
+                                          setState(() {
+                                            if (editShow==true)
+                                            {
+                                              editShow=false;
+                                            }
+                                            else {
+                                              editShow=true;
+                                            }
+                                            //editShow=false;
+                                          });
+                                        },
                                         child: Container(
-                                          color: Colors.lightBlue[50],
-                                          height: 530,
-                                          child:  Row(
-                                            crossAxisAlignment: CrossAxisAlignment.center,
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Expanded(
-                                                child: FittedBox(
-                                                  fit: BoxFit.contain,
+                                          height: 50,
+                                          color: Global.mainColor,
+                                          child: const Padding(
+                                            padding: EdgeInsets.only(left: 18.0, right: 18),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Expanded(
                                                   child: Row(
                                                     children: [
-                                                      Padding(
-                                                        padding: const EdgeInsets.only(left: 40.0),
-                                                        child: Column(
-                                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                                          mainAxisAlignment: MainAxisAlignment.center,
-                                                          children: [
-                                                            const Text(
-                                                              "HAND WOVEN",
-                                                              style: TextStyle(
-                                                                  color: Global.mainColor,
-                                                                  fontWeight: FontWeight.w600,
-                                                                  fontSize: 25
-                                                              ),
-                                                            ),
-                                                            const SizedBox(height: 8),
-                                                            const Text(
-                                                              "BASKETS",
-                                                              style: TextStyle(
-                                                                  color: Colors.black,
-                                                                  fontWeight: FontWeight.w600,
-                                                                  fontSize: 40
-                                                              ),
-                                                            ),
-                                                            const SizedBox(height: 5),
-                                                            const Text(
-                                                              "100% ORGANIC",
-                                                              style: TextStyle(
-                                                                  color: Colors.black,
-                                                                  fontWeight: FontWeight.w600,
-                                                                  fontSize: 40
-                                                              ),
-                                                            ),
-                                                            const SizedBox(height: 8),
-                                                            const Text(
-                                                              "Free pickup delivery available",
-                                                              style: TextStyle(
-                                                                  color: Colors.black,
-                                                                  fontSize: 25
-                                                              ),
-                                                            ),
-                                                            const SizedBox(height: 20),
-                                                            ElevatedButton(
-                                                              onPressed: (){
-                                                                Navigator.pushNamed(context, Routes.mainShop);
-                                                              },
-                                                              style: ButtonStyle(
-                                                                backgroundColor: MaterialStateProperty.resolveWith((states) {
-                                                                  if (states.contains(MaterialState.pressed)) {
-                                                                    return Global.mainColor.withOpacity(0.5);
-                                                                  }
-                                                                  return Global.mainColor;
-                                                                }),
-                                                              ),
-                                                              child: const Text("SHOP NOW", style: TextStyle(color: Colors.white),),
-                                                            )
-                                                          ],
+                                                      Icon(Icons.menu, color: Colors.white,),
+                                                      Text(
+                                                        "ALL CATEGORIES",
+                                                        style: TextStyle(
+                                                            color: Colors.white
                                                         ),
-                                                      ),
+                                                      )
                                                     ],
                                                   ),
                                                 ),
-                                              ),
-                                              Expanded(
-                                                child: Row(
+                                                Row(
                                                   children: [
-                                                    Expanded(
-                                                      child: Column(
+                                                    Icon(Icons.arrow_drop_down, size: 30, color: Colors.white,),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Visibility(
+                                        visible: editShow,
+                                        child: Container(
+                                          color: Colors.white,
+                                          height: 550,
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(left: 20.0, top: 20, right: 20),
+                                            child: StreamBuilder<QuerySnapshot>(
+                                                stream: Dbfields.db.collection("category").snapshots(),
+                                                builder: (context, snapshot) {
+                                                  if(!snapshot.hasData){
+                                                    return const Text("Loading...");
+                                                  }
+                                                  else if(snapshot.connectionState!=ConnectionState.active){
+                                                    return const Text("Connection Error",style: TextStyle(color: Colors.red),);
+                                                  }
+                                                  else if(snapshot.data!.docs.isEmpty)
+                                                  {
+                                                    return const Text("Empty Baskets Category");
+                                                  }
+                                                  return ListView.builder(
+                                                    scrollDirection: Axis.vertical,
+                                                    itemCount: snapshot.data!.docs.length,
+                                                    itemBuilder: (BuildContext context, int index) {
+                                                      String cate=snapshot.data!.docs[index]['name'];
+                                                      return Container(child: Column(
                                                         crossAxisAlignment: CrossAxisAlignment.start,
-                                                        mainAxisAlignment: MainAxisAlignment.center,
                                                         children: [
-                                                          Container(
-                                                            color: Colors.lightBlue[50],
-                                                            height: 530,
-                                                            child: CarouselSlider(
-                                                              items: [
-                                                                Image.asset(Imagesurls.heritage5, height: 400,),
-                                                                Image.asset(Imagesurls.heritage4, height: 400,),
-                                                                Image.asset(Imagesurls.heritage1, height: 400,),
-                                                                Image.asset(Imagesurls.heritage2, height: 400,),
-                                                              ],
-                                                              options: CarouselOptions(
-                                                                aspectRatio: 16/9,
-                                                                enlargeCenterPage: true,
-                                                                autoPlay: true,
-                                                                autoPlayInterval: const Duration(seconds: 3),
-                                                                autoPlayAnimationDuration: const Duration(milliseconds: 800),
-                                                                enableInfiniteScroll: true,
-                                                                autoPlayCurve: Curves.fastOutSlowIn,
-                                                                scrollDirection: Axis.horizontal,
+                                                          InkWell(
+                                                            onTap: (){
+                                                              setState(() {
+                                                                shoenum=cate;
+                                                              });
+                                                            },
+                                                            child: InkWell(
+                                                              onTap: (){
+                                                                Navigator.pushNamed(context, Routes.mainShop, arguments: {"cate":cate,"from":"desktop"});
+                                                              },
+                                                              child: MenuType(
+                                                                  isSelected: false,
+                                                                  coffeeType: cate
                                                               ),
                                                             ),
                                                           ),
+                                                          Divider(thickness: 1,color: Colors.grey[200],),
+                                                          const SizedBox(height: 10),
                                                         ],
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
+                                                      );
+                                                    },
+                                                  );
+                                                }
+                                            ),
                                           ),
                                         ),
                                       ),
                                     ],
-                                  ),
-                                ),
-                              ],
+                                  )
+                              ),
                             ),
-                            const SizedBox(height: 30),
-                            Divider(
-                              thickness: 10,
-                              color: Colors.grey[200],
-                            ),
-                            const SizedBox(height: 50),
-                            const Column(
-                              children: [
-                                Text("FEATURED BASKETS", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
-                                Divider(
-                                  color: Global.mainColor,
-                                  indent: 800,
-                                  endIndent: 800,
-                                  thickness: 5,
-                                ),
-                                SizedBox(height: 30),
-                              ],
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                featuredGridview(shoenum: shoenum, widgth: 250, height: 150, name: 14, price: 14, favHeight: 30, favWidth: 80, favSize: 20, cartHeight: 30, cartWidth: 80, cartSize: 20, querySnapshot: Ecom.querysnapshot,)
-                              ],
-                            ),
-                            const SizedBox(height: 20),
-                            Divider(
-                              thickness: 10,
-                              color: Colors.grey[200],
-                            ),
-                            const SizedBox(height: 80),
-                            Row(
-                              children: [
-                                Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 8.0),
-                                      child: FittedBox(
-                                        fit: BoxFit.contain,
-                                        child: Container(
-                                          height: 300,
-                                          color: Colors.lightBlue[50],
-                                          child: Row(
-                                            crossAxisAlignment: CrossAxisAlignment.center,
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Column(
+                            const SizedBox(width: 10),
+                            Expanded(
+                              flex: 5,
+                              child: Column(
+                                children: [
+                                  Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                              child: Container(
+                                                color: Colors.white,
+                                                height: 50,
+                                                child:  Padding(
+                                                  padding: const EdgeInsets.only(right: 10),
+                                                  child: Row(
+                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                     children: [
-                                                      Image.asset(Imagesurls.heritage5, height: 300, width: 300,)
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Padding(
-                                                    padding: const EdgeInsets.only(right: 20.0),
-                                                    child: Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                      mainAxisAlignment: MainAxisAlignment.center,
-                                                      children: [
-                                                        const Text(
-                                                          "SUMMER FRUIT",
-                                                          style: TextStyle(
-                                                              color: Global.mainColor,
-                                                              fontWeight: FontWeight.w600,
-                                                              fontSize: 20
-                                                          ),
+                                                      Expanded(
+                                                        flex: 2,
+                                                        child: Row(
+                                                          children: [
+                                                            // const Text("All Categories", style: TextStyle(fontWeight: FontWeight.bold),),
+                                                            // const SizedBox(width: 20),
+                                                            // const Icon(Icons.arrow_drop_down),
+                                                            // const SizedBox(width: 30),
+                                                            Expanded(
+                                                              flex:3,
+                                                              child: SizedBox(
+                                                                height: 50,
+                                                                width: 300,
+                                                                child: Column(
+                                                                  children: [
+                                                                    TextField(
+                                                                      decoration: InputDecoration(
+                                                                        hintText: 'What do you need?',
+                                                                        hintStyle: const TextStyle(color: Colors.grey, fontSize: 12),
+                                                                        border: InputBorder.none,
+                                                                        filled: true,
+                                                                        fillColor: Colors.lightBlue[50]
+                                                                      ),
+                                                                    )
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Expanded(
+                                                              flex:1,
+                                                              child: Container(
+                                                                height: 50,
+                                                                width: 100,
+                                                                color: Global.mainColor,
+                                                                child: const Column(
+                                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                                  children: [
+                                                                    Text("Search", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
-                                                        //const SizedBox(height: 8),
-                                                        const Text(
-                                                          "100% Pure Natural Fruit",
-                                                          style: TextStyle(
-                                                              color: Colors.black,
-                                                              fontSize: 20
-                                                          ),
-                                                        ),
-                                                        //const SizedBox(height: 20),
-                                                        ElevatedButton(
-                                                          onPressed: (){},
-                                                          style: ButtonStyle(
-                                                            backgroundColor: MaterialStateProperty.resolveWith((states) {
-                                                              if (states.contains(MaterialState.pressed)) {
-                                                                return Global.mainColor.withOpacity(0.5);
-                                                              }
-                                                              return Global.mainColor;
-                                                            }),
-                                                          ),
-                                                          child: const Text("SHOP NOW", style: TextStyle(color: Colors.white),),
-                                                        )
+                                                      ),
+                                                      Expanded(
+                                                        child: Row(
+                                                          mainAxisAlignment: MainAxisAlignment.end,
 
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    )
-                                ),
-                                const SizedBox(width: 20),
-                                Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(right: 8.0,),
-                                      child: FittedBox(
-                                        fit: BoxFit.contain,
-                                        child: Container(
-                                          height: 300,
-                                          color: Colors.lightGreen[50],
-                                          child: Row(
-                                            crossAxisAlignment: CrossAxisAlignment.center,
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Column(
-                                                    children: [
-                                                      Image.asset(Imagesurls.heritage3, height: 300, width: 300,)
+                                                          children: [
+                                                            CircleAvatar(
+                                                              backgroundColor: Colors.lightBlue[50],
+                                                              child: const Icon(
+                                                                Icons.call, color: Global.mainColor,
+                                                              ),
+                                                            ),
+                                                            const SizedBox(width: 12),
+                                                            Flexible(
+                                                              child: Column(
+                                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                                children: [
+                                                                  Expanded(child: Text(value.companyphone, style: const TextStyle(fontWeight: FontWeight.bold),)),
+                                                                  const Text("support 24/7 time", style: TextStyle(color: Colors.black54),),
+                                                                ],
+                                                              ),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      )
                                                     ],
                                                   ),
-                                                ],
-                                              ),
-                                              Row(
+                                                ),
+                                              )
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                  const SizedBox(height: 20,),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 8.0),
+                                    child: Container(
+                                      color: Colors.lightBlue[50],
+                                      height: 530,
+                                      child:  Row(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Expanded(
+                                            child: FittedBox(
+                                              fit: BoxFit.contain,
+                                              child: Row(
                                                 children: [
                                                   Padding(
-                                                    padding: const EdgeInsets.only(right: 20.0),
+                                                    padding: const EdgeInsets.only(left: 40.0),
                                                     child: Column(
                                                       crossAxisAlignment: CrossAxisAlignment.start,
                                                       mainAxisAlignment: MainAxisAlignment.center,
                                                       children: [
                                                         const Text(
-                                                          "SUMMER FRUIT",
+                                                          "HAND WOVEN",
                                                           style: TextStyle(
                                                               color: Global.mainColor,
                                                               fontWeight: FontWeight.w600,
-                                                              fontSize: 20
+                                                              fontSize: 25
                                                           ),
                                                         ),
-                                                        //const SizedBox(height: 8),
+                                                        const SizedBox(height: 8),
                                                         const Text(
-                                                          "100% Pure Natural Fruit",
+                                                          "BASKETS",
                                                           style: TextStyle(
                                                               color: Colors.black,
-                                                              fontSize: 20
+                                                              fontWeight: FontWeight.w600,
+                                                              fontSize: 40
                                                           ),
                                                         ),
-                                                        //const SizedBox(height: 20),
+                                                        const SizedBox(height: 5),
+                                                        const Text(
+                                                          "100% NATURAL",
+                                                          style: TextStyle(
+                                                              color: Colors.black,
+                                                              fontWeight: FontWeight.w600,
+                                                              fontSize: 40
+                                                          ),
+                                                        ),
+                                                        const SizedBox(height: 8),
+                                                        const Text(
+                                                          "Free pickup delivery available",
+                                                          style: TextStyle(
+                                                              color: Colors.black,
+                                                              fontSize: 25
+                                                          ),
+                                                        ),
+                                                        const SizedBox(height: 20),
                                                         ElevatedButton(
                                                           onPressed: (){
-                                                            print("Loading...");
                                                             Navigator.pushNamed(context, Routes.mainShop);
                                                           },
                                                           style: ButtonStyle(
@@ -687,299 +478,304 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                                               return Global.mainColor;
                                                             }),
                                                           ),
-                                                          child: const Text("SHOP NOW", style: TextStyle(color: Colors.white),),
+                                                          child: const Text("SHOP NOW", style: TextStyle(color: Colors.white, fontSize: 8),),
                                                         )
-
                                                       ],
                                                     ),
                                                   ),
                                                 ],
                                               ),
-                                            ],
+                                            ),
                                           ),
-                                        ),
+                                          Expanded(
+                                            child: Row(
+                                              children: [
+                                                Expanded(
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: [
+                                                      Container(
+                                                        color: Colors.lightBlue[50],
+                                                        height: 530,
+                                                        child: CarouselSlider(
+                                                          items: [
+                                                            Image.asset(Imagesurls.heritage5, height: 400,),
+                                                            Image.asset(Imagesurls.heritage4, height: 400,),
+                                                            Image.asset(Imagesurls.heritage1, height: 400,),
+                                                            Image.asset(Imagesurls.heritage2, height: 400,),
+                                                          ],
+                                                          options: CarouselOptions(
+                                                            aspectRatio: 16/9,
+                                                            enlargeCenterPage: true,
+                                                            autoPlay: true,
+                                                            autoPlayInterval: const Duration(seconds: 3),
+                                                            autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                                                            enableInfiniteScroll: true,
+                                                            autoPlayCurve: Curves.fastOutSlowIn,
+                                                            scrollDirection: Axis.horizontal,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    )
-                                )
-                              ],
-                            ),
-                            const SizedBox(height: 30),
-                            Divider(
-                              thickness: 10,
-                              color: Colors.grey[200],
-                            ),
-                            const Column(
-                              children: [
-                                Text("FROM THE BLOG", style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),),
-                                Divider(
-                                  color: Global.mainColor,
-                                  indent: 800,
-                                  endIndent: 800,
-                                  thickness: 5,
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 50),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                      child: FittedBox(
-                                        fit: BoxFit.contain,
-                                        child: SizedBox(
-                                          height: 600,
-                                          //color: Colors.red,
-                                          child: Column(
-                                            children: [
-                                              Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.heritage4, height: 400,width: 400,),),
-                                              const SizedBox(height: 18),
-                                              const Padding(
-                                                padding: EdgeInsets.only(left: 8.0, right: 8.0),
-                                                child: Row(
-                                                  children: [
-                                                    Icon(Icons.calendar_today, size: 18,),
-                                                    SizedBox(width: 4),
-                                                    Text("February 18, 2024"),
-                                                    SizedBox(width: 20),
-                                                    Row(
-                                                      children: [
-                                                        Icon(Icons.comment, size: 18,),
-                                                        SizedBox(width: 4),
-                                                        Text("10")
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(height: 15),
-                                              const Padding(
-                                                padding: EdgeInsets.only(left: 8.0, right: 8.0),
-                                                child: Row(
-                                                  children: [
-                                                    Text("COMFORTABLE STUFFING CHAIRS", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),),
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(height: 15),
-                                              const Padding(
-                                                padding: EdgeInsets.only(left: 8.0, right: 8.0),
-                                                child: Row(
-                                                  children: [
-                                                    Text("Stuffing is the soft material inside pillows, "
-                                                        "\n mattresses, or sofa cushions. Without stuffing, "
-                                                        "\n your comfy chair wouldn't be very comfy.",
-                                                      style: TextStyle(color: Colors.black54, fontSize: 12),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      )
-                                  ),
-                                  const SizedBox(width: 8),
-                                  Expanded(
-                                      child: FittedBox(
-                                        fit: BoxFit.contain,
-                                        child: SizedBox(
-                                          height: 600,
-                                          //color: Colors.red,
-                                          child: Column(
-                                            children: [
-                                              Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.heritage2, height: 400,width: 400,),),
-                                              const SizedBox(height: 18),
-                                              const Padding(
-                                                padding: EdgeInsets.only(left: 8.0, right: 8.0),
-                                                child: Row(
-                                                  children: [
-                                                    Icon(Icons.calendar_today, size: 18,),
-                                                    SizedBox(width: 4),
-                                                    Text("February 18, 2024"),
-                                                    SizedBox(width: 20),
-                                                    Row(
-                                                      children: [
-                                                        Icon(Icons.comment, size: 18,),
-                                                        SizedBox(width: 4),
-                                                        Text("10")
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(height: 15),
-                                              const Padding(
-                                                padding: EdgeInsets.only(left: 8.0, right: 8.0),
-                                                child: Row(
-                                                  children: [
-                                                    Text("COMFORTABLE STUFFING CHAIRS", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),),
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(height: 15),
-                                              const Padding(
-                                                padding: EdgeInsets.only(left: 8.0, right: 8.0),
-                                                child: Row(
-                                                  children: [
-                                                    Text("Stuffing is the soft material inside pillows, "
-                                                        "\n mattresses, or sofa cushions. Without stuffing, "
-                                                        "\n your comfy chair wouldn't be very comfy.",
-                                                      style: TextStyle(color: Colors.black54, fontSize: 12),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      )
-                                  ),
-                                  const SizedBox(width: 8),
-                                  Expanded(
-                                      child: FittedBox(
-                                        fit: BoxFit.contain,
-                                        child: SizedBox(
-                                          height: 600,
-                                          //color: Colors.red,
-                                          child: Column(
-                                            children: [
-                                              Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.heritage1, height: 400,width: 400,),),
-                                              const SizedBox(height: 18),
-                                              const Padding(
-                                                padding: EdgeInsets.only(left: 8.0, right: 8.0),
-                                                child: Row(
-                                                  children: [
-                                                    Icon(Icons.calendar_today, size: 18,),
-                                                    SizedBox(width: 4),
-                                                    Text("February 18, 2024"),
-                                                    SizedBox(width: 20),
-                                                    Row(
-                                                      children: [
-                                                        Icon(Icons.comment, size: 18,),
-                                                        SizedBox(width: 4),
-                                                        Text("10")
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(height: 15),
-                                              const Padding(
-                                                padding: EdgeInsets.only(left: 8.0, right: 8.0),
-                                                child: Row(
-                                                  children: [
-                                                    Text("COMFORTABLE STUFFING CHAIRS", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),),
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(height: 15),
-                                              const Padding(
-                                                padding: EdgeInsets.only(left: 8.0, right: 8.0),
-                                                child: Row(
-                                                  children: [
-                                                    Text("Stuffing is the soft material inside pillows, "
-                                                        "\n mattresses, or sofa cushions. Without stuffing, "
-                                                        "\n your comfy chair wouldn't be very comfy.",
-                                                      style: TextStyle(color: Colors.black54, fontSize: 12),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      )
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
+                          ],
+                        ),
+                        const SizedBox(height: 30),
+                        Divider(
+                          thickness: 10,
+                          color: Colors.grey[200],
+                        ),
+                        const SizedBox(height: 50),
+                        const Column(
+                          children: [
+                            Text("FEATURED BASKETS", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
                             Divider(
-                              thickness: 20,
-                              color: Colors.grey[200],
+                              color: Global.mainColor,
+                              indent: 800,
+                              endIndent: 800,
+                              thickness: 5,
+                            ),
+                            SizedBox(height: 30),
+                          ],
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            featuredGridview(shoenum: shoenum, widgth: 250, height: 150, name: 14, price: 14, favHeight: 30, favWidth: 80, favSize: 20, cartHeight: 30, cartWidth: 80, cartSize: 20, querySnapshot: Ecom.querysnapshot,)
+                          ],
+                        ),
+                        const SizedBox(height: 20),
+                        Divider(
+                          thickness: 10,
+                          color: Colors.grey[200],
+                        ),
+                        const SizedBox(height: 80),
+                        Row(
+                          children: [
+                            Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 8.0),
+                                  child: FittedBox(
+                                    fit: BoxFit.contain,
+                                    child: Container(
+                                      height: 300,
+                                      color: Colors.lightBlue[50],
+                                      child: Row(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Column(
+                                                children: [
+                                                  Image.asset(Imagesurls.heritage2, height: 300, width: 300,)
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(right: 20.0),
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    const Text(
+                                                      "LAUNDRY BASKET",
+                                                      style: TextStyle(
+                                                          color: Global.mainColor,
+                                                          fontWeight: FontWeight.w600,
+                                                          fontSize: 20
+                                                      ),
+                                                    ),
+                                                    //const SizedBox(height: 8),
+                                                    const Text(
+                                                      "Quality And Durable",
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 20
+                                                      ),
+                                                    ),
+                                                    //const SizedBox(height: 20),
+                                                    ElevatedButton(
+                                                      onPressed: (){},
+                                                      style: ButtonStyle(
+                                                        backgroundColor: MaterialStateProperty.resolveWith((states) {
+                                                          if (states.contains(MaterialState.pressed)) {
+                                                            return Global.mainColor.withOpacity(0.5);
+                                                          }
+                                                          return Global.mainColor;
+                                                        }),
+                                                      ),
+                                                      child: const Text("SHOP NOW", style: TextStyle(color: Colors.white, fontSize: 8),),
+                                                    )
+
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                )
+                            ),
+                            const SizedBox(width: 20),
+                            Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(right: 8.0,),
+                                  child: FittedBox(
+                                    fit: BoxFit.contain,
+                                    child: Container(
+                                      height: 300,
+                                      color: Colors.lightGreen[50],
+                                      child: Row(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Column(
+                                                children: [
+                                                  Image.asset(Imagesurls.heritage5, height: 300, width: 300,)
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(right: 20.0),
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    const Text(
+                                                      "BOLGA ROUND BASKET",
+                                                      style: TextStyle(
+                                                          color: Global.mainColor,
+                                                          fontWeight: FontWeight.w600,
+                                                          fontSize: 20
+                                                      ),
+                                                    ),
+                                                    //const SizedBox(height: 8),
+                                                    const Text(
+                                                      "Quality And Durable",
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 20,
+                                                      ),
+                                                    ),
+                                                    ElevatedButton(
+                                                      onPressed: (){
+                                                        Navigator.pushNamed(context, Routes.mainShop);
+                                                      },
+                                                      style: ButtonStyle(
+                                                        backgroundColor: MaterialStateProperty.resolveWith((states) {
+                                                          if (states.contains(MaterialState.pressed)) {
+                                                            return Global.mainColor.withOpacity(0.5);
+                                                          }
+                                                          return Global.mainColor;
+                                                        }),
+                                                      ),
+                                                      child: const Text("SHOP NOW", style: TextStyle(color: Colors.white, fontSize: 8),),
+                                                    )
+
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                )
+                            )
+                          ],
+                        ),
+                        const SizedBox(height: 30),
+                        Divider(
+                          thickness: 10,
+                          color: Colors.grey[200],
+                        ),
+                        const Column(
+                          children: [
+                            Text("FROM THE BLOG", style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),),
+                            Divider(
+                              color: Global.mainColor,
+                              indent: 800,
+                              endIndent: 800,
+                              thickness: 5,
                             ),
                           ],
                         ),
-                      )
-                  ),
-                  Container(
-                    height: 400,
-                    color: Colors.lightGreen[50],
-                    child:  Padding(
-                      padding: const EdgeInsets.only(left: 130.0, right: 130, top: 50),
-                      child: Column(
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                        const SizedBox(height: 50),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                          child: Row(
                             children: [
                               Expanded(
-                                  child: SizedBox(
-                                    height: 200,
-                                    //color: Colors.red,
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(Companydata.companyname, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20),),
-                                        const SizedBox(height: 20),
-                                        Text("Address: ${value.companyaddress}"),
-                                        const SizedBox(height: 15),
-                                        Text("Phone: ${value.companyphone}"),
-                                        const SizedBox(height: 15),
-                                        Text("Email: ${value.companyemail}"),
-                                      ],
-                                    ),
-                                  )
-                              ),
-                              const SizedBox(width: 8),
-                              const Expanded(
-                                  child: SizedBox(
-                                    height: 250,
-                                    //color: Colors.red,
-                                    child: Padding(
-                                      padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                                  child: FittedBox(
+                                    fit: BoxFit.contain,
+                                    child: SizedBox(
+                                      height: 600,
+                                      //color: Colors.red,
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
-                                          Text("USEFUL LINKS", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20)),
-                                          SizedBox(height: 20),
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text("About Us"),
-                                              Text("Who We Are"),
-                                            ],
+                                          Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.heritage4, height: 300,width: 300,),),
+                                          const SizedBox(height: 18),
+                                          const Padding(
+                                            padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                                            child: Row(
+                                              children: [
+                                                Icon(Icons.calendar_today, size: 18,),
+                                                SizedBox(width: 4),
+                                                Text("February 18, 2024"),
+                                                SizedBox(width: 20),
+                                                Row(
+                                                  children: [
+                                                    Icon(Icons.comment, size: 18,),
+                                                    SizedBox(width: 4),
+                                                    Text("10")
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                          SizedBox(height: 15),
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text("Secure Products"),
-                                              Text("Project"),
-                                            ],
+                                          const SizedBox(height: 15),
+                                          const Padding(
+                                            padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                                            child: Row(
+                                              children: [
+                                                Text("TRENDING FASHION", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),),
+                                              ],
+                                            ),
                                           ),
-                                          SizedBox(height: 15),
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text("About Our Shop"),
-                                              Text("Our Services"),
-                                            ],
-                                          ),
-                                          SizedBox(height: 15),
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text("Privacy And Policy"),
-                                              Text("SiteMap"),
-                                            ],
-                                          ),
-                                          SizedBox(height: 15),
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text("Delivery Information"),
-                                              Text("Contact"),
-                                            ],
+                                          const SizedBox(height: 15),
+                                          Padding(
+                                            padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                                            child: Row(
+                                              children: [
+                                                Text(Companydata.blogDescription,
+                                                  style: TextStyle(color: Colors.black54, fontSize: 12),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -988,83 +784,285 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                               ),
                               const SizedBox(width: 8),
                               Expanded(
-                                  child: SizedBox(
-                                    height: 250,
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.end,
-                                      children: [
-                                        const Text("JOIN OUR NEWSLETTER NOW", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20)),
-                                        const SizedBox(height: 20),
-                                        const Text("Get E-mail updates about our latest shop and special offers."),
-                                        const SizedBox(height: 15),
-                                        Row(
-                                          children: [
-                                            const Expanded(
-                                                flex: 2,
-                                                child: TextField(
-                                                  decoration: InputDecoration(
-                                                      hintText: 'Enter your mail',
-                                                      fillColor: Colors.white,
-                                                      filled: true
-                                                  ),
-                                                )
+                                  child: FittedBox(
+                                    fit: BoxFit.contain,
+                                    child: SizedBox(
+                                      height: 600,
+                                      //color: Colors.red,
+                                      child: Column(
+                                        children: [
+                                          Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.heritage5, height: 300,width: 300,),),
+                                          const SizedBox(height: 18),
+                                          const Padding(
+                                            padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                                            child: Row(
+                                              children: [
+                                                Icon(Icons.calendar_today, size: 18,),
+                                                SizedBox(width: 4),
+                                                Text("February 18, 2024"),
+                                                SizedBox(width: 20),
+                                                Row(
+                                                  children: [
+                                                    Icon(Icons.comment, size: 18,),
+                                                    SizedBox(width: 4),
+                                                    Text("10")
+                                                  ],
+                                                ),
+                                              ],
                                             ),
-                                            Expanded(
-                                                child: Container(
-                                                  height: 50,
-                                                  color: Global.mainColor,
-                                                  child: const Column(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                    children: [
-                                                      Text("SUBSCRIBE", style: TextStyle(color: Colors.white),),
-                                                    ],
-                                                  ),
-                                                )
-                                            )
-                                          ],
-                                        ),
-                                        const SizedBox(height: 15),
-                                        const SocialMediaIcons(),
-                                      ],
+                                          ),
+                                          const SizedBox(height: 15),
+                                          const Padding(
+                                            padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                                            child: Row(
+                                              children: [
+                                                Text("BOLGA ROUND BASKETS", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),),
+                                              ],
+                                            ),
+                                          ),
+                                          const SizedBox(height: 15),
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                                            child: Row(
+                                              children: [
+                                                Text(Companydata.blogDescription,
+                                                  style: const TextStyle(color: Colors.black54, fontSize: 12),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                    //color: Colors.red,
+                                  )
+                              ),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                  child: FittedBox(
+                                    fit: BoxFit.contain,
+                                    child: SizedBox(
+                                      height: 600,
+                                      //color: Colors.red,
+                                      child: Column(
+                                        children: [
+                                          Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.heritage3, height: 300,width: 300,),),
+                                          const SizedBox(height: 18),
+                                          const Padding(
+                                            padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                                            child: Row(
+                                              children: [
+                                                Icon(Icons.calendar_today, size: 18,),
+                                                SizedBox(width: 4),
+                                                Text("February 18, 2024"),
+                                                SizedBox(width: 20),
+                                                Row(
+                                                  children: [
+                                                    Icon(Icons.comment, size: 18,),
+                                                    SizedBox(width: 4),
+                                                    Text("10")
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          const SizedBox(height: 15),
+                                          const Padding(
+                                            padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                                            child: Row(
+                                              children: [
+                                                Text("INTERIOR DECOR", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),),
+                                              ],
+                                            ),
+                                          ),
+                                          const SizedBox(height: 15),
+                                          Padding(
+                                            padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                                            child: Row(
+                                              children: [
+                                                Text(Companydata.blogDescription,
+                                                  style: TextStyle(color: Colors.black54, fontSize: 12),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   )
                               ),
                             ],
                           ),
-                          const Divider(),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Row(
-                                children: [
-                                  Text('Copyright ©2024 All rights reserved', style: TextStyle(fontSize: 15),),
-                                  SizedBox(width: 10),
-                                  Text('|'),
-                                  SizedBox(width: 10),
-                                  Text('Powered By KologSoft', style: TextStyle(fontSize: 15)),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Image.asset("assets/images/visa1.png", height: 50,),
-                                  const SizedBox(width: 10),
-                                  Image.asset("assets/images/PayPal.png", height: 50,),
-                                  const SizedBox(width: 10),
-                                  Image.asset("assets/images/MasterCard1.png", height: 50,),
-                                  //Image.asset("assets/images/payout.png", height: 100,)
-                                ],
+                        ),
+                        Divider(
+                          thickness: 20,
+                          color: Colors.grey[200],
+                        ),
+                      ],
+                    ),
+                  )
+              ),
+              Container(
+                height: 400,
+                color: Colors.lightGreen[50],
+                child:  Padding(
+                  padding: const EdgeInsets.only(left: 130.0, right: 130, top: 50),
+                  child: Column(
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                              child: SizedBox(
+                                height: 200,
+                                //color: Colors.red,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(value.companyname, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20),),
+                                    const SizedBox(height: 20),
+                                    Text("Address: ${value.companyaddress}"),
+                                    const SizedBox(height: 15),
+                                    Text("Phone: ${value.companyphone}"),
+                                    const SizedBox(height: 15),
+                                    Text("Email: ${value.companyemail}"),
+                                  ],
+                                ),
                               )
+                          ),
+                          const SizedBox(width: 8),
+                          const Expanded(
+                              child: SizedBox(
+                                height: 250,
+                                //color: Colors.red,
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Text("USEFUL LINKS", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20)),
+                                      SizedBox(height: 20),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text("About Us"),
+                                          Text("Who We Are"),
+                                        ],
+                                      ),
+                                      SizedBox(height: 15),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text("Secure Products"),
+                                          Text("Project"),
+                                        ],
+                                      ),
+                                      SizedBox(height: 15),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text("About Our Shop"),
+                                          Text("Our Services"),
+                                        ],
+                                      ),
+                                      SizedBox(height: 15),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text("Privacy And Policy"),
+                                          Text("SiteMap"),
+                                        ],
+                                      ),
+                                      SizedBox(height: 15),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text("Delivery Information"),
+                                          Text("Contact"),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              )
+                          ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                              child: SizedBox(
+                                height: 250,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    const Text("JOIN OUR NEWSLETTER NOW", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20)),
+                                    const SizedBox(height: 20),
+                                    const Text("Get E-mail updates about our latest shop and special offers."),
+                                    const SizedBox(height: 15),
+                                    Row(
+                                      children: [
+                                        const Expanded(
+                                            flex: 2,
+                                            child: TextField(
+                                              decoration: InputDecoration(
+                                                  hintText: 'Enter your mail',
+                                                  fillColor: Colors.white,
+                                                  filled: true,
+                                                  border: InputBorder.none
+                                              ),
+                                            )
+                                        ),
+                                        Expanded(
+                                            child: Container(
+                                              height: 50,
+                                              color: Global.mainColor,
+                                              child: const Column(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                children: [
+                                                  Text("SUBSCRIBE", style: TextStyle(color: Colors.white),),
+                                                ],
+                                              ),
+                                            )
+                                        )
+                                      ],
+                                    ),
+                                    const SizedBox(height: 15),
+                                    const SocialMediaIcons(),
+                                  ],
+                                ),
+                                //color: Colors.red,
+                              )
+                          ),
+                        ],
+                      ),
+                      const Divider(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Row(
+                            children: [
+                              Text('Copyright ©2024 All rights reserved', style: TextStyle(fontSize: 15),),
+                              SizedBox(width: 10),
+                              Text('|'),
+                              SizedBox(width: 10),
+                              Text('Powered By KologSoft', style: TextStyle(fontSize: 15)),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Image.asset("assets/images/visa1.png", height: 50,),
+                              const SizedBox(width: 10),
+                              Image.asset("assets/images/PayPal.png", height: 50,),
+                              const SizedBox(width: 10),
+                              Image.asset("assets/images/MasterCard1.png", height: 50,),
+                              //Image.asset("assets/images/payout.png", height: 100,)
                             ],
                           )
                         ],
-                      ),
-                    ),
+                      )
+                    ],
                   ),
-                ],
+                ),
               ),
-            );
-          },
+            ],
+          ),
         ),
       );
     },

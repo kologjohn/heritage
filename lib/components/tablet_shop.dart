@@ -64,7 +64,7 @@ class _TabletShopState extends State<TabletShop> {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 100.0, right: 100),
+                  padding: const EdgeInsets.only(left: 50.0, right: 50, top: 20),
                   child: Column(
                     children: [
                       Column(
@@ -72,17 +72,25 @@ class _TabletShopState extends State<TabletShop> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Icon(Icons.favorite),
-                              const SizedBox(width: 20),
                               InkWell(
                                   onTap: (){
+                                    Navigator.pushNamed(context, Routes.singleProduct);
+                                  },
+                                  child: const Icon(Icons.favorite)
+                              ),
+                              const SizedBox(width: 8),
+                              InkWell(
+                                  onTap: ()async{
+                                    await value.cartidmethod();
+                                    final st=await value.alreadypaid(context);
                                     Navigator.pushNamed(context, Routes.cart);
                                   },
-                                  child: const Icon(Icons.shopping_cart)),
-                              const SizedBox(width: 20),
-                              const Text("Item")
+                                  child: const Icon(Icons.shopping_cart)
+                              ),
+                              const SizedBox(width: 8),
+                              Text("Total: USD ${value.mycarttotal}",style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),)
                             ],
-                          )
+                          ),
                         ],
                       ),
                       const SizedBox(height: 20),
@@ -212,60 +220,66 @@ class _TabletShopState extends State<TabletShop> {
                                     child: Container(
                                       color: Colors.white,
                                       height: 60,
-                                      child:  Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              const Text("All Categories"),
-                                              const Icon(Icons.arrow_drop_down),
-                                              const SizedBox(width: 30),
-                                              const SizedBox(
-                                                height: 50,
-                                                width: 300,
-                                                child: Column(
-                                                  children: [
-                                                    TextField(
-                                                      decoration: InputDecoration(
-                                                        hintText: 'What do you need?',
-                                                        hintStyle: TextStyle(color: Colors.grey, fontSize: 12),
-                                                      ),
-                                                    )
-                                                  ],
+                                      child:  Padding(
+                                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                const Text("All Categories"),
+                                                const Icon(Icons.arrow_drop_down),
+                                                const SizedBox(width: 30),
+                                                const SizedBox(
+                                                  height: 50,
+                                                  width: 300,
+                                                  child: Expanded(
+                                                    child: Column(
+                                                      children: [
+                                                        TextField(
+                                                          decoration: InputDecoration(
+                                                            hintText: 'What do you need?',
+                                                            hintStyle: TextStyle(color: Colors.grey, fontSize: 12),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
-                                              Container(
-                                                height: 50,
-                                                width: 80,
-                                                color: Global.mainColor,
-                                                child: const Column(
+                                                Container(
+                                                  height: 50,
+                                                  width: 80,
+                                                  color: Global.mainColor,
+                                                  child: const Column(
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: [
+                                                      Text("Search", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(width: 8),
+                                            Row(
+                                              children: [
+                                                CircleAvatar(
+                                                  backgroundColor: Colors.lightGreen[50],
+                                                  child: const Icon(
+                                                    Icons.call, color: Global.mainColor,
+                                                  ),
+                                                ),
+                                                const SizedBox(width: 12),
+                                                Column(
                                                   mainAxisAlignment: MainAxisAlignment.center,
                                                   children: [
-                                                    Text("Search", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),),
+                                                    Text(value.companyphone, style: TextStyle(fontWeight: FontWeight.bold),),
+                                                    Text("support 24/7 time", style: TextStyle(color: Colors.black54),),
                                                   ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              CircleAvatar(
-                                                backgroundColor: Colors.lightGreen[50],
-                                                child: const Icon(
-                                                  Icons.call, color: Global.mainColor,
-                                                ),
-                                              ),
-                                              const SizedBox(width: 12),
-                                              Column(
-                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                children: [
-                                                  Text(value.companyphone, style: TextStyle(fontWeight: FontWeight.bold),),
-                                                  Text("support 24/7 time", style: TextStyle(color: Colors.black54),),
-                                                ],
-                                              )
-                                            ],
-                                          )
-                                        ],
+                                                )
+                                              ],
+                                            )
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   )
@@ -282,14 +296,14 @@ class _TabletShopState extends State<TabletShop> {
                             children: [
                               Text(
                                 "Sort by",
-                                style: TextStyle(fontSize: 20),
+                                style: TextStyle(fontSize: 16),
                               ),
                               SizedBox(width: 20),
                               Row(
                                 children: [
                                   Text(
                                     "Default",
-                                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                                   ),
                                   Icon(Icons.keyboard_arrow_down)
                                 ],
@@ -305,9 +319,9 @@ class _TabletShopState extends State<TabletShop> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("30", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                              Text("30", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),),
                               SizedBox(width: 10,),
-                              Text("Items Found", style: TextStyle(fontSize: 18)),
+                              Text("Items Found", style: TextStyle(fontSize: 14)),
                             ],
                           ),
                           SizedBox(height: 30),
@@ -340,11 +354,11 @@ class _TabletShopState extends State<TabletShop> {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Expanded(child: Text(Companydata.companyname, style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),)),
+                                      Expanded(child: Text(value.companyname, style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),)),
                                       const SizedBox(height: 20),
-                                      Expanded(child: Text(value.companyaddress)),
+                                      Expanded(child: Text("Address: ${value.companyaddress}")),
                                       const SizedBox(height: 15),
-                                      Expanded(child: Text(value.companyphone)),
+                                      Expanded(child: Text("Phone: ${value.companyphone}")),
                                       const SizedBox(height: 15),
                                       Expanded(child: Text("Email: ${value.companyaddress}")),
                                     ],

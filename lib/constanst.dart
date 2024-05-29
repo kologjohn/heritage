@@ -4,7 +4,7 @@ class Companydata{
   static String email="info@heritagebaskets.com";
   static String address="BONGO ROAD,OLGATAGA,UPPER EAST,GHANA";
   static String description="Basket weaving (also basketry or basket making) is the process of weaving or sewing pliable materials into three-dimensional artifacts, such as baskets, mats, mesh bags or even furniture. Craftspeople and artists specialized in making baskets may be known as basket makers and basket weavers.";
-
+  static String blogDescription="Basket weaving (also basketry or basket making) \n is the process of weaving or sewing pliable materials \n into three-dimensional artifacts, such as baskets, \n mats, mesh bags or even furniture";
 
 }
 
@@ -17,4 +17,7 @@ class Imagesurls{
   static String heritage3="assets/images/heritage3.jpg";
   static String heritage4="assets/images/heritage8.png";
   static String heritage5="assets/images/heritage5.png";
+  static String heritage6="assets/images/DSC_0242.png";
+  static String heritage7="assets/images/DSC_0331.png";
+  static String heritage8="assets/images/DSC_0259.png";
 }

@@ -34,7 +34,7 @@ class MainMenu extends StatelessWidget {
         const SizedBox(width: 30),
         const MenuType(
             isSelected: false,
-            coffeeType: "PAGES"
+            coffeeType: "ABOUT US"
         ),
         const SizedBox(width: 30),
         const MenuType(

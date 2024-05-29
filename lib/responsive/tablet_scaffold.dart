@@ -60,17 +60,26 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Icon(Icons.favorite),
-                              const SizedBox(width: 20),
                               InkWell(
                                   onTap: (){
+                                    Navigator.pushNamed(context, Routes.singleProduct);
+                                  },
+                                  child: const Icon(Icons.favorite)
+                              ),
+                              const SizedBox(width: 10),
+                              InkWell(
+                                  onTap: ()async{
+                                    await value.cartidmethod();
+                                    final st=await value.alreadypaid(context);
+                                    print(st);
                                     Navigator.pushNamed(context, Routes.cart);
                                   },
-                                  child: const Icon(Icons.shopping_cart)),
-                              const SizedBox(width: 20),
-                              const Text("Item")
+                                  child: const Icon(Icons.shopping_cart)
+                              ),
+                              const SizedBox(width: 10),
+                              Text("Total: USD ${value.mycarttotal}",style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),)
                             ],
-                          )
+                          ),
                         ],
                       ),
                       const SizedBox(height: 20),
@@ -197,65 +206,69 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                     child: Container(
                                       color: Colors.white,
                                       height: 60,
-                                      child:  Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          // const Row(
-                                          //   children: [
-                                          //     Text("All Categories"),
-                                          //     Icon(Icons.arrow_drop_down),
-                                          //   ],
-                                          // ),
-                                          const SizedBox(width: 50,),
-                                          Row(
-                                            children: [
-                                              const SizedBox(
-                                                height: 50,
-                                                width: 300,
-                                                child: Column(
-                                                  children: [
-                                                    TextField(
-                                                      decoration: InputDecoration(
-                                                        hintText: 'What do you need?',
-                                                        hintStyle: TextStyle(color: Colors.grey, fontSize: 12),
-                                                      ),
-                                                    )
-                                                  ],
+                                      child:  Padding(
+                                        padding: const EdgeInsets.only(left: 8.0, right: 8),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            // const Row(
+                                            //   children: [
+                                            //     Text("All Categories"),
+                                            //     Icon(Icons.arrow_drop_down),
+                                            //   ],
+                                            // ),
+                                            //const SizedBox(width: 50,),
+                                            Row(
+                                              children: [
+                                                const SizedBox(
+                                                  height: 50,
+                                                  width: 300,
+                                                  child: Column(
+                                                    children: [
+                                                      TextField(
+                                                        decoration: InputDecoration(
+                                                          hintText: 'What do you need?',
+                                                          hintStyle: TextStyle(color: Colors.grey, fontSize: 12),
+                                                          //border: InputBorder.none,
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
                                                 ),
-                                              ),
-                                              Container(
-                                                height: 50,
-                                                width: 80,
-                                                color: Global.mainColor,
-                                                child: const Column(
+                                                Container(
+                                                  height: 50,
+                                                  width: 80,
+                                                  color: Global.mainColor,
+                                                  child: const Column(
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: [
+                                                      Text("Search", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(width: 50,),
+                                            Row(
+                                              children: [
+                                                CircleAvatar(
+                                                  backgroundColor: Colors.lightGreen[50],
+                                                  child: const Icon(
+                                                    Icons.call, color: Global.mainColor,
+                                                  ),
+                                                ),
+                                                const SizedBox(width: 12),
+                                                 Column(
                                                   mainAxisAlignment: MainAxisAlignment.center,
                                                   children: [
-                                                    Text("Search", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),),
+                                                    Text(value.companyphone, style: const TextStyle(fontWeight: FontWeight.bold),),
+                                                    const Text("support 24/7 time", style: TextStyle(color: Colors.black54, fontSize: 12),),
                                                   ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          const SizedBox(width: 50,),
-                                          Row(
-                                            children: [
-                                              CircleAvatar(
-                                                backgroundColor: Colors.lightGreen[50],
-                                                child: const Icon(
-                                                  Icons.call, color: Global.mainColor,
-                                                ),
-                                              ),
-                                              const SizedBox(width: 12),
-                                               Column(
-                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                children: [
-                                                  Text(value.companyphone, style: const TextStyle(fontWeight: FontWeight.bold),),
-                                                  const Text("support 24/7 time", style: TextStyle(color: Colors.black54, fontSize: 12),),
-                                                ],
-                                              )
-                                            ],
-                                          )
-                                        ],
+                                                )
+                                              ],
+                                            )
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   )
@@ -304,7 +317,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                                 ),
                                                 const SizedBox(height: 5),
                                                 const Text(
-                                                  "100% ORGANIC",
+                                                  "100% NATURAL",
                                                   style: TextStyle(
                                                       color: Colors.black,
                                                       fontWeight: FontWeight.w600,
@@ -418,7 +431,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                                 mainAxisAlignment: MainAxisAlignment.center,
                                                 children: [
                                                   const Text(
-                                                    "SUMMER FRUIT",
+                                                    "LAUNDRY BASKET",
                                                     style: TextStyle(
                                                         color: Global.mainColor,
                                                         fontWeight: FontWeight.w600,
@@ -427,7 +440,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                                   ),
                                                   //const SizedBox(height: 8),
                                                   const Text(
-                                                    "100% Pure Natural Fruit",
+                                                    "Quality And Durable",
                                                     style: TextStyle(
                                                         color: Colors.black,
                                                         fontSize: 20
@@ -474,7 +487,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                           children: [
                                             Column(
                                               children: [
-                                                Image.asset(Imagesurls.heritage1, height: 300, width: 300,)
+                                                Image.asset(Imagesurls.heritage5, height: 300, width: 300,)
                                               ],
                                             ),
                                           ],
@@ -488,7 +501,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                                 mainAxisAlignment: MainAxisAlignment.center,
                                                 children: [
                                                   const Text(
-                                                    "SUMMER FRUIT",
+                                                    "BOLGA ROUND BASKET",
                                                     style: TextStyle(
                                                         color: Global.mainColor,
                                                         fontWeight: FontWeight.w600,
@@ -497,7 +510,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                                   ),
                                                   //const SizedBox(height: 8),
                                                   const Text(
-                                                    "100% Pure Natural Fruit",
+                                                    "Quality And Durable",
                                                     style: TextStyle(
                                                         color: Colors.black,
                                                         fontSize: 20
@@ -581,7 +594,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                               child: FittedBox(
                                 fit: BoxFit.contain,
                                 child: SizedBox(
-                                  height: 600,
+                                  height: 650,
                                   //color: Colors.red,
                                   child: Column(
                                     children: [
@@ -610,19 +623,17 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                         padding: EdgeInsets.only(left: 8.0, right: 8.0),
                                         child: Row(
                                           children: [
-                                            Text("COMFORTABLE STUFFING CHAIRS", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
+                                            Text("TRENDING FASHION", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
                                           ],
                                         ),
                                       ),
                                       const SizedBox(height: 15),
-                                      const Padding(
-                                        padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                                         child: Row(
                                           children: [
-                                            Text("Stuffing is the soft material inside pillows, "
-                                                "\n mattresses, or sofa cushions. Without stuffing, "
-                                                "\n your comfy chair wouldn't be very comfy.",
-                                              style: TextStyle(color: Colors.black54, fontSize: 20),
+                                            Text(Companydata.blogDescription,
+                                              style: const TextStyle(color: Colors.black54, fontSize: 20),
                                             ),
                                           ],
                                         ),
@@ -637,7 +648,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                               child: FittedBox(
                                 fit: BoxFit.contain,
                                 child: SizedBox(
-                                  height: 600,
+                                  height: 650,
                                   //color: Colors.red,
                                   child: Column(
                                     children: [
@@ -666,19 +677,17 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                         padding: EdgeInsets.only(left: 8.0, right: 8.0),
                                         child: Row(
                                           children: [
-                                            Text("COMFORTABLE STUFFING CHAIRS", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
+                                            Text("BOLGA ROUND BASKETS", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
                                           ],
                                         ),
                                       ),
                                       const SizedBox(height: 15),
-                                      const Padding(
-                                        padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                                         child: Row(
                                           children: [
-                                            Text("Stuffing is the soft material inside pillows, "
-                                                "\n mattresses, or sofa cushions. Without stuffing, "
-                                                "\n your comfy chair wouldn't be very comfy.",
-                                              style: TextStyle(color: Colors.black54, fontSize: 20),
+                                            Text(Companydata.blogDescription,
+                                              style: const TextStyle(color: Colors.black54, fontSize: 20),
                                             ),
                                           ],
                                         ),
@@ -693,7 +702,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                               child: FittedBox(
                                 fit: BoxFit.contain,
                                 child: SizedBox(
-                                  height: 600,
+                                  height: 650,
                                   //color: Colors.red,
                                   child: Column(
                                     children: [
@@ -722,19 +731,17 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                         padding: EdgeInsets.only(left: 8.0, right: 8.0),
                                         child: Row(
                                           children: [
-                                            Text("COMFORTABLE STUFFING CHAIRS", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
+                                            Text("INTERIOR DECOR", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
                                           ],
                                         ),
                                       ),
                                       const SizedBox(height: 15),
-                                      const Padding(
-                                        padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                                         child: Row(
                                           children: [
-                                            Text("Stuffing is the soft material inside pillows, "
-                                                "\n mattresses, or sofa cushions. Without stuffing, "
-                                                "\n your comfy chair wouldn't be very comfy.",
-                                              style: TextStyle(color: Colors.black54, fontSize: 20),
+                                            Text(Companydata.blogDescription,
+                                              style: const TextStyle(color: Colors.black54, fontSize: 20),
                                             ),
                                           ],
                                         ),
@@ -766,13 +773,13 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Expanded(child: Text(Companydata.companyname, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 25),)),
+                                      Expanded(child: Text(Companydata.companyname, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20),)),
                                       const SizedBox(height: 20),
                                       Expanded(child: Text("Address: ${value.companyaddress}"),),
                                       const SizedBox(height: 15),
                                       Expanded(child: Text("Phone: ${value.companyphone}"),),
                                       const SizedBox(height: 15),
-                                      Expanded(child: Text("Email: ${value.companyaddress}")),
+                                      Expanded(child: Text("Email: ${value.companyemail}")),
                                     ],
                                   ),
                                 )
@@ -787,46 +794,66 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
-                                        Text("USEFUL LINKS", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25)),
+                                        Text("USEFUL LINKS", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20)),
                                         SizedBox(height: 20),
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text("About Us"),
-                                            Text("Who We Are"),
-                                          ],
+                                        FittedBox(
+                                          fit: BoxFit.contain,
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Text("About Us"),
+                                              SizedBox(width: 16),
+                                              Text("Who We Are"),
+                                            ],
+                                          ),
                                         ),
                                         SizedBox(height: 15),
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text("Secure Products"),
-                                            Text("Project"),
-                                          ],
+                                        FittedBox(
+                                          fit: BoxFit.contain,
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text("Secure Products"),
+                                              SizedBox(width: 16),
+                                              Text("Project"),
+                                            ],
+                                          ),
                                         ),
                                         SizedBox(height: 15),
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text("About Our Shop"),
-                                            Text("Our Services"),
-                                          ],
+                                        FittedBox(
+                                          fit: BoxFit.contain,
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text("About Our Shop"),
+                                              SizedBox(width: 16),
+                                              Text("Our Services"),
+                                            ],
+                                          ),
                                         ),
                                         SizedBox(height: 15),
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text("Privacy And Policy"),
-                                            Text("SiteMap"),
-                                          ],
+                                        FittedBox(
+                                          fit: BoxFit.contain,
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text("Privacy And Policy"),
+                                              SizedBox(width: 16),
+                                              Text("SiteMap"),
+                                            ],
+                                          ),
                                         ),
                                         SizedBox(height: 15),
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text("Delivery Information"),
-                                            Text("Contact"),
-                                          ],
+                                        FittedBox(
+                                          fit: BoxFit.contain,
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text("Delivery Information"),
+                                              SizedBox(width: 16),
+                                              Text("Contact"),
+                                            ],
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -836,11 +863,11 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                             const SizedBox(width: 8),
                             Expanded(
                                 child: SizedBox(
-                                  height: 250,
+                                  height: 280,
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
-                                      const Text("JOIN OUR NEWSLETTER NOW", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25)),
+                                      const Text("JOIN OUR NEWSLETTER NOW", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20)),
                                       const SizedBox(height: 20),
                                       const Text("Get E-mail updates about our latest shop and special offers."),
                                       const SizedBox(height: 15),
@@ -852,7 +879,8 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                                 decoration: InputDecoration(
                                                     hintText: 'Enter your mail',
                                                     fillColor: Colors.white,
-                                                    filled: true
+                                                    filled: true,
+                                                  border: InputBorder.none
                                                 ),
                                               )
                                           ),
@@ -863,7 +891,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                                 child: const Column(
                                                   mainAxisAlignment: MainAxisAlignment.center,
                                                   children: [
-                                                    Text("SUBSCRIBE"),
+                                                    FittedBox(child: Text("SUBSCRIBE", style: TextStyle(color: Colors.white),)),
                                                   ],
                                                 ),
                                               )
@@ -880,29 +908,33 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                           ],
                         ),
                         const Divider(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Row(
-                              children: [
-                                Text('Copyright ©2024 All rights reserved', style: TextStyle(fontSize: 15),),
-                                SizedBox(width: 10),
-                                Text('|'),
-                                SizedBox(width: 10),
-                                Text('Powered By KologSoft', style: TextStyle(fontSize: 15)),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Image.asset("assets/images/visa1.png", height: 50,),
-                                const SizedBox(width: 10),
-                                Image.asset("assets/images/PayPal.png", height: 50,),
-                                const SizedBox(width: 10),
-                                Image.asset("assets/images/MasterCard1.png", height: 50,),
-                                //Image.asset("assets/images/payout.png", height: 100,)
-                              ],
-                            )
-                          ],
+                        FittedBox(
+                          fit: BoxFit.contain,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Row(
+                                children: [
+                                  Text('Copyright ©2024 All rights reserved', style: TextStyle(fontSize: 15),),
+                                  SizedBox(width: 10),
+                                  Text('|'),
+                                  SizedBox(width: 10),
+                                  Text('Powered By KologSoft', style: TextStyle(fontSize: 15)),
+                                ],
+                              ),
+                              const SizedBox(width: 30),
+                              Row(
+                                children: [
+                                  Image.asset("assets/images/visa1.png", height: 50,),
+                                  const SizedBox(width: 10),
+                                  Image.asset("assets/images/PayPal.png", height: 50,),
+                                  const SizedBox(width: 10),
+                                  Image.asset("assets/images/MasterCard1.png", height: 50,),
+                                  //Image.asset("assets/images/payout.png", height: 100,)
+                                ],
+                              )
+                            ],
+                          ),
                         )
                       ],
                     ),
