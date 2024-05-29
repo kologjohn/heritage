@@ -32,9 +32,14 @@ class MainMenu extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 30),
-        const MenuType(
-            isSelected: false,
-            coffeeType: "PAGES"
+        InkWell(
+          onTap: (){
+            Navigator.pushNamed(context, Routes.about);
+          },
+          child: const MenuType(
+              isSelected: false,
+              coffeeType: "ABOUT US"
+          ),
         ),
         const SizedBox(width: 30),
         const MenuType(

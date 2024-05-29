@@ -4,6 +4,8 @@ class Assets {
 
   static const String assetsChair = 'assets/chair.png';
   static const String imagesChair = 'assets/images/chair.png';
+  static const String imagesDSC0242 = 'assets/images/DSC_0242.png';
+  static const String imagesDSC0331 = 'assets/images/DSC_0331.png';
   static const String imagesDSC6131 = 'assets/images/DSC_6131.jpg';
   static const String imagesDSC6144 = 'assets/images/DSC_6144.jpg';
   static const String imagesDSC6146 = 'assets/images/DSC_6146.jpg';
@@ -21,6 +23,10 @@ class Assets {
   static const String imagesHeritage3 = 'assets/images/heritage3.jpg';
   static const String imagesHeritage4 = 'assets/images/heritage4.jpg';
   static const String imagesHeritage44 = 'assets/images/heritage44.png';
+  static const String imagesHeritage5 = 'assets/images/heritage5.png';
+  static const String imagesHeritage6 = 'assets/images/heritage6.png';
+  static const String imagesHeritage7 = 'assets/images/heritage7.png';
+  static const String imagesHeritage8 = 'assets/images/heritage8.png';
   static const String imagesImage0 = 'assets/images/image_0.png';
   static const String imagesLaceBasket  = 'assets/images/Lace Basket .jpg';
   static const String imagesMasterCard = 'assets/images/MasterCard.png';

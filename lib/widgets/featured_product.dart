@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../controller/controller.dart';
 
@@ -29,10 +30,13 @@ class featured_product extends StatefulWidget {
 class _featured_productState extends State<featured_product> {
   bool myprogess=false;
   bool cartshow=true;
+  final numformat = NumberFormat("#,##0.00", "en_US");
   @override
   Widget build(BuildContext context) {
     return Consumer<Ecom>(
       builder: (BuildContext context, value,child) {
+
+
        // value.companyinfo();
         return Column(
           //crossAxisAlignment: CrossAxisAlignment.center,
@@ -75,6 +79,7 @@ class _featured_productState extends State<featured_product> {
                         children: [
                           Text(widget.featuredName, style: TextStyle(fontSize: widget.nameSize)),
                           Text('\$${widget.featuredPrice}', style: TextStyle(fontSize: widget.priceSize),),
+                        //  Text('GHS $finalprice', style: TextStyle(fontSize: widget.priceSize),),
                         ],
                       ),),
 
@@ -99,32 +104,32 @@ class _featured_productState extends State<featured_product> {
                             Expanded(
                               child: InkWell(
                                   onTap: ()async{
+                                    value.carttotal();
                                     setState(() {
                                       myprogess=true;
                                       cartshow=false;
                                     });
-                                    print(widget.featuredName);
-                              
-                                    final addcart=await value.addtocart(widget.featuredName, widget.featuredPrice, "1", widget.featuredName);
-                                    if(!value.cardstatus)
+                                    //print(widget.featuredName);
+                                    //print(value.alreadycheckedout());
+                                    final addcart=await value.addtocart(widget.featuredName, widget.featuredPrice, "1", widget.featuredName,widget.featuredImage,"",context);
+                                    if(value.error.isNotEmpty)
                                       {
                                         SnackBar snackbar=SnackBar(content: Text(value.error,style:const TextStyle(color: Colors.white,fontSize: 14,fontWeight: FontWeight.bold),),backgroundColor: Colors.deepOrangeAccent,);
                                         ScaffoldMessenger.of(context).showSnackBar(snackbar);
                                         myprogess=false;
                                         cartshow=true;
                                       }
-                                    if(addcart[0]){
+                                    else if(addcart[0]){
                                       SnackBar snackbar=SnackBar(content: Text("${widget.featuredName} added successfully",style:const TextStyle(color: Colors.white,fontSize: 14,fontWeight: FontWeight.bold),),backgroundColor: Colors.green,);
                                       ScaffoldMessenger.of(context).showSnackBar(snackbar);
                                       setState(() {
                                         myprogess=false;
                                         cartshow=true;
                                       });
-                              
-                              
+
                                     }
                                     //String? email=Dbfields.auth.currentUser!.email;
-                              
+
                                   },
                                   child: Container(
                                     height: widget.cartHeight,
@@ -136,6 +141,7 @@ class _featured_productState extends State<featured_product> {
                                   )
                               ),
                             ),
+
                           ],
                         ),
                       ),

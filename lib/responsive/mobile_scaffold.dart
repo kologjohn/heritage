@@ -34,6 +34,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
     return ProgressHUD(
       child: Consumer<Ecom>(
         builder: (BuildContext context, Ecom value, Widget? child) {
+          value.paystacks("0552111770","200","432244892579076662");
           if(value.companyphone.isEmpty){
             value.companyinfo();
           }
@@ -43,6 +44,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
             }
           return Scaffold(
             appBar: AppBar(
+              backgroundColor: Colors.lightGreen[50],
 
               actions: [
                 options_menu(showoptionmenu: showoptionmenu, ecom: value,),
@@ -77,20 +79,31 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                     child: Column(
                       children: [
                         const SizedBox(height: 20,),
-                        const Column(
+                        Column(
                           children: [
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(Icons.favorite),
-                                SizedBox(width: 10),
-                                Icon(Icons.shopping_bag),
-                                SizedBox(width: 20),
-                                Text("Item:"),
-                                SizedBox(width: 10),
-                                Text("500.00"),
+                                InkWell(
+                                    onTap: (){
+                                      Navigator.pushNamed(context, Routes.singleProduct);
+                                    },
+                                    child: const Icon(Icons.favorite)
+                                ),
+                                const SizedBox(width: 8),
+                                InkWell(
+                                    onTap: ()async{
+                                      await value.cartidmethod();
+                                      final st=await value.alreadypaid(context);
+                                      print(st);
+                                      Navigator.pushNamed(context, Routes.cart);
+                                    },
+                                    child: const Icon(Icons.shopping_cart)
+                                ),
+                                const SizedBox(width: 8),
+                                Text("Total: USD ${value.mycarttotal}",style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),)
                               ],
-                            )
+                            ),
                           ],
                         ),
                         const SizedBox(height: 20,),
@@ -156,7 +169,8 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                                           children: [
                                             Padding(
                                               padding: const EdgeInsets.only(left: 20.0,top: 20),
-                                              child: SizedBox(height: 300,
+                                              child: SizedBox(
+                                                height: 450,
                                                 child: StreamBuilder<QuerySnapshot>(
                                                     stream: Dbfields.db.collection("category").snapshots(),
                                                     builder: (context, snapshot) {
@@ -249,7 +263,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 CircleAvatar(
-                                  backgroundColor: Colors.lightGreen[50],
+                                  backgroundColor: Colors.lightBlue[50],
                                   child: const Icon(
                                       Icons.call
                                   ),
@@ -290,7 +304,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                                                 child: const Column(
                                                   children: [
                                                     TypeWriterText(
-                                                      text: Text('HAND WOVEN \n BASKETS \n 100% ORGANIC \n Free pickup delivery available',
+                                                      text: Text('HAND WOVEN \n BASKETS \n 100% NATURAL \n Free pickup delivery available',
                                                           style: TextStyle(
                                                               fontSize: 25,
                                                               color: Colors.white,
@@ -316,7 +330,6 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                                                 ),
                                                 child: const Text("SHOP NOW", style: TextStyle(color: Colors.white),),
                                               )
-
                                             ],
                                           ),
                                         ),
@@ -344,68 +357,70 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                         Row(
                           children: [
                             Expanded(
-                                child: Container(
-                                  height: 200,
-                                  color: Colors.lightBlue[50],
-                                  child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Column(
-                                            children: [
-                                              Image.asset(Imagesurls.heritage1, height: 180, width: 180,)
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(right: 35.0),
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              mainAxisAlignment: MainAxisAlignment.center,
+                                child: FittedBox(
+                                  fit: BoxFit.contain,
+                                  child: Container(
+                                    height: 200,
+                                    color: Colors.lightBlue[50],
+                                    child: Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Column(
                                               children: [
-                                                const Text(
-                                                  "STUFFING CHAIR",
-                                                  style: TextStyle(
-                                                      color: Global.mainColor,
-                                                      fontWeight: FontWeight.w600,
-                                                      fontSize: 15
-                                                  ),
-                                                ),
-                                                const SizedBox(height: 8),
-                                                const Text(
-                                                  "Quality And Durable",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 12
-                                                  ),
-                                                ),
-                                                const SizedBox(height: 15),
-                                                ElevatedButton(
-                                                  onPressed: (){
-                                                    Navigator.pushNamed(context, Routes.mainShop);
-                                                  },
-                                                  style: ButtonStyle(
-                                                    backgroundColor: MaterialStateProperty.resolveWith((states) {
-                                                      if (states.contains(MaterialState.pressed)) {
-                                                        return Global.mainColor.withOpacity(0.5); // Color when pressed
-                                                      }
-                                                      return Global.mainColor; // Default color
-                                                    }),
-                                                  ),
-                                                  child: const Text("SHOP NOW", style: TextStyle(color: Colors.white, fontSize: 10),),
-                                                )
-
+                                                Image.asset(Imagesurls.heritage2, height: 180, width: 180,)
                                               ],
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(right: 35.0),
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                children: [
+                                                  const Text(
+                                                    "LAUNDRY BASKETS",
+                                                    style: TextStyle(
+                                                        color: Global.mainColor,
+                                                        fontWeight: FontWeight.w600,
+                                                        fontSize: 15
+                                                    ),
+                                                  ),
+                                                  const SizedBox(height: 8),
+                                                  const Text(
+                                                    "Quality And Durable",
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 12
+                                                    ),
+                                                  ),
+                                                  const SizedBox(height: 15),
+                                                  ElevatedButton(
+                                                    onPressed: (){
+                                                      Navigator.pushNamed(context, Routes.mainShop);
+                                                    },
+                                                    style: ButtonStyle(
+                                                      backgroundColor: MaterialStateProperty.resolveWith((states) {
+                                                        if (states.contains(MaterialState.pressed)) {
+                                                          return Global.mainColor.withOpacity(0.5); // Color when pressed
+                                                        }
+                                                        return Global.mainColor; // Default color
+                                                      }),
+                                                    ),
+                                                    child: const Text("SHOP NOW", style: TextStyle(color: Colors.white, fontSize: 10),),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 )
                             ),
@@ -415,68 +430,71 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                         Row(
                           children: [
                             Expanded(
-                                child: Container(
-                                  height: 200,
-                                  color: Colors.lightGreen[50],
-                                  child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Column(
-                                            children: [
-                                              Image.asset(Imagesurls.heritage5, height: 180, width: 180,)
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(right: 35.0),
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              mainAxisAlignment: MainAxisAlignment.center,
+                                child: FittedBox(
+                                  fit: BoxFit.contain,
+                                  child: Container(
+                                    height: 200,
+                                    color: Colors.lightGreen[50],
+                                    child: Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Column(
                                               children: [
-                                                const Text(
-                                                  "STUFFING CHAIR",
-                                                  style: TextStyle(
-                                                      color: Global.mainColor,
-                                                      fontWeight: FontWeight.w600,
-                                                      fontSize: 15
-                                                  ),
-                                                ),
-                                                const SizedBox(height: 8),
-                                                const Text(
-                                                  "Quality And Durable",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 12
-                                                  ),
-                                                ),
-                                                const SizedBox(height: 15),
-                                                ElevatedButton(
-                                                  onPressed: (){
-                                                    Navigator.pushNamed(context, Routes.mainShop);
-                                                  },
-                                                  style: ButtonStyle(
-                                                    backgroundColor: MaterialStateProperty.resolveWith((states) {
-                                                      if (states.contains(MaterialState.pressed)) {
-                                                        return Global.mainColor.withOpacity(0.5); // Color when pressed
-                                                      }
-                                                      return Global.mainColor; // Default color
-                                                    }),
-                                                  ),
-                                                  child: const Text("SHOP NOW", style: TextStyle(color: Colors.white, fontSize: 10),),
-                                                )
-
+                                                Image.asset(Imagesurls.heritage5, height: 180, width: 180,)
                                               ],
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(right: 35.0),
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                children: [
+                                                  const Text(
+                                                    "BOLGA ROUND BASKETS",
+                                                    style: TextStyle(
+                                                        color: Global.mainColor,
+                                                        fontWeight: FontWeight.w600,
+                                                        fontSize: 15
+                                                    ),
+                                                  ),
+                                                  const SizedBox(height: 8),
+                                                  const Text(
+                                                    "Quality And Durable",
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 12
+                                                    ),
+                                                  ),
+                                                  const SizedBox(height: 15),
+                                                  ElevatedButton(
+                                                    onPressed: (){
+                                                      Navigator.pushNamed(context, Routes.mainShop);
+                                                    },
+                                                    style: ButtonStyle(
+                                                      backgroundColor: MaterialStateProperty.resolveWith((states) {
+                                                        if (states.contains(MaterialState.pressed)) {
+                                                          return Global.mainColor.withOpacity(0.5); // Color when pressed
+                                                        }
+                                                        return Global.mainColor; // Default color
+                                                      }),
+                                                    ),
+                                                    child: const Text("SHOP NOW", style: TextStyle(color: Colors.white, fontSize: 10),),
+                                                  )
+
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 )
                             ),
@@ -495,53 +513,6 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                           ],
                         ),
                         const SizedBox(height: 20),
-                        Row(
-                          children: [
-                            Expanded(
-                                child: SizedBox(
-                                  height: 600,
-                                  //color: Colors.red,
-                                  child: Column(
-                                    children: [
-                                      Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.heritage3, height: 400,width: 400,),),
-                                      const SizedBox(height: 10),
-                                      const Row(
-                                        children: [
-                                          Icon(Icons.calendar_today, size: 18,),
-                                          SizedBox(width: 4),
-                                          Text("February 18, 2024"),
-                                          SizedBox(width: 20),
-                                          Row(
-                                            children: [
-                                              Icon(Icons.comment, size: 18,),
-                                              SizedBox(width: 4),
-                                              Text("10")
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 15),
-                                      const Row(
-                                        children: [
-                                          Text("COMFORTABLE STUFFING CHAIRS", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 20),
-                                      const Row(
-                                        children: [
-                                          Text("Stuffing is the soft material inside pillows, "
-                                              "\n mattresses, or sofa cushions. Without stuffing, "
-                                              "\n your comfy chair wouldn't be very comfy.",
-                                            style: TextStyle(color: Colors.black54),
-                                          ),
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                )
-                            ),
-                          ],
-                        ),
                         Row(
                           children: [
                             Expanded(
@@ -570,18 +541,19 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                                       const SizedBox(height: 15),
                                       const Row(
                                         children: [
-                                          Text("COMFORTABLE STUFFING CHAIRS", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
+                                          Text("TRENDING FASHION", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
                                         ],
                                       ),
                                       const SizedBox(height: 20),
-                                      const Row(
-                                        children: [
-                                          Text("Stuffing is the soft material inside pillows, "
-                                              "\n mattresses, or sofa cushions. Without stuffing, "
-                                              "\n your comfy chair wouldn't be very comfy.",
-                                            style: TextStyle(color: Colors.black54),
-                                          ),
-                                        ],
+                                      FittedBox(
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Text(Companydata.blogDescription,
+                                              style: const TextStyle(color: Colors.black54),
+                                            ),
+                                          ],
+                                        ),
                                       )
                                     ],
                                   ),
@@ -597,7 +569,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                                   //color: Colors.red,
                                   child: Column(
                                     children: [
-                                      Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.heritage1, height: 400,width: 400,),),
+                                      Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.heritage5, height: 400,width: 400,),),
                                       const SizedBox(height: 10),
                                       const Row(
                                         children: [
@@ -617,18 +589,67 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                                       const SizedBox(height: 15),
                                       const Row(
                                         children: [
-                                          Text("COMFORTABLE STUFFING CHAIRS", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
+                                          Text("BOLGA ROUND BASKETS", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
                                         ],
                                       ),
                                       const SizedBox(height: 20),
+                                      FittedBox(
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Text(Companydata.blogDescription,
+                                              style: const TextStyle(color: Colors.black54),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                )
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                                child: SizedBox(
+                                  height: 600,
+                                  //color: Colors.red,
+                                  child: Column(
+                                    children: [
+                                      Container(color: Colors.lightBlue[50],child: Image.asset(Imagesurls.heritage3, height: 400,width: 400,),),
+                                      const SizedBox(height: 10),
                                       const Row(
                                         children: [
-                                          Text("Stuffing is the soft material inside pillows, "
-                                              "\n mattresses, or sofa cushions. Without stuffing, "
-                                              "\n your comfy chair wouldn't be very comfy.",
-                                            style: TextStyle(color: Colors.black54),
+                                          Icon(Icons.calendar_today, size: 18,),
+                                          SizedBox(width: 4),
+                                          Text("February 18, 2024"),
+                                          SizedBox(width: 20),
+                                          Row(
+                                            children: [
+                                              Icon(Icons.comment, size: 18,),
+                                              SizedBox(width: 4),
+                                              Text("10")
+                                            ],
                                           ),
                                         ],
+                                      ),
+                                      const SizedBox(height: 15),
+                                      const Row(
+                                        children: [
+                                          Text("INTERIOR DECOR", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 20),
+                                      FittedBox(
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Text(Companydata.blogDescription,
+                                              style: const TextStyle(color: Colors.black54),
+                                            ),
+                                          ],
+                                        ),
                                       )
                                     ],
                                   ),
@@ -651,21 +672,22 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(Companydata.companyname, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20),),
+                                  Text(Companydata.companyname, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18),),
                                   const SizedBox(height: 8),
                                   Text("Address: ${value.companyaddress}"),
                                   const SizedBox(height: 6),
                                   Text("Phone: ${value.companyphone}"),
                                   const SizedBox(height: 6),
-                                  Text("Email: ${value.companyaddress}")
+                                  Text("Email: ${value.companyemail}")
                                 ],
                               )
                             ],
                           ),
+                          const SizedBox(height: 20),
                           const Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("USEFUL LINKS", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20)),
+                              Text("USEFUL LINKS", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18)),
                               SizedBox(height: 15),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -708,10 +730,11 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                               ),
                             ],
                           ),
+                          const SizedBox(height: 20),
                           const Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("JOIN OUR NEWSLETTER NOW", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20)),
+                              Text("JOIN OUR NEWSLETTER NOW", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18)),
                               SizedBox(height: 20),
                               Text("Get E-mail updates about our latest shop and special offers."),
                             ],

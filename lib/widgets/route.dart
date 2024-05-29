@@ -6,6 +6,7 @@ import 'package:jona/forms/check_out.dart';
 import 'package:jona/forms/register_page.dart';
 import 'package:jona/forms/reset_password.dart';
 import 'package:jona/forms/signin_page.dart';
+import 'package:jona/pages/about.dart';
 import 'package:jona/responsive/desktop_scaffold.dart';
 import 'package:jona/responsive/mobile_scaffold.dart';
 import 'package:jona/responsive/responsive_layout.dart';
@@ -23,6 +24,7 @@ class Routes{
   static String checkout="checkout";
   static String table="table";
   static String resetPassword="resetPassword";
+  static String about="about";
 }
 
 final pages={
@@ -33,6 +35,7 @@ final pages={
   Routes.checkout:(context)=>CheckoutForm(),
   Routes.table:(context)=>TableExample(),
   Routes.resetPassword:(context)=>const ResetPassword(),
+  Routes.about:(context)=>const AboutPage(),
   Routes.mainShop:(context)=>const ResponsiveLayout(isMobile: MobileShop(), isTablet: TabletShop(), isDesktop: ShopPage(),),
   Routes.dashboard:(context)=>const ResponsiveLayout(isMobile: MobileScaffold(), isTablet: TabletScaffold(), isDesktop: DesktopScaffold(),
   ),

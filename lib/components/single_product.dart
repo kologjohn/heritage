@@ -7,6 +7,7 @@ import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:jona/components/global.dart';
 import 'package:jona/controller/controller.dart';
 import 'package:jona/controller/dbfields.dart';
+import 'package:jona/widgets/route.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
 
@@ -30,6 +31,10 @@ class _SingleProductState extends State<SingleProduct> {
       final Map<String, dynamic> args =routeparam as Map<String, dynamic>;
       itemamme=args['name'];
     }
+    else
+      {
+        Navigator.pushNamed(context, Routes.dashboard);
+      }
 
       return ProgressHUD(
         child: Consumer<Ecom>(
@@ -180,7 +185,7 @@ class _SingleProductState extends State<SingleProduct> {
                                                                   children: [
                                                                     Row(
                                                                       children: [
-                                                                        Text("${snapshot.data!.docs[0][ItemReg.sellingprice]}",
+                                                                        Text("${snapshot.data!.docs[0][ItemReg.sellingprice]} USD",
                                                                           style: TextStyle(
                                                                             //decoration: TextDecoration.lineThrough,
                                                                               fontSize: 25,
@@ -212,6 +217,15 @@ class _SingleProductState extends State<SingleProduct> {
                                                                         )
                                                                       ],
                                                                     ),
+
+                                                                    // const Row(
+                                                                    //   children: [
+                                                                    //     Icon(Icons.star),
+                                                                    //     Icon(Icons.star_rate),
+                                                                    //     Icon(Icons.star_rate),
+                                                                    //
+                                                                    //   ],
+                                                                    // ),
                                                                     const SizedBox(height: 10),
                                                                     SmoothStarRating(
                                                                       allowHalfRating: true,
@@ -287,15 +301,23 @@ class _SingleProductState extends State<SingleProduct> {
                                                                           width: 30,
                                                                           height: 30,
                                                                           decoration: BoxDecoration(
-                                                                              border: Border.all(
-                                                                                  color: Colors.black,
-                                                                                  width: 2
-                                                                              )
+                                                                            border: Border.all(
+                                                                              color: Colors.black,
+                                                                              width: 2,
+                                                                            ),
                                                                           ),
                                                                           child: const Center(
                                                                             child: TextField(
                                                                               textAlign: TextAlign.center,
                                                                               textAlignVertical: TextAlignVertical.center,
+                                                                              decoration: InputDecoration(
+                                                                                contentPadding: EdgeInsets.all(0),
+                                                                                isDense: true,
+                                                                                border: InputBorder.none,
+                                                                              ),
+                                                                              style: TextStyle(
+                                                                                fontSize: 14, // Adjust the font size as needed
+                                                                              ),
                                                                             ),
                                                                           ),
                                                                         ),
@@ -324,21 +346,20 @@ class _SingleProductState extends State<SingleProduct> {
                                                                 String code=snapshot.data!.docs[0][ItemReg.code];
                                                                 String name=snapshot.data!.docs[0][ItemReg.item];
                                                                 String price=snapshot.data!.docs[0][ItemReg.sellingprice];
+                                                                String des=snapshot.data!.docs[0][ItemReg.description];
+                                                                String imageurl=snapshot.data!.docs[0][ItemReg.itemurl];
                                                                 String quantity="1";
-
-                                                                final savetocard=await Ecom().addtocart(name, price, quantity, code);
-                                                                print(savetocard);
+                                                                final savetocard=await Ecom().addtocart(name, price, quantity, code,imageurl,des,context);
+                                                                //print(savetocard);
                                                                 if(savetocard[0]){
                                                                   SnackBar snackbar=const SnackBar(content: Text("Added to cart successfully",style: TextStyle(color: Colors.white),),backgroundColor: Colors.green,);
                                                                   ScaffoldMessenger.of(context).showSnackBar(snackbar);
                                                                 }
                                                                 else
-                                                                  {
-
+                                                                {
                                                                     SnackBar snackbar= SnackBar(content: Text(savetocard[1],style: const TextStyle(color: Colors.white),),backgroundColor: Colors.red,);
                                                                     ScaffoldMessenger.of(context).showSnackBar(snackbar);
-
-                                                                  }
+                                                                }
 
                                                                 progress.dismiss();
                                                               },
