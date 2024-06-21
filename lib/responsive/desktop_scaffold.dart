@@ -622,7 +622,6 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                                       ),
                                                       child: const Text("SHOP NOW", style: TextStyle(color: Colors.white, fontSize: 8),),
                                                     )
-
                                                   ],
                                                 ),
                                               ),

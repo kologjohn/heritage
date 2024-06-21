@@ -44,6 +44,12 @@ class LoginField extends StatelessWidget {
               ),
               borderRadius: BorderRadius.circular(6)
           ),
+          errorBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.red),
+          ),
+          focusedErrorBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.red),
+          ),
           hintText: hintText,
           labelText: labelText,
           //labelText: 'label'

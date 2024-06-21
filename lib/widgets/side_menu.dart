@@ -132,8 +132,46 @@ class _SideDrawerState extends State<SideDrawer> {
                             },
                             child: const MenuType(isSelected: false, coffeeType: 'SHOP')),
                       ),
+                      // ListTile(
+                      //   title: InkWell(
+                      //     onTap: (){
+                      //       Navigator.pushNamed(context, Routes.about);
+                      //     },
+                      //       child: const MenuType(isSelected: false, coffeeType: 'ABOUT US')
+                      //   ),
+                      // ),
+                      ExpansionTile(
+                          title: const MenuType(isSelected: false, coffeeType: 'ABOUT US'),
+                          childrenPadding: const EdgeInsets.only(left: 30),
+                        children: [
+                          ListTile(
+                            title: InkWell(
+                                onTap: (){
+                                  Navigator.pushNamed(context, Routes.about);
+                                },
+                                child: const Text("ABOUT HERITAGE BASKETS")
+                            ),
+                          ),
+                          ListTile(
+                            title: InkWell(
+                                onTap: (){
+                                  Navigator.pushNamed(context, Routes.about);
+                                },
+                                child: const Text("CUSTOMER DIRECTION")
+                            ),
+                          ),
+                          ListTile(
+                            title: InkWell(
+                                onTap: (){
+                                  Navigator.pushNamed(context, Routes.about);
+                                },
+                                child: const Text("OUR TEAM")
+                            ),
+                          ),
+                        ],
+                      ),
                       const ListTile(
-                        title: MenuType(isSelected: false, coffeeType: 'ABOUT US'),
+                        title: MenuType(isSelected: false, coffeeType: 'WHOLESALE'),
                       ),
                       const ListTile(
                         title: MenuType(isSelected: false, coffeeType: 'BLOG'),

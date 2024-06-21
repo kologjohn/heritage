@@ -296,7 +296,7 @@ class AboutPage extends StatelessWidget {
                                           mainAxisAlignment: MainAxisAlignment.start,
                                           children: [
                                             Text(
-                                                "WELCOME TO HERITAGE BASKETS WHOLESALE WEBSITE",
+                                                "WELCOME TO HERITAGE BASKETS WHOLESALE",
                                               style: TextStyle(
                                                 color: Colors.black,
                                                 fontWeight: FontWeight.bold,
@@ -341,7 +341,7 @@ class AboutPage extends StatelessWidget {
                               runSpacing: 5,
                               children: [
                                 Container(
-                                  color: Colors.lightGreen[50],
+                                  color: Colors.white54,
                                   //height: 500,
                                   width: 550,
                                   child: Padding(
@@ -408,7 +408,7 @@ class AboutPage extends StatelessWidget {
                                   ),
                                 ),
                                 Container(
-                                  color: Colors.lightGreen[50],
+                                  color: Colors.white54,
                                   //height: 500,
                                   width: 550,
                                   child: Padding(
@@ -417,10 +417,10 @@ class AboutPage extends StatelessWidget {
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          mainAxisAlignment: MainAxisAlignment.start,
                                           children: [
                                             Column(
-                                              crossAxisAlignment: CrossAxisAlignment.end,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 const Text(
                                                   "RETURN POLICY",
@@ -476,6 +476,311 @@ class AboutPage extends StatelessWidget {
                                         const Text("Once we confirm the damage occurred during shipping or before, we will initiate the return process. Alternatively, we might offer a quicker and more efficient solution that satisfies both you and Heritage Baskets, instead of a refund."),
                                         const SizedBox(height: 4),
                                         const Text("To complete your return, we require a receipt as proof of purchase. The return shipping costs for the damaged or incorrect basket(s) to Baba Tree in Bolgatanga, Ghana, will be covered by us.")
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(height: 80),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Container(
+                      color: Colors.lightGreen[50],
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            Wrap(
+                              spacing: 5,
+                              runSpacing: 5,
+                              children: [
+                                Container(
+                                  color: Colors.lightGreen[50],
+                                  //height: 500,
+                                  width: 550,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                const Text(
+                                                  "POLICIES - SHIPPING AND PAYMENTS",
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 18
+                                                  ),
+                                                ),
+                                                Container(
+                                                  width: 70,
+                                                  height: 3,
+                                                  color: Global.mainColor,
+                                                )
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(height: 16),
+                                        const Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Shipping and Payments (International)",
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 16
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 8),
+                                        const Row(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            Text(" • ", style: TextStyle(fontSize: 30),),
+                                            Expanded(
+                                              child: Text("For most countries, we use DHL or Ghana Post."),
+                                            ),
+                                          ],
+                                        ),
+                                        const Row(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            Text(" • ", style: TextStyle(fontSize: 30),),
+                                            Expanded(
+                                              child: Text("Payments can be made through Visa, MasterCard, Apple Pay, or PayPal"),
+                                            ),
+                                          ],
+                                        ),
+                                        const Row(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            Text(" • ", style: TextStyle(fontSize: 30),),
+                                            Expanded(
+                                              child: Text("Our products are not available for sale in Ghana."),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 16),
+                                        const Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "SHIPPING FEES",
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 16
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "SHIPPING VIA GHANA POST OR DHL TO MOST DESTINATIONS",
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 14
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "ZONE 1 - USA, Europe, Africa",
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 14
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const Row(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            Text(" • ", style: TextStyle(fontSize: 30),),
+                                            Expanded(
+                                              child: Text("15.00 USD per basket"),
+                                            ),
+                                          ],
+                                        ),
+                                        const Row(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            Text(" • ", style: TextStyle(fontSize: 30),),
+                                            Expanded(
+                                              child: Text("Free shipping for orders over 500.00 USD"),
+                                            ),
+                                          ],
+                                        ),
+                                        const Text(
+                                          "ZONE 2 - Australia, New Zealand, Middle East, Far East, South America, Central America (including Mexico), and the Caribbean",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 14
+                                          ),
+                                        ),
+                                        const Row(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            Text(" • ", style: TextStyle(fontSize: 30),),
+                                            Expanded(
+                                              child: Text("17.00 USD per basket"),
+                                            ),
+                                          ],
+                                        ),
+                                        const Row(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            Text(" • ", style: TextStyle(fontSize: 30),),
+                                            Expanded(
+                                              child: Text("Free shipping for orders over 500.00 USD"),
+                                            ),
+                                          ],
+                                        ),
+                                        const Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Additional taxes and duties may apply upon delivery.",
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 14
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  color: Colors.lightGreen[50],
+                                  //height: 500,
+                                  width: 550,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                const Text(
+                                                  "Order Processing (International)",
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 18
+                                                  ),
+                                                ),
+                                                Container(
+                                                  width: 70,
+                                                  height: 3,
+                                                  color: Global.mainColor,
+                                                )
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(height: 16),
+                                        const Row(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            Text(" • ", style: TextStyle(fontSize: 30),),
+                                            Expanded(
+                                              child: Text("After placing your order, you will receive an email confirming receipt."),
+                                            ),
+                                          ],
+                                        ),
+                                        const Row(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            Text(" • ", style: TextStyle(fontSize: 30),),
+                                            Expanded(
+                                              child: Text("Orders undergo a credit card approval process and are not released for shipment until verification is complete, which may affect delivery time."),
+                                            ),
+                                          ],
+                                        ),
+                                        const Row(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            Text(" • ", style: TextStyle(fontSize: 30),),
+                                            Expanded(
+                                              child: Text("When your order ships, you will receive an email confirmation and receipt, along with a DHL or Ghana Post tracking number. For Ghana Post, tracking information will be provided a few days after shipment."),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 16),
+                                        const Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Shipping Process",
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 16
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const Row(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            Text(" • ", style: TextStyle(fontSize: 30),),
+                                            Expanded(
+                                              child: Text("Credit card authorization and verification are required before processing your order."),
+                                            ),
+                                          ],
+                                        ),
+                                        const Row(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            Text(" • ", style: TextStyle(fontSize: 30),),
+                                            Expanded(
+                                              child: Text("Your basket(s) will be packaged in a poly woven sack, wrapped in cardboard, and secured with ample packing tape. Our packaging is utilitarian and not decorative, designed to meet international courier requirements for cost-effective shipping."),
+                                            ),
+                                          ],
+                                        ),
+                                        const Row(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            Text(" • ", style: TextStyle(fontSize: 30),),
+                                            Expanded(
+                                              child: Text("Due to high shipping costs, baskets are often packed in a compressed state. Instructions for reshaping the basket will be included. Please do not be alarmed by the basket's initial appearance; they are resilient and can be easily restored to their original shape."),
+                                            ),
+                                          ],
+                                        ),
                                       ],
                                     ),
                                   ),
