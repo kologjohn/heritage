@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import 'package:jona/components/global.dart';
 import 'package:jona/controller/controller.dart';
 import 'package:provider/provider.dart';
 import '../controller/dbfields.dart';
+import '../widgets/featured_product.dart';
 import '../widgets/featuredgridview.dart';
 import '../widgets/menu_type.dart';
 import '../widgets/route.dart';
@@ -22,30 +24,40 @@ class ShopPage extends StatefulWidget {
 }
 
 class _ShopPageState extends State<ShopPage> {
-   var querysnapshot=Dbfields.db.collection("items").orderBy(ItemReg.category).snapshots();
+   List<String> urls=[];
+   List<Widget> myimage = [];
+   String searchQuery = '';
 
-  String shoenum="";
+   String shoenum="";
   List<bool> active=[];
   final searchController=TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final routeparam = ModalRoute.of(context)!.settings.arguments;
-    String dfg="";
-    if (routeparam != null && routeparam is Map<String, dynamic>) {
-      final Map<String, dynamic> args =routeparam as Map<String, dynamic>;
-      //querysnapshot=Dbfields.db.collection("items").orderBy(ItemReg.category).startAt(['value']).snapshots();
-      //print(args['cate']);
-      querysnapshot=Dbfields.db.collection("items").where(ItemReg.category, isEqualTo:args['cate'] ).snapshots();
+    double screenWidth = MediaQuery.of(context).size.width;
+    double itemWidth = 330.0;
 
-      // final  datam= ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
-        dfg="yes";
-      }
-    else
-      {
-        dfg="No";
-      }
+    int crossAxisCount = (screenWidth / itemWidth).floor();
+    if (screenWidth <= 400) {
+      crossAxisCount = 2;
+    }
+    else if (screenWidth <= 600 && screenWidth<800) {
+      crossAxisCount = (screenWidth / 200).floor();
+    }
+    else if(screenWidth >=600 && screenWidth<1000)
+    {
+      crossAxisCount = (screenWidth / 230).floor();
+
+    }
+
+    if (crossAxisCount <= 1) {
+      crossAxisCount = 1;
+    }
+
     return Consumer<Ecom>(
       builder: (BuildContext context, value, Widget? child) {
+        if(value.selectedcategory.isNotEmpty){
+          searchQuery=value.selectedcategory;
+        }
         return Scaffold(
           appBar: AppBar(
             //toolbarHeight: 100,
@@ -103,15 +115,14 @@ class _ShopPageState extends State<ShopPage> {
                               children: [
                                 TextField(
                                   controller: searchController,
-                                  onChanged: (e){
+                                  onChanged: (txt){
                                     setState(() {
-                                      shoenum=Ecom().capitalizeSentence(searchController.text.trim().toUpperCase());
-                                      querysnapshot=Dbfields.db.collection("items").orderBy(ItemReg.item).startAt([shoenum]).snapshots();
-                                      // print(shoenum);
+                                      searchQuery=txt;
+
                                     });
                                   },
                                   decoration: const InputDecoration(
-                                    hintText: 'What do you need?',
+                                    hintText: 'Search by Item name,category or price?',
                                     hintStyle: TextStyle(color: Colors.grey, fontSize: 16),
                                     fillColor: Colors.white54,
                                     filled: true
@@ -239,16 +250,20 @@ class _ShopPageState extends State<ShopPage> {
                                                         InkWell(
                                                           onTap: (){
                                                             setState(() {
-                                                              shoenum=Ecom().capitalizeSentence(cate);
-                                                              querysnapshot=Dbfields.db.collection("items").where(ItemReg.category,isEqualTo: cate).snapshots();
-                                                              if(active[index])
-                                                              {
-                                                                active.add(false);
-                                                              } else{
-                                                                active[index]=true;
-                                                              }
-
+                                                              value.selected_category("");
+                                                              searchQuery=cate;
                                                             });
+                                                            // setState(() {
+                                                            //   shoenum=Ecom().capitalizeSentence(cate);
+                                                            //   querysnapshot=Dbfields.db.collection("items").where(ItemReg.category,isEqualTo: cate).snapshots();
+                                                            //   if(active[index])
+                                                            //   {
+                                                            //     active.add(false);
+                                                            //   } else{
+                                                            //     active[index]=true;
+                                                            //   }
+                                                            //
+                                                            // });
                                                           },
                                                           child: MenuType(
                                                               isSelected: active[index],
@@ -302,11 +317,108 @@ class _ShopPageState extends State<ShopPage> {
                                           ),
                                         ),
                                       ),
-                                      Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          featuredGridview(shoenum: shoenum, widgth: 300, height: 200, name: 16, price: 16, favHeight: 30, favWidth: 100, favSize: 25, cartHeight: 30, cartWidth: 100, cartSize: 25, querySnapshot: querysnapshot,)
-                                        ],
+                                      SizedBox(
+                                        height: 1200,
+                                        child: StreamBuilder<QuerySnapshot>(
+                                         stream: Dbfields.db.collection("items").orderBy(ItemReg.category).snapshots(),
+                                          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+
+                                           if(!snapshot.hasData){
+                                            return const Text("Loading...");
+                                          }
+                                          else if(snapshot.connectionState==ConnectionState.waiting)
+                                          {
+                                            const CircularProgressIndicator();
+                                          }
+                                          else if(snapshot.hasError)
+                                          {
+                                            return const Text("Error Loading Data");
+                                          }
+                                           urls.clear();
+                                           myimage.clear();
+                                           var filteredDocs = snapshot.data!.docs.where((doc) {
+                                             var data = doc.data() as Map<String, dynamic>;
+                                             String item = data['item']?.toString().toLowerCase() ?? '';
+                                             String category = data['category']?.toString().toLowerCase() ?? '';
+                                             String price = data['sellingprice']?.toString().toLowerCase() ?? '';
+                                             return item.contains(searchQuery.toLowerCase()) || category.contains(searchQuery.toLowerCase() )||price.contains(searchQuery.toLowerCase());
+
+                                           }).toList();
+                                           // for(int i=0;i<snapshot.data!.docs.length;i++){
+                                           //   //print(i);
+                                           //   String url= snapshot.data!.docs[i][ItemReg.itemurl];
+                                           //   urls.add(url);
+                                           //
+                                           //   //print(url);
+                                           //
+                                           //
+                                           // }
+                                          return GridView.builder(
+                                            itemCount: filteredDocs.length,
+                                            gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+                                              mainAxisSpacing: 0.6,
+                                              childAspectRatio: 0.7,
+                                              crossAxisCount: crossAxisCount.ceil(),
+                                            ), itemBuilder: (BuildContext context, int index) {
+                                            final fetchedData = filteredDocs[index];
+                                            String itemname=fetchedData['item'];
+                                            String url=fetchedData['itemurl'];
+                                            String sellingprice=fetchedData[ItemReg.sellingprice];
+
+                                            return FittedBox(
+                                              child: Row(
+                                                children: [
+                                                  InkWell(
+                                                    onTap: (){
+                                                      // print(widget.name);
+                                                      Navigator.pushNamed(context, Routes.singleProduct,arguments: {"name":snapshot.data!.docs[index][ItemReg.code]});
+                                                    },
+                                                    child: Container(
+                                                      // height: 300,
+                                                      width: 220,
+                                                      child: FeaturedProduct(
+                                                        featuredImage:url,
+                                                        featuredName: itemname,
+                                                        featuredPrice: sellingprice,
+                                                        image: CachedNetworkImage(
+                                                          errorListener:(rr){
+                                                            //print("${name_txt} image are not uploaded yet");
+                                                          } ,
+                                                          imageUrl: url,
+                                                          height: 200,
+                                                          width: 400,
+                                                          fit: BoxFit.cover,
+                                                          placeholder: (context, url) => const Center(
+                                                            child: SizedBox(
+                                                              height: 50,
+                                                              width: 50,
+                                                              child: CircularProgressIndicator(),
+                                                            ),
+                                                          ),
+                                                          errorWidget: (context, url, error) =>Icon(Icons.error,color: Colors.red,),
+
+                                                        ),
+                                                        progress: false,
+                                                        consWidth: itemWidth,
+                                                      ),
+                                                    ),
+                                                  )
+                                                  // items[index]
+
+                                                ],
+                                              ),
+                                            );
+                                          },);
+                                          // Wrap(
+                                          // runSpacing: 5,
+                                          // spacing: 5,
+                                          // children: items
+                                          // );
+
+                                        },
+                                      )
+
+                                //featuredGridview(shoenum: shoenum, widgth: 300, height: 200, name: 16, price: 16, favHeight: 30, favWidth: 100, favSize: 25, cartHeight: 30, cartWidth: 100, cartSize: 25, querySnapshot: querysnapshot,),
                                       )
                                     ],
                                   )

@@ -36,7 +36,7 @@ final pages={
   Routes.table:(context)=>TableExample(),
   Routes.resetPassword:(context)=>const ResetPassword(),
   Routes.about:(context)=>const AboutPage(),
-  Routes.mainShop:(context)=>const ResponsiveLayout(isMobile: MobileShop(), isTablet: TabletShop(), isDesktop: ShopPage(),),
-  Routes.dashboard:(context)=>const ResponsiveLayout(isMobile: MobileScaffold(), isTablet: TabletScaffold(), isDesktop: DesktopScaffold(),
+  Routes.mainShop:(context)=>const ResponsiveLayout(isMobile: MobileShop(), isTablet: ShopPage(), isDesktop: ShopPage(),),
+  Routes.dashboard:(context)=>const ResponsiveLayout(isMobile: MobileScaffold(), isTablet: DesktopScaffold(), isDesktop: DesktopScaffold(),
   ),
 };

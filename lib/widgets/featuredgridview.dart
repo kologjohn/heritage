@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_network/image_network.dart';
@@ -26,10 +27,35 @@ class featuredGridview extends StatefulWidget {
 }
 
 class _featuredGridviewState extends State<featuredGridview> {
+  List<String> urls=[];
+  List<Widget> myimage = [];
+
   //var itemData;
   @override
   Widget build(BuildContext context) {
-    List<Widget> items=[];
+    double screenWidth = MediaQuery.of(context).size.width;
+    double itemWidth = 280.0;
+    int crossAxisCount=0;
+    if (screenWidth <= 400) {
+      crossAxisCount = 2;
+    }
+    else if (screenWidth <= 600 && screenWidth<800) {
+      crossAxisCount = (screenWidth / 200).floor();
+    }
+    else if(screenWidth >=600 && screenWidth<1000)
+    {
+      crossAxisCount = (screenWidth / 230).floor();
+
+    }
+    else
+    {
+      crossAxisCount = (screenWidth / itemWidth).floor();
+
+    }
+    if (crossAxisCount <= 1) {
+      crossAxisCount = 1;
+    }
+   // List<Widget> items=[];
     // if(widget.shoenum.isNotEmpty)
     //   {
     //     String value=Ecom().capitalizeEachWord(widget.shoenum);
@@ -46,31 +72,33 @@ class _featuredGridviewState extends State<featuredGridview> {
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if(snapshot.hasData)
         {
-          items.clear();
+          urls.clear();
+          myimage.clear();
           for(int i=0;i<snapshot.data!.docs.length;i++){
             //print(i);
             String url= snapshot.data!.docs[i][ItemReg.itemurl];
+            urls.add(url);
+            myimage.add(CachedNetworkImage(
+              errorListener:(rr){
+                //print("${name_txt} image are not uploaded yet");
+              } ,
+              imageUrl: url,
+              height: 180,
+              width: 180,
+              fit: BoxFit.contain,
+              placeholder: (context, url) => const Center(
+                child: SizedBox(
+                  height: 50,
+                  width: 50,
+                  child: CircularProgressIndicator(),
+                ),
+              ),
+              errorWidget: (context, url, error) => Image.asset("assets/images/profile.jpg"),
+
+            ),);
+
             //print(url);
-            items.add(
-                InkWell(
-                  onTap: (){
-                   // print(widget.name);
-                    Navigator.pushNamed(context, Routes.singleProduct,arguments: {"name":snapshot.data!.docs[i][ItemReg.code]});
-                  },
-                  child: Container(
-                    // height: 300,
-                    width: 200,
-                    child: featured_product(
-                      featuredImage:url,
-                      featuredName: snapshot.data!.docs[i][ItemReg.item],
-                      featuredPrice: snapshot.data!.docs[i][ItemReg.sellingprice],
-                      pgress: false,
-                      contwidth: widget.widgth,
-                      contheight: widget.height, nameSize: widget.name, priceSize: widget.price, favHeight: widget.favHeight, favWidth: widget.favWidth, favSize: widget.favSize, cartHeight: widget.cartHeight, cartWidth: widget.cartWidth, cartSize: widget.cartSize,
-                    ),
-                  ),
-                )
-            );
+
 
           }
           //return ;
@@ -87,11 +115,50 @@ class _featuredGridviewState extends State<featuredGridview> {
         {
           return const Text("Error Loading Data");
         }
-        return Wrap(
-          runSpacing: 5,
-          spacing: 5,
-          children: items
-          );
+        return GridView.builder(
+          itemCount: urls.length,
+          gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+            childAspectRatio: 0.6,
+          crossAxisCount: crossAxisCount.ceil(),
+        ), itemBuilder: (BuildContext context, int index) {
+          return Container(child:Wrap(
+            runSpacing: 10,
+            spacing: 10,
+            children: [
+              FittedBox(
+                child: Row(
+                  children: [
+                    InkWell(
+                      onTap: (){
+                        // print(widget.name);
+                        Navigator.pushNamed(context, Routes.singleProduct,arguments: {"name":snapshot.data!.docs[index][ItemReg.code]});
+                      },
+                      child: Container(
+                        // height: 300,
+                        width: 200,
+                        child: FeaturedProduct(
+                          featuredImage:snapshot.data!.docs[index][ItemReg.itemurl],
+                          featuredName: snapshot.data!.docs[index][ItemReg.item],
+                          featuredPrice: snapshot.data!.docs[index][ItemReg.sellingprice],
+                          progress: false,
+                          image: myimage[index],
+                          consWidth: 200,
+                        ),
+                      ),
+                    )
+                    // items[index]
+                
+                  ],
+                ),
+              )
+            ],
+          ));
+        },);
+          // Wrap(
+          // runSpacing: 5,
+          // spacing: 5,
+          // children: items
+          // );
 
       },
     );
