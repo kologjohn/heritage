@@ -25,7 +25,7 @@ class MainMenu extends StatelessWidget {
               coffeeType: "HOME",
             ),
           ),
-          SizedBox(width: 40),
+          const SizedBox(width: 40),
           InkWell(
             onTap: () {
               Navigator.pushNamed(context, Routes.mainShop);
@@ -42,8 +42,10 @@ class MainMenu extends StatelessWidget {
               if (value == 'aboutUs') {
                 Navigator.pushNamed(context, Routes.about);
               } else if (value == 'customerDirection') {
+                Navigator.pushNamed(context, Routes.customerDirection);
                 // Navigate to Customer Direction page
               } else if (value == 'ourTeam') {
+                Navigator.pushNamed(context, Routes.ourTeam);
                 // Navigate to Our Team page
               }
             },

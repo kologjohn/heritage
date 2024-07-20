@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import 'package:jona/widgets/options_menu.dart';
 import 'package:jona/widgets/route.dart';
 import 'package:provider/provider.dart';
 import '../controller/controller.dart';
+import '../widgets/featured_product.dart';
 import '../widgets/featuredgridview.dart';
 import '../widgets/main_menu.dart';
 import '../widgets/menu_type.dart';
@@ -21,6 +23,8 @@ class DesktopScaffold extends StatefulWidget {
 }
 
 class _DesktopScaffoldState extends State<DesktopScaffold> {
+  String searchQuery="";
+
   var querysnapshot=Dbfields.db.collection("items").orderBy(ItemReg.category).limit(10).snapshots();
   String shoenum="";
   bool show=false;
@@ -28,6 +32,25 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
   bool showoptions=false;
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double itemWidth = 250.0;
+
+    int crossAxisCount = (screenWidth / itemWidth).floor();
+    if (screenWidth <= 400) {
+      crossAxisCount = 2;
+    }
+    else if (screenWidth <= 600 && screenWidth<800) {
+      crossAxisCount = (screenWidth / 200).floor();
+    }
+    else if(screenWidth >=600 && screenWidth<1000)
+    {
+      crossAxisCount = (screenWidth / 230).floor();
+
+    }
+
+    if (crossAxisCount <= 1) {
+      crossAxisCount = 1;
+    }
     return   Consumer<Ecom>(builder: (context,  value,  child) {
 
       if(value.mycarttotal==0)
@@ -290,6 +313,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                                             },
                                                             child: InkWell(
                                                               onTap: (){
+                                                                value.selected_category(cate);
                                                                 Navigator.pushNamed(context, Routes.mainShop, arguments: {"cate":cate,"from":"desktop"});
                                                               },
                                                               child: MenuType(
@@ -338,16 +362,18 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                                           children: [
                                                             // const Text("All Categories", style: TextStyle(fontWeight: FontWeight.bold),),
                                                             // const SizedBox(width: 20),
-                                                            // const Icon(Icons.arrow_drop_down),
+                                                            // const Icon(Icons.arrow_drop_dow
                                                             // const SizedBox(width: 30),
-                                                            const Expanded(
+                                                             Expanded(
                                                               flex:3,
                                                               child: SizedBox(
                                                                 height: 50,
                                                                 width: 300,
                                                                 child: Column(
                                                                   children: [
-                                                                    TextField(
+                                                                   // TextFormField()
+                                                                    TextFormField(
+
                                                                       decoration: InputDecoration(
                                                                         hintText: 'What do you need?',
                                                                         hintStyle: TextStyle(color: Colors.grey, fontSize: 12),
@@ -547,15 +573,123 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                               endIndent: 800,
                               thickness: 5,
                             ),
-                            SizedBox(height: 30),
                           ],
                         ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            featuredGridview(shoenum: shoenum, widgth: 250, height: 150, name: 14, price: 14, favHeight: 30, favWidth: 80, favSize: 20, cartHeight: 30, cartWidth: 80, cartSize: 20, querySnapshot: Ecom.querysnapshot,)
-                          ],
+                        SizedBox(
+                            height: 500,
+                            child: StreamBuilder<QuerySnapshot>(
+                              stream: Dbfields.db.collection("items").orderBy(ItemReg.category).orderBy('date').limit(8).snapshots(),
+                              builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+
+                                if(!snapshot.hasData){
+                                  return const Text("Loading...");
+                                }
+                                else if(snapshot.connectionState==ConnectionState.waiting)
+                                {
+                                  const CircularProgressIndicator();
+                                }
+                                else if(snapshot.hasError)
+                                {
+                                  return const Text("Error Loading Data");
+                                }
+                                //urls.clear();
+                               // myimage.clear();
+                                var filteredDocs = snapshot.data!.docs.where((doc) {
+                                  var data = doc.data() as Map<String, dynamic>;
+                                  String item = data['item']?.toString().toLowerCase() ?? '';
+                                  String category = data['category']?.toString().toLowerCase() ?? '';
+                                  String price = data['sellingprice']?.toString().toLowerCase() ?? '';
+                                  return item.contains(searchQuery.toLowerCase()) || category.contains(searchQuery.toLowerCase() )||price.contains(searchQuery.toLowerCase());
+
+                                }).toList();
+                                // for(int i=0;i<snapshot.data!.docs.length;i++){
+                                //   //print(i);
+                                //   String url= snapshot.data!.docs[i][ItemReg.itemurl];
+                                //   urls.add(url);
+                                //
+                                //   //print(url);
+                                //
+                                //
+                                // }
+                                return GridView.builder(
+                                  itemCount: filteredDocs.length,
+                                  gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+                                    mainAxisSpacing: 0.6,
+                                    childAspectRatio: 0.7,
+                                    crossAxisCount: crossAxisCount.ceil(),
+                                  ), itemBuilder: (BuildContext context, int index) {
+                                  final fetchedData = filteredDocs[index];
+                                  String itemname=fetchedData['item'];
+                                  String url=fetchedData['itemurl'];
+                                  String sellingprice=fetchedData[ItemReg.sellingprice];
+
+                                  return FittedBox(
+                                    child: Row(
+                                      children: [
+                                        InkWell(
+                                          onTap: (){
+                                            // print(widget.name);
+                                            Navigator.pushNamed(context, Routes.singleProduct,arguments: {"name":snapshot.data!.docs[index][ItemReg.code]});
+                                          },
+                                          child: Container(
+                                            // height: 300,
+                                            width: 220,
+                                            child: FeaturedProduct(
+                                              featuredImage:url,
+                                              featuredName: itemname,
+                                              featuredPrice: sellingprice,
+                                              image: CachedNetworkImage(
+                                                errorListener:(rr){
+                                                  //print("${name_txt} image are not uploaded yet");
+                                                } ,
+                                                imageUrl: url,
+                                                height: 200,
+                                                width: 400,
+                                                fit: BoxFit.cover,
+                                                placeholder: (context, url) => const Center(
+                                                  child: SizedBox(
+                                                    height: 50,
+                                                    width: 50,
+                                                    child: CircularProgressIndicator(),
+                                                  ),
+                                                ),
+                                                errorWidget: (context, url, error) =>const Icon(Icons.error,color: Colors.red,),
+
+                                              ),
+                                              progress: false,
+                                              consWidth: itemWidth,
+                                            ),
+                                          ),
+                                        )
+                                        // items[index]
+                                      ],
+                                    ),
+                                  );
+                                },);
+                                // Wrap(
+                                // runSpacing: 5,
+                                // spacing: 5,
+                                // children: items
+                                // );
+
+                              },
+                            )
+
+                          //featuredGridview(shoenum: shoenum, widgth: 300, height: 200, name: 16, price: 16, favHeight: 30, favWidth: 100, favSize: 25, cartHeight: 30, cartWidth: 100, cartSize: 25, querySnapshot: querysnapshot,),
                         ),
+
+                        // StreamBuilder<QuerySnapshot>(
+                        //   stream: null,
+                        //   builder: (context, snapshot) {
+                        //     return Container(height:500,child: featuredGridview(shoenum: shoenum, widgth: 250, height: 150, name: 14, price: 14, favHeight: 30, favWidth: 80, favSize: 20, cartHeight: 30, cartWidth: 80, cartSize: 20, querySnapshot: Ecom.querysnapshot,));
+                        //   }
+                        // ),
+
+                        // Column(
+                        //   mainAxisAlignment: MainAxisAlignment.center,
+                        //   children: [
+                        //   ],
+                        // ),
                         const SizedBox(height: 20),
                         Divider(
                           thickness: 10,

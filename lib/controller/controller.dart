@@ -34,12 +34,17 @@ class Ecom extends ChangeNotifier{
    String user_firstname="";
    String user_lastname="";
    String user_middlename="";
+   String selectedcategory="";
    bool accountcreated=false;
   String error="";
   bool cardstatus=false;
   String cartidnumber="";
   bool loginstatus=false;
 
+  selected_category(String selected)async{
+    selectedcategory=selected;
+    notifyListeners();
+  }
 
   lockcart()async{
     final SharedPreferences sharedPreferences=await SharedPreferences.getInstance();
