@@ -8,6 +8,7 @@ import 'package:jona/forms/signin_page.dart';
 import 'package:jona/pages/about.dart';
 import 'package:jona/pages/customer_direction.dart';
 import 'package:jona/pages/our_team.dart';
+import 'package:jona/pages/wholesale.dart';
 import 'package:jona/responsive/desktop_scaffold.dart';
 import 'package:jona/responsive/mobile_scaffold.dart';
 import 'package:jona/responsive/responsive_layout.dart';
@@ -27,6 +28,7 @@ class Routes{
   static String about="about";
   static String customerDirection="customerDirection";
   static String ourTeam="ourTeam";
+  static String wholesale="wholesale";
 }
 
 final pages={
@@ -40,6 +42,7 @@ final pages={
   Routes.about:(context)=>const AboutPage(),
   Routes.customerDirection:(context)=>const CustomerDirection(),
   Routes.ourTeam:(context)=>const OurTeam(),
+  Routes.wholesale:(context)=>const Wholesale(),
   Routes.mainShop:(context)=>const ResponsiveLayout(isMobile: MobileShop(), isTablet: ShopPage(), isDesktop: ShopPage(),),
   Routes.dashboard:(context)=>const ResponsiveLayout(isMobile: MobileScaffold(), isTablet: DesktopScaffold(), isDesktop: DesktopScaffold(),
   ),

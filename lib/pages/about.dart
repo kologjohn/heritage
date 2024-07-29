@@ -225,271 +225,271 @@ class AboutPage extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 80),
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Container(
-                      color: Colors.lightGreen[50],
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Wrap(
-                              spacing: 5,
-                              runSpacing: 5,
-                              children: [
-                                Container(
-                                    height: 500,
-                                    width: 550,
-                                    decoration: BoxDecoration(
-                                      //color: Colors.white,
-                                      color: Colors.lightGreen[50],
-                                      // border: const Border(
-                                      //   top: BorderSide(color: Colors.white, width: 10.0), // Top border
-                                      //   left: BorderSide(color: Colors.white, width: 10.0), // Left border
-                                      //   right: BorderSide(color: Colors.white, width: 10.0), // Right border
-                                      //   bottom: BorderSide(color: Colors.white, width: 10.0), // Bottom border
-                                      // ),
-                                    ),
-                                    child: Image.asset(
-                                      "assets/images/heritage4.jpg",
-                                      fit: BoxFit.contain,
-                                    )
-                                ),
-                                Container(
-                                  color: Colors.lightGreen[50],
-                                  //height: 500,
-                                  width: 550,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          children: [
-                                            Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                const Text(
-                                                    "WHOLESALE",
-                                                  style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 18
-                                                  ),
-                                                ),
-                                                Container(
-                                                  width: 70,
-                                                  height: 3,
-                                                  color: Global.mainColor,
-                                                )
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                        SizedBox(height: 16),
-                                        const Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                                "WELCOME TO HERITAGE BASKETS WHOLESALE",
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 16
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(height: 20),
-                                        const Text("Heritage Baskets offers retail and wholesale access to the finest Bolga Market Baskets. We are committed to an ethical business model, viewing everyone as partners in a global transformation. \n Handwoven in Ghana by our skilled artisans, our baskets are both beautiful and functional. They come in various styles, colours, and sizes, including shopping baskets, laundry baskets, hampers, storage baskets, bicycle baskets, and decorative pieces."),
-                                        const SizedBox(height: 8),
-                                        const Text("Here, artistry, culture, and tradition come together to set industry standards for design innovation, quality craftsmanship, fair compensation, customer service, and environmental sustainability. Discover our Fairtrade wholesale collection of home goods and fashion accessories, crafted with passion and excellence from the heart of Ghana. We invite you to explore!"),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-            const SizedBox(height: 80),
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Container(
-                      color: Colors.white54,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Wrap(
-                              spacing: 5,
-                              runSpacing: 5,
-                              children: [
-                                Container(
-                                  color: Colors.white54,
-                                  //height: 500,
-                                  width: 550,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          children: [
-                                            Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                const Text(
-                                                  "CUSTOMER SERVICE",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.bold,
-                                                      fontSize: 18
-                                                  ),
-                                                ),
-                                                Container(
-                                                  width: 70,
-                                                  height: 3,
-                                                  color: Global.mainColor,
-                                                )
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                        const SizedBox(height: 20),
-                                        const Text("At Heritage Baskets, we pride ourselves on exceptional customer service and providing the highest quality handwoven baskets from Bolgatanga, Ghana."),
-                                        const SizedBox(height: 8),
-                                        const Text("We strive to ensure your order arrives quickly, complete, beautiful, and undamaged.\nIf you encounter any issues with your order, please contact us so we can resolve them promptly."),
-                                        const SizedBox(height: 8),
-                                        const Row(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(" • ", style: TextStyle(fontSize: 30),),
-                                            Expanded(
-                                              child: Text("You will receive the exact basket pictured when you purchase from the Heritage Baskets online store."),
-                                            ),
-                                          ],
-                                        ),
-                                        const Row(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(" • ", style: TextStyle(fontSize: 30),),
-                                            Expanded(
-                                              child: Text("Please note that colours may vary slightly depending on your screen’s calibration."),
-                                            ),
-                                          ],
-                                        ),
-                                        const Row(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(" • ", style: TextStyle(fontSize: 30),),
-                                            Expanded(
-                                              child: Text("•	Some baskets may need reshaping upon arrival. To reshape, submerge the basket in water (avoid wetting the leather handles), reshape, and let it dry"),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  color: Colors.white54,
-                                  //height: 500,
-                                  width: 550,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          children: [
-                                            Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                const Text(
-                                                  "RETURN POLICY",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.bold,
-                                                      fontSize: 18
-                                                  ),
-                                                ),
-                                                Container(
-                                                  width: 70,
-                                                  height: 3,
-                                                  color: Global.mainColor,
-                                                )
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                        const SizedBox(height: 20),
-                                        const Text("Our return policy is effective for 7 days after you receive your purchase."),
-                                        const SizedBox(height: 8),
-                                        const Text("You can apply for a refund for the following reasons:"),
-                                        const SizedBox(height: 8),
-                                        const Row(
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: [
-                                            Text(" • ", style: TextStyle(fontSize: 30),),
-                                            Expanded(
-                                              child: Text("You received the wrong basket(s) (not the basket(s) you ordered)."),
-                                            ),
-                                          ],
-                                        ),
-                                        const Row(
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: [
-                                            Text(" • ", style: TextStyle(fontSize: 30),),
-                                            Expanded(
-                                              child: Text("Your basket(s) was damaged during shipping."),
-                                            ),
-                                          ],
-                                        ),
-                                        const Row(
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: [
-                                            Text(" • ", style: TextStyle(fontSize: 30),),
-                                            Expanded(
-                                              child: Text("Your basket was defective or damaged before shipping, and we didn’t notice it."),
-                                            ),
-                                          ],
-                                        ),
-                                        const Text("To apply for a refund, send us high-quality photos of the damaged basket(s) and each of the six sides of the shipping box within 7 days of receiving your order."),
-                                        const SizedBox(height: 4),
-                                        const Text("Once we confirm the damage occurred during shipping or before, we will initiate the return process. Alternatively, we might offer a quicker and more efficient solution that satisfies both you and Heritage Baskets, instead of a refund."),
-                                        const SizedBox(height: 4),
-                                        const Text("To complete your return, we require a receipt as proof of purchase. The return shipping costs for the damaged or incorrect basket(s) to Baba Tree in Bolgatanga, Ghana, will be covered by us.")
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
+            // const SizedBox(height: 80),
+            // Padding(
+            //   padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     children: [
+            //       Expanded(
+            //         child: Container(
+            //           color: Colors.lightGreen[50],
+            //           child: Padding(
+            //             padding: const EdgeInsets.all(8.0),
+            //             child: Column(
+            //               children: [
+            //                 Wrap(
+            //                   spacing: 5,
+            //                   runSpacing: 5,
+            //                   children: [
+            //                     Container(
+            //                         height: 500,
+            //                         width: 550,
+            //                         decoration: BoxDecoration(
+            //                           //color: Colors.white,
+            //                           color: Colors.lightGreen[50],
+            //                           // border: const Border(
+            //                           //   top: BorderSide(color: Colors.white, width: 10.0), // Top border
+            //                           //   left: BorderSide(color: Colors.white, width: 10.0), // Left border
+            //                           //   right: BorderSide(color: Colors.white, width: 10.0), // Right border
+            //                           //   bottom: BorderSide(color: Colors.white, width: 10.0), // Bottom border
+            //                           // ),
+            //                         ),
+            //                         child: Image.asset(
+            //                           "assets/images/heritage4.jpg",
+            //                           fit: BoxFit.contain,
+            //                         )
+            //                     ),
+            //                     Container(
+            //                       color: Colors.lightGreen[50],
+            //                       //height: 500,
+            //                       width: 550,
+            //                       child: Padding(
+            //                         padding: const EdgeInsets.all(8.0),
+            //                         child: Column(
+            //                           children: [
+            //                             Row(
+            //                               mainAxisAlignment: MainAxisAlignment.start,
+            //                               children: [
+            //                                 Column(
+            //                                   crossAxisAlignment: CrossAxisAlignment.start,
+            //                                   children: [
+            //                                     const Text(
+            //                                         "WHOLESALE",
+            //                                       style: TextStyle(
+            //                                         color: Colors.black,
+            //                                         fontWeight: FontWeight.bold,
+            //                                         fontSize: 18
+            //                                       ),
+            //                                     ),
+            //                                     Container(
+            //                                       width: 70,
+            //                                       height: 3,
+            //                                       color: Global.mainColor,
+            //                                     )
+            //                                   ],
+            //                                 )
+            //                               ],
+            //                             ),
+            //                             SizedBox(height: 16),
+            //                             const Row(
+            //                               mainAxisAlignment: MainAxisAlignment.start,
+            //                               children: [
+            //                                 Text(
+            //                                     "WELCOME TO HERITAGE BASKETS WHOLESALE",
+            //                                   style: TextStyle(
+            //                                     color: Colors.black,
+            //                                     fontWeight: FontWeight.bold,
+            //                                     fontSize: 16
+            //                                   ),
+            //                                 ),
+            //                               ],
+            //                             ),
+            //                             const SizedBox(height: 20),
+            //                             const Text("Heritage Baskets offers retail and wholesale access to the finest Bolga Market Baskets. We are committed to an ethical business model, viewing everyone as partners in a global transformation. \n Handwoven in Ghana by our skilled artisans, our baskets are both beautiful and functional. They come in various styles, colours, and sizes, including shopping baskets, laundry baskets, hampers, storage baskets, bicycle baskets, and decorative pieces."),
+            //                             const SizedBox(height: 8),
+            //                             const Text("Here, artistry, culture, and tradition come together to set industry standards for design innovation, quality craftsmanship, fair compensation, customer service, and environmental sustainability. Discover our Fairtrade wholesale collection of home goods and fashion accessories, crafted with passion and excellence from the heart of Ghana. We invite you to explore!"),
+            //                           ],
+            //                         ),
+            //                       ),
+            //                     ),
+            //                   ],
+            //                 )
+            //               ],
+            //             ),
+            //           ),
+            //         ),
+            //       )
+            //     ],
+            //   ),
+            // ),
+            // const SizedBox(height: 80),
+            // Padding(
+            //   padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     children: [
+            //       Expanded(
+            //         child: Container(
+            //           color: Colors.white54,
+            //           child: Padding(
+            //             padding: const EdgeInsets.all(8.0),
+            //             child: Column(
+            //               children: [
+            //                 Wrap(
+            //                   spacing: 5,
+            //                   runSpacing: 5,
+            //                   children: [
+            //                     Container(
+            //                       color: Colors.white54,
+            //                       //height: 500,
+            //                       width: 550,
+            //                       child: Padding(
+            //                         padding: const EdgeInsets.all(8.0),
+            //                         child: Column(
+            //                           children: [
+            //                             Row(
+            //                               mainAxisAlignment: MainAxisAlignment.start,
+            //                               children: [
+            //                                 Column(
+            //                                   crossAxisAlignment: CrossAxisAlignment.start,
+            //                                   children: [
+            //                                     const Text(
+            //                                       "CUSTOMER SERVICE",
+            //                                       style: TextStyle(
+            //                                           color: Colors.black,
+            //                                           fontWeight: FontWeight.bold,
+            //                                           fontSize: 18
+            //                                       ),
+            //                                     ),
+            //                                     Container(
+            //                                       width: 70,
+            //                                       height: 3,
+            //                                       color: Global.mainColor,
+            //                                     )
+            //                                   ],
+            //                                 )
+            //                               ],
+            //                             ),
+            //                             const SizedBox(height: 20),
+            //                             const Text("At Heritage Baskets, we pride ourselves on exceptional customer service and providing the highest quality handwoven baskets from Bolgatanga, Ghana."),
+            //                             const SizedBox(height: 8),
+            //                             const Text("We strive to ensure your order arrives quickly, complete, beautiful, and undamaged.\nIf you encounter any issues with your order, please contact us so we can resolve them promptly."),
+            //                             const SizedBox(height: 8),
+            //                             const Row(
+            //                               crossAxisAlignment: CrossAxisAlignment.start,
+            //                               children: [
+            //                                 Text(" • ", style: TextStyle(fontSize: 30),),
+            //                                 Expanded(
+            //                                   child: Text("You will receive the exact basket pictured when you purchase from the Heritage Baskets online store."),
+            //                                 ),
+            //                               ],
+            //                             ),
+            //                             const Row(
+            //                               crossAxisAlignment: CrossAxisAlignment.start,
+            //                               children: [
+            //                                 Text(" • ", style: TextStyle(fontSize: 30),),
+            //                                 Expanded(
+            //                                   child: Text("Please note that colours may vary slightly depending on your screen’s calibration."),
+            //                                 ),
+            //                               ],
+            //                             ),
+            //                             const Row(
+            //                               crossAxisAlignment: CrossAxisAlignment.start,
+            //                               children: [
+            //                                 Text(" • ", style: TextStyle(fontSize: 30),),
+            //                                 Expanded(
+            //                                   child: Text("•	Some baskets may need reshaping upon arrival. To reshape, submerge the basket in water (avoid wetting the leather handles), reshape, and let it dry"),
+            //                                 ),
+            //                               ],
+            //                             ),
+            //                           ],
+            //                         ),
+            //                       ),
+            //                     ),
+            //                     Container(
+            //                       color: Colors.white54,
+            //                       //height: 500,
+            //                       width: 550,
+            //                       child: Padding(
+            //                         padding: const EdgeInsets.all(8.0),
+            //                         child: Column(
+            //                           crossAxisAlignment: CrossAxisAlignment.start,
+            //                           children: [
+            //                             Row(
+            //                               mainAxisAlignment: MainAxisAlignment.start,
+            //                               children: [
+            //                                 Column(
+            //                                   crossAxisAlignment: CrossAxisAlignment.start,
+            //                                   children: [
+            //                                     const Text(
+            //                                       "RETURN POLICY",
+            //                                       style: TextStyle(
+            //                                           color: Colors.black,
+            //                                           fontWeight: FontWeight.bold,
+            //                                           fontSize: 18
+            //                                       ),
+            //                                     ),
+            //                                     Container(
+            //                                       width: 70,
+            //                                       height: 3,
+            //                                       color: Global.mainColor,
+            //                                     )
+            //                                   ],
+            //                                 )
+            //                               ],
+            //                             ),
+            //                             const SizedBox(height: 20),
+            //                             const Text("Our return policy is effective for 7 days after you receive your purchase."),
+            //                             const SizedBox(height: 8),
+            //                             const Text("You can apply for a refund for the following reasons:"),
+            //                             const SizedBox(height: 8),
+            //                             const Row(
+            //                               crossAxisAlignment: CrossAxisAlignment.center,
+            //                               children: [
+            //                                 Text(" • ", style: TextStyle(fontSize: 30),),
+            //                                 Expanded(
+            //                                   child: Text("You received the wrong basket(s) (not the basket(s) you ordered)."),
+            //                                 ),
+            //                               ],
+            //                             ),
+            //                             const Row(
+            //                               crossAxisAlignment: CrossAxisAlignment.center,
+            //                               children: [
+            //                                 Text(" • ", style: TextStyle(fontSize: 30),),
+            //                                 Expanded(
+            //                                   child: Text("Your basket(s) was damaged during shipping."),
+            //                                 ),
+            //                               ],
+            //                             ),
+            //                             const Row(
+            //                               crossAxisAlignment: CrossAxisAlignment.center,
+            //                               children: [
+            //                                 Text(" • ", style: TextStyle(fontSize: 30),),
+            //                                 Expanded(
+            //                                   child: Text("Your basket was defective or damaged before shipping, and we didn’t notice it."),
+            //                                 ),
+            //                               ],
+            //                             ),
+            //                             const Text("To apply for a refund, send us high-quality photos of the damaged basket(s) and each of the six sides of the shipping box within 7 days of receiving your order."),
+            //                             const SizedBox(height: 4),
+            //                             const Text("Once we confirm the damage occurred during shipping or before, we will initiate the return process. Alternatively, we might offer a quicker and more efficient solution that satisfies both you and Heritage Baskets, instead of a refund."),
+            //                             const SizedBox(height: 4),
+            //                             const Text("To complete your return, we require a receipt as proof of purchase. The return shipping costs for the damaged or incorrect basket(s) to Baba Tree in Bolgatanga, Ghana, will be covered by us.")
+            //                           ],
+            //                         ),
+            //                       ),
+            //                     ),
+            //                   ],
+            //                 )
+            //               ],
+            //             ),
+            //           ),
+            //         ),
+            //       )
+            //     ],
+            //   ),
+            // ),
             const SizedBox(height: 80),
             Padding(
               padding: const EdgeInsets.only(left: 8.0, right: 8.0),

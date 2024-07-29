@@ -69,9 +69,14 @@ class MainMenu extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 30),
-          const MenuType(
-            isSelected: false,
-            coffeeType: "WHOLESALE",
+          InkWell(
+            onTap: (){
+              Navigator.pushNamed(context, Routes.wholesale);
+            },
+            child: const MenuType(
+              isSelected: false,
+              coffeeType: "WHOLESALE",
+            ),
           ),
           const SizedBox(width: 30),
           const MenuType(
