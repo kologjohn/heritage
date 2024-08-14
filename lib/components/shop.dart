@@ -47,10 +47,10 @@ class _ShopPageState extends State<ShopPage> {
       double screenWidth = MediaQuery.of(context).size.width;
       return screenWidth < 1200;
     }
-    // bool isMobileVisible () {
-    //   double screenWidth = MediaQuery.of(context).size.width;
-    //   return screenWidth < 500;
-    // }
+    bool isMobileVisible () {
+      double screenWidth = MediaQuery.of(context).size.width;
+      return screenWidth < 500;
+    }
 
     int crossAxisCount = (screenWidth / itemWidth).floor();
     if (screenWidth <= 400) {
@@ -585,7 +585,7 @@ class _ShopPageState extends State<ShopPage> {
                   ),
                 ),
                 Visibility(
-                  visible: isNotVisible(),
+                  visible: isNotVisible() && !isMobileVisible(),
                   child: Container(
                     height: 400,
                     color: Colors.lightGreen[50],
@@ -747,7 +747,7 @@ class _ShopPageState extends State<ShopPage> {
                   ),
                 ),
                 Visibility(
-                  visible: false,
+                  visible: isMobileVisible(),
                   child: Container(
                     height: 690,
                     color: Colors.lightGreen[50],
