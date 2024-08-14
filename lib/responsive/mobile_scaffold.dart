@@ -172,12 +172,11 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                                               child: SizedBox(
                                                 height: 450,
                                                 child: StreamBuilder<QuerySnapshot>(
-                                                    stream: Dbfields.db.collection("category").snapshots(),
+                                                    stream: Dbfields.db.collection("items").orderBy(ItemReg.category).orderBy('date').limit(8).snapshots(),
                                                     builder: (context, snapshot) {
                                                       if(!snapshot.hasData)
                                                       {
                                                         return const Text("No data yet");
-
                                                       }
                                                       return ListView.builder(
                                                         scrollDirection: Axis.vertical,
@@ -195,7 +194,8 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                                                                     onTap: (){
                                                                       setState(() {
                                                                         shoenum=cate;
-                                                                      });
+                                                                      }
+                                                                      );
                                                                     },
                                                                     child: MenuType(
                                                                         isSelected: false,
@@ -204,12 +204,9 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                                                                   ),
                                                                 ),
                                                                 Divider(thickness: 1,color: Colors.grey[200],),
-
                                                               ],
                                                             ),
                                                           );
-
-
                                                         },
                                                       );
                                                     }

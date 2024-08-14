@@ -635,7 +635,7 @@ class _MobileShopState extends State<MobileShop> {
                       ],
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),

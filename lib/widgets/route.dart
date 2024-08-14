@@ -12,6 +12,7 @@ import 'package:jona/pages/wholesale.dart';
 import 'package:jona/responsive/desktop_scaffold.dart';
 import 'package:jona/responsive/mobile_scaffold.dart';
 import 'package:jona/responsive/responsive_layout.dart';
+import 'package:jona/responsive/tablet_scaffold.dart';
 import 'package:jona/tables/checkout_table.dart';
 import 'package:jona/widgets/cart.dart';
 
@@ -43,7 +44,7 @@ final pages={
   Routes.customerDirection:(context)=>const CustomerDirection(),
   Routes.ourTeam:(context)=>const OurTeam(),
   Routes.wholesale:(context)=>const Wholesale(),
-  Routes.mainShop:(context)=>const ResponsiveLayout(isMobile: MobileShop(), isTablet: ShopPage(), isDesktop: ShopPage(),),
-  Routes.dashboard:(context)=>const ResponsiveLayout(isMobile: MobileScaffold(), isTablet: DesktopScaffold(), isDesktop: DesktopScaffold(),
+  Routes.mainShop:(context)=>const ResponsiveLayout(isMobile: ShopPage(), isTablet: ShopPage(), isDesktop: ShopPage(),),
+  Routes.dashboard:(context)=>const ResponsiveLayout(isMobile: MobileScaffold(), isTablet: TabletScaffold(), isDesktop: DesktopScaffold(),
   ),
 };
