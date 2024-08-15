@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:jona/components/global.dart';
 import 'package:jona/controller/controller.dart';
+import 'package:jona/widgets/side_menu.dart';
 import 'package:provider/provider.dart';
 import '../controller/dbfields.dart';
 import '../widgets/featured_product.dart';
@@ -25,6 +26,7 @@ class ShopPage extends StatefulWidget {
 }
 
 class _ShopPageState extends State<ShopPage> {
+  bool show=false;
    List<String> urls=[];
    List<Widget> myimage = [];
    String searchQuery = '';
@@ -77,90 +79,97 @@ class _ShopPageState extends State<ShopPage> {
         return Scaffold(
           appBar: AppBar(
             //toolbarHeight: 100,
-            title: Container(
-              width: double.infinity,
-              height: 50,
-              color: Colors.lightGreen[50],
-              child: FittedBox(
-                fit: BoxFit.contain,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Row(
-                        children: [
-                          MainMenu()
-                        ],
-                      ),
-                      const SizedBox(width: 120),
-                      Row(
-                        children: [
-                          SizedBox(
-                            height: 50,
-                            width: 400,
-                            child: Column(
-                              children: [
-                                TextField(
-                                  controller: searchController,
-                                  onChanged: (txt){
-                                    setState(() {
-                                      searchQuery=txt;
+            title: Visibility(
+              visible: isVisible(),
+              child: Container(
+                width: double.infinity,
+                height: 50,
+                color: Colors.lightGreen[50],
+                child: FittedBox(
+                  fit: BoxFit.contain,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Row(
+                          children: [
+                            MainMenu()
+                          ],
+                        ),
+                        const SizedBox(width: 120),
+                        Row(
+                          children: [
+                            SizedBox(
+                              height: 50,
+                              width: 400,
+                              child: Column(
+                                children: [
+                                  TextField(
+                                    controller: searchController,
+                                    onChanged: (txt){
+                                      setState(() {
+                                        searchQuery=txt;
 
-                                    });
-                                  },
-                                  decoration: const InputDecoration(
-                                    hintText: 'Search by Item name,category or price?',
-                                    hintStyle: TextStyle(color: Colors.grey, fontSize: 16),
-                                    fillColor: Colors.white54,
-                                    filled: true
-                                  ),
-                                )
-                              ],
+                                      });
+                                    },
+                                    decoration: const InputDecoration(
+                                      hintText: 'Search by Item name,category or price?',
+                                      hintStyle: TextStyle(color: Colors.grey, fontSize: 16),
+                                      fillColor: Colors.white54,
+                                      filled: true
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
-                          Container(
-                            height: 50,
-                            width: 150,
-                            color: Global.mainColor,
-                            child: const Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text("Search", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 18),),
-                              ],
+                            Container(
+                              height: 50,
+                              width: 150,
+                              color: Global.mainColor,
+                              child: const Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("Search", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 18),),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(width: 120),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          InkWell(
-                              onTap: (){
-                                Navigator.pushNamed(context, Routes.singleProduct);
-                              },
-                              child: const Icon(Icons.favorite)
-                          ),
-                          const SizedBox(width: 8),
-                          InkWell(
-                              onTap: ()async{
-                                await value.cartidmethod();
-                                final st=await value.alreadypaid(context);
-                                Navigator.pushNamed(context, Routes.cart);
-                              },
-                              child: const Icon(Icons.shopping_cart)
-                          ),
-                          const SizedBox(width: 8),
-                          Text("Total: USD ${value.mycarttotal}",style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),)
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                        const SizedBox(width: 120),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            InkWell(
+                                onTap: (){
+                                  Navigator.pushNamed(context, Routes.singleProduct);
+                                },
+                                child: const Icon(Icons.favorite)
+                            ),
+                            const SizedBox(width: 8),
+                            InkWell(
+                                onTap: ()async{
+                                  await value.cartidmethod();
+                                  final st=await value.alreadypaid(context);
+                                  Navigator.pushNamed(context, Routes.cart);
+                                },
+                                child: const Icon(Icons.shopping_cart)
+                            ),
+                            const SizedBox(width: 8),
+                            Text("Total: USD ${value.mycarttotal}",style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),)
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
             backgroundColor: Colors.lightGreen[50],
+          ),
+          drawer: Visibility(
+            visible: isNotVisible(),
+              child: SideDrawer(dWidth: 400)
           ),
           body: SingleChildScrollView(
             child: Column(
@@ -172,6 +181,154 @@ class _ShopPageState extends State<ShopPage> {
                       child: Column(
                         children: [
                           const SizedBox(height: 20),
+                          Visibility(
+                            visible: isNotVisible(),
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    InkWell(
+                                        onTap: (){
+                                          Navigator.pushNamed(context, Routes.singleProduct);
+                                        },
+                                        child: const Icon(Icons.favorite)
+                                    ),
+                                    const SizedBox(width: 8),
+                                    InkWell(
+                                        onTap: ()async{
+                                          await value.cartidmethod();
+                                          final st=await value.alreadypaid(context);
+                                          Navigator.pushNamed(context, Routes.cart);
+                                        },
+                                        child: const Icon(Icons.shopping_cart)
+                                    ),
+                                    const SizedBox(width: 8),
+                                    Text("Total: USD ${value.mycarttotal}",style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),)
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          Visibility(
+                            visible: isNotVisible(),
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Expanded(
+                                        child: GestureDetector(
+                                          onTap: ()async{
+                                            setState(() {
+                                              if(show==false)
+                                              {
+                                                show=true;
+                                              }
+                                              else if(show==true)
+                                              {
+                                                show=false;
+                                              }
+                                              //show=true;
+                                            });
+                                          },
+                                          child: Container(
+                                            color: Global.mainColor,
+                                            height: 50,
+                                            child: const Padding(
+                                              padding: EdgeInsets.only(left: 18.0, right: 18),
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      Icon(Icons.menu, color: Colors.white,),
+                                                      Text(
+                                                        "BASKETS CATEGORIES",
+                                                        style: TextStyle(
+                                                            color: Colors.white
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Icon(Icons.arrow_drop_down, size: 30, color: Colors.white,),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                    )
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                        child: Visibility(
+                                          visible: show,
+                                          child: Container(
+                                            height: 400,
+                                            decoration: const BoxDecoration(
+                                              color: Colors.white,
+                                            ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(left: 20.0,top: 20),
+                                              child: SizedBox(height: 300,
+                                                child:StreamBuilder<QuerySnapshot>(
+                                                    stream: value.db.collection("category").snapshots(),
+                                                    builder: (context, snapshot) {
+                                                      if(!snapshot.hasData)
+                                                      {
+                                                        return Text("No data yet");
+
+                                                      }
+                                                      return ListView.builder(
+                                                        itemCount: snapshot.data!.docs.length,
+                                                        scrollDirection: Axis.vertical,
+                                                        itemBuilder: (BuildContext context, int index) {
+                                                          String categoryName = snapshot.data!.docs[index]['name'];
+                                                          return  InkWell(
+                                                            onTap: (){},
+                                                            child: Column(
+                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                              children: [
+                                                                Padding(
+                                                                  padding: const EdgeInsets.all(4.0),
+                                                                  child: InkWell(
+                                                                    onTap: (){
+                                                                      setState(() {
+                                                                        shoenum=categoryName;
+                                                                      });
+                                                                    },
+                                                                    child: MenuType(
+                                                                        isSelected: false,
+                                                                        coffeeType: categoryName
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Divider(thickness: 1,color: Colors.grey[200],),
+
+                                                              ],
+                                                            ),
+                                                          );
+
+                                                        },
+                                                      );
+                                                    }
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
