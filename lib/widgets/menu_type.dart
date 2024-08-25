@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jona/components/global.dart';
-import 'package:jona/widgets/route.dart';
+
+import '../components/global.dart';
 
 class MenuType extends StatelessWidget {
   final String coffeeType;

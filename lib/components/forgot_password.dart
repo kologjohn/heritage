@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jona/widgets/route.dart';
+import '../widgets/route.dart';
 import 'global.dart';
 
 class ForgotPasText extends StatelessWidget {

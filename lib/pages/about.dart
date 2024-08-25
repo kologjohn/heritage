@@ -53,11 +53,11 @@ class AboutPage extends StatelessWidget {
                                               crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 const Text(
-                                                    "WHO WE ARE!",
+                                                  "WHO WE ARE!",
                                                   style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 18
+                                                      color: Colors.black,
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 18
                                                   ),
                                                 ),
                                                 Container(
@@ -86,11 +86,11 @@ class AboutPage extends StatelessWidget {
                                                     mainAxisAlignment: MainAxisAlignment.center,
                                                     children: [
                                                       Text(
-                                                          "120+",
+                                                        "120+",
                                                         style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 22,
-                                                          fontWeight: FontWeight.bold
+                                                            color: Colors.black,
+                                                            fontSize: 22,
+                                                            fontWeight: FontWeight.bold
                                                         ),
                                                       ),
                                                       Text("UNIQUE PRODUCTS"),
@@ -109,11 +109,11 @@ class AboutPage extends StatelessWidget {
                                                     mainAxisAlignment: MainAxisAlignment.center,
                                                     children: [
                                                       Text(
-                                                          "12k+",
+                                                        "12k+",
                                                         style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 22,
-                                                          fontWeight: FontWeight.bold
+                                                            color: Colors.black,
+                                                            fontSize: 22,
+                                                            fontWeight: FontWeight.bold
                                                         ),
                                                       ),
                                                       Text("HAPPY CUSTOMERS"),
@@ -182,8 +182,8 @@ class AboutPage extends StatelessWidget {
                                   ),
                                 ),
                                 Container(
-                                  height: 500,
-                                  width: 550,
+                                    height: 500,
+                                    width: 550,
                                     decoration: BoxDecoration(
                                       //color: Colors.white,
                                       color: Colors.lightGreen[50],
@@ -194,10 +194,10 @@ class AboutPage extends StatelessWidget {
                                         bottom: BorderSide(color: Colors.white, width: 10.0), // Bottom border
                                       ),
                                     ),
-                                  child: Image.asset(
+                                    child: Image.asset(
                                       "assets/images/heritage4.jpg",
-                                    fit: BoxFit.cover,
-                                  )
+                                      fit: BoxFit.cover,
+                                    )
                                 ),
                               ],
                             ),

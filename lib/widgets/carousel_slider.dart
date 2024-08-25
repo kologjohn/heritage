@@ -1,16 +1,15 @@
-import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:jona/controller/controller.dart';
-import 'package:jona/controller/dbfields.dart';
 import 'package:jona/widgets/slide_tile.dart';
+
+import '../controller/controller.dart';
+import '../controller/dbfields.dart';
 
 class MyCarousel extends StatefulWidget {
   final bool enlargeCenter;
   final double viewPort;
   const MyCarousel({super.key, required this.enlargeCenter, required this.viewPort});
-
   @override
   State<MyCarousel> createState() => _CarouselSliderState();
 }

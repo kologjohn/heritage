@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:jona/widgets/route.dart';
 import 'package:provider/provider.dart';
 import '../components/forgot_password.dart';
 import '../components/global.dart';
@@ -11,6 +9,7 @@ import '../components/login_field.dart';
 import '../components/social_button.dart';
 import '../constanst.dart';
 import '../controller/controller.dart';
+import '../widgets/route.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});

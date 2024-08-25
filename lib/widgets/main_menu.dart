@@ -41,26 +41,44 @@ class MainMenu extends StatelessWidget {
               // Handle submenu item click
               if (value == 'aboutUs') {
                 Navigator.pushNamed(context, Routes.about);
-              } else if (value == 'customerDirection') {
+              } else if (value == 'shippingProcess') {
                 Navigator.pushNamed(context, Routes.customerDirection);
-                // Navigate to Customer Direction page
-              } else if (value == 'ourTeam') {
-                Navigator.pushNamed(context, Routes.ourTeam);
-                // Navigate to Our Team page
+                // Navigate to Shipping Process page
+              // } else if (value == 'reshape') {
+              //   Navigator.pushNamed(context, Routes.reshape);
+              //   // Navigate to Our Team page
+              // } else if (value =='termsAndConditions') {
+              //   Navigator.pushNamed(context, Routes.terms);
+              // } else if (value =='returnPolicy') {
+              //   Navigator.pushNamed(context, Routes.returns);
+              // }else if (value =='brand') {
+              //   Navigator.pushNamed(context, Routes.brand);
               }
             },
             itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-              const PopupMenuItem<String>(
+               const PopupMenuItem<String>(
                 value: 'aboutUs',
-                child: Text('ABOUT HERITAGE BASKET'),
+                child: Text('About Us'),
+              ),
+              // const PopupMenuItem<String>(
+              //     value: 'brand',
+              //     child: Text('Brand Story')
+              // ),
+              const PopupMenuItem<String>(
+                value: 'shippingProcess',
+                child: Text('Customer Direction'),
               ),
               const PopupMenuItem<String>(
-                value: 'customerDirection',
-                child: Text('CUSTOMER DIRECTION'),
+                value: 'reshape',
+                child: Text('Reshaping Baskets'),
               ),
               const PopupMenuItem<String>(
-                value: 'ourTeam',
-                child: Text('OUR TEAM'),
+                value: 'termsAndConditions',
+                  child: Text("Terms And Conditions")
+              ),
+              const PopupMenuItem<String>(
+                value: 'returnPolicy',
+                  child: Text('Return Policy')
               ),
             ],
             child: const MenuType(
@@ -79,14 +97,24 @@ class MainMenu extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 30),
-          const MenuType(
-            isSelected: false,
-            coffeeType: "BLOG",
+          InkWell(
+            onTap: (){
+              Navigator.pushNamed(context, Routes.blog);
+            },
+            child: const MenuType(
+              isSelected: false,
+              coffeeType: "BLOG",
+            ),
           ),
           const SizedBox(width: 30),
-          const MenuType(
-            isSelected: false,
-            coffeeType: "CONTACT",
+          InkWell(
+            onTap: (){
+              Navigator.pushNamed(context, Routes.contactPage);
+            },
+            child: const MenuType(
+              isSelected: false,
+              coffeeType: "CONTACT",
+            ),
           ),
         ],
       ),

@@ -2,16 +2,19 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
-import 'package:jona/components/global.dart';
-import 'package:jona/controller/controller.dart';
-import 'package:jona/controller/dbfields.dart';
-import 'package:jona/widgets/route.dart';
+import 'package:http/http.dart';
+import 'package:jona/components/shimmer.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
 
 import '../constanst.dart';
+import '../controller/controller.dart';
+import '../controller/dbfields.dart';
+import '../widgets/route.dart';
+import 'global.dart';
 
 
 class SingleProduct extends StatefulWidget {
@@ -22,53 +25,56 @@ class SingleProduct extends StatefulWidget {
 }
 
 class _SingleProductState extends State<SingleProduct> {
+  @override
+
+  final qty=TextEditingController();
   double rating = 3.0;
-  String itemamme="";
   @override
   Widget build(BuildContext context) {
-    final routeparam=ModalRoute.of(context)!.settings.arguments;
-    if (routeparam != null && routeparam is Map<String, dynamic>) {
-      final Map<String, dynamic> args =routeparam as Map<String, dynamic>;
-      itemamme=args['name'];
-    }
-    else
-      {
-        Navigator.pushNamed(context, Routes.dashboard);
-      }
-
       return ProgressHUD(
         child: Consumer<Ecom>(
           builder: (BuildContext context, Ecom value, Widget? child) {
+            if(int.parse(value.existingqty)==0){
+              qty.text="1";
+            }
+            else
+              {
+                qty.text=value.existingqty;
+              }
             return Scaffold(
               appBar: AppBar(
+                leading: InkWell(child: Icon(Icons.arrow_back_outlined,),
+                    onTap: (){
+                        Navigator.pushNamed(context, Routes.dashboard);
+                    },
+                ),
                 backgroundColor: Colors.lightGreen[50],
                 centerTitle: true,
                 title: Text(Companydata.companyname, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),),
               ),
               body: StreamBuilder<QuerySnapshot>(
-                  stream: value.db.collection("items").where(ItemReg.code, isEqualTo: itemamme).snapshots(),
+                  stream: value.db.collection("items").where('code', isEqualTo: value.selecteditem).snapshots(),
                   builder: (context, snapshot) {
                     if(!snapshot.hasData){
-                      return const Text("NO RECORD FOUNND");
+                      return ShimmerLoadingList();
                     }
                     else if(snapshot.connectionState==ConnectionState.waiting)
                     {
                       return const Text("Please wait for Network");
                     }
+                    String weight="0";
+                    String dimensions="0";
+                    String sprice=snapshot.data!.docs[0][ItemReg.sellingprice];
+                    try{
+                       weight=snapshot.data!.docs[0][ItemReg.weight];
+                       dimensions=snapshot.data!.docs[0][ItemReg.dimensions];
+                    }catch(e){
+                      print(e);
+                    }
+
                     return SingleChildScrollView(
                       child: Column(
                         children: [
-                          // Column(
-                          //   children: [
-                          //     Card(
-                          //       elevation: 3,
-                          //       child: Container(
-                          //         color: Colors.white,
-                          //         height: 100,
-                          //       ),
-                          //     )
-                          //   ],
-                          // ),
                           const SizedBox(height: 50),
                           Center(
                             child: Column(
@@ -87,42 +93,6 @@ class _SingleProductState extends State<SingleProduct> {
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         //mainAxisAlignment: MainAxisAlignment.start,
                                         children: [
-                                          // Expanded(
-                                          //     child: Column(
-                                          //       crossAxisAlignment: CrossAxisAlignment.end,
-                                          //       children: [
-                                          //         FittedBox(
-                                          //           fit: BoxFit.contain,
-                                          //           child: Container(
-                                          //             height: 100,
-                                          //             width: 100,
-                                          //             color: Colors.grey[500],
-                                          //             child: Image.asset(Imagesurls.hats),
-                                          //           ),
-                                          //         ),
-                                          //         const SizedBox(height: 10),
-                                          //         FittedBox(
-                                          //           fit: BoxFit.contain,
-                                          //           child: Container(
-                                          //             height: 100,
-                                          //             width: 100,
-                                          //             color: Colors.grey[500],
-                                          //             child: Image.asset(Imagesurls.d2),
-                                          //           ),
-                                          //         ),
-                                          //         const SizedBox(height: 10),
-                                          //         FittedBox(
-                                          //           fit: BoxFit.contain,
-                                          //           child: Container(
-                                          //             height: 100,
-                                          //             width: 100,
-                                          //             color: Colors.grey[500],
-                                          //             child: Image.asset(Imagesurls.d1),
-                                          //           ),
-                                          //         ),
-                                          //       ],
-                                          //     )
-                                          // ),
                                           const SizedBox(width: 10),
                                           Expanded(
                                               flex: 5,
@@ -133,7 +103,7 @@ class _SingleProductState extends State<SingleProduct> {
                                                   FittedBox(
                                                     fit: BoxFit.contain,
                                                     child: Container(
-                                                        color: Colors.lightBlue[50],
+                                                        color: Colors.brown.withOpacity(0.5),
                                                         height: 500,
                                                         width: 500,
                                                         child:CachedNetworkImage(
@@ -142,7 +112,7 @@ class _SingleProductState extends State<SingleProduct> {
                                                             decoration: BoxDecoration(
                                                               image: DecorationImage(
                                                                 image: imageProvider,
-                                                                fit: BoxFit.cover,
+                                                                fit: BoxFit.contain,
                                                                 // colorFilter: ColorFilter.mode(Colors.white, BlendMode.colorDodge)
                                                               ),
                                                             ),
@@ -194,8 +164,8 @@ class _SingleProductState extends State<SingleProduct> {
                                                                           ),
                                                                         ),
                                                                         const SizedBox(width: 20),
-                                                                        const Text(
-                                                                          "120 USD",
+                                                                         Text(
+                                                                          "${double.parse(sprice)*1.2} USD",
                                                                           style: TextStyle(
                                                                               decoration: TextDecoration.lineThrough,
                                                                               fontSize: 14,
@@ -205,27 +175,20 @@ class _SingleProductState extends State<SingleProduct> {
                                                                       ],
                                                                     ),
                                                                     const SizedBox(height: 10),
-                                                                    const Row(
+                                                                     Row(
                                                                       children: [
-                                                                        Icon(Icons.info_outline, size: 20, color: Colors.red,),
+                                                                        Icon(Icons.info_outline, size: 20, color: Colors.amber,),
                                                                         SizedBox(width: 10),
                                                                         Text(
-                                                                          "21 units left",
-                                                                          style: TextStyle(
-                                                                              color: Colors.red
+                                                                          "Size:$dimensions Weight: ${weight}",
+                                                                          style: const TextStyle(
+                                                                            fontSize: 16,
+                                                                              color: Colors.blue,fontWeight: FontWeight.bold
                                                                           ),
                                                                         )
                                                                       ],
                                                                     ),
 
-                                                                    // const Row(
-                                                                    //   children: [
-                                                                    //     Icon(Icons.star),
-                                                                    //     Icon(Icons.star_rate),
-                                                                    //     Icon(Icons.star_rate),
-                                                                    //
-                                                                    //   ],
-                                                                    // ),
                                                                     const SizedBox(height: 10),
                                                                     SmoothStarRating(
                                                                       allowHalfRating: true,
@@ -256,49 +219,34 @@ class _SingleProductState extends State<SingleProduct> {
                                                                           ),
                                                                         ),
                                                                         const SizedBox(width: 40),
-                                                                        // Container(
-                                                                        //   padding: const EdgeInsets.all(4),
-                                                                        //   decoration: BoxDecoration(
-                                                                        //       color: Colors.orange[200],
-                                                                        //       borderRadius: BorderRadius.circular(6)
-                                                                        //   ),
-                                                                        //   child: const Icon(Icons.remove),
-                                                                        // ),
-                                                                        // const SizedBox(width: 20),
-                                                                        // Container(
-                                                                        //   width: 30,
-                                                                        //   height: 30,
-                                                                        //   decoration: BoxDecoration(
-                                                                        //       borderRadius: BorderRadius.circular(6),
-                                                                        //     border: Border.all(
-                                                                        //         color: Colors.orange,
-                                                                        //
-                                                                        //       width: 2
-                                                                        //     )
-                                                                        //   ),
-                                                                        //   child: Center(child: TextField()),),
-                                                                        // const SizedBox(width: 20),
-                                                                        // Container(
-                                                                        //   padding: const EdgeInsets.all(4),
-                                                                        //   decoration: BoxDecoration(
-                                                                        //       color: Colors.orange[200],
-                                                                        //       borderRadius: BorderRadius.circular(6)
-                                                                        //   ),
-                                                                        //   child: const Icon(Icons.add),
-                                                                        // ),
-                                                                        Container(
-                                                                          height: 30,
-                                                                          width: 30,
-                                                                          decoration: BoxDecoration(
-                                                                              border: Border.all(
-                                                                                  color: Colors.black,
-                                                                                  width: 2
-                                                                              )
+                                                                        InkWell(
+                                                                          onTap: (){
+
+                                                                            int a= int.parse(qty.text);
+                                                                            a--;
+                                                                            if(a<=0)
+                                                                              {
+                                                                                value.snackbarerror("Invalid Quantity", context);
+                                                                                return;
+                                                                              }
+                                                                            qty.text="${a}";
+                                                                            print(qty.text);
+
+                                                                          },
+                                                                          child: Container(
+                                                                            height: 30,
+                                                                            width: 30,
+                                                                            decoration: BoxDecoration(
+                                                                                border: Border.all(
+                                                                                    color: Colors.black,
+                                                                                    width: 2
+                                                                                )
+                                                                            ),
+                                                                            child: const Icon(Icons.remove),
                                                                           ),
-                                                                          child: const Icon(Icons.remove),
                                                                         ),
                                                                         Container(
-                                                                          width: 30,
+                                                                          width: 60,
                                                                           height: 30,
                                                                           decoration: BoxDecoration(
                                                                             border: Border.all(
@@ -306,31 +254,50 @@ class _SingleProductState extends State<SingleProduct> {
                                                                               width: 2,
                                                                             ),
                                                                           ),
-                                                                          child: const Center(
-                                                                            child: TextField(
+                                                                          child:  Center(
+                                                                            child: TextFormField(
+                                                                              validator: (val){
+                                                                                if(int.parse(val.toString())==0){
+                                                                                  return "Invalid Quantity";
+
+                                                                                }
+                                                                              },
+                                                                              inputFormatters: [
+                                                                                FilteringTextInputFormatter.digitsOnly, // Only allow digits
+                                                                              ],
+                                                                              controller: qty,
                                                                               textAlign: TextAlign.center,
                                                                               textAlignVertical: TextAlignVertical.center,
-                                                                              decoration: InputDecoration(
+                                                                              decoration: const InputDecoration(
                                                                                 contentPadding: EdgeInsets.all(0),
                                                                                 isDense: true,
                                                                                 border: InputBorder.none,
                                                                               ),
-                                                                              style: TextStyle(
+                                                                              style: const TextStyle(
                                                                                 fontSize: 14, // Adjust the font size as needed
                                                                               ),
                                                                             ),
                                                                           ),
                                                                         ),
-                                                                        Container(
-                                                                          height: 30,
-                                                                          width: 30,
-                                                                          decoration: BoxDecoration(
-                                                                              border: Border.all(
-                                                                                  color: Colors.black,
-                                                                                  width: 2
-                                                                              )
+                                                                        InkWell(
+                                                                          onTap: (){
+                                                                            int a= int.parse(qty.text);
+                                                                            a++;
+                                                                            qty.text="${a}";
+                                                                            print(qty.text);
+
+                                                                          },
+                                                                          child: Container(
+                                                                            height: 30,
+                                                                            width: 30,
+                                                                            decoration: BoxDecoration(
+                                                                                border: Border.all(
+                                                                                    color: Colors.black,
+                                                                                    width: 2
+                                                                                )
+                                                                            ),
+                                                                            child: const Icon(Icons.add),
                                                                           ),
-                                                                          child: const Icon(Icons.add),
                                                                         ),
                                                                       ],
                                                                     ),
@@ -341,19 +308,38 @@ class _SingleProductState extends State<SingleProduct> {
                                                             const SizedBox(height: 20),
                                                             InkWell(
                                                               onTap: ()async{
+                                                                if(int.parse(qty.text)<1)
+                                                                {
+                                                                  value.snackbarerror("Invalid Quantity", context);
+                                                                  return;
+                                                                }
                                                                 final progress=ProgressHUD.of(context);
                                                                 progress!.show();
+                                                                String dimension="0";
+                                                                String weight="0";
                                                                 String code=snapshot.data!.docs[0][ItemReg.code];
                                                                 String name=snapshot.data!.docs[0][ItemReg.item];
                                                                 String price=snapshot.data!.docs[0][ItemReg.sellingprice];
                                                                 String des=snapshot.data!.docs[0][ItemReg.description];
                                                                 String imageurl=snapshot.data!.docs[0][ItemReg.itemurl];
-                                                                String quantity="1";
-                                                                final savetocard=await Ecom().addtocart(name, price, quantity, code,imageurl,des,context);
+                                                               try{
+                                                                 weight=snapshot.data!.docs[0][ItemReg.weight];
+                                                                 dimension=snapshot.data!.docs[0][ItemReg.dimensions];
+                                                               }catch(e){
+                                                                 print(e);
+                                                               }
+                                                               String quantity=qty.text;
+                                                                value.cartids();
+
+                                                                final savetocard=await value.addtocart("single",name, price, quantity, code,imageurl,des,dimension,weight,context);
                                                                 //print(savetocard);
                                                                 if(savetocard[0]){
                                                                   SnackBar snackbar=const SnackBar(content: Text("Added to cart successfully",style: TextStyle(color: Colors.white),),backgroundColor: Colors.green,);
                                                                   ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                                                                  value.item_alreadexist(value.cartidnumber,code);
+                                                                  await value.cartidmethod();
+                                                                  final st=await value.alreadypaid(context);
+                                                                  Navigator.pushNamed(context, Routes.cart);
                                                                 }
                                                                 else
                                                                 {

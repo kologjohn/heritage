@@ -1,13 +1,16 @@
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:country_state_city_picker/country_state_city_picker.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
-import 'package:jona/components/global.dart';
-import 'package:jona/tables/checkout_table.dart';
 import 'package:provider/provider.dart';
 
+import '../components/global.dart';
 import '../components/login_field.dart';
 import '../controller/controller.dart';
+import '../widgets/route.dart';
 
 class CheckoutForm extends StatefulWidget {
   @override
@@ -21,18 +24,45 @@ class _CheckoutFormState extends State<CheckoutForm> {
   TextEditingController contact = TextEditingController();
   TextEditingController postcode = TextEditingController();
   TextEditingController street = TextEditingController();
-  TextEditingController city = TextEditingController();
 
   final GlobalKey<FormState> formskey = GlobalKey<FormState>();
+  String? selectedValue; // Holds the selected value from the dropdown
+  String? _selectedCountry; // Default country
+  String? _selectedRegion; // Default region for Ghana
+  String? _selectedCity; // Default region for Ghana
 
-  String _selectedCountry = 'Ghana'; // Default country
-  String _selectedRegion = 'Accra'; // Default region for Ghana
-
-  Map<String, List<String>> _regionsByCountry = {
+  final Map<String, List<String>> _regionsByCountry = {
     'Ghana': ['Accra', 'Kumasi', 'Tamale', 'Cape Coast'],
     'Nigeria': ['Abuja', 'Lagos', 'Kano', 'Ibadan'],
     // Add more countries and their regions here
   };
+
+  String? selectedDestination;  // Holds the selected destination
+  String? amount="0";  // Holds the fetched amount based on the selected destination
+  int? selectedIndex;  // Holds the index of the selected item
+
+  // Fetch the amount when a destination is selected
+  Future<void> fetchAmount(String destination,String totalweight) async {
+    try {
+      // Query Firestore for the document with the selected destination
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('delivery')
+          .where('destination', isEqualTo: destination) // Assuming 'name' is the field for destination
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        // Get the amount from the first document (assuming each destination is unique)
+        setState(() {
+          double t_weight=double.parse(totalweight);
+          double amt = double.parse(querySnapshot.docs.first['amount']);
+          double final_amt=t_weight*amt;
+          amount = final_amt.toString();
+        });
+      }
+    } catch (e) {
+      print("Error fetching amount: $e");
+    }
+  }
 @override
   void initState() {
     // TODO: implement initState
@@ -56,10 +86,10 @@ class _CheckoutFormState extends State<CheckoutForm> {
           if(ecom.mycarttotal==0){
             ecom.carttotal();
             ecom.cartidmethod();
-            ecom.currecy();
+            print(ecom.currecyval);
           }
-          double convertedamt=double.parse(ecom.cardvalue)*ecom.currecyval;
-          String finalconverted=ecom.numformat.format(convertedamt);
+         // double convertedamt=double.parse(ecom.cardvalue);
+        //  String finalconverted=ecom.numformat.format(convertedamt);
           if(ecom.auth.currentUser!=null){
             String? fullname=ecom.auth.currentUser!.displayName;
             List<String> split=fullname!.split(" ");
@@ -71,6 +101,9 @@ class _CheckoutFormState extends State<CheckoutForm> {
           }
           return Scaffold(
             appBar: AppBar(
+              leading: InkWell(onTap:(){
+                Navigator.pushNamed(context, Routes.cart);
+              },child: Icon(Icons.arrow_back)),
               backgroundColor: Colors.lightGreen[50],
               centerTitle: true,
               title: const Text('Checkout Form'),
@@ -99,6 +132,50 @@ class _CheckoutFormState extends State<CheckoutForm> {
                                       spacing: 5,
                                       runSpacing: 5,
                                       children: [
+                                        Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            // DropdownButton<String>(
+                                            //   hint: const Text("Select Country"),
+                                            //   value: ecom.selectedCountry,
+                                            //   onChanged: (newValue) {
+                                            //     setState(() {
+                                            //       ecom.selectedCountry = newValue;
+                                            //       ecom.cities = ecom.countryCityData['countries']
+                                            //           .firstWhere((country) => country['name'] == newValue)['cities']
+                                            //           .cast<String>();
+                                            //       ecom.selectedCity = null;
+                                            //     });
+                                            //   },
+                                            //   items: countries.map((String country) {
+                                            //     return DropdownMenuItem<String>(
+                                            //       value: country,
+                                            //       child: Text(country),
+                                            //     );
+                                            //   }).toList(),
+                                            // ),
+                                            // SizedBox(height: 20),
+                                            // DropdownButton<String>(
+                                            //   hint: const Text("Select City"),
+                                            //   value: ecom.selectedCity,
+                                            //   onChanged: (newValue) {
+                                            //     setState(() {
+                                            //       ecom.selectedCity = newValue;
+                                            //     });
+                                            //   },
+                                            //   items: ecom.cities.map((String city) {
+                                            //     return DropdownMenuItem<String>(
+                                            //       value: city,
+                                            //       child: Text(city),
+                                            //     );
+                                            //   }).toList(),
+                                            // ),
+                                            // SizedBox(height: 20),
+                                           // Text("Selected Country: $countryValue"),
+                                           // Text("Selected State: $stateValue"),
+                                            //Text("Selected City: $cityValue"),
+                                          ],
+                                        ),
                                         Container(
                                           //color: Colors.lightBlue[50],
                                           width: 600,
@@ -146,77 +223,31 @@ class _CheckoutFormState extends State<CheckoutForm> {
                                                         ],
                                                       ),
                                                       const SizedBox(height: 16.0),
-                                                      Row(
-                                                        children: <Widget>[
-                                                          Expanded(
-                                                            child: DropdownButtonFormField<String>(
-                                                              value: _selectedCountry,
-                                                              onChanged: (value) {
-                                                                setState(() {
-                                                                  _selectedCountry = value!;
-                                                                  _selectedRegion = _regionsByCountry[value]![0];
-                                                                });
-                                                              },
-                                                              items: _regionsByCountry.keys.map((String country) {
-                                                                return DropdownMenuItem<String>(
-                                                                  value: country,
-                                                                  child: Text(country),
-                                                                );
-                                                              }).toList(),
-                                                              decoration: InputDecoration(
-                                                                labelText: 'Country',
-                                                                enabledBorder: OutlineInputBorder(
-                                                                  borderSide: const BorderSide(
-                                                                    color: Global.borderColor,
-                                                                    width: 1,
-                                                                  ),
-                                                                  borderRadius: BorderRadius.circular(6),
-                                                                ),
-                                                                focusedBorder: OutlineInputBorder(
-                                                                  borderSide: const BorderSide(
-                                                                    color: Colors.orange,
-                                                                    width: 1,
-                                                                  ),
-                                                                  borderRadius: BorderRadius.circular(6),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          const SizedBox(width: 16.0),
-                                                          Expanded(
-                                                            child: DropdownButtonFormField<String>(
-                                                              value: _selectedRegion,
-                                                              onChanged: (value) {
-                                                                setState(() {
-                                                                  _selectedRegion = value!;
-                                                                });
-                                                              },
-                                                              items: _regionsByCountry[_selectedCountry]!.map((String region) {
-                                                                return DropdownMenuItem<String>(
-                                                                  value: region,
-                                                                  child: Text(region),
-                                                                );
-                                                              }).toList(),
-                                                              decoration: InputDecoration(
-                                                                labelText: 'Region/State',
-                                                                enabledBorder: OutlineInputBorder(
-                                                                  borderSide: const BorderSide(
-                                                                    color: Global.borderColor,
-                                                                    width: 1,
-                                                                  ),
-                                                                  borderRadius: BorderRadius.circular(6),
-                                                                ),
-                                                                focusedBorder: OutlineInputBorder(
-                                                                  borderSide: const BorderSide(
-                                                                    color: Colors.orange,
-                                                                    width: 1,
-                                                                  ),
-                                                                  borderRadius: BorderRadius.circular(6),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
+                                                      SelectState(
+                                                        onCountryChanged: (value) {
+                                                          setState(() {
+                                                             _selectedCountry = value;
+                                                          });
+                                                        },
+                                                        onStateChanged: (value) {
+
+                                                          setState(() {
+                                                            _selectedRegion = value;
+                                                          });
+                                                        },
+                                                        onCityChanged: (value) {
+                                                          setState(() {
+                                                            _selectedCity = value;
+                                                          });
+                                                        }, decoration: InputDecoration(
+                                                          border: OutlineInputBorder()
+                                                      ),
+                                                        validation: (myval){
+                                                          if(myval.toString().isEmpty){
+                                                            return "Field Required";
+                                                          }
+
+                                                        },
                                                       ),
                                                       const SizedBox(height: 16.0),
                                                       LoginField(
@@ -225,15 +256,6 @@ class _CheckoutFormState extends State<CheckoutForm> {
                                                         textInputType: TextInputType.text,
                                                         obscure: false,
                                                         labelText: 'Street Address',
-                                                        enabled: true,
-                                                      ),
-                                                      const SizedBox(height: 16.0),
-                                                      LoginField(
-                                                        hintText: 'Town/City',
-                                                        controller: city,
-                                                        textInputType: TextInputType.text,
-                                                        obscure: false,
-                                                        labelText: 'Town/City',
                                                         enabled: true,
                                                       ),
                                                       const SizedBox(height: 16.0),
@@ -261,6 +283,72 @@ class _CheckoutFormState extends State<CheckoutForm> {
                                                         textInputType: TextInputType.emailAddress,
                                                         obscure: false,
                                                         labelText: 'Email', enabled: true,
+                                                      ),
+                                                      const SizedBox(height: 16),
+                                                      FutureBuilder<QuerySnapshot>(
+                                                        future: FirebaseFirestore.instance.collection('delivery').get(),
+                                                        builder: (context, snapshot) {
+                                                          if (!snapshot.hasData) {
+                                                            return const Center(child: CircularProgressIndicator());
+                                                          }
+                                                          if(snapshot.hasError){
+                                                            return Text("Error");
+                                                          }
+
+                                                          // Get the documents from the snapshot
+                                                          final List<DocumentSnapshot> docs = snapshot.data!.docs;
+
+                                                          // Create a list of dropdown items for destinations
+                                                          List<DropdownMenuItem<String>> dropdownItems = docs.map((doc) {
+                                                            String destination = doc['destination']; // Assuming 'name' is the field for destination
+                                                            return DropdownMenuItem<String>(
+                                                              value: destination,
+                                                              child: Text(destination),
+                                                            );
+                                                          }).toList();
+
+                                                          return DropdownButtonFormField<String>(
+                                                            validator: (val){
+                                                              if(val==null || val.isEmpty){
+                                                                return "Select Delivery Zone";
+                                                              }
+                                                            },
+
+                                                            hint: const Text('Select Delivery Zone'),
+                                                            value: selectedDestination,
+                                                            items: dropdownItems,
+                                                            onChanged: (String? newValue) {
+                                                              setState(() {
+                                                                selectedDestination = newValue;
+                                                                // Get the index of the selected item
+                                                                selectedIndex = dropdownItems.indexWhere((item) => item.value == newValue);
+                                                              });
+                                                              // Fetch the amount based on the selected destination
+                                                              if (newValue != null) {
+                                                              //  double amt=(ecom.totalweight)*(double.parse(newValue.toString()));
+                                                                fetchAmount(newValue,ecom.totalweight.toString());
+
+                                                              }
+                                                            },
+                                                            decoration: InputDecoration(
+                                                              labelText: 'Delivery Zone',
+                                                              enabledBorder: OutlineInputBorder(
+                                                                borderSide: const BorderSide(
+                                                                  color: Global.borderColor,
+                                                                  width: 1,
+                                                                ),
+                                                                borderRadius: BorderRadius.circular(6),
+                                                              ),
+                                                              focusedBorder: OutlineInputBorder(
+                                                                borderSide: const BorderSide(
+                                                                  color: Colors.orange,
+                                                                  width: 1,
+                                                                ),
+                                                                borderRadius: BorderRadius.circular(6),
+                                                              ),
+                                                            ),
+                                                          );
+                                                        },
                                                       ),
                                                       const SizedBox(height: 16),
                                                       const Text(
@@ -326,25 +414,31 @@ class _CheckoutFormState extends State<CheckoutForm> {
                                                         ),
                                                         child: ElevatedButton(
                                                           onPressed: () async{
-                                                            if (validator()) {
+                                                           if (validator() && amount!=null) {
+                                                              double finalshipping=double.parse(amount.toString())* double.parse(ecom.totalweight.toString());
+                                                             // amount=ecom.numformat.format(finalshipping);
                                                               String email_txt=email.text.trim().toString();
                                                               String fname_txt=firstname.text.trim().toString();
                                                               String lname_txt=lastname.text.trim().toString();
                                                               String addres_txt=street.text.trim().toString();
                                                               String phone_txt=contact.text.trim().toString();
-                                                              String country_txt=_selectedCountry;
-                                                              String region_txt=_selectedRegion;
-                                                              String city_txt=city.text.trim().toString();
+                                                              String country_txt=_selectedCountry!;
+                                                              String region_txt=_selectedRegion!;
+                                                              String city_txt=_selectedCity!;
                                                               String postcode_txt=postcode.text.trim().toString();
+
                                                               final pgress=ProgressHUD.of(context);
                                                               pgress!.show();
                                                               Future.delayed(Duration(seconds: 10),(){
                                                                 pgress.dismiss();
                                                               });
-                                                              await ecom.checkout(email_txt, fname_txt,lname_txt, addres_txt, phone_txt, country_txt, region_txt, city_txt, postcode_txt);
-                                                              double paystackvalue=convertedamt*100;
 
-                                                              ecom.paystacks(phone_txt, "$paystackvalue",ecom.mycardid);
+                                                              print("object ${amount}");
+                                                              await ecom.checkout(email_txt, fname_txt,lname_txt, addres_txt, phone_txt, country_txt, region_txt, city_txt, postcode_txt,amount!,selectedDestination!);
+                                                              double shipping=double.parse(amount!);
+                                                              //double paystackvalue=(convertedamt+shipping)*100;
+
+                                                             // ecom.paystacks(phone_txt, "$paystackvalue",ecom.mycardid);
 
                                                               pgress.dismiss();
 
@@ -422,9 +516,9 @@ class _CheckoutFormState extends State<CheckoutForm> {
 
                                                           ],
                                                         ),
-                                                         const TableRow(
+                                                          TableRow(
                                                           children: [
-                                                            TableCell(
+                                                            const TableCell(
                                                               child: Padding(
                                                                 padding: EdgeInsets.all(8.0),
                                                                 child: Text('Shipping'),
@@ -432,8 +526,8 @@ class _CheckoutFormState extends State<CheckoutForm> {
                                                             ),
                                                             TableCell(
                                                               child: Padding(
-                                                                padding: EdgeInsets.all(8.0),
-                                                                child: Text('Free shipping'),
+                                                                padding: const EdgeInsets.all(8.0),
+                                                                child: Text("USD ${amount}"),
                                                               ),
                                                             ),
                                                           ],
@@ -448,8 +542,8 @@ class _CheckoutFormState extends State<CheckoutForm> {
                                                             ),
                                                             TableCell(
                                                               child: Padding(
-                                                                padding: EdgeInsets.all(8.0),
-                                                                child: Text("USD ${ecom.cardvalue}"),
+                                                                padding: const EdgeInsets.all(8.0),
+                                                                child: Text("USD ${double.parse(ecom.cardvalue)+double.parse(amount.toString())}"),
                                                               ),
                                                             ),
                                                           ],
@@ -465,7 +559,9 @@ class _CheckoutFormState extends State<CheckoutForm> {
                                                             TableCell(
                                                               child: Padding(
                                                                 padding: EdgeInsets.all(8.0),
-                                                                child: Text("GHS ${finalconverted}"),
+                                                                child: Text("GHS ${
+                                                                    ((double.parse(ecom.cardvalue)+(double.parse(amount!)))*ecom.currecyval)
+                                                                }"),
                                                               ),
                                                             ),
                                                           ],

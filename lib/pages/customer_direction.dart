@@ -223,7 +223,7 @@ class CustomerDirection extends StatelessWidget {
                                   ),
                                 ),
                                 Container(
-                                    //height: 500,
+                                  //height: 500,
                                     width: 550,
                                     decoration: BoxDecoration(
                                       //color: Colors.white,

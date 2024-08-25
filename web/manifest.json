@@ -1,11 +1,11 @@
 {
-    "name": "jona",
-    "short_name": "jona",
+    "name": "Heritage Baskets",
+    "short_name": "Heritage Baskets",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Dealers in Hand Woven Baskets.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

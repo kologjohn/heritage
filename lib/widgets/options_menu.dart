@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:jona/widgets/route.dart';
-import 'package:provider/provider.dart';
-
 import '../controller/controller.dart';
 class options_menu extends StatelessWidget {
   const options_menu({
@@ -26,23 +23,28 @@ class options_menu extends StatelessWidget {
         itemBuilder: (BuildContext context) => [
           PopupMenuItem<String>(
             value: 'email',
-            child: Row(children: [const Icon(Icons.email,color: Colors.green,),Text(ecom.user_email)],),
+            child: Row(children: [const Icon(Icons.email,color: Colors.green,),Text("${ecom.auth.currentUser!.email}")],),
           ),
           PopupMenuItem<String>(
             value: 'name',
-            child: Row(children: [
-              const Icon(Icons.person,color: Colors.green,),
-              Text(ecom.user_lastname)
-            ],
+            child: InkWell(
+              onTap: (){
+                Navigator.pushNamed(context, Routes.userProfile);
+              },
+              child: Row(children: [
+                const Icon(Icons.person,color: Colors.green,),
+                Text('${ecom.auth.currentUser!.displayName}')
+              ],
+              ),
             ),
           ),
           PopupMenuItem<String>(
             onTap: ()async{
-              final progress=ProgressHUD.of(context);
-              progress!.show();
-              await ecom.signout();
-              Navigator.pushNamed(context, Routes.dashboard);
-              progress.dismiss();
+              //final progress=ProgressHUD.of(context);
+              //progress!.show();
+              await ecom.signout(context);
+              //Navigator.pushNamed(context, Routes.dashboard);
+             // progress.dismiss();
             },
             value: 'Logout',
             child: const Row(children: [Icon(Icons.logout,color: Colors.green,),Text(' Logout')],),
