@@ -34,14 +34,14 @@ class _MobileScaffoldState extends State<MobileScaffold> {
     return ProgressHUD(
       child: Consumer<Ecom>(
         builder: (BuildContext context, Ecom value, Widget? child) {
-          value.paystacks("0552111770","200","432244892579076662");
-          if(value.companyphone.isEmpty){
-            value.companyinfo();
-          }
-          if(value.auth.currentUser!=null)
-            {
-              showoptionmenu=true;
-            }
+          // value.paystacks("0552111770","200","432244892579076662");
+          // if(value.companyphone.isEmpty){
+          //   value.companyinfo();
+          // }
+          // if(value.auth.currentUser!=null)
+          //   {
+          //     showoptionmenu=true;
+          //   }
           return Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.lightGreen[50],
@@ -184,7 +184,11 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                                                         itemBuilder: (BuildContext context, int index) {
                                                           String cate = snapshot.data!.docs[index]['name'];
                                                           return  InkWell(
-                                                            onTap: (){},
+                                                            onTap: (){
+                                                              //print(cate);
+                                                              value.selected_category(cate);
+                                                              Navigator.pushNamed(context, Routes.mainShop, arguments: {"cate":cate,"from":"desktop"});
+                                                            },
                                                             child: Column(
                                                               crossAxisAlignment: CrossAxisAlignment.start,
                                                               children: [
@@ -347,7 +351,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
                               endIndent: 140,
                               thickness: 5,
                             ),
-                            featuredGridview(shoenum: shoenum, widgth: 250, height: 250,name: 12, price: 12, favHeight: 25, favWidth: 60, favSize: 25, cartHeight: 25, cartWidth: 60, cartSize: 25, querySnapshot: Ecom.querysnapshot,),
+                            //featuredGridview(shoenum: shoenum, widgth: 250, height: 250,name: 12, price: 12, favHeight: 25, favWidth: 60, favSize: 25, cartHeight: 25, cartWidth: 60, cartSize: 25, querySnapshot: Ecom.querysnapshot,),
                           ],
                         ),
                         const SizedBox(height: 20),
@@ -805,5 +809,4 @@ class _MobileScaffoldState extends State<MobileScaffold> {
     );
   }
 }
-
 

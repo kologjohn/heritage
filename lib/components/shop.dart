@@ -300,6 +300,7 @@ class _ShopPageState extends State<ShopPage> {
                                                                   child: InkWell(
                                                                     onTap: (){
                                                                       setState(() {
+                                                                        value.selected_category(categoryName);
                                                                         shoenum=categoryName;
                                                                       });
                                                                     },
@@ -489,7 +490,15 @@ class _ShopPageState extends State<ShopPage> {
                                              String item = data['item']?.toString().toLowerCase() ?? '';
                                              String category = data['category']?.toString().toLowerCase() ?? '';
                                              String price = data['sellingprice']?.toString().toLowerCase() ?? '';
-                                             return item.contains(searchQuery.toLowerCase()) || category.contains(searchQuery.toLowerCase() )||price.contains(searchQuery.toLowerCase());
+                                             if(value.selectedcategory.isNotEmpty){
+                                               return  category.contains(searchQuery.toLowerCase());
+
+                                             }
+                                             else
+                                               {
+                                                 return item.contains(searchQuery.toLowerCase()) || category.contains(searchQuery.toLowerCase() )||price.contains(searchQuery.toLowerCase());
+
+                                               }
 
                                            }).toList();
                                            // for(int i=0;i<snapshot.data!.docs.length;i++){
@@ -543,7 +552,7 @@ class _ShopPageState extends State<ShopPage> {
                                                               child: CircularProgressIndicator(),
                                                             ),
                                                           ),
-                                                          errorWidget: (context, url, error) =>Icon(Icons.error,color: Colors.red,),
+                                                          errorWidget: (context, url, error) =>const Icon(Icons.error,color: Colors.red,),
 
                                                         ),
                                                         progress: false,
@@ -566,7 +575,7 @@ class _ShopPageState extends State<ShopPage> {
                                         },
                                       )
 
-                                //featuredGridview(shoenum: shoenum, widgth: 300, height: 200, name: 16, price: 16, favHeight: 30, favWidth: 100, favSize: 25, cartHeight: 30, cartWidth: 100, cartSize: 25, querySnapshot: querysnapshot,),
+                                            //featuredGridview(shoenum: shoenum, widgth: 300, height: 200, name: 16, price: 16, favHeight: 30, favWidth: 100, favSize: 25, cartHeight: 30, cartWidth: 100, cartSize: 25, querySnapshot: querysnapshot,),
                                       )
                                     ],
                                   )

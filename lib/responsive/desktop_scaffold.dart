@@ -25,7 +25,6 @@ class DesktopScaffold extends StatefulWidget {
 class _DesktopScaffoldState extends State<DesktopScaffold> {
   String searchQuery="";
 
-  var querysnapshot=Dbfields.db.collection("items").orderBy(ItemReg.category).limit(10).snapshots();
   String shoenum="";
   bool show=false;
   bool editShow=true;

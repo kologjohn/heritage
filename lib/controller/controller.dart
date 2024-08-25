@@ -19,7 +19,6 @@ class Ecom extends ChangeNotifier{
    final auth=FirebaseAuth.instance;
    static final querysnapshot=FirebaseFirestore.instance.collection("items").orderBy(ItemReg.category).limit(10).snapshots();
    final numformat = NumberFormat("#,##0.00", "en_US");
-
    //cart id with provider
    double currecyval=0;
    bool lockstatus=false;
@@ -36,10 +35,10 @@ class Ecom extends ChangeNotifier{
    String user_middlename="";
    String selectedcategory="";
    bool accountcreated=false;
-  String error="";
-  bool cardstatus=false;
-  String cartidnumber="";
-  bool loginstatus=false;
+   String error="";
+   bool cardstatus=false;
+   String cartidnumber="";
+   bool loginstatus=false;
 
   selected_category(String selected)async{
     selectedcategory=selected;
