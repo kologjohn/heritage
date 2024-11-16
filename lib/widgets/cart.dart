@@ -160,6 +160,7 @@ class _CartViewState extends State<CartView> {
 
                                                                   InkWell(
                                                                     child: Container(
+
                                                                       height: 30,
                                                                       width: 30,
                                                                       decoration: BoxDecoration(
@@ -168,7 +169,7 @@ class _CartViewState extends State<CartView> {
                                                                               width: 2
                                                                           )
                                                                       ),
-                                                                      child: const Icon(Icons.remove),
+                                                                      child: const Icon(Icons.remove,color: Colors.red,),
                                                                     ),
                                                                     onTap: ()async{
                                                                       int val=int.parse(qty_controller[i].text);
@@ -271,14 +272,18 @@ class _CartViewState extends State<CartView> {
                                                                       child: const Icon(Icons.add),
                                                                     ),
                                                                   ),
-                                                                  // IconButton(onPressed: ()async{
-                                                                  //  await value.db.collection("cart").doc(key).delete();
-                                                                  //   value.carttotal();
-                                                                  //   if(value.mycarttotal<=0){
-                                                                  //     value.resetcart(context);
-                                                                  //    // Navigator.pushNamed(context, Routes.dashboard);
-                                                                  //   }
-                                                                  // }, icon: Icon(Icons.delete),color: Colors.red[900],)
+                                                                  IconButton(onPressed: ()async{
+                                                                   await value.db.collection("cart").doc(key).delete();
+                                                                    value.carttotal();
+                                                                   value.resetcart(context);
+
+                                                                   if(value.mycarttotal<=0){
+                                                                      value.resetcart(context);
+                                                                      value.carttotal();
+
+                                                                     // Navigator.pushNamed(context, Routes.dashboard);
+                                                                    }
+                                                                  }, icon: Icon(Icons.delete),color: Colors.red[900],)
 
                                                                 ],
                                                               ),
@@ -381,6 +386,7 @@ class _CartViewState extends State<CartView> {
                                                                   Navigator.pushNamed(context, Routes.checkout);
                                                                 }
                                                                 else{
+                                                                  value.setnextstate("checkout");
                                                                   Navigator.pushNamed(context, Routes.login);
                                                                 }
 

@@ -1,30 +1,85 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
-import 'package:jona/main.dart';
+class ImageCarousel extends StatefulWidget {
+  final List<String> imageUrls;
 
-void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  const ImageCarousel({Key? key, required this.imageUrls}) : super(key: key);
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  @override
+  _ImageCarouselState createState() => _ImageCarouselState();
+}
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+class _ImageCarouselState extends State<ImageCarousel> {
+  PageController _pageController = PageController();
+  int _currentIndex = 0;
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
-  });
+  void _nextPage() {
+    if (_currentIndex < widget.imageUrls.length - 1) {
+      _pageController.nextPage(duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
+    }
+  }
+
+  void _previousPage() {
+    if (_currentIndex > 0) {
+      _pageController.previousPage(duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        PageView.builder(
+          controller: _pageController,
+          itemCount: widget.imageUrls.length,
+          scrollDirection: Axis.horizontal,
+          onPageChanged: (index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+          itemBuilder: (context, index) {
+            return CachedNetworkImage(
+              imageUrl: widget.imageUrls[index],
+              imageBuilder: (context, imageProvider) => Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: imageProvider,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
+              placeholder: (context, url) => Transform.scale(
+                scale: 0.4,
+                child: const CircularProgressIndicator(),
+              ),
+              errorWidget: (context, url, error) => const Icon(
+                Icons.error,
+                color: Colors.red,
+                size: 40,
+              ),
+            );
+          },
+        ),
+        if (_currentIndex > 0)
+          Positioned(
+            left: 10,
+            child: IconButton(
+              icon: Icon(Icons.arrow_back_ios, size: 30),
+              onPressed: _previousPage,
+            ),
+          ),
+        if (_currentIndex < widget.imageUrls.length - 1)
+          Positioned(
+            right: 10,
+            child: IconButton(
+              icon: Icon(Icons.arrow_forward_ios, size: 30),
+              onPressed: _nextPage,
+            ),
+          ),
+      ],
+    );
+  }
 }

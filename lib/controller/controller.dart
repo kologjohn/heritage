@@ -114,6 +114,8 @@ class Ecom extends ChangeNotifier{
   setnextstate(String cstate)async{
     final SharedPreferences sharedPreferences=await SharedPreferences.getInstance();
     sharedPreferences.setString("cstate", cstate);
+    nextstate=cstate;
+    notifyListeners();
   }
   getcstate()async{
     final SharedPreferences sharedPreferences=await SharedPreferences.getInstance();
@@ -788,36 +790,43 @@ class Ecom extends ChangeNotifier{
 
 
   }
-  currecy() async {
-    String? email = "";
-    final user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      email = auth.currentUser!.email;
-      String? token = await user.getIdToken();
-      var headers = {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $token',
-      };
-      var request = http.Request('POST', Uri.parse('https://currency2-5pkpcqprhq-uc.a.run.app'));
-      request.body = json.encode({
-        "data": {
-          "email": email,
-        }
-      });
-      request.headers.addAll(headers);
-      http.StreamedResponse response = await request.send();
-      if (response.statusCode == 200) {
-        String resdata = await response.stream.bytesToString();
-        final Map parsed = json.decode(resdata);
-        String  finaldata = parsed['result'].toStringAsFixed(2);
-        currecyval=double.parse(finaldata);
-        print(finaldata);
-      } else {
-        print("Error:${response.reasonPhrase}");
-      }
 
+  currecy() async {
+    try{
+      String? email = "";
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        email = auth.currentUser!.email;
+        String? token = await user.getIdToken();
+        var headers = {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        };
+        var request = http.Request('POST', Uri.parse('https://currency2-5pkpcqprhq-uc.a.run.app'));
+        request.body = json.encode({
+          "data": {
+            "email": email,
+          }
+        });
+        request.headers.addAll(headers);
+        http.StreamedResponse response = await request.send();
+        if (response.statusCode == 200) {
+          String resdata = await response.stream.bytesToString();
+          final Map parsed = json.decode(resdata);
+          String  finaldata = parsed['result'].toStringAsFixed(2);
+          currecyval=double.parse(finaldata);
+          print(finaldata);
+        } else {
+          print("Error:${response.reasonPhrase}");
+        }
+
+      }
+      notifyListeners();
+
+    }catch(e){
+      print(e);
     }
-    notifyListeners();
+
   }
 
   Future<List<dynamic>> fetchItems() async {

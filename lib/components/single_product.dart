@@ -27,8 +27,29 @@ class SingleProduct extends StatefulWidget {
 class _SingleProductState extends State<SingleProduct> {
   @override
 
+  //===================
+  final List<String> imageUrls = [
+
+  ];
+  PageController _pageController = PageController();
+  int _currentIndex = 0;
+
+  void _nextPage() {
+    if (_currentIndex < imageUrls.length - 1) {
+      _pageController.nextPage(duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
+    }
+  }
+
+  void _previousPage() {
+    if (_currentIndex > 0) {
+      _pageController.previousPage(duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
+    }
+  }
+
+
   final qty=TextEditingController();
   double rating = 3.0;
+
   @override
   Widget build(BuildContext context) {
       return ProgressHUD(
@@ -60,11 +81,15 @@ class _SingleProductState extends State<SingleProduct> {
                     }
                     else if(snapshot.connectionState==ConnectionState.waiting)
                     {
-                      return const Text("Please wait for Network");
+                     // return const Text("Please wait for Network");
                     }
                     String weight="0";
                     String dimensions="0";
                     String sprice=snapshot.data!.docs[0][ItemReg.sellingprice];
+                    String image=snapshot.data!.docs[0][ItemReg.itemurl];
+                    imageUrls.add(image);
+                    imageUrls.add(image);
+                    imageUrls.add(image);
                     try{
                        weight=snapshot.data!.docs[0][ItemReg.weight];
                        dimensions=snapshot.data!.docs[0][ItemReg.dimensions];
@@ -106,20 +131,61 @@ class _SingleProductState extends State<SingleProduct> {
                                                         color: Colors.brown.withOpacity(0.5),
                                                         height: 500,
                                                         width: 500,
-                                                        child:CachedNetworkImage(
-                                                          imageUrl:snapshot.data!.docs[0][ItemReg.itemurl],
-                                                          imageBuilder: (context, imageProvider) => Container(
-                                                            decoration: BoxDecoration(
-                                                              image: DecorationImage(
-                                                                image: imageProvider,
-                                                                fit: BoxFit.contain,
-                                                                // colorFilter: ColorFilter.mode(Colors.white, BlendMode.colorDodge)
-                                                              ),
+                                                        child: Stack(
+                                                          alignment: Alignment.center,
+                                                          children: [
+                                                            PageView.builder(
+                                                              controller: _pageController,
+                                                              itemCount: imageUrls.length,
+                                                              scrollDirection: Axis.horizontal,
+                                                              onPageChanged: (index) {
+                                                                setState(() {
+                                                                  _currentIndex = index;
+                                                                });
+                                                              },
+                                                              itemBuilder: (context, index) {
+                                                                return CachedNetworkImage(
+                                                                  imageUrl: imageUrls[index],
+                                                                  imageBuilder: (context, imageProvider) => Container(
+                                                                    decoration: BoxDecoration(
+                                                                      image: DecorationImage(
+                                                                        image: imageProvider,
+                                                                        fit: BoxFit.contain,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                  placeholder: (context, url) => Transform.scale(
+                                                                    scale: 0.4,
+                                                                    child: const CircularProgressIndicator(),
+                                                                  ),
+                                                                  errorWidget: (context, url, error) => const Icon(
+                                                                    Icons.error,
+                                                                    color: Colors.red,
+                                                                    size: 40,
+                                                                  ),
+                                                                );
+                                                              },
                                                             ),
-                                                          ),
-                                                          placeholder: (context, url) => Transform.scale(scale:0.4,child: const CircularProgressIndicator()),
-                                                          errorWidget: (context, url, error) => const Icon(Icons.error,color: Colors.red,size: 40,),
-                                                        )
+                                                            if (_currentIndex > 0)
+                                                              Positioned(
+                                                                left: 10,
+                                                                child: IconButton(
+                                                                  icon: Icon(Icons.arrow_back_ios, size: 30),
+                                                                  onPressed: _previousPage,
+                                                                ),
+                                                              ),
+                                                            if (_currentIndex <imageUrls.length - 1)
+                                                              Positioned(
+                                                                right: 10,
+                                                                child: IconButton(
+                                                                  icon: Icon(Icons.arrow_forward_ios, size: 30),
+                                                                  onPressed: _nextPage,
+                                                                ),
+                                                              ),
+                                                          ],
+                                                        ),
+
+
                                                       // CachedNetworkImage(imageUrl: snapshot.data!.docs[0][ItemReg.itemurl],),
                                                     ),
                                                   ),
@@ -166,7 +232,7 @@ class _SingleProductState extends State<SingleProduct> {
                                                                         const SizedBox(width: 20),
                                                                          Text(
                                                                           "${double.parse(sprice)*1.2} USD",
-                                                                          style: TextStyle(
+                                                                          style: const TextStyle(
                                                                               decoration: TextDecoration.lineThrough,
                                                                               fontSize: 14,
                                                                               color: Colors.black

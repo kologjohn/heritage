@@ -239,14 +239,14 @@ class _CheckoutFormState extends State<CheckoutForm> {
                                                           setState(() {
                                                             _selectedCity = value;
                                                           });
-                                                        }, decoration: InputDecoration(
-                                                          border: OutlineInputBorder()
-                                                      ),
-                                                        validation: (myval){
-                                                          if(myval.toString().isEmpty){
-                                                            return "Field Required";
-                                                          }
-
+                                                      //   }, decoration: const InputDecoration(
+                                                      //     border: OutlineInputBorder()
+                                                      // ),
+                                                      //   validation: (myval){
+                                                      //     if(myval.toString().isEmpty){
+                                                      //       return "Field Required";
+                                                      //     }
+                                                      //
                                                         },
                                                       ),
                                                       const SizedBox(height: 16.0),

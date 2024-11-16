@@ -36,7 +36,9 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
     Imagesurls.slide3,
     Imagesurls.slide4,
     Imagesurls.slide5,
-    Imagesurls.heritage6,
+    Imagesurls.slide6,
+    Imagesurls.slide7,
+    Imagesurls.slide8,
   ];
   bool trackingcart=false;
   String purchaseid="";
@@ -141,6 +143,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
       crossAxisCount = 1;
     }
     return   Consumer<Ecom>(builder: (context,  value,  child) {
+      print(value.currecyval);
       // if(trackingcart){
       //   value.route(context);
       //  // print(purchaseid);
@@ -640,7 +643,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                     child: Padding(
                                       padding: const EdgeInsets.only(right: 8.0),
                                       child: Container(
-                                        height: 450,
+                                        height: MediaQuery.of(context).size.height * 0.5, // Responsive height
                                         color: Global.appbar,
                                         child:  Row(
                                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -683,14 +686,14 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                             //                     fontSize: 40
                                             //                 ),
                                             //               ),
-                                            //               const SizedBox(height: 8),
-                                            //               const Text(
-                                            //                 "Free pickup delivery available",
-                                            //                 style: TextStyle(
-                                            //                     color: Colors.black,
-                                            //                     fontSize: 25
-                                            //                 ),
-                                            //               ),
+                                            //               // const SizedBox(height: 8),
+                                            //               // const Text(
+                                            //               //   "Free pickup delivery available",
+                                            //               //   style: TextStyle(
+                                            //               //       color: Colors.black,
+                                            //               //       fontSize: 25
+                                            //               //   ),
+                                            //               // ),
                                             //               const SizedBox(height: 20),
                                             //               ElevatedButton(
                                             //                 onPressed: (){
@@ -721,22 +724,27 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                                       crossAxisAlignment: CrossAxisAlignment.start,
                                                       mainAxisAlignment: MainAxisAlignment.center,
                                                       children: [
-                                                        Container(
-                                                          height: 450,
-                                                          color: Global.appbar,
-                                                          // Remove fixed height to let it expand fully
+                                                        SizedBox(
+                                                          width: double.infinity,
+                                                          height: MediaQuery.of(context).size.height * 0.5, // Responsive height
                                                           child: CarouselSlider(
                                                             items: [
-                                                              Image.asset(Imagesurls.slide1, fit: BoxFit.cover, width: double.infinity),
-                                                              Image.asset(Imagesurls.slide2, fit: BoxFit.cover, width: double.infinity),
-                                                              Image.asset(Imagesurls.slide3, fit: BoxFit.cover, width: double.infinity),
-                                                              Image.asset(Imagesurls.slide4, fit: BoxFit.cover, width: double.infinity),
-                                                              Image.asset(Imagesurls.slide5, fit: BoxFit.cover, width: double.infinity),
-                                                              Image.asset(Imagesurls.heritage6, fit: BoxFit.cover, width: double.infinity),
-                                                              Image.asset(Imagesurls.heritage7, fit: BoxFit.cover, width: double.infinity),
-                                                             ],
+                                                              // Image.asset(Imagesurls.slide1, fit: BoxFit.cover, width: double.infinity),
+                                                              // Image.asset(Imagesurls.slide2, fit: BoxFit.cover, width: double.infinity),
+                                                              // Image.asset(Imagesurls.slide3, fit: BoxFit.cover, width: double.infinity),
+                                                              // Image.asset(Imagesurls.slide4, fit: BoxFit.cover, width: double.infinity),
+                                                              // Image.asset(Imagesurls.slide5, fit: BoxFit.cover, width: double.infinity),
+                                                              Image.asset(Imagesurls.slide6, fit: BoxFit.cover, width: double.infinity),
+                                                              Image.asset(Imagesurls.slide7, fit: BoxFit.cover, width: double.infinity),
+                                                              Image.asset(Imagesurls.slide8, fit: BoxFit.cover, width: double.infinity),
+                                                              Image.asset(Imagesurls.slide9, fit: BoxFit.fill, width: double.infinity),
+                                                              Image.asset(Imagesurls.slide10, fit: BoxFit.fill, width: double.infinity),
+                                                              Image.asset(Imagesurls.slide11, fit: BoxFit.fill, width: double.infinity),
+                                                              Image.asset(Imagesurls.slide12, fit: BoxFit.fill, width: double.infinity),
+
+                                                            ],
                                                             options: CarouselOptions(
-                                                              aspectRatio: 16 / 9,
+                                                              aspectRatio: MediaQuery.of(context).size.width > 600 ? 16 / 6 : 16 / 9, // Adjust based on screen size
                                                               enlargeCenterPage: false,
                                                               autoPlay: true,
                                                               autoPlayInterval: const Duration(seconds: 3),
@@ -744,10 +752,12 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                                               enableInfiniteScroll: true,
                                                               autoPlayCurve: Curves.fastOutSlowIn,
                                                               scrollDirection: Axis.horizontal,
-                                                              viewportFraction: 0.9, // Ensures no space between images
+                                                              viewportFraction: 1.0, // Full width for images
                                                             ),
                                                           ),
-                                                        ),
+                                                        )
+
+
                                                       ],
                                                     ),
                                                   ),
@@ -850,9 +860,11 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                               builder: (context, snapshot) {
                                 if (!snapshot.hasData) {
                                   return ShimmerLoadingList();
-                                }  else if (snapshot.hasError) {
+                                }
+                                if (snapshot.hasError) {
                                   return const Text("Error Loading Data");
                                 }
+
 
                                 var filteredDocs = snapshot.data!.docs.where((doc) {
                                   var data = doc.data() as Map<String, dynamic>;
@@ -863,11 +875,19 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                       category.contains(searchQuery.toLowerCase()) ||
                                       price.contains(searchQuery.toLowerCase());
                                 }).toList();
-
+                                int itemlength=0;
+                                if(filteredDocs.length<5)
+                                  {
+                                    itemlength=filteredDocs.length;
+                                  }
+                                else
+                                  {
+                                    itemlength=5;
+                                  }
                                 return GridView.builder(
                                   shrinkWrap: true,
                                   physics: const ClampingScrollPhysics(),
-                                  itemCount: 5,
+                                  itemCount: itemlength,
                                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                                     mainAxisSpacing: 0.6,
                                     childAspectRatio: 0.7,

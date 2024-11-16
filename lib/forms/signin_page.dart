@@ -131,6 +131,17 @@ class _SignInPageState extends State<SignInPage> {
                                           if(hh!=null){
                                             SnackBar snackbar=SnackBar(content: Text("Hello,${hh.displayName}, Login Success"));
                                             ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                                            if(value.nextstate=="checkout"){
+                                              value.currecy();
+                                              value.lockcart();
+                                              Navigator.pushNamed(context, Routes.checkout);
+                                            }
+                                            else
+                                              {
+                                                Navigator.pushNamed(context, Routes.dashboard);
+                                              }
+
+                                          //  ;
                                           }
                                           // print(hh);
                                         }
